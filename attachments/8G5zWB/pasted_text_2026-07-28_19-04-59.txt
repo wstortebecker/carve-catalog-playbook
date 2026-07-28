@@ -1,0 +1,61 @@
+The Philosophy of Carve
+
+Carve exists because every product deserves continuous deep attention, but no human team can provide it.
+
+An e-commerce manager with thousands of products must constantly choose where to look and what to ignore. Even with analytics and AI tools, the manager is still responsible for finding the problem, deciding whether it’s worth spending precious time on, investigating it, determining what to do, and following up afterward.
+
+Carve changes that division of work.
+
+Carve owns the continuous improvement of how every product is discovered and converted, from finding and investigating opportunities to preparing actions, following them through, and measuring outcomes. The e-commerce manager defines what good looks like, sets business and brand priorities, and decides when Carve recommends, drafts, requests approval, or acts automatically.
+
+Carve does not replace the manager’s commercial or brand judgment. It gives that judgment vastly greater reach. Carve provides the attention, persistence and analytical capacity to work across the entire catalog continuously. The e-commerce manager provides direction, context, taste and judgment.
+
+Carve is intelligence, not a pipeline. A pipeline assumes the task is already known and applies a predetermined process to templated product data. Carve investigates before it acts. It studies how a product is performing, reads the page as a customer would, understands the demand around it, researches search results and competitors, compares it with related products, and identifies the true constraint. The result is not simply a processed product or generated fix, but an evidence-backed understanding of what is happening, why, and what should be done.
+
+Carve applies that intelligence at catalog scale. A human team can investigate a small number of priority products deeply; Carve can continuously consider every product and signal across thousands. Each product can receive the attention, investigation and follow-through that would otherwise be reserved for only the most important few.
+
+How Carve Works
+
+Once connected, Carve begins building a live understanding of every product in the store and the demand around it. It continuously watches how products are discovered, how customers respond when they reach them, and how that performance changes over time, looking at real analytics.
+
+Carve looks for three kinds of opportunity. It recovers value when a product’s performance begins to fall. It improves products performing below their potential. And it captures valuable demand the store could serve but is not currently pursuing.
+
+When Carve finds something worth deeper attention, it investigates. It does not assume the answer is another content update. It studies the product’s performance, the searches and customer intent around it, how the page communicates and converts, what competitors are doing, and what stronger products do differently. It considers possible explanations, tests them against the evidence, and identifies the real gap.
+
+Once Carve understands what is happening, it determines what should be done. It explains the problem or opportunity, presents the evidence, prepares the right action, and defines the outcome it expects that action to influence.
+
+What happens next depends on the e-commerce manager’s permissions. Carve may prepare a draft, request approval, or perform the action automatically.
+
+Carve does not stop when the change is made. It follows the action through, measures what happens to visibility, traffic, add-to-cart, and conversion, and determines whether to keep, expand, revise, or reverse it. What Carve learns becomes part of how it understands the store and what it does next.
+
+The Experience of Working with Carve
+
+Working with Carve should feel like finally having enough time and analytical depth to understand the entire catalog. The e-commerce manager no longer has to choose between looking closely at a few important products and remaining largely unaware of everything else. Carve extends their attention across every product while keeping their judgment at the center.
+
+The relationship begins with Carve learning the business. It reads the store, analytics, catalog, website, market, and competitors, then presents its understanding back to the manager. Together, they correct assumptions, add context, define what good looks like, and establish where Carve has permission to act. The manager should feel that Carve understands their business, not that they are configuring another generic tool.
+
+Once Carve is working, the manager no longer needs to hunt through dashboards to discover what matters. Carve shows how the catalog is performing, what has changed, why it changed, what opportunities exist, what is being done about them, and what previous work achieved. The feeling is not simply that Carve has completed work in the background. It is that the manager is informed and ahead of the business.
+
+Carve gives the manager depth as well as overview. They can explore any opportunity or product, inspect the research and evidence, and discuss it directly with Carve. Rather than asking the manager to trust a recommendation blindly, Carve helps them understand the product, customer, demand, competition, and true constraint. The manager becomes more knowledgeable through using Carve, not merely more productive.
+
+When human judgment is needed, Carve brings a prepared decision rather than an unfinished problem. The manager spends their attention on commercial priorities, brand choices, ambiguity, and consequential decisions, not gathering data or performing repetitive analysis. Once that judgment is given, Carve can carry it through hundreds or thousands of relevant products.
+
+Carve also gives the manager a clear account of their work and its value. It explains what changed, why it changed, what was done, what impact it created, and what should happen next. The manager can refine that story with Carve, present it interactively, or export it for a meeting. They can confidently say: “We identified this, we understood why it was happening, we acted, and this was the result.”
+
+Carve should leave the e-commerce manager feeling aware, capable, in control, and credible. They understand more, act on more, and can demonstrate the impact of their decisions more clearly. Carve does not automate the manager out of the work, it gives their intelligence and judgment catalog-wide reach.
+
+How Carve Understands the Store
+
+Understanding a product requires three kinds of access: its underlying product data, its real performance, and the outside market in which it competes.
+
+Carve connects to the store, commerce platform, and PIM for raw product data. It connects to analytics for performance. Through browser access, it can experience the PDP, search Google and research competitors.
+
+Carve works in the gaps between these sources. A product may contain the right attributes but fail to communicate them to customers or search engines. Performance may fall because the product changed, or because demand, search results, and competitors changed around it. Valuable demand may exist for something the catalog already offers but does not clearly express.
+
+During an investigation, Carve moves between these sources as the evidence demands. It might notice a drop in analytics, trace it to a set of queries, inspect the underlying product data, experience the PDP, and compare it with the pages now winning in Google. Each answer determines the next question. Carve follows the investigation until it understands the true constraint instead of forcing the product through a predefined fix.
+
+The investigation determines the action. Carve might update the underlying product data, change how the product is positioned on the PDP, improve its metadata and internal links, create missing supporting content, or conclude that the real constraint is imagery, price, availability, or something else. It prepares or applies the change according to its permissions, then returns to the performance data to determine whether it worked.
+
+Carve does not start from zero with every investigation. Each product, decision, action, and measured outcome becomes part of its understanding of the store. It learns what works across different products, how the manager applies commercial and brand judgment, and which interventions deserve greater confidence in the future. Over time, Carve’s investigations become sharper, its actions become more specific, and its understanding becomes increasingly unique to the business.
+
+
