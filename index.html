@@ -482,7 +482,8 @@
 
       .world.is-low-detail .node-summary,
       .world.is-low-detail .node-tags,
-      .world.is-low-detail .node-count {
+      .world.is-low-detail .node-count,
+      .world.is-low-detail .node-depth {
         display: none;
       }
 
@@ -491,12 +492,14 @@
       }
 
       .world.is-low-detail .node-title {
-        font-size: 14.5px;
+        font-size: 18px;
         font-weight: 600;
-        line-height: 1.24;
+        line-height: 1.22;
       }
 
       .world.is-low-detail .node-stage {
+        font-size: 10.5px;
+        font-weight: 700;
         color: var(--body);
       }
 
@@ -840,7 +843,18 @@
       }
 
       .map-node.is-muted {
-        opacity: 0.4;
+        opacity: 1;
+        border-color: rgba(20, 18, 16, 0.09);
+      }
+
+      .map-node.is-muted .node-stage,
+      .map-node.is-muted .node-summary,
+      .map-node.is-muted .node-footer {
+        opacity: 0.38;
+      }
+
+      .map-node.is-muted .node-title {
+        opacity: 0.78;
       }
 
       .map-node.is-search-match {
@@ -879,7 +893,7 @@
         border-left-width: 3px;
       }
 
-      .map-node[data-owner="apply"] {
+      .map-node[data-owner="correct"] {
         border-left-color: var(--apply);
       }
 
@@ -887,7 +901,7 @@
         border-left-color: var(--test);
       }
 
-      .map-node[data-owner="route"] {
+      .map-node[data-owner="decide"] {
         border-left-color: var(--route);
       }
 
@@ -983,7 +997,7 @@
         text-transform: uppercase;
       }
 
-      .ownership-badge[data-owner="apply"] {
+      .ownership-badge[data-owner="correct"] {
         background: var(--apply-soft);
         color: var(--apply);
       }
@@ -993,7 +1007,7 @@
         color: var(--test);
       }
 
-      .ownership-badge[data-owner="route"] {
+      .ownership-badge[data-owner="decide"] {
         background: var(--route-soft);
         color: var(--route);
       }
@@ -1279,6 +1293,15 @@
         line-height: 1.35;
       }
 
+      .connected-button em {
+        display: block;
+        margin-top: 3px;
+        color: var(--muted);
+        font-size: 9px;
+        font-style: normal;
+        line-height: 1.35;
+      }
+
       .connected-button span {
         color: var(--muted);
         font-size: 14px;
@@ -1456,6 +1479,7 @@
 
       .playbook-module {
         margin-top: 12px;
+        scroll-margin-top: 24px;
         border: 1px solid var(--line);
         border-radius: 10px;
         background: var(--paper-raised);
@@ -1518,6 +1542,86 @@
         color: var(--ink);
         font-size: 14px;
         line-height: 1.5;
+      }
+
+      .module-contract {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 7px;
+      }
+
+      .module-contract > div {
+        padding: 10px 11px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--paper);
+      }
+
+      .module-contract strong {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--ink);
+        font-size: 9px;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+      }
+
+      .module-contract ul {
+        margin: 0;
+        padding-left: 15px;
+      }
+
+      .module-contract li {
+        margin: 4px 0;
+        color: var(--body);
+        font-size: 10.5px;
+        line-height: 1.4;
+      }
+
+      .next-paths {
+        display: grid;
+        gap: 7px;
+      }
+
+      .next-path {
+        padding: 11px 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--paper);
+      }
+
+      .next-path small {
+        display: block;
+        color: var(--accent);
+        font-size: 8.5px;
+        font-weight: 700;
+        letter-spacing: 0.07em;
+        text-transform: uppercase;
+      }
+
+      .next-path strong,
+      .next-path span {
+        display: block;
+        margin-top: 5px;
+        color: var(--ink);
+        font-size: 11px;
+        line-height: 1.45;
+      }
+
+      .next-path span {
+        color: var(--body);
+      }
+
+      .next-path button {
+        margin: 8px 5px 0 0;
+        padding: 6px 8px;
+        border: 1px solid var(--line-strong);
+        border-radius: 6px;
+        background: var(--paper-raised);
+        color: var(--ink);
+        font-size: 9px;
+        font-weight: 600;
+        cursor: pointer;
       }
 
       .playbook-label {
@@ -1739,6 +1843,39 @@
         gap: 7px;
       }
 
+      .evidence-ladder {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 7px;
+      }
+
+      .evidence-ladder article {
+        padding: 11px;
+        border: 1px solid var(--line);
+        border-top: 3px solid var(--accent);
+        border-radius: 8px;
+        background: var(--paper);
+      }
+
+      .evidence-ladder strong,
+      .evidence-ladder span,
+      .evidence-ladder em {
+        display: block;
+        font-size: 10px;
+        line-height: 1.4;
+      }
+
+      .evidence-ladder span {
+        margin-top: 5px;
+        color: var(--body);
+      }
+
+      .evidence-ladder em {
+        margin-top: 7px;
+        color: var(--muted);
+        font-style: normal;
+      }
+
       .decision-matrix article {
         padding: 12px;
         border: 1px solid var(--line);
@@ -1747,7 +1884,7 @@
         background: var(--paper);
       }
 
-      .decision-matrix article[data-owner="apply"] {
+      .decision-matrix article[data-owner="correct"] {
         border-top-color: var(--apply);
       }
 
@@ -1755,7 +1892,7 @@
         border-top-color: var(--test);
       }
 
-      .decision-matrix article[data-owner="route"] {
+      .decision-matrix article[data-owner="decide"] {
         border-top-color: var(--route);
       }
 
@@ -1828,7 +1965,7 @@
 
       @media (max-width: 720px) {
         :root {
-          --header-h: 174px;
+          --header-h: 124px;
         }
 
         .app-header {
@@ -1892,17 +2029,20 @@
         }
 
         .header-secondary {
-          min-height: 96px;
+          min-height: 58px;
           padding-top: 8px;
-          display: block;
-          overflow: hidden;
+          display: flex;
+          flex-wrap: nowrap;
+          overflow-x: auto;
+          overflow-y: hidden;
+          scrollbar-width: none;
         }
 
         .control-group {
-          width: 100%;
-          padding: 0 0 7px;
-          overflow-x: auto;
-          scrollbar-width: none;
+          width: max-content;
+          padding: 0;
+          flex: 0 0 auto;
+          overflow: visible;
         }
 
         .control-group::-webkit-scrollbar {
@@ -1915,7 +2055,7 @@
         }
 
         .control-label {
-          flex: 0 0 auto;
+          display: none;
         }
 
         .filter-button {
@@ -1961,15 +2101,7 @@
         }
 
         .drawer::before {
-          position: absolute;
-          top: 8px;
-          left: 50%;
-          width: 36px;
-          height: 4px;
-          border-radius: 99px;
-          background: var(--line-strong);
-          content: "";
-          transform: translateX(-50%);
+          display: none;
         }
 
         .drawer-inner {
@@ -1987,6 +2119,8 @@
 
         .playbook-index,
         .decision-matrix,
+        .evidence-ladder,
+        .module-contract,
         .playbook-sequence,
         .measure-grid {
           grid-template-columns: 1fr;
@@ -2250,9 +2384,9 @@
       </div>
 
       <div class="map-legend" aria-label="Decision and action legend">
-        <span class="legend-item"><i class="legend-mark apply"></i>Apply</span>
+        <span class="legend-item"><i class="legend-mark apply"></i>Correct</span>
         <span class="legend-item"><i class="legend-mark test"></i>Test</span>
-        <span class="legend-item"><i class="legend-mark route"></i>Route</span>
+        <span class="legend-item"><i class="legend-mark route"></i>Decide</span>
         <span class="legend-item"><i class="legend-mark watch"></i>Watch</span>
         <span>Click any card for evidence and connections</span>
       </div>
@@ -2552,9 +2686,128 @@
           url: "https://www.searchpilot.com/resources/case-studies/adding-question-on-cost-to-title-tag",
           kind: "Practitioner experiment",
         },
+        googleManualActions: {
+          name: "Manual Actions report",
+          publisher: "Google Search Console",
+          url: "https://support.google.com/webmasters/answer/9044175",
+          kind: "Platform procedure",
+        },
+        googleSecurityIssues: {
+          name: "Security Issues report",
+          publisher: "Google Search Console",
+          url: "https://support.google.com/webmasters/answer/9044101",
+          kind: "Platform procedure",
+        },
+        googleCrawlStats: {
+          name: "Crawl Stats report",
+          publisher: "Google Search Console",
+          url: "https://support.google.com/webmasters/answer/9679690",
+          kind: "Platform procedure",
+        },
+        googleLinks: {
+          name: "Links report",
+          publisher: "Google Search Console",
+          url: "https://support.google.com/webmasters/answer/9049606",
+          kind: "Platform procedure",
+        },
+        googleSiteMoves: {
+          name: "Site moves with URL changes",
+          publisher: "Google Search Central",
+          url: "https://developers.google.com/search/docs/crawling-indexing/site-move-with-url-changes",
+          kind: "Platform rule",
+        },
+        googleRedirects: {
+          name: "Redirects and Google Search",
+          publisher: "Google Search Central",
+          url: "https://developers.google.com/search/docs/crawling-indexing/301-redirects",
+          kind: "Platform rule",
+        },
+        merchantAccountIssues: {
+          name: "Merchant account-level issues",
+          publisher: "Google Merchant Center",
+          url: "https://support.google.com/merchants/answer/12153802",
+          kind: "Platform procedure",
+        },
+        merchantStatus: {
+          name: "Merchant Center product and account status",
+          publisher: "Google Merchant Center",
+          url: "https://support.google.com/merchants/answer/15110920",
+          kind: "Platform procedure",
+        },
+        merchantAvailability: {
+          name: "Availability product-data rules",
+          publisher: "Google Merchant Center",
+          url: "https://support.google.com/merchants/answer/6324448",
+          kind: "Platform rule",
+        },
+        merchantPause: {
+          name: "Pause product-data rules",
+          publisher: "Google Merchant Center",
+          url: "https://support.google.com/merchants/answer/11909930",
+          kind: "Platform rule",
+        },
+        merchantExpiration: {
+          name: "Product-data expiration",
+          publisher: "Google Merchant Center",
+          url: "https://support.google.com/merchants/answer/6324499",
+          kind: "Platform rule",
+        },
+        ga4Scopes: {
+          name: "GA4 ecommerce scopes",
+          publisher: "Google Analytics",
+          url: "https://support.google.com/analytics/answer/12947610",
+          kind: "Measurement rule",
+        },
+        shopifyRedirects: {
+          name: "Shopify URL redirects",
+          publisher: "Shopify",
+          url: "https://help.shopify.com/en/manual/online-store/menus-and-links/url-redirect",
+          kind: "Implementation guide",
+        },
       };
 
+      const STORE_CONTRACT_SCHEMA = Object.freeze({
+        version: 1,
+        fields: Object.freeze([
+          "business outcomes and downstream value",
+          "qualified demand and intentionally excluded traffic",
+          "product lifecycle and strategic catalog roles",
+          "markets, channels, and intentional exclusions",
+          "authoritative product truth and claim boundaries",
+          "margin, returns, delivery, brand, accessibility, and trust guardrails",
+          "decision owners, human-judgment boundaries, and escalation rules",
+          "permissions by source system and change class",
+        ]),
+        metadata: Object.freeze([
+          "contract version",
+          "approved at",
+          "approved by",
+          "effective markets",
+          "review trigger",
+        ]),
+      });
+
       const ALWAYS_ON = [
+        {
+          id: "always-contract",
+          stage: "always",
+          branch: "all",
+          tags: ["recover", "improve", "capture"],
+          title: "Keep the store contract current",
+          explanation:
+            "Know what qualified demand, commercial value, truthful claims, acceptable risk, and human judgment mean for this store.",
+          checks: [
+            "Define the business outcome, strategic products and markets, lifecycle expectations, and intentional exclusions.",
+            "Name authoritative facts, prohibited inference, brand/legal boundaries, and commercial guardrails.",
+            "Record who decides price, stock, product, creative, brand, legal, analytics, and technical changes.",
+          ],
+          systems: ["Store contract", "Business priorities", "Decision rights", "Carve permissions"],
+          caveat:
+            "Unknown business judgment must stay explicit. Carve does not silently invent a store policy.",
+          evidence: ["memo"],
+          owner: null,
+          connects: [],
+        },
         {
           id: "always-data",
           stage: "always",
@@ -2743,6 +2996,42 @@
               evidence: ["memo", "googleTraffic", "merchantOptimize"],
               connects: ["d-problem"],
             },
+            {
+              id: "d-s6",
+              title: "Many products or a whole Google surface fall together",
+              explanation:
+                "The loss spans a host, directory, template, market, or Merchant account rather than one product.",
+              checks: [
+                "Compare breadth and first-change timing across Web, Images, product results, free listings, hosts, and markets.",
+                "Check Search Console messages, manual/security reports, Search status, Merchant account issues, server availability, and migration history before SKU edits.",
+              ],
+              systems: ["Search Console", "Merchant Center", "Server logs", "Release history"],
+              caveat: "Shared timing defines the incident scope; it does not by itself identify the cause.",
+              tags: ["recover"],
+              evidence: [
+                "googleTraffic",
+                "googleManualActions",
+                "googleSecurityIssues",
+                "googleCrawlStats",
+                "merchantAccountIssues",
+              ],
+              connects: ["d-problem"],
+            },
+            {
+              id: "d-s7",
+              title: "Launch, stock, pause, or discontinuation leaves the wrong state",
+              explanation:
+                "The source, PDP, feed, schema, or Google record no longer reflects the product’s approved lifecycle state.",
+              checks: [
+                "Compare launch, active, temporary OOS, preorder, backorder, paused, discontinued, and replaced state by variant, market, and effective time.",
+                "Verify PDP, schema, feed, processed item, URL behavior, and checkout all express the same approved state.",
+              ],
+              systems: ["PIM", "Commerce platform", "Merchant Center", "Storefront"],
+              caveat: "A lifecycle transition is not automatically a visibility fault; the wrong or inconsistent state is.",
+              tags: ["recover", "improve"],
+              evidence: ["merchantAvailability", "merchantPause", "merchantExpiration"],
+              connects: ["d-problem"],
+            },
           ],
           problem: {
             id: "d-problem",
@@ -2757,7 +3046,7 @@
             caveat: "Discovery is the problem area. The observed metric is not yet the cause.",
             tags: ["recover", "improve", "capture"],
             evidence: ["memo", "googleTraffic"],
-            connects: ["d-i1", "d-i2", "d-i3", "d-i4", "d-i5"],
+            connects: ["d-i1", "d-i2", "d-i3", "d-i4", "d-i5", "d-i6", "d-i7"],
           },
           investigations: [
             {
@@ -2840,6 +3129,55 @@
               tags: ["recover", "improve"],
               evidence: ["googleStructure", "googleTraffic", "shopifyPerformance"],
               connects: ["d-c2", "d-c3", "d-c8"],
+            },
+            {
+              id: "d-i6",
+              title: "Site, account, migration, and authority health",
+              explanation:
+                "Check shared infrastructure, enforcement, migration, and link-path failures before blaming individual products.",
+              checks: [
+                "DNS, CDN, origin availability, 5xx/429 responses, robots availability, Crawl Stats, and server logs.",
+                "Manual Actions, Security Issues, removals/messages, Search status, and ranking-update timing.",
+                "Merchant account warnings, suspensions, status, outages, and destination-wide failures.",
+                "Migration redirect maps, old/new hosts, important linked URLs, and lost internal or external paths.",
+              ],
+              systems: ["Search Console", "Merchant Center", "Server logs", "Link data"],
+              caveat:
+                "Update timing or a lost-link report is a clue until the affected scope and mechanism also agree.",
+              tags: ["recover"],
+              evidence: [
+                "googleTraffic",
+                "googleManualActions",
+                "googleSecurityIssues",
+                "googleCrawlStats",
+                "googleSiteMoves",
+                "googleLinks",
+                "merchantAccountIssues",
+              ],
+              connects: ["d-c3", "d-c6", "d-c9", "d-c10"],
+            },
+            {
+              id: "d-i7",
+              title: "Lifecycle, availability, and replacement policy",
+              explanation:
+                "Determine the approved commercial state and the correct PDP, feed, and URL behavior for each transition.",
+              checks: [
+                "Temporary OOS versus pause, preorder/backorder, discontinued, replaced, seasonal, and feed-refresh state.",
+                "Whether orders are accepted, the visible availability date, market/variant coverage, stable IDs, and alternative products.",
+                "Whether a clear replacement justifies a redirect; otherwise retain a useful archive or return an honest 404/410.",
+              ],
+              systems: ["PIM", "Inventory", "Merchant Center", "Storefront", "Redirects"],
+              caveat:
+                "The playbook applies an approved lifecycle decision; price, assortment, and discontinuation choices remain owner decisions.",
+              tags: ["recover", "improve"],
+              evidence: [
+                "merchantAvailability",
+                "merchantPause",
+                "merchantExpiration",
+                "googleRedirects",
+                "shopifyRedirects",
+              ],
+              connects: ["d-c7", "d-c8", "d-c11"],
             },
           ],
           causes: [
@@ -2939,6 +3277,56 @@
               evidence: ["merchantOptimize", "shopifyPerformance"],
               connects: ["d-f6", "d-f7"],
             },
+            {
+              id: "d-c9",
+              title: "A shared site, account, security, service, or migration fault suppresses many products",
+              explanation:
+                "A root-level failure changes access or eligibility across a coherent host, template, market, or Google surface.",
+              checks: [
+                "Supported by a direct health report, response/log evidence, enforcement notice, or old/new URL comparison.",
+              ],
+              systems: ["Search Console", "Merchant Center", "Server logs", "Migration records"],
+              caveat: "Open one root incident and suppress product-by-product content reactions.",
+              tags: ["recover"],
+              evidence: [
+                "googleTraffic",
+                "googleManualActions",
+                "googleSecurityIssues",
+                "googleCrawlStats",
+                "googleSiteMoves",
+              ],
+              connects: ["d-f2", "d-f6"],
+            },
+            {
+              id: "d-c10",
+              title: "Important internal, redirect, or external authority paths were lost",
+              explanation:
+                "Google and customers no longer reach important product URLs through the paths that previously carried discovery and trust.",
+              checks: [
+                "Supported by changed internal graphs, missing exact redirects, broken referring destinations, and affected versus unaffected controls.",
+              ],
+              systems: ["Internal links", "Redirect map", "Search Console", "Link data"],
+              caveat:
+                "Link reports are incomplete. Never infer a penalty or recommend manufactured links from one report.",
+              tags: ["recover", "improve"],
+              evidence: ["googleLinks", "googleSiteMoves", "googleStructure"],
+              connects: ["d-f2", "d-f6"],
+            },
+            {
+              id: "d-c11",
+              title: "The lifecycle state is stale, inconsistent, or has no approved policy",
+              explanation:
+                "Different systems disagree about whether the product is buyable, paused, upcoming, unavailable, discontinued, or replaced.",
+              checks: [
+                "Supported by a source-to-PDP-to-feed-to-Google mismatch, expired refresh, broken transition, or missing owner decision.",
+              ],
+              systems: ["PIM", "Inventory", "Merchant Center", "Storefront"],
+              caveat:
+                "Correct a mismatched state; route the underlying commercial lifecycle choice.",
+              tags: ["recover", "improve"],
+              evidence: ["merchantAvailability", "merchantPause", "merchantExpiration"],
+              connects: ["d-f1", "d-f5", "d-f7", "d-f8"],
+            },
           ],
           fixes: [
             {
@@ -2950,7 +3338,9 @@
               systems: ["Carve decision history", "Monitoring"],
               caveat: "The intervention stops. The product’s live investigation does not.",
               tags: ["recover", "improve", "capture"],
-              owner: "watch",
+              interventions: ["watch"],
+              executors: ["carve"],
+              deliveryNote: "Carve records the stop reason and the evidence that would reopen the case.",
               evidence: ["memo", "googleTraffic"],
               connects: ["d-measure"],
             },
@@ -2963,7 +3353,9 @@
               systems: ["Commerce platform", "Storefront", "Sitemap"],
               caveat: "Do not index duplicates or intentionally excluded products merely to increase URL count.",
               tags: ["recover", "improve"],
-              owner: "apply",
+              interventions: ["correct"],
+              executors: ["carve", "engineering"],
+              deliveryNote: "Carve executes permitted product-level corrections; shared code or platform work goes to its owner.",
               evidence: ["googleStructure", "googleCanonical"],
               connects: ["d-measure"],
             },
@@ -2976,7 +3368,9 @@
               systems: ["PIM", "PDP", "Metadata", "Product feed"],
               caveat: "Never stretch the product to chase a query it cannot honestly satisfy.",
               tags: ["recover", "improve", "capture"],
-              owner: "test",
+              interventions: ["correct", "test"],
+              executors: ["carve", "marketing", "brand-legal"],
+              deliveryNote: "Correct verified missing or wrong facts. Test a truthful alternative presentation when the facts are already correct.",
               evidence: ["memo", "merchantOptimize"],
               connects: ["d-measure"],
             },
@@ -2989,7 +3383,9 @@
               systems: ["Storefront", "Internal links", "Canonical data", "Content"],
               caveat: "Multiple pages may remain when they serve distinct intents.",
               tags: ["recover", "improve", "capture"],
-              owner: "test",
+              interventions: ["correct", "test"],
+              executors: ["carve", "marketing", "engineering"],
+              deliveryNote: "Correct proven duplicate or signal faults. Test uncertain page-role or supporting-content strategy.",
               evidence: ["googleCanonical", "googleStructure"],
               connects: ["d-measure"],
             },
@@ -3002,34 +3398,63 @@
               systems: ["PIM", "Merchant Center", "Structured data", "PDP"],
               caveat: "Never invent a GTIN, and never treat automatic item updates as the source of truth.",
               tags: ["recover", "improve"],
-              owner: "apply",
+              interventions: ["correct"],
+              executors: ["carve", "catalog", "engineering"],
+              deliveryNote: "Execute at the authoritative source when permitted; otherwise send the same verified correction to its owner.",
               evidence: ["merchantSpec", "merchantOptimize", "googleProduct"],
               connects: ["d-measure"],
             },
             {
               id: "d-f6",
-              title: "Route shared technical work",
+              title: "Repair or reverse the shared technical source",
               explanation:
-                "Prepare the evidence for the owner of rendering, redirects, templates, feeds, apps, migrations, or platform behavior.",
+                "Correct the proven rendering, redirect, template, feed, app, migration, or platform fault at its shared source.",
               checks: ["Include affected scope, reproduction, likely release, and expected discovery metric."],
               systems: ["Engineering", "Platform", "SEO"],
-              caveat: "Suppress product-by-product rewrites until the shared cause is fixed.",
+              caveat: "Carve can diagnose and contain the fault; execution follows the permission and engineering owner.",
               tags: ["recover", "improve"],
-              owner: "route",
+              interventions: ["correct"],
+              executors: ["carve", "engineering"],
+              deliveryNote: "Carve executes if permission and safety allow; otherwise it routes a reproducible correction, not an open-ended investigation.",
               evidence: ["memo", "googleTraffic", "shopifyPerformance"],
               connects: ["d-measure"],
             },
             {
               id: "d-f7",
-              title: "Route the offer or assortment decision",
+              title: "Prepare the offer or assortment decision",
               explanation:
                 "Prepare a decision on price, stock, market eligibility, imagery, product availability, or a genuine assortment gap.",
               checks: ["Show the demand, expected value, constraint, and relevant alternatives."],
               systems: ["Commercial", "Inventory", "Buying", "Creative"],
               caveat: "Discovery work cannot solve a product the business cannot or should not offer.",
               tags: ["recover", "improve", "capture"],
-              owner: "route",
+              interventions: ["decide"],
+              executors: ["commercial", "inventory", "creative", "product"],
+              deliveryNote: "Carve prepares the decision; the commercial, inventory, creative, or product owner chooses and executes it.",
               evidence: ["memo", "merchantOptimize"],
+              connects: ["d-measure"],
+            },
+            {
+              id: "d-f8",
+              title: "Publish the approved lifecycle state consistently",
+              explanation:
+                "Propagate launch, active, temporary OOS, preorder, backorder, paused, discontinued, or replaced state from its source to the PDP, schema, feed, URL, and alternatives.",
+              checks: [
+                "Keep stable IDs and history; use a redirect only for a clear replacement; alert before feed data expires.",
+              ],
+              systems: ["PIM", "Commerce platform", "Merchant Center", "Storefront", "Redirects"],
+              caveat:
+                "Carve applies the approved state. A new lifecycle, stock, price, or assortment decision belongs to its owner.",
+              tags: ["recover", "improve"],
+              interventions: ["correct"],
+              executors: ["carve", "catalog", "engineering"],
+              deliveryNote: "Carve publishes an already approved state when permitted; an unmade lifecycle decision returns to its owner.",
+              evidence: [
+                "merchantAvailability",
+                "merchantPause",
+                "merchantExpiration",
+                "googleRedirects",
+              ],
               connects: ["d-measure"],
             },
           ],
@@ -3047,7 +3472,7 @@
             tags: ["recover", "improve", "capture"],
             evidence: ["memo", "googleTraffic"],
             owner: null,
-            connects: ["d-s1", "d-s2", "d-s3", "d-s4", "d-s5"],
+            connects: ["d-s1", "d-s2", "d-s3", "d-s4", "d-s5", "d-s6", "d-s7"],
           },
         },
         {
@@ -3322,20 +3747,24 @@
               systems: ["Search Console", "Commerce analytics"],
               caveat: "Do not optimize an average at the expense of incremental demand.",
               tags: ["recover"],
-              owner: "watch",
+              interventions: ["watch"],
+              executors: ["carve"],
+              deliveryNote: "Carve preserves useful reach and records what would justify reopening the listing.",
               evidence: ["googleTraffic"],
               connects: ["c-measure"],
             },
             {
               id: "c-f2",
-              title: "Route the investigation back to Discovery",
+              title: "Continue the case in Discovery",
               explanation:
                 "Treat persistent ranking, eligibility, or SERP access loss as a visibility problem rather than a result-copy problem.",
               checks: ["Carry the affected queries, pages, surfaces, and timeline into the Discovery branch."],
               systems: ["Carve investigation", "Search Console"],
               caveat: "Snippet rewriting cannot restore lost ranking opportunity by itself.",
               tags: ["recover"],
-              owner: "route",
+              interventions: ["decide"],
+              executors: ["carve"],
+              deliveryNote: "This is a case-routing decision: continue the same evidence trail in Discovery instead of changing result copy.",
               evidence: ["googleTraffic"],
               connects: ["c-measure"],
             },
@@ -3348,7 +3777,9 @@
               systems: ["PIM", "PDP", "Metadata", "Product feed"],
               caveat: "Google may still choose a different title or snippet.",
               tags: ["recover", "improve"],
-              owner: "test",
+              interventions: ["correct", "test"],
+              executors: ["carve", "marketing", "brand-legal"],
+              deliveryNote: "Correct conflicting or false identity signals; test truthful wording when the current signals are already accurate.",
               evidence: ["googleTraffic", "merchantOptimize"],
               connects: ["c-measure"],
             },
@@ -3361,7 +3792,9 @@
               systems: ["Storefront", "Canonical data", "Product feed", "Internal links"],
               caveat: "Consolidation is appropriate only for true duplicates or harmful overlap.",
               tags: ["recover", "improve"],
-              owner: "apply",
+              interventions: ["correct", "test"],
+              executors: ["carve", "marketing", "engineering"],
+              deliveryNote: "Correct a proven wrong page or landing variant; test uncertain page-role strategy.",
               evidence: ["googleCanonical", "merchantOptimize"],
               connects: ["c-measure"],
             },
@@ -3374,7 +3807,9 @@
               systems: ["PIM", "Merchant Center", "Structured data", "PDP"],
               caveat: "Correct data improves eligibility and trust; it does not guarantee a richer result.",
               tags: ["recover", "improve"],
-              owner: "apply",
+              interventions: ["correct"],
+              executors: ["carve", "catalog", "engineering"],
+              deliveryNote: "Correct verified source data under permission; route only the execution when another system owner is required.",
               evidence: ["merchantOptimize", "googleProduct"],
               connects: ["c-measure"],
             },
@@ -3387,20 +3822,24 @@
               systems: ["Creative", "PIM", "Product feed"],
               caveat: "Carve prepares the evidence and brief; new asset production belongs to the creative owner.",
               tags: ["improve"],
-              owner: "route",
+              interventions: ["decide"],
+              executors: ["creative"],
+              deliveryNote: "Carve produces the evidence-backed brief; the creative owner produces and approves the asset.",
               evidence: ["merchantOptimize"],
               connects: ["c-measure"],
             },
             {
               id: "c-f7",
-              title: "Route price, stock, shipping, promotion, or proof",
+              title: "Prepare the offer or proof decision",
               explanation:
                 "Prepare the commercial decision when the competing offer—not the wording—is the true reason shoppers do not click.",
               checks: ["Show the live comparison, affected demand, and expected metric."],
               systems: ["Commercial", "Inventory", "Logistics", "Reviews"],
               caveat: "Never disguise an offer problem with copy.",
               tags: ["recover", "improve"],
-              owner: "route",
+              interventions: ["decide"],
+              executors: ["commercial", "inventory", "marketing"],
+              deliveryNote: "Carve prepares the commercial decision and continues measuring; the responsible owner changes the offer.",
               evidence: ["memo", "merchantOptimize"],
               connects: ["c-measure"],
             },
@@ -3428,15 +3867,16 @@
           name: "Add to cart",
           shortName: "ATC",
           statement: "Shoppers reach the PDP but do not add the product to cart.",
-          metric: "Successful cart additions per valid product view",
+          metric: "Product-PDP sessions with ≥1 confirmed add ÷ qualified product-PDP sessions",
           signals: [
             {
               id: "a-s1",
               title: "PDP views stay healthy while ATC falls",
               explanation:
-                "The product still receives traffic, but fewer valid product views lead to a successful cart addition.",
+                "Qualified product-PDP sessions stay healthy, but fewer sessions produce at least one confirmed add of that product.",
               checks: [
-                "Use the same product/variant identity and a stable denominator.",
+                "Primary ATC deduplicates repeat views and adds within product × session.",
+                "Report both all-qualified-session ATC and purchasable-at-entry ATC so stock is not hidden.",
                 "Separate the button click, cart mutation, and analytics event.",
               ],
               systems: ["GA4", "Commerce analytics", "Cart state"],
@@ -3738,11 +4178,13 @@
               title: "Repair measurement or the functional add path",
               explanation:
                 "Correct event setup, product IDs, selector validation, cart mutation, or duplicated instrumentation before changing the page story.",
-              checks: ["Route technical repair with reproduction steps and verify against actual cart state."],
+              checks: ["Repair under permission or route the same verified correction with reproduction steps; verify against actual cart state."],
               systems: ["Analytics", "Engineering", "Commerce platform"],
-              caveat: "The map labels this Route because Carve diagnoses and prepares the technical work.",
+              caveat: "Whether Carve executes or another owner does depends on permission—not on whether the fault is verified.",
               tags: ["recover"],
-              owner: "route",
+              interventions: ["correct"],
+              executors: ["carve", "analytics", "engineering"],
+              deliveryNote: "Carve executes permitted measurement/configuration repairs; code work goes to engineering with exact reproduction.",
               evidence: ["ga4Events", "shopifyDiscrepancies"],
               connects: ["a-measure"],
             },
@@ -3755,7 +4197,9 @@
               systems: ["PIM", "PDP", "Product feed", "Campaign"],
               caveat: "Redirect low-intent traffic when a different page better serves it.",
               tags: ["recover", "improve"],
-              owner: "test",
+              interventions: ["correct", "test"],
+              executors: ["carve", "marketing", "catalog"],
+              deliveryNote: "Correct a false or mismatched promise; test positioning when both current and proposed promises are truthful.",
               evidence: ["memo", "merchantOptimize"],
               connects: ["a-measure"],
             },
@@ -3768,7 +4212,9 @@
               systems: ["PIM", "PDP", "Customer voice"],
               caveat: "Remove unsupported or misleading claims.",
               tags: ["improve"],
-              owner: "test",
+              interventions: ["correct", "test"],
+              executors: ["carve", "catalog", "marketing"],
+              deliveryNote: "Correct wrong facts first. Test placement or decision support when the underlying facts are already right.",
               evidence: ["memo", "baymardPdp"],
               connects: ["a-measure"],
             },
@@ -3781,7 +4227,9 @@
               systems: ["PDP", "Reviews", "Storefront"],
               caveat: "Surface authentic evidence; never create or selectively suppress reviews.",
               tags: ["recover", "improve"],
-              owner: "test",
+              interventions: ["test"],
+              executors: ["carve", "marketing"],
+              deliveryNote: "This is a presentation hypothesis unless it corrects a verified factual omission handled elsewhere.",
               evidence: ["baymardPdp"],
               connects: ["a-measure"],
             },
@@ -3794,7 +4242,9 @@
               systems: ["Creative", "PIM", "PDP"],
               caveat: "Carve prepares the brief; creative production belongs to the asset owner.",
               tags: ["improve"],
-              owner: "route",
+              interventions: ["decide"],
+              executors: ["creative"],
+              deliveryNote: "Carve produces the exact brief and expected decision outcome; the asset owner creates and approves it.",
               evidence: ["baymardPdp"],
               connects: ["a-measure"],
             },
@@ -3807,13 +4257,15 @@
               systems: ["PDP", "Inventory", "Markets", "Product feed"],
               caveat: "Carve can clarify truth; replenishment and policy changes remain routed decisions.",
               tags: ["recover", "improve"],
-              owner: "apply",
+              interventions: ["correct", "test", "decide"],
+              executors: ["carve", "catalog", "marketing", "inventory", "commercial"],
+              deliveryNote: "Correct state mismatches; test information placement; route replenishment or policy changes.",
               evidence: ["baymardPdp", "merchantOptimize"],
               connects: ["a-measure"],
             },
             {
               id: "a-f7",
-              title: "Route the offer, stock, or product decision",
+              title: "Prepare the offer, stock, or product decision",
               explanation:
                 "Prepare the commercial or product decision when price, delivery, availability, quality, or weak market fit—not the page—is the constraint.",
               checks: [
@@ -3823,7 +4275,9 @@
               caveat:
                 "Copy alone is not a fix for an uncompetitive offer, unavailable option, or product customers do not want.",
               tags: ["recover", "improve"],
-              owner: "route",
+              interventions: ["decide"],
+              executors: ["commercial", "inventory", "product"],
+              deliveryNote: "Carve brings a prepared choice; the commercial, inventory, or product owner decides.",
               evidence: ["memo", "merchantOptimize"],
               connects: ["a-measure"],
             },
@@ -3836,7 +4290,9 @@
               systems: ["Engineering", "Theme", "Apps", "Web performance"],
               caveat: "Suppress product-level content changes while the shared failure remains.",
               tags: ["recover"],
-              owner: "route",
+              interventions: ["correct"],
+              executors: ["carve", "engineering"],
+              deliveryNote: "Carve can execute a safe permitted reversal or repair; otherwise engineering receives the exact fault and rollback plan.",
               evidence: ["shopifyPerformance", "ga4Events"],
               connects: ["a-measure"],
             },
@@ -3851,67 +4307,73 @@
               systems: ["GA4", "Commerce analytics", "Carve decision history"],
               caveat: "Do not optimize a blended rate at the expense of incremental qualified demand.",
               tags: ["recover"],
-              owner: "watch",
+              interventions: ["watch"],
+              executors: ["carve"],
+              deliveryNote: "Carve records the stable cohort, useful incremental demand, and reopening conditions.",
               evidence: ["googleTraffic", "ga4Metrics"],
               connects: ["a-measure"],
             },
           ],
           measure: {
             id: "a-measure",
-            title: "Measure successful adds from valid views",
+            title: "Measure confirmed-add sessions from qualified PDP sessions",
             explanation:
-              "Measure actual cart additions per valid item view for the affected cohort, then keep, expand, revise, or reverse.",
+              "Primary ATC is unique product-PDP sessions with at least one confirmed add of that product divided by unique qualified product-PDP sessions.",
             checks: [
-              "Declare the primary cohort and window before changing the PDP.",
+              "A confirmed add requires a successful cart response and the intended product/variant present in cart; deduplicate repeat views/adds within product × session.",
+              "Report all qualified sessions and purchasable-at-entry sessions separately; keep add events, units, quick-add, and accelerated checkout as separate diagnostics.",
               "Use purchases or revenue as guardrails where available so a superficial ATC lift is not called success.",
             ],
             systems: ["Commerce platform", "GA4", "Carve decision history"],
-            caveat: "A higher ATC rate is not durable value if the cart action fails or downstream quality worsens.",
+            caveat:
+              "Qualified and purchasable status must be defined before treatment; post-treatment clicks or selections cannot define the primary denominator.",
             tags: ["recover", "improve"],
-            evidence: ["memo", "ga4Metrics"],
+            evidence: ["memo", "ga4Metrics", "ga4Events", "ga4Scopes"],
             owner: null,
             connects: ["a-s1", "a-s2", "a-s3", "a-s4", "a-s5"],
           },
         },
       ];
 
-      const DECISION_ORDER = ["apply", "test", "route", "watch"];
+      const INTERVENTION_ORDER = ["correct", "test", "decide", "watch"];
 
-      const DECISION_TEMPLATES = {
-        apply: {
-          title: "Apply a proven correction",
+      const INTERVENTION_TEMPLATES = {
+        correct: {
+          title: "Correct a verified fault",
           explanation:
-            "The cause is supported and the response is factual, low-risk, reversible, permitted, and safe to measure.",
+            "The exact change repairs product truth, identity, eligibility, measurement, or broken behavior. Who executes it is decided separately.",
           checks: [
-            "The action corrects product truth, identity, eligibility, measurement, or broken behavior.",
-            "The affected scope, permissions, rollback, and expected outcome are clear.",
+            "Require a reproduced fault or directly verified source/output mismatch.",
+            "Name the smallest correction, execution owner, permission, blast radius, validation, and reversal.",
           ],
-          systems: ["Carve permissions", "Source systems", "Change history"],
-          caveat: "A clear correction still needs outcome and regression monitoring.",
+          systems: ["Source systems", "Execution rights", "Change history"],
+          caveat:
+            "A correction remains a correction when engineering or another owner must execute it; routing does not turn it into an experiment.",
           evidence: ["memo"],
         },
         test: {
-          title: "Run a controlled test",
+          title: "Test an uncertain treatment",
           explanation:
-            "The opportunity may matter, but the proposed positioning, presentation, or decision-support change is still uncertain.",
+            "The facts are truthful, but the effect of different positioning, presentation, or decision support remains uncertain.",
           checks: [
             "State one evidence-backed hypothesis and the cohort it should help.",
-            "Define the primary outcome, business guardrails, comparison, observation window, and rollback.",
+            "Predeclare assignment, the full analysis population, primary outcome, guardrails, stopping rule, and reversal.",
           ],
           systems: ["Experiment plan", "Matched cohort", "Commerce analytics"],
           caveat: "Customer traffic and causal evidence remain scarce even when Carve’s attention is not.",
           evidence: ["memo", "shopifySeoTesting", "bingExperiments"],
         },
-        route: {
-          title: "Prepare the owner’s decision",
+        decide: {
+          title: "Prepare a real owner decision",
           explanation:
-            "Carve understands the constraint, but price, stock, imagery, product, brand, legal, or technical work belongs elsewhere.",
+            "The constraint is understood, but price, stock, imagery, product, brand, legal, or another business choice needs its accountable owner.",
           checks: [
-            "Bring the affected scope, evidence, likely impact, options, risks, and recommended next move.",
+            "Bring the affected scope, evidence, likely impact, feasible options, risks, and Carve’s recommendation.",
             "Interrupt a person only when a real decision or urgent action is required.",
           ],
           systems: ["Decision brief", "Business priorities", "Responsible owner"],
-          caveat: "Route a prepared decision, not an unfinished investigation.",
+          caveat:
+            "This is not the bucket for every change another team executes. A verified technical repair is still a correction.",
           evidence: ["memo", "googleAlerting"],
         },
         watch: {
@@ -3928,6 +4390,95 @@
         },
       };
 
+      const EVIDENCE_LEVELS = Object.freeze({
+        untrusted: Object.freeze({
+          label: "Untrusted",
+          meaning: "Identity, scope, event, or source disagreement prevents a behavioral diagnosis.",
+          permits: "Repair or bound measurement; continue investigation.",
+        }),
+        clue: Object.freeze({
+          label: "Clue",
+          meaning: "One metric, snapshot, competitor, recording, or comment suggests a path.",
+          permits: "Form hypotheses and run the next discriminating check.",
+        }),
+        corroborated: Object.freeze({
+          label: "Corroborated",
+          meaning: "Independent evidence, timing, affected/control pattern, and mechanism agree; contradictions are bounded.",
+          permits: "Test, prepare an owner decision, or Watch.",
+        }),
+        verified: Object.freeze({
+          label: "Verified fault",
+          meaning: "A reproducible source/output mismatch or broken behavior has a known source.",
+          permits: "Correct at the authoritative source under the applicable execution rights.",
+        }),
+        causal: Object.freeze({
+          label: "Causal learning",
+          meaning: "A valid controlled or defensible quasi-experiment supports the effect.",
+          permits: "Keep or expand only within the tested transfer boundary.",
+        }),
+      });
+
+      const DECISION_POLICY = Object.freeze({
+        readyWhen: Object.freeze([
+          "The store contract is current or the relevant unknown is explicit.",
+          "Identity and measurement pass or are safely bounded.",
+          "The affected cohort is reproducible.",
+          "The leading mechanism explains the main observations.",
+          "Serious alternatives are falsified or bounded.",
+          "The responsible source, exact intervention, execution owner, and untouched scope are known.",
+          "Expected outcome, guardrails, validation, stopping rule, and reversal are defined.",
+        ]),
+        stopOutcomes: Object.freeze([
+          "Decision-ready: correct, test, or prepare the owner decision.",
+          "Bounded Watch: another available check is unlikely to change the decision; save reopening conditions.",
+          "Merged case: a shared root case already owns the symptom.",
+          "Unsafe or stale: refresh state or obtain human judgment before execution.",
+        ]),
+        urgentContainment: Object.freeze([
+          "Widespread noindex, routing, feed, server, or market loss.",
+          "Wrong price, stock, variant, delivery promise, identifier, or regulated claim.",
+          "Broken, duplicate, or wrong-item cart behavior.",
+          "A proposed reversal would overwrite a newer human or system change.",
+        ]),
+      });
+
+      const METRIC_GLOSSARY = Object.freeze({
+        "Qualified demand":
+          "A store-approved customer intent the product or page can truthfully satisfy in the target market.",
+        "Relevant impression":
+          "An impression from qualified demand on the intended surface, page role, market, and product state.",
+        "Expected query":
+          "A validated intent with external/store evidence and truthful product fit—not merely a keyword Carve wants.",
+        "Matched product":
+          "A comparison product similar on category, intent, price, lifecycle, season, market, stock, and relevant template.",
+        "Material change":
+          "A store-calibrated movement that survives data-quality, normal-variation, seasonality, and false-alert checks and could change a decision.",
+        "Stable position":
+          "No meaningful cohort-level movement in Search Console’s approximate/topmost position; it is not an exact controlled rank.",
+        "Qualified PDP session":
+          "A human, non-internal product-detail session in the target market with stable product identity; the definition is fixed before treatment.",
+        "Purchasable-at-entry session":
+          "A qualified PDP session where at least one option is buyable in that market at the first valid view.",
+        "Confirmed add":
+          "A successful cart response with the intended product/variant present in cart; repeat adds are deduplicated for the primary session rate.",
+        "Intentional exclusion":
+          "A current, approved store or market decision not to publish, index, list, or sell the item in that scope.",
+      });
+
+      const EXECUTOR_META = Object.freeze({
+        carve: { label: "Carve" },
+        approval: { label: "Approval required" },
+        catalog: { label: "Catalog" },
+        marketing: { label: "Marketing" },
+        analytics: { label: "Analytics" },
+        engineering: { label: "Engineering" },
+        commercial: { label: "Commercial" },
+        inventory: { label: "Inventory" },
+        creative: { label: "Creative" },
+        product: { label: "Product" },
+        "brand-legal": { label: "Brand / legal" },
+      });
+
       function normalizeNode(item, stage, branch) {
         return Object.freeze({
           ...item,
@@ -3939,7 +4490,11 @@
           evidence: Object.freeze([...(item.evidence || [])]),
           connects: Object.freeze([...(item.connects || [])]),
           candidates: Object.freeze([...(item.candidates || [])]),
-          owner: item.owner || null,
+          candidateRules: Object.freeze([...(item.candidateRules || [])]),
+          interventions: Object.freeze([...(item.interventions || [])]),
+          executors: Object.freeze([...(item.executors || [])]),
+          interventionType: item.interventionType || null,
+          deliveryNote: item.deliveryNote || "",
         });
       }
 
@@ -3948,18 +4503,19 @@
           .map((item) => normalizeNode(item, "fix", branch.id))
           .sort(
             (left, right) =>
-              DECISION_ORDER.indexOf(left.owner) - DECISION_ORDER.indexOf(right.owner),
+              INTERVENTION_ORDER.indexOf(left.interventions[0]) -
+              INTERVENTION_ORDER.indexOf(right.interventions[0]),
           );
         const fixById = new Map(fixes.map((fix) => [fix.id, fix]));
-        const decisions = DECISION_ORDER.map((action) => {
-          const actionFixes = fixes.filter((fix) => fix.owner === action);
-          const template = DECISION_TEMPLATES[action];
+        const decisions = INTERVENTION_ORDER.map((action) => {
+          const actionFixes = fixes.filter((fix) => fix.interventions.includes(action));
+          const template = INTERVENTION_TEMPLATES[action];
           return normalizeNode(
             {
               id: `${branch.id}-decision-${action}`,
               ...template,
               tags: Array.from(new Set(actionFixes.flatMap((fix) => fix.tags))),
-              owner: action,
+              interventionType: action,
               connects: actionFixes.map((fix) => fix.id),
             },
             "decision",
@@ -3970,16 +4526,36 @@
           const candidates = [...item.connects];
           const decisionIds = Array.from(
             new Set(
-              candidates.map((fixId) => {
+              candidates.flatMap((fixId) => {
                 const fix = fixById.get(fixId);
-                return fix ? `${branch.id}-decision-${fix.owner}` : "";
+                return fix
+                  ? fix.interventions.map((action) => `${branch.id}-decision-${action}`)
+                  : [];
               }),
             ),
           ).filter(Boolean);
+          const candidateRules = candidates
+            .map((fixId) => {
+              const fix = fixById.get(fixId);
+              if (!fix) return null;
+              const minimumEvidence =
+                fix.interventions.length === 1 && fix.interventions[0] === "correct"
+                  ? "Verified fault"
+                  : fix.interventions.includes("test") || fix.interventions.includes("decide")
+                    ? "Corroborated"
+                    : "Bounded uncertainty";
+              return Object.freeze({
+                fixId,
+                when: fix.checks[0] || fix.explanation,
+                minimumEvidence,
+              });
+            })
+            .filter(Boolean);
           return normalizeNode(
             {
               ...item,
               candidates,
+              candidateRules,
               connects: decisionIds,
             },
             "cause",
@@ -4002,7 +4578,7 @@
       });
 
       const MAP_DATA = Object.freeze({
-        version: 2,
+        version: 3,
         title: "Carve catalog diagnostic map",
         stages: Object.freeze(["signal", "problem", "investigate", "cause", "decision", "fix"]),
         sources: Object.freeze(SOURCE_LIBRARY),
@@ -4013,6 +4589,105 @@
       window.CARVE_MAP_DATA = MAP_DATA;
 
       const OPERATING_PROTOCOL = Object.freeze([
+        {
+          id: "p-store-contract",
+          number: "P0",
+          title: "Define what good and safe mean",
+          question: "Which outcomes, truth, constraints, and decisions govern this store?",
+          nodeIds: ["always-contract"],
+          entryWhen: [
+            "Before the first store-specific diagnosis.",
+            "After a material business, market, lifecycle, policy, or decision-rights change.",
+          ],
+          exitWhen: [
+            "Every required store-contract field is current.",
+            "Unknowns are explicit and routed rather than silently assumed.",
+          ],
+          outputs: ["Versioned store contract", "Known unknowns", "Decision owners", "Review trigger"],
+          checks: [
+            {
+              what: "Business outcome and qualified demand",
+              how: "Define the commercial outcome, downstream value, intents that count, traffic that does not count, and the mechanism metrics Carve may use.",
+              impact: "Carve cannot call visibility, clicks, or adds good when they attract the wrong demand or destroy downstream value.",
+            },
+            {
+              what: "Catalog and lifecycle roles",
+              how: "Record strategic products, categories, markets, launch/mature/seasonal/clearance/discontinued expectations, and intentional channel exclusions.",
+              impact: "The same metric can be healthy for a launch, expected for a discontinued item, and dangerous for a strategic evergreen product.",
+            },
+            {
+              what: "Truth and commercial guardrails",
+              how: "Name authoritative facts, prohibited inference, regulated/brand claims, margin, return, delivery, trust, accessibility, and customer-harm boundaries.",
+              impact: "Carve can improve presentation without inventing claims or optimizing one metric past a real business constraint.",
+            },
+            {
+              what: "Decision rights and execution rights",
+              how: "Name owners for price, stock, product, creative, brand/legal, analytics, and engineering; record where Carve may execute, draft, request approval, or observe.",
+              impact: "The diagnosis stays independent from who is allowed to make the change.",
+            },
+          ],
+          patterns: [
+            {
+              evidence: "The product is intentionally excluded from one market and the contract is current.",
+              decision: "Watch that market state; do not treat the missing listing as a fault.",
+            },
+            {
+              evidence: "A proposed title claim is not present in an authoritative source.",
+              decision: "Route fact collection or approval. Do not infer the claim from competitor language.",
+            },
+            {
+              evidence: "The business outcome or decision owner is unknown.",
+              decision: "Continue evidence collection, but do not execute a customer-facing or commercial change.",
+            },
+          ],
+          examples: [
+            {
+              title: "A low-volume product that still deserves understanding",
+              before: "The team would ignore the SKU because it contributes little revenue this week.",
+              after: "Carve keeps its identity, lifecycle, visibility, offer, and PDP state current; value controls investigation depth, rollout size, and manager interruption—not whether the product is understood.",
+              why: "Carve is not time-constrained, but evidence, change risk, and human decision capacity remain real.",
+            },
+          ],
+          implementation: [
+            {
+              title: "Write the contract",
+              instruction: "Store each schema field, its owner, effective scope, source, approval, and review trigger.",
+              verify: "A second operator can explain what good, truthful, safe, and intentionally excluded mean without guessing.",
+            },
+            {
+              title: "Expose unknowns",
+              instruction: "Represent missing commercial judgment as an explicit unknown with an owner; never replace it with a generic benchmark.",
+              verify: "Every unknown blocks only the decisions that depend on it.",
+            },
+            {
+              title: "Version changes",
+              instruction: "When a policy or priority changes, preserve the old contract and reevaluate open cases whose decisions depended on it.",
+              verify: "No open recommendation silently uses a superseded business rule.",
+            },
+          ],
+          measure: {
+            primary: "Contract completeness and freshness for the decisions Carve is making",
+            guardrails: "Truth, customer harm, brand/legal, margin, returns, delivery, accessibility, and trust",
+            window: "Before dependent decisions and whenever a review trigger fires",
+            success: "The reasoning context is current, attributable, and contains no hidden business assumption",
+            rollback: "Restore the prior approved contract only when the newer change was erroneous; otherwise reevaluate dependent cases",
+          },
+          nextPaths: [
+            {
+              when: "The relevant contract is current.",
+              outcome: "Continue",
+              nextModules: ["p-scope"],
+              reason: "The case can now be scoped against store-specific outcomes and constraints.",
+            },
+            {
+              when: "A required judgment or owner is missing.",
+              outcome: "Owner decision",
+              nextModules: [],
+              reason: "Collect the missing decision without halting unrelated monitoring.",
+            },
+          ],
+          sources: ["memo"],
+        },
         {
           id: "p-scope",
           number: "P1",
@@ -4039,6 +4714,11 @@
               what: "Change ledger",
               how: "Overlay deployments, feed jobs, PIM edits, campaigns, price, promotions, inventory, shipping, consent, tracking, and competitor events on the first meaningful change date.",
               impact: "A tightly timed, mechanism-compatible change raises causal confidence; timing alone still does not prove it.",
+            },
+            {
+              what: "Shared funnel and earliest changed stage",
+              how: "For the same product/query/market/device cohort, read qualified demand → eligible impressions → clicks → qualified PDP sessions → confirmed adds → purchases/value. Start at the earliest stage that changed.",
+              impact: "Later rates can move because the upstream mix changed. One release, feed, offer, or traffic change should stay one case when it explains several signals.",
             },
           ],
           patterns: [
@@ -4090,10 +4770,125 @@
           sources: ["memo", "searchConsoleFilters", "searchConsoleCounting", "ga4Metrics", "speeroResearch"],
         },
         {
-          id: "p-decision",
+          id: "p-evidence",
           number: "P2",
-          title: "Choose Apply, Test, Route, or Watch",
-          question: "What kind of decision does this evidence justify?",
+          title: "Grade the evidence and choose the next question",
+          question: "What does Carve know, what remains only a clue, and which check would separate the remaining explanations?",
+          nodeIds: ["always-data", "always-scope", "always-uncertainty"],
+          entryWhen: ["After a reproducible case scope exists.", "Whenever new evidence changes the leading explanation."],
+          exitWhen: [
+            "The decision-ready conditions are satisfied.",
+            "The uncertainty is bounded and another available check is unlikely to change the decision.",
+            "The symptom is merged into a shared root case.",
+          ],
+          outputs: [
+            "Evidence level",
+            "Evidence for and against",
+            "Alternatives ruled out",
+            "Next discriminating check",
+            "Stop or reopen condition",
+          ],
+          checks: [
+            {
+              what: "Evidence ladder",
+              how: "Classify the case as Untrusted, Clue, Corroborated, Verified fault, or Causal learning. Record the direct observations supporting that level.",
+              impact: "A clue can choose the next check. It cannot authorize a correction or be presented as causal proof.",
+            },
+            {
+              what: "Next discriminating check",
+              how: "List the remaining plausible mechanisms and choose the cheapest reliable observation that would make them predict different results.",
+              impact: "The investigation follows information value instead of mechanically completing every module.",
+            },
+            {
+              what: "Catalog-scale false alerts",
+              how: "Calibrate normal variation by store and cohort; require fresh confirmation for extreme movers; use independent read periods, shrinkage/pooling, or false-alert control when scanning many products.",
+              impact: "The worst-looking SKU in a large catalog is not automatically broken; regression to the mean cannot become a success story.",
+            },
+            {
+              what: "Decision-ready and containment checks",
+              how: "Apply every ready condition in the shared policy. If a wrong price, claim, identifier, broad exclusion, or cart fault risks customers, contain it before the full performance diagnosis.",
+              impact: "Carve can act urgently on verified harm without converting urgency into overconfidence about secondary causes.",
+            },
+          ],
+          patterns: [
+            {
+              evidence: "One screenshot or competitor example supports a plausible story.",
+              decision: "Label it Clue and run the next check; do not change the catalog from inspiration alone.",
+            },
+            {
+              evidence: "Source, rendered output, processed channel, timing, and reproduction all show the same deterministic mismatch.",
+              decision: "Label it Verified fault and prepare the smallest correction.",
+            },
+            {
+              evidence: "Evidence conflicts or volume is too sparse, and no available check would change the current choice.",
+              decision: "Choose bounded Watch; state the contradiction and exact reopening condition.",
+            },
+          ],
+          examples: [
+            {
+              title: "The worst mover is not automatically the best case",
+              before: "Out of 18,000 SKUs, one product falls 70% week over week on ten impressions and is immediately selected for optimization.",
+              after: "Carve confirms the next complete period, pools genuinely comparable products, checks the raw counts and shared systems, and records the movement as a Clue until it survives fresh data.",
+              why: "Selecting and judging the product on the same noise produces false certainty.",
+            },
+          ],
+          implementation: [
+            {
+              title: "Create the evidence record",
+              instruction: "Store level, reliability, freshness, evidence for, evidence against, alternatives ruled out, and the next check that could change the decision.",
+              verify: "Every confidence statement can be traced to observations rather than tone.",
+            },
+            {
+              title: "Run one separating check",
+              instruction: "Choose the check with the highest expected information for the least risk and effort; update or eliminate explanations from its result.",
+              verify: "The next step differs depending on the observed outcome.",
+            },
+            {
+              title: "Close honestly",
+              instruction: "Use Decision-ready, Bounded Watch, Merged case, or Unsafe/stale as the explicit stop reason.",
+              verify: "Watch cases contain a measurable reopening condition; stale cases cannot execute.",
+            },
+          ],
+          measure: {
+            primary: "Decision quality: reproduced scope, calibrated evidence level, and predicted observations",
+            guardrails: "False alerts, unnecessary changes, missed urgent harm, manager interruptions, and stale evidence",
+            window: "Reassess whenever a discriminating observation or store-contract change arrives",
+            success: "Independent operators reach the same evidence level and next type of action from the stored record",
+            rollback: "Downgrade the evidence and reopen alternatives when a prediction fails or contradictory evidence arrives",
+          },
+          nextPaths: [
+            {
+              when: "A verified fault exists.",
+              outcome: "Correct",
+              nextModules: ["p-decision", "p-change"],
+              reason: "Prepare the exact correction and choose its execution owner.",
+            },
+            {
+              when: "The mechanism is corroborated but the treatment effect is uncertain.",
+              outcome: "Test or owner decision",
+              nextModules: ["p-decision", "p-change"],
+              reason: "Turn the mechanism into a controlled treatment or a prepared business choice.",
+            },
+            {
+              when: "Evidence is only a clue.",
+              outcome: "Continue",
+              nextModules: [],
+              reason: "Choose the branch module that best separates the remaining explanations.",
+            },
+            {
+              when: "Uncertainty is bounded and no useful action is supported.",
+              outcome: "Watch",
+              nextModules: [],
+              reason: "Preserve the evidence and reopening condition without a customer-facing change.",
+            },
+          ],
+          sources: ["memo", "uclSparse", "bingExperiments", "googleAlerting", "speeroResearch"],
+        },
+        {
+          id: "p-decision",
+          number: "P3",
+          title: "Choose the intervention and executor separately",
+          question: "What should happen—and who may execute it?",
           nodeIds: ["always-scope", "always-history", "always-uncertainty"],
           checks: [
             {
@@ -4102,9 +4897,14 @@
               impact: "Specific, corroborated correctness faults can be repaired. A plausible story without a mechanism should be tested or watched.",
             },
             {
-              what: "Truth and authority",
-              how: "Check that every proposed claim is supported by product data and that Carve has permission to change the responsible system.",
-              impact: "Unsupported claims and price, policy, stock, legal, or brand decisions are routed with evidence rather than disguised with copy.",
+              what: "Intervention type",
+              how: "Choose Correct for a verified fault, Test for an uncertain truthful treatment, Decide for a real business choice, or Watch when no intervention is justified.",
+              impact: "The response follows evidence and uncertainty rather than a broad fix category.",
+            },
+            {
+              what: "Executor and authority",
+              how: "Separately identify who owns the source and whether Carve may execute, draft, request approval, or deliver the correction/decision to that owner.",
+              impact: "A proven code fault remains Correct when engineering executes it; a price hypothesis remains a business decision even if Carve drafts the analysis.",
             },
             {
               what: "Blast radius and reversibility",
@@ -4119,16 +4919,16 @@
           ],
           patterns: [
             {
-              evidence: "Wrong factual value, deterministic technical fault, strong corroboration, low blast radius, permission exists.",
-              decision: "Apply the smallest correction; validate every derived surface.",
+              evidence: "Wrong factual value or deterministic technical fault is directly verified.",
+              decision: "Correct the smallest authoritative source. Carve executes only when permission and safety allow.",
             },
             {
               evidence: "Truthful alternative presentation may help, but outcome is uncertain and enough comparable units exist.",
               decision: "Test one mechanism on persistent page or product cohorts with guardrails.",
             },
             {
-              evidence: "Cause is price, stock, shipping, imagery, product, brand, legal, or platform ownership.",
-              decision: "Route a prepared decision: scope, evidence, impact, options, recommendation, risk, and verification plan.",
+              evidence: "Cause is price, stock, shipping, imagery, product, brand, legal, or another genuine business choice.",
+              decision: "Prepare the owner decision: scope, evidence, impact, options, recommendation, risk, and verification plan.",
             },
             {
               evidence: "Noise, seasonality, intentional exclusion, weak evidence, or no attractive intervention.",
@@ -4139,14 +4939,14 @@
             {
               title: "Same symptom, four valid responses",
               before: "Clicks fall. Possible explanations include a stale price, a weaker title, a seasonal demand drop, or an uncompetitive offer.",
-              after: "Stale source value → Apply. Alternative factual title → Test. Real price disadvantage → Route. Seasonal decline with stable share → Watch.",
-              why: "The response follows the cause and ownership, not the name of the metric.",
+              after: "Stale source value → Correct; Catalog executes. Alternative truthful title → Test; Marketing approves. Real price disadvantage → Decide; Commercial owns it. Seasonal decline with stable share → Watch; Carve monitors.",
+              why: "Intervention type and execution ownership answer different questions.",
             },
           ],
           implementation: [
             {
               title: "Write the decision sentence",
-              instruction: "Use: Because [evidence], Carve believes [mechanism]. It will [action] on [scope], expecting [metric], while protecting [guardrails].",
+              instruction: "Use: Because [evidence], Carve believes [mechanism]. It recommends [intervention] on [scope]; [executor] will [execute/approve/decide], expecting [metric] while protecting [guardrails].",
               verify: "Every clause points to stored evidence or an explicit assumption.",
             },
             {
@@ -4171,7 +4971,7 @@
         },
         {
           id: "p-change",
-          number: "P3",
+          number: "P4",
           title: "Know exactly what to change",
           question: "Which source, field, rule, or component should change—and which should remain untouched?",
           nodeIds: ["always-data", "always-history", "always-uncertainty"],
@@ -4256,11 +5056,152 @@
           sequence: ["Locate the loss", "Prove the mechanism", "Change its source", "Verify and measure"],
           modules: [
             {
+              id: "d-health",
+              number: "D0",
+              title: "Site, account, migration, and authority health gate",
+              question: "Is this one product—or a shared root incident affecting many products?",
+              nodeIds: [
+                "d-s1",
+                "d-s3",
+                "d-s4",
+                "d-s6",
+                "d-i5",
+                "d-i6",
+                "d-c3",
+                "d-c6",
+                "d-c9",
+                "d-c10",
+                "d-f2",
+                "d-f6",
+                "d-measure",
+              ],
+              entryWhen: [
+                "Many products, a host, directory, template, market, or Google surface move together.",
+                "A migration, infrastructure release, enforcement notice, or account warning is plausible.",
+              ],
+              exitWhen: [
+                "A root incident owns the affected cohort and product-level reactions are suppressed.",
+                "Shared site/account health is cleared and the case can continue at product depth.",
+              ],
+              outputs: ["Root incident or cleared gate", "Affected scope", "Direct health evidence", "Representative verification set"],
+              checks: [
+                {
+                  what: "Breadth before depth",
+                  how: "Compare first-change time and magnitude across hosts, directories, templates, markets, Web, Images, product results, free listings, and representative unaffected products.",
+                  impact: "A coherent broad failure should become one incident, not hundreds of product-content tasks.",
+                },
+                {
+                  what: "Search and service health",
+                  how: "Check DNS/CDN/origin, 5xx/429, robots availability, Crawl Stats, server logs, Page Indexing, Manual Actions, Security Issues, removals/messages, and Search status.",
+                  impact: "Direct service or enforcement evidence names a root correction; update timing alone remains a clue.",
+                },
+                {
+                  what: "Merchant account health",
+                  how: "Inspect account warnings/suspensions, product/account status, destinations, source processing, and whether the failure spans all items or one feed/market.",
+                  impact: "An account or source incident is repaired once; item copy stays unchanged unless separate evidence supports it.",
+                },
+                {
+                  what: "Migration and authority paths",
+                  how: "Compare old/new hosts and URL maps, exact redirects, internal links, top linked destinations, server hits, and affected versus unaffected URL groups.",
+                  impact: "Missing exact redirects or important paths support restoration; a sampled link report does not prove a penalty.",
+                },
+              ],
+              patterns: [
+                {
+                  evidence: "Broad 5xx/crawl failure begins with one infrastructure release.",
+                  decision: "Contain or reverse the shared release; verify representative URLs before reopening SKU cases.",
+                },
+                {
+                  evidence: "Free listings fall account-wide with a specific Merchant suspension or source failure.",
+                  decision: "Open the account/source case and follow the stated issue; do not optimize individual listing titles.",
+                },
+                {
+                  evidence: "Old linked URLs lost traffic after a move and do not redirect to their exact new equivalents.",
+                  decision: "Restore the versioned one-to-one redirect and internal-link map.",
+                },
+                {
+                  evidence: "Timing overlaps a ranking update but no direct fault or coherent content pattern exists.",
+                  decision: "Treat the update as context, not a generic penalty; continue demand, intent, competition, and page-quality diagnosis.",
+                },
+              ],
+              examples: [
+                {
+                  title: "A catalog loss caused by one missing redirect rule",
+                  before: "312 PDPs are individually flagged after a domain move; each is queued for copy work.",
+                  after: "Carve finds that the affected old directory returns 404 while an unaffected directory has exact redirects. It restores the missing mapped rule and suppresses SKU edits.",
+                  why: "The shared source explains the breadth, timing, and control difference.",
+                },
+              ],
+              implementation: [
+                {
+                  title: "Open one root incident",
+                  instruction: "Save the affected host/source/template/account, first-change time, representative URLs/items, logs/reports, and dependent product cases.",
+                  verify: "Every suppressed SKU symptom links back to the same reproducible incident.",
+                },
+                {
+                  title: "Preserve and repair the shared source",
+                  instruction: "Version infrastructure/configuration, redirect maps, feed/account state, and representative before evidence; correct or safely reverse the narrow root fault.",
+                  verify: "The direct fault disappears without overwriting newer unrelated state.",
+                },
+                {
+                  title: "Verify before broad recovery claims",
+                  instruction: "Check representative URLs/items across markets and surfaces, then monitor the full affected cohort through recrawl or reprocessing.",
+                  verify: "Access/eligibility recovers for the intended root cohort before product-level investigations resume.",
+                },
+              ],
+              measure: {
+                primary: "Affected host, account, source, template, or migration cohort regains access and qualified visibility",
+                guardrails: "Unrelated hosts/markets, redirects, canonical identity, Merchant status, server health, and customer access",
+                window: "Immediate technical verification, followed by expected recrawl/reprocessing and complete business cycles",
+                success: "The direct root fault is gone and representative plus cohort outcomes recover",
+                rollback: "Use a compensating or versioned reversal only after confirming no newer state would be overwritten",
+              },
+              nextPaths: [
+                {
+                  when: "A direct shared fault is verified.",
+                  outcome: "Correct",
+                  nextModules: ["p-decision", "p-change", "d-rollout"],
+                  reason: "Repair the root source and keep product-level edits suppressed.",
+                },
+                {
+                  when: "The shared gate is clear and demand itself moved.",
+                  outcome: "Continue",
+                  nextModules: ["d-demand"],
+                  reason: "Separate external demand from product visibility.",
+                },
+                {
+                  when: "The shared gate is clear but specific URLs are inaccessible.",
+                  outcome: "Continue",
+                  nextModules: ["d-access"],
+                  reason: "Continue at crawl, index, canonical, and publication depth.",
+                },
+              ],
+              sources: [
+                "googleTraffic",
+                "googleManualActions",
+                "googleSecurityIssues",
+                "googleCrawlStats",
+                "googleSiteMoves",
+                "googleLinks",
+                "merchantAccountIssues",
+                "merchantStatus",
+              ],
+            },
+            {
               id: "d-demand",
               number: "D1",
               title: "Demand, seasonality, and signal quality",
               question: "Did Google show the product less, or did fewer relevant people search for it?",
               nodeIds: ["d-s1", "d-s2", "d-s5", "d-i1", "d-c1", "d-f1"],
+              entryWhen: [
+                "The site/account health gate is clear or the signal is product/category-specific.",
+                "Qualified impressions or expected-query coverage changed or appears persistently weak.",
+              ],
+              exitWhen: [
+                "Demand/seasonality explains the movement and a Watch condition is recorded.",
+                "Stable demand points to one more specific Discovery module.",
+              ],
+              outputs: ["Demand conclusion", "Comparable cohort", "Search Console limitations", "Next Discovery path"],
               checks: [
                 {
                   what: "Like-for-like Search Console cells",
@@ -4271,6 +5212,11 @@
                   what: "Raw demand and coverage",
                   how: "Track impressions and unique covered query clusters, not CTR alone. Compare related products, category pages, paid search terms, onsite searches, and seasonal demand sources.",
                   impact: "Missing anonymized Search Console queries and sampled trend tools mean zero is not proof of no demand.",
+                },
+                {
+                  what: "Search Console measurement limits",
+                  how: "Keep the unfiltered property/page total beside segmented tables. Query filters omit anonymized queries; data is usually credited to the canonical URL; page/property aggregation differs; and appearance slices do not reconstruct every impression or click.",
+                  impact: "Use Search Console to locate a pattern—not to calculate exact organic market share or prove that a specific result feature caused the click.",
                 },
                 {
                   what: "Relative visibility",
@@ -4329,6 +5275,38 @@
                 success: "Relative visibility improves for intended demand, not merely broad irrelevant impressions",
                 rollback: "No catalog rollback for a watch decision; reverse any later change that harms intended query coverage",
               },
+              nextPaths: [
+                {
+                  when: "Demand and peers fall together while relative visibility and eligibility hold.",
+                  outcome: "Watch",
+                  nextModules: [],
+                  reason: "Record seasonality or demand change and its reopening threshold; do not edit the catalog.",
+                },
+                {
+                  when: "Demand holds but the intended URL is absent or the wrong URL appears.",
+                  outcome: "Continue",
+                  nextModules: ["d-access"],
+                  reason: "Test crawl, publication, index, and canonical access.",
+                },
+                {
+                  when: "Expected intent exists but the wrong page type or unclear role wins.",
+                  outcome: "Continue",
+                  nextModules: ["d-page-role"],
+                  reason: "Resolve the intent and page job before changing product wording.",
+                },
+                {
+                  when: "Shopping status, product truth, or variant state is inconsistent.",
+                  outcome: "Continue",
+                  nextModules: ["d-product-data", "d-variants", "d-lifecycle"],
+                  reason: "Trace the affected source, processed item, variant, and approved lifecycle state.",
+                },
+                {
+                  when: "The page is accessible and accurate but loses against a changed market or SERP.",
+                  outcome: "Continue",
+                  nextModules: ["d-competition"],
+                  reason: "Separate intent/result changes from a real offer or product disadvantage.",
+                },
+              ],
               sources: ["googleTraffic", "searchConsoleFilters", "searchConsoleCounting", "searchConsole", "uclSparse"],
             },
             {
@@ -4718,8 +5696,145 @@
               sources: ["googleTraffic", "merchantOptimize", "speeroResearch", "memo"],
             },
             {
-              id: "d-rollout",
+              id: "d-lifecycle",
               number: "D7",
+              title: "Product lifecycle, availability, and URL policy",
+              question: "Does every system express the product’s approved lifecycle state correctly?",
+              nodeIds: [
+                "d-s3",
+                "d-s4",
+                "d-s7",
+                "d-i4",
+                "d-i7",
+                "d-c2",
+                "d-c7",
+                "d-c8",
+                "d-c11",
+                "d-f1",
+                "d-f2",
+                "d-f5",
+                "d-f7",
+                "d-f8",
+                "d-measure",
+              ],
+              entryWhen: [
+                "A launch, stock, pause, seasonal, discontinued, replacement, or feed-refresh transition is involved.",
+                "PDP, schema, feed, processed item, URL, or checkout disagree about whether the product is buyable.",
+              ],
+              exitWhen: [
+                "The approved state is consistent across every required surface.",
+                "A missing commercial lifecycle choice is delivered to its owner with safe interim behavior.",
+              ],
+              outputs: ["Approved lifecycle state", "Transition record", "Surface parity result", "URL/replacement decision", "Refresh deadline"],
+              checks: [
+                {
+                  what: "Lifecycle state contract",
+                  how: "For product × variant × market × effective time, resolve launch, active, temporary OOS, preorder, backorder, paused, discontinued, replaced, or seasonal state and whether orders are accepted.",
+                  impact: "A missing owner decision is routed; an approved state that propagated incorrectly is corrected.",
+                },
+                {
+                  what: "Merchant state and freshness",
+                  how: "Use out_of_stock when temporarily not accepting orders; use preorder/backorder with a visible availability date when orders are accepted; use pause/excluded destination for intentional suppression; remove discontinued items; alert before source data expires.",
+                  impact: "Carve does not fake OOS to hide a buyable product or delete a temporary item that should retain stable identity.",
+                },
+                {
+                  what: "Storefront and URL behavior",
+                  how: "Verify PDP truth, schema, selected variant, alternatives, cart/checkout, status code, canonical, internal links, sitemap, and redirects for the approved state.",
+                  impact: "Redirect only to a clear equivalent. Otherwise retain an accurate useful archive or return an honest 404/410 according to policy.",
+                },
+                {
+                  what: "Propagation and transition safety",
+                  how: "Trace the authoritative state into every renderer/feed, make the transition idempotent, and test retries, partial failures, markets, variants, and old events arriving late.",
+                  impact: "A correct transition cannot leave one channel stale or flip back after the next feed run.",
+                },
+              ],
+              patterns: [
+                {
+                  evidence: "Temporarily unavailable and no orders accepted.",
+                  decision: "Keep the stable PDP/ID when useful, show truthful availability, and publish out_of_stock consistently.",
+                },
+                {
+                  evidence: "Orders are accepted before release or restock with a known date.",
+                  decision: "Use preorder or backorder as appropriate; show the matching availability date on the landing page and feed.",
+                },
+                {
+                  evidence: "The product is buyable but intentionally suppressed for a limited period or destination.",
+                  decision: "Use supported pause/excluded-destination behavior; never misstate stock.",
+                },
+                {
+                  evidence: "The product is discontinued.",
+                  decision: "Remove it from Merchant data. Redirect only to a clear replacement; otherwise retain a useful accurate archive or return 404/410 under the approved policy.",
+                },
+                {
+                  evidence: "The product source has not refreshed and will expire.",
+                  decision: "Repair/schedule the source before expiry and verify the final processed products.",
+                },
+              ],
+              examples: [
+                {
+                  title: "Temporary OOS versus discontinued",
+                  before: "Both states delete the product, remove its URL, and later recreate a new Merchant item when stock returns.",
+                  after: "Temporary OOS retains the stable PDP and item identity with honest availability. A discontinued item leaves Merchant data and follows the approved replacement/archive/not-found policy.",
+                  why: "The states have different customer, feed, indexing, identity, and recovery consequences.",
+                },
+              ],
+              implementation: [
+                {
+                  title: "Create a versioned state transition",
+                  instruction: "Store prior/next state, effective time, variants/markets, order acceptance, availability date, replacement, source owner, target surfaces, and reversal/compensation behavior.",
+                  verify: "The transition can be replayed safely without duplicating, deleting, or changing stable identity unexpectedly.",
+                },
+                {
+                  title: "Propagate from one source",
+                  instruction: "Update commerce/PIM truth first, then derive PDP, schema, feed, search publication, URL, alternatives, and analytics state.",
+                  verify: "Representative variant/market fixtures agree through processed Merchant item and cart/checkout.",
+                },
+                {
+                  title: "Canary and monitor freshness",
+                  instruction: "Run representative transition fixtures, publish a reversible subset, and alert on parity drift, failed refresh, expiration risk, or unexpected URL/index state.",
+                  verify: "The approved lifecycle state persists through the next full source/feed cycle.",
+                },
+              ],
+              measure: {
+                primary: "Lifecycle parity and expected eligibility/index/buyability state by product, variant, market, and time",
+                guardrails: "Stable identity, wrong-stock/price rate, broken redirects, customer access, cart/checkout, visibility, and support",
+                window: "Immediate source/output verification plus final Merchant processing and expected crawl/index delay",
+                success: "Every required surface shows the approved state and customers can take only the intended actions",
+                rollback: "Restore the prior approved state only when still valid; otherwise issue a compensating transition that preserves newer truth",
+              },
+              nextPaths: [
+                {
+                  when: "The approved state exists but one or more surfaces disagree.",
+                  outcome: "Correct",
+                  nextModules: ["p-decision", "p-change", "d-rollout"],
+                  reason: "Repair propagation from the authoritative lifecycle source.",
+                },
+                {
+                  when: "The commercial lifecycle or replacement decision has not been made.",
+                  outcome: "Owner decision",
+                  nextModules: ["p-decision"],
+                  reason: "Present options and safe interim behavior to the accountable owner.",
+                },
+                {
+                  when: "The approved lifecycle state is intentional and all surfaces agree.",
+                  outcome: "Watch",
+                  nextModules: [],
+                  reason: "Record the expected state and next transition/refresh trigger.",
+                },
+              ],
+              sources: [
+                "merchantAvailability",
+                "merchantPause",
+                "merchantExpiration",
+                "merchantSpec",
+                "googleRedirects",
+                "shopifyRedirects",
+                "shopifyProducts",
+              ],
+            },
+            {
+              id: "d-rollout",
+              number: "D8",
               title: "Discovery rollout, proof, and rollback",
               question: "How does Carve prove that the discovery fix worked without risking the catalog?",
               nodeIds: ["d-f2", "d-f3", "d-f4", "d-f5", "d-f6", "d-f7", "d-measure"],
@@ -4735,9 +5850,14 @@
                   impact: "External demand and ranking changes affect both cohorts, improving attribution.",
                 },
                 {
+                  what: "Assignment and analysis population",
+                  how: "Use URL assignment for organic changes and item_group_id for feed/listing changes. Analyze every predeclared assigned unit; treat crawl, rendering, eligibility, and actual display as mechanism/implementation metrics.",
+                  impact: "Dropping URLs or items because Google did not process or display the treatment hides a real part of treatment performance.",
+                },
+                {
                   what: "Processing clock",
-                  how: "Verify crawl, index, processed feed, actual title/result, and eligibility before counting performance exposure.",
-                  impact: "Time since deployment is not time exposed to the treatment.",
+                  how: "Confirm source output is live and use a predeclared recrawl/reprocessing threshold before the planned performance read; report unprocessed share rather than filtering it away.",
+                  impact: "The test distinguishes failed rollout from an ineffective idea without selecting only successful treatment rendering.",
                 },
                 {
                   what: "Sparse evidence",
@@ -4808,6 +5928,15 @@
               title: "Comparable CTR and the size of the opportunity",
               question: "Did the same kind of impression become less likely to earn a click?",
               nodeIds: ["c-s1", "c-s2", "c-i1", "c-c1", "c-c2", "c-f1", "c-f2"],
+              entryWhen: [
+                "Impressions remain healthy or the suspected problem is a click loss rather than an eligibility loss.",
+                "Organic Search, free listings, and paid Shopping have been separated.",
+              ],
+              exitWhen: [
+                "Position/mix explains the movement and the case is watched or moved to Discovery.",
+                "A comparable decline survives and the actual result must be inspected.",
+              ],
+              outputs: ["Predefined comparison cohort", "Aggregate totals", "Click-opportunity range", "Next CTR path"],
               checks: [
                 {
                   what: "Surface separation",
@@ -4815,19 +5944,19 @@
                   impact: "Each surface has different controls. Blended CTR can fall even while every individual surface is healthy.",
                 },
                 {
-                  what: "Comparable cells",
-                  how: "Compare query class × canonical page/product × country × device × search appearance × position bucket over complete matched periods.",
-                  impact: "Only a within-cell decline supports a presentation/offer investigation. Aggregate change may be mix.",
+                  what: "Comparable—but not causal—cells",
+                  how: "Start with predefined query/page cohorts, then split country, device, search type, appearance, and rough position only while exposure remains sufficient. Keep aggregate totals and canonical attribution visible; inspect the actual SERP.",
+                  impact: "A within-cell decline removes some mix explanations and justifies inspection. It does not prove that title, image, or offer caused the loss.",
                 },
                 {
                   what: "Internal CTR curve",
                   how: "Build baselines by page type, brand/non-brand, intent, device, market, appearance, and position buckets 1, 2–3, 4–5, 6–10, 11–20.",
-                  impact: "Carve's own comparable history is more useful than a universal ecommerce benchmark.",
+                  impact: "Use large, stable internal cohorts as a diagnostic expectation. Average position is approximate/topmost—not a controlled placement.",
                 },
                 {
-                  what: "Recoverable clicks and value",
-                  how: "Expected clicks = sum(current cell impressions × comparable baseline CTR). Missed clicks = max(0, expected − actual). Join qualified conversion and contribution value.",
-                  impact: "This orders experiments and interruptions. It does not decide whether Carve understands a low-value product.",
+                  what: "Click-opportunity scenario",
+                  how: "Scenario clicks = current impressions × a matched historical/cohort CTR distribution. Show a range and uncertainty, then join downstream value; never label max(expected − actual, 0) as recoverable.",
+                  impact: "This is a prioritization estimate, not a causal forecast. Missing queries, regression to the mean, rank, and SERP changes can move the result.",
                 },
               ],
               patterns: [
@@ -4870,12 +5999,32 @@
                 },
               ],
               measure: {
-                primary: "Qualified clicks or organic sessions in fixed comparable cells",
+                primary: "Qualified clicks/sessions for predefined page/query cohorts; segmented CTR remains diagnostic",
                 guardrails: "Impressions, intended query coverage, position, ATC, purchases, revenue/margin, and other surfaces",
                 window: "28-day triage is common; use matched seasons or 6–12 weeks for volatile/sparse cells",
                 success: "Clicks improve within the intended exposure without losing valuable demand",
                 rollback: "No presentation change when mix/position explains the signal; reverse changes that reduce qualified clicks or coverage",
               },
+              nextPaths: [
+                {
+                  when: "Position or eligibility loss explains the click decline.",
+                  outcome: "Move case",
+                  nextModules: ["d-health", "d-demand", "d-access"],
+                  reason: "Continue in Discovery; result-copy work is not supported.",
+                },
+                {
+                  when: "Comparable cohorts remain stable and only the aggregate mix changed.",
+                  outcome: "Watch",
+                  nextModules: [],
+                  reason: "Keep useful reach and monitor absolute qualified clicks.",
+                },
+                {
+                  when: "Comparable CTR falls with enough exposure and no position explanation.",
+                  outcome: "Continue",
+                  nextModules: ["c-snapshot"],
+                  reason: "Inspect the actual visible organic result or Shopping card before choosing a control.",
+                },
+              ],
               sources: ["searchConsoleFilters", "searchConsoleCounting", "searchConsolePosition", "searchConsoleBulk", "googleTraffic"],
             },
             {
@@ -4960,6 +6109,12 @@
               title: "The actual result shoppers saw",
               question: "What changed in the rendered search result, surrounding SERP, or product card?",
               nodeIds: ["c-s3", "c-s4", "c-i2", "c-i3", "c-i5", "c-c2", "c-c6", "c-c8"],
+              entryWhen: ["A comparable CTR loss survives C1.", "A listing or rich-result presentation change is directly reported."],
+              exitWhen: [
+                "The visible mechanism points to intent/page, organic copy, Shopping data, rich eligibility, or the real offer.",
+                "The result is unchanged and the case returns to comparison or Watch.",
+              ],
+              outputs: ["Standardized result snapshot", "Source-to-render diff", "Competitor/offer comparison", "Chosen next module"],
               checks: [
                 {
                   what: "Standardized snapshot",
@@ -5028,6 +6183,32 @@
                 success: "The intended result appears and comparable CTR/downstream quality improve",
                 rollback: "Immediate if the wrong fact/variant appears; otherwise use the predeclared performance rule",
               },
+              nextPaths: [
+                {
+                  when: "The wrong listing fact, image, or variant is visible.",
+                  outcome: "Correct",
+                  nextModules: ["c-shopping", "p-decision", "p-change"],
+                  reason: "Repair the exact source and landing state before testing presentation.",
+                },
+                {
+                  when: "The wrong page or intent promise earns the impression.",
+                  outcome: "Continue",
+                  nextModules: ["c-intent"],
+                  reason: "Resolve page role and message match.",
+                },
+                {
+                  when: "Organic identity is unclear or rewritten from conflicting accurate inputs.",
+                  outcome: "Correct or test",
+                  nextModules: ["c-organic-copy"],
+                  reason: "Correct conflicting signals or test a truthful clarity treatment.",
+                },
+                {
+                  when: "Rich eligibility or a real commercial disadvantage explains the result.",
+                  outcome: "Continue",
+                  nextModules: ["c-eligibility-offer"],
+                  reason: "Separate source correctness from a price, stock, shipping, or proof decision.",
+                },
+              ],
               sources: ["googleTitleLinks", "googleSnippets", "merchantOptimize", "searchConsolePosition", "speeroResearch"],
             },
             {
@@ -5295,8 +6476,13 @@
                 },
                 {
                   what: "Treatment served",
-                  how: "Confirm recrawl/rendered title or processed listing/image before starting the effective window.",
-                  impact: "A flat result when Google ignored the treatment is not evidence that the idea failed.",
+                  how: "Confirm source change, rollout health, and a predeclared recrawl/processing threshold. Analyze every assigned unit; treat Google rendering or actual card display as a mechanism metric, not an inclusion filter.",
+                  impact: "A flat result can be explained by poor processing, but assigned URLs/items that did not render cannot be removed from the primary result.",
+                },
+                {
+                  what: "Assignment and analysis population",
+                  how: "Choose persistent URL assignment for organic Search and item_group_id for listings. Predeclare every eligible assigned unit and use cluster-aware analysis where groups—not individual rows—are randomized.",
+                  impact: "The primary result follows original assignment; preferred rewrites or displayed cards explain implementation rather than selecting winners.",
                 },
                 {
                   what: "Business outcome",
@@ -5335,7 +6521,7 @@
                 {
                   title: "Canary then holdout",
                   instruction: "Publish 5–10%; validate. Expand to 25–50% matched treatment while control stays unchanged; retain a holdout during full rollout when feasible.",
-                  verify: "Treatment/control assignments remain stable and all treatment units actually serve.",
+                  verify: "Assignments remain stable, source output is live, and processing coverage reaches the predeclared threshold; all assigned units remain in analysis.",
                 },
                 {
                   title: "Decide after the planned read",
@@ -5367,7 +6553,29 @@
               title: "Event truth and successful cart mutation",
               question: "Did the intended variant actually enter the cart—and was that success recorded exactly once?",
               nodeIds: ["a-s1", "a-s4", "a-i1", "a-i6", "a-c1", "a-c7", "a-f1"],
+              entryWhen: ["Any ATC case opens.", "A CTA click, analytics event, or cart outcome disagrees."],
+              exitWhen: [
+                "The functional/measurement fault is verified and correction-ready.",
+                "The metric contract passes and the case can continue to cohort diagnosis.",
+                "Adds are healthy and the loss is downstream of ATC.",
+              ],
+              outputs: ["Versioned ATC metric contract", "Transaction trace", "Path coverage", "Measurement verdict"],
               checks: [
+                {
+                  what: "Primary rate contract",
+                  how: "Primary ATC = unique product-PDP sessions with ≥1 confirmed successful add of that product ÷ unique qualified product-PDP sessions. Confirm with a successful cart response and the intended product/variant present; deduplicate repeat views/adds within product × session.",
+                  impact: "Refreshes, quantities, duplicate events, and repeated adds cannot silently change the primary rate.",
+                },
+                {
+                  what: "Two denominators",
+                  how: "Report business ATC over all qualified PDP sessions, including unavailable states. Also report purchasable ATC where at least one option was buyable in that market at the first valid PDP view.",
+                  impact: "The first preserves stock as a real business constraint; the second isolates persuasion and functionality.",
+                },
+                {
+                  what: "Alternative purchase paths",
+                  how: "Keep PDP ATC separate from collection quick-add. Track Buy now/accelerated checkout separately because it may bypass cart; use product progress/purchase as a guardrail.",
+                  impact: "A shopper who legitimately bypasses the cart is not misclassified as PDP failure.",
+                },
                 {
                   what: "Full transaction trace",
                   how: "Trace eligible PDP view → option selected → CTA interaction → locale-aware cart request → correct item/quantity in cart → UI confirmation → Shopify event → GA4 add_to_cart.",
@@ -5433,13 +6641,39 @@
                 },
               ],
               measure: {
-                primary: "Successful adds per eligible PDP view and per item quantity, clearly separated",
+                primary: "Contracted session ATC; secondary confirmed add events, units, failed attempts, quick-add, accelerated paths, and purchasable-session ATC remain separate",
                 guardrails: "Duplicate rate, wrong-variant rate, cart errors, purchase, revenue, consent coverage",
                 window: "Immediate functional proof; compare trend only after identity/event history is bridged",
                 success: "One correct cart mutation and one comparable event per intended action",
                 rollback: "Immediately restore prior theme/tag code for failed, duplicate, wrong-item, or missing-success behavior",
               },
-              sources: ["ga4Events", "ga4Metrics", "shopifyCart", "shopifyDiscrepancies", "shopifyTemplates"],
+              nextPaths: [
+                {
+                  when: "The cart mutation or buy control fails.",
+                  outcome: "Correct",
+                  nextModules: ["a-cart-tech", "p-decision", "p-change"],
+                  reason: "Repair the earliest functional failure before persuasion work.",
+                },
+                {
+                  when: "The cart succeeds but analytics diverges.",
+                  outcome: "Correct",
+                  nextModules: ["p-decision", "p-change"],
+                  reason: "Repair identity/event measurement and bridge the history.",
+                },
+                {
+                  when: "The metric contract passes.",
+                  outcome: "Continue",
+                  nextModules: ["a-cohort"],
+                  reason: "Locate the affected traffic, device, market, variant, or template cohort.",
+                },
+                {
+                  when: "Confirmed adds hold but purchase/value falls.",
+                  outcome: "Move case",
+                  nextModules: [],
+                  reason: "Route the downstream checkout/product-quality investigation; stop ATC diagnosis.",
+                },
+              ],
+              sources: ["ga4Events", "ga4Metrics", "ga4Scopes", "shopifyCart", "shopifyDiscrepancies", "shopifyTemplates"],
             },
             {
               id: "a-cohort",
@@ -5447,6 +6681,12 @@
               title: "Affected cohort, traffic intent, and message match",
               question: "Is the PDP weaker, or did the mix and promise of visitors change?",
               nodeIds: ["a-s1", "a-s2", "a-s3", "a-s5", "a-i2", "a-i6", "a-c2", "a-c8", "a-f2"],
+              entryWhen: ["A1 confirms the cart and primary metric are trustworthy.", "The blended or segment ATC signal remains meaningful."],
+              exitWhen: [
+                "Traffic/promise or a shared technical cohort explains the loss.",
+                "Qualified cohorts remain weak and one product-decision module is selected.",
+              ],
+              outputs: ["Affected cohort", "Matched controls", "Upstream promise verdict", "Chosen PDP mechanism"],
               checks: [
                 {
                   what: "Cohort decomposition",
@@ -5494,8 +6734,8 @@
               implementation: [
                 {
                   title: "Create an ATC cohort cube",
-                  instruction: "Join product/variant/template, stock, price, acquisition, device, market, and release fields to eligible PDP views, successful adds, and purchases.",
-                  verify: "The denominator excludes ineligible/non-PDP states consistently and IDs join through purchase.",
+                  instruction: "Join product/variant/template, stock, price, acquisition, device, market, and release fields to qualified PDP sessions, purchasable-at-entry flag, confirmed-add session, add events/units, quick-add/buy-now path, and purchases.",
+                  verify: "Rules are versioned, IDs join through purchase, and out-of-stock sessions remain visible in business ATC.",
                 },
                 {
                   title: "Find the earliest divergence",
@@ -5509,12 +6749,38 @@
                 },
               ],
               measure: {
-                primary: "Successful ATC for the fixed cohort; qualified sessions when acquisition is changed",
+                primary: "Contracted session ATC for the predefined affected cohort; qualified sessions when acquisition is changed",
                 guardrails: "Purchases, revenue/margin, returns, wrong-product navigation, other cohorts",
                 window: "At least a complete business cycle; matched seasonal windows for volatile categories",
                 success: "The affected cohort recovers relative to matched controls and sends qualified customers downstream",
                 rollback: "Restore prior campaign/template/link when cohort quality or commercial guardrails worsen",
               },
+              nextPaths: [
+                {
+                  when: "Acquisition mix or upstream promise changed.",
+                  outcome: "Move case",
+                  nextModules: ["c-intent", "c-snapshot"],
+                  reason: "Correct targeting, result, feed, campaign, or landing promise before redesigning the PDP.",
+                },
+                {
+                  when: "One release, device, template, or market regressed.",
+                  outcome: "Continue",
+                  nextModules: ["a-cart-tech"],
+                  reason: "Investigate the shared functional/performance source.",
+                },
+                {
+                  when: "Qualified cohorts remain weak and a repeated objection is observed.",
+                  outcome: "Continue",
+                  nextModules: ["a-proposition", "a-information", "a-imagery", "a-variants", "a-offer"],
+                  reason: "Choose only the module matching the observed decision barrier.",
+                },
+                {
+                  when: "The original qualified cohort is healthy and broader traffic adds useful demand.",
+                  outcome: "Watch",
+                  nextModules: [],
+                  reason: "Keep the PDP unchanged and preserve incremental adds.",
+                },
+              ],
               sources: ["ga4Metrics", "shopifyDiscrepancies", "speeroResearch", "memo"],
             },
             {
@@ -5580,12 +6846,12 @@
                 },
                 {
                   title: "Test one hierarchy mechanism",
-                  instruction: "Change value line or block order—not copy, media, offer, and selector together—on a matched template/product cohort.",
-                  verify: "Eligible-view and exposure tracking confirms both arms actually saw their assigned first screen.",
+                  instruction: "Change one causal mechanism. For visitor-facing copy/layout, use persistent visitor/session assignment where available; otherwise use predeclared product clusters and cluster-aware analysis.",
+                  verify: "Assignment persists, the sample ratio is healthy, and the primary result includes all predefined eligible assigned sessions.",
                 },
               ],
               measure: {
-                primary: "Successful ATC per eligible PDP view for relevant cohorts",
+                primary: "Contracted session ATC for all predefined eligible assigned sessions; comprehension/exposure remain mechanism checks",
                 guardrails: "Purchase, revenue/margin, returns, support questions, mobile speed, accessibility",
                 window: "Predeclared full business cycles; enough exposures for the minimum useful effect",
                 success: "Comprehension and ATC improve without higher returns or lower downstream value",
@@ -5662,12 +6928,12 @@
                 },
                 {
                   title: "Measure the question",
-                  instruction: "Track interaction with the relevant control plus ATC among shoppers who faced that decision; continue monitoring support/return themes.",
-                  verify: "The answer reduces the observed uncertainty, not just increases page length.",
+                  instruction: "Measure contracted ATC for all predefined eligible assigned sessions. Track control opens/clicks and support/return themes as secondary mechanism evidence.",
+                  verify: "The primary result never filters to people whose post-treatment interaction was caused by the treatment.",
                 },
               ],
               measure: {
-                primary: "Successful ATC in products/cohorts missing the identified answer",
+                primary: "Contracted session ATC for predefined eligible assigned products/sessions missing the identified answer",
                 guardrails: "Purchase, returns by reason, support contacts, comprehension, speed/accessibility",
                 window: "Enough business cycles; pool only products sharing the same missing fact/mechanism",
                 success: "The named question declines and downstream outcomes improve",
@@ -5743,7 +7009,7 @@
                 },
               ],
               measure: {
-                primary: "Successful ATC for the affected visual-question cohort",
+                primary: "Contracted session ATC for the predefined eligible assigned visual-question cohort",
                 guardrails: "Purchase, visual return reasons, media load, LCP/layout stability, accessibility",
                 window: "Full business cycles plus later return observation",
                 success: "Named visual uncertainty and returns decline while ATC/purchase improve",
@@ -5814,12 +7080,12 @@
                 },
                 {
                   title: "Separate stock from UX",
-                  instruction: "Report unavailable demand to inventory owner while measuring selector comprehension only among purchasable options.",
-                  verify: "The UI is not credited for inventory recovery and stock is not blamed for a technical selection fault.",
+                  instruction: "Report business ATC across all qualified PDP sessions and unavailable demand to inventory; use purchasable-at-entry ATC plus option behavior to isolate selector comprehension.",
+                  verify: "Cohorts are defined before treatment; option interaction remains a secondary mechanism rather than the primary denominator.",
                 },
               ],
               measure: {
-                primary: "Successful adds per eligible view and per option interaction",
+                primary: "Contracted session ATC among cohorts defined before treatment; option interaction, errors, and purchasable-session ATC are secondary",
                 guardrails: "Wrong-variant rate, out-of-stock demand, purchase, cancellations, size-related returns, mobile errors",
                 window: "Immediate functional QA; cohort performance over full cycles and stock states",
                 success: "Available shoppers choose/add correctly; fit uncertainty and wrong-item outcomes fall",
@@ -5901,7 +7167,7 @@
                 },
               ],
               measure: {
-                primary: "Successful ATC and purchase for offer-objection cohorts",
+                primary: "Contracted session ATC and purchase for predefined offer-objection cohorts",
                 guardrails: "Margin, AOV, shipping cost, cancellations, returns, support, trust/complaints",
                 window: "Full promotional/weekday cycles; longer for purchase/return outcomes",
                 success: "Uncertainty or real offer improves and downstream value remains healthy",
@@ -6012,6 +7278,11 @@
                   impact: "Ordinary dashboard fluctuations and early stopping do not establish causality.",
                 },
                 {
+                  what: "Assignment and analysis population",
+                  how: "Choose URL for organic SEO, item_group_id for listing/feed tests, and persistent visitor/session assignment for PDP copy or UX when possible. Analyze every predeclared eligible assigned unit—intention to treat. Treat rendering, exposure, and interaction as mechanism/implementation metrics, not filters.",
+                  impact: "Filtering to people who opened a guide, clicked an option, or saw a preferred Google rewrite selects behavior caused by treatment and can create a false win.",
+                },
+                {
                   what: "Sparse products",
                   how: "Pool only products sharing mechanism, template, category decision, and missing field; retain each baseline. Add functional automation, qualitative/customer evidence, matched history, and canaries.",
                   impact: "Every product gets investigation, while causal claims remain honest when individual traffic is small.",
@@ -6039,7 +7310,7 @@
                 {
                   title: "Good recommendation",
                   before: "“Move the size guide up because competitors do.”",
-                  after: "“31% of relevant exits mention fit; size-guide opens are followed by exits; affected apparel lacks garment measures. Add model/worn size and garment dimensions beside Size; test successful adds among size-interaction sessions; guard purchase, size returns, and mobile speed.”",
+                  after: "“31% of relevant exits mention fit; affected apparel lacks garment measures. Add model/worn size and garment dimensions beside Size; test contracted ATC among all eligible assigned PDP sessions; track size-guide opens as a secondary mechanism; guard purchase, size returns, and mobile speed.”",
                   why: "Evidence, mechanism, source, exact change, cohort, outcome, and downside are all named.",
                 },
                 {
@@ -6052,13 +7323,13 @@
               implementation: [
                 {
                   title: "Pre-register",
-                  instruction: "Save hypothesis, mechanism, source diff, product/template IDs, allocation, exposure, primary metric, minimum useful effect, guardrails, duration/stopping, and rollback.",
-                  verify: "Sample assignment and decision rules are testable before publication.",
+                  instruction: "Save hypothesis, mechanism, source diff, assignment unit, eligible intention-to-treat population, product/template IDs, allocation, primary metric, minimum useful effect, cluster-aware analysis where needed, guardrails, stopping, and rollback.",
+                  verify: "Assignment, analysis population, sample ratio, and decision rules are testable before publication.",
                 },
                 {
                   title: "Canary and observe",
                   instruction: "Functional smoke-test, release narrowly, check allocation/implementation health, then expand while retaining a matched control when possible.",
-                  verify: "Correct treatment exposure—not merely assigned products—is measured.",
+                  verify: "The primary result uses all eligible assigned units; actual exposure and interaction diagnose implementation rather than selecting the analysis population.",
                 },
                 {
                   title: "Keep, revise, expand, reverse, or route",
@@ -6067,7 +7338,7 @@
                 },
               ],
               measure: {
-                primary: "Successful ATC per eligible exposure; purchase/value remains decisive downstream evidence",
+                primary: "Contracted session ATC for all predefined eligible assigned sessions; purchase/value remains decisive downstream evidence",
                 guardrails: "Purchase, revenue/margin, AOV, returns, cancellations, support, errors, speed, accessibility",
                 window: "At least complete relevant business cycles or a valid sequential method; longer/pooled for sparse products",
                 success: "The named mechanism and business outcome improve with healthy experiment implementation",
@@ -6079,6 +7350,10 @@
         },
       });
       window.CARVE_PLAYBOOK_DATA = Object.freeze({
+        storeContractSchema: STORE_CONTRACT_SCHEMA,
+        evidenceLevels: EVIDENCE_LEVELS,
+        decisionPolicy: DECISION_POLICY,
+        metricGlossary: METRIC_GLOSSARY,
         operatingProtocol: OPERATING_PROTOCOL,
         branches: PLAYBOOKS,
       });
@@ -6090,23 +7365,23 @@
         problem: { label: "Problem", number: "02" },
         investigate: { label: "What Carve investigates", number: "03" },
         cause: { label: "Current explanation", number: "04" },
-        decision: { label: "Decision", number: "05" },
+        decision: { label: "Intervention", number: "05" },
         fix: { label: "Candidate action", number: "06" },
         measure: { label: "Measure", number: "↺" },
       };
 
-      const OWNER_META = {
-        apply: {
-          label: "Apply",
-          detail: "Carve can make a supported, low-risk, reversible correction within its granted permissions.",
+      const INTERVENTION_META = {
+        correct: {
+          label: "Correct",
+          detail: "Repair a verified fault. Carve executes only when permission and safety allow; otherwise the responsible owner executes the same correction.",
         },
         test: {
           label: "Test",
-          detail: "The response is plausible but uncertain, so Carve prepares a controlled test with guardrails.",
+          detail: "The facts are truthful but the treatment effect is uncertain, so use a controlled test with guardrails.",
         },
-        route: {
-          label: "Route",
-          detail: "Carve diagnoses the constraint and brings a prepared decision to the responsible owner.",
+        decide: {
+          label: "Decide",
+          detail: "Carve prepares a complete commercial, product, creative, brand, legal, or other owner decision.",
         },
         watch: {
           label: "Watch",
@@ -6116,24 +7391,24 @@
 
       const LAYOUT = {
         worldWidth: 3260,
-        worldHeight: 3920,
+        worldHeight: 4200,
         innerLeft: 52,
         innerWidth: 3150,
         gateTop: 40,
         gateHeight: 200,
         headerTop: 278,
         laneTop: 380,
-        laneHeight: 1100,
-        laneGap: 1170,
+        laneHeight: 1200,
+        laneGap: 1270,
         nodeAreaTop: 108,
-        nodeAreaHeight: 820,
+        nodeAreaHeight: 930,
         columns: {
           signal: { x: 92, width: 270, height: 112 },
           problem: { x: 480, width: 320, height: 194 },
           investigate: { x: 920, width: 330, height: 108 },
-          cause: { x: 1450, width: 360, height: 86 },
+          cause: { x: 1450, width: 360, height: 80 },
           decision: { x: 2050, width: 300, height: 124 },
-          fix: { x: 2630, width: 470, height: 90 },
+          fix: { x: 2630, width: 470, height: 86 },
         },
         measure: { x: 850, width: 2050, height: 58 },
       };
@@ -6173,7 +7448,7 @@
         activeBranch: "discovery",
         playbookBranch: "discovery",
         activeOpportunity: "all",
-        collapsedBranches: new Set(),
+        collapsedBranches: new Set(MAP_DATA.branches.map((branch) => branch.id)),
         selectedId: null,
         searchQuery: "",
         searchMatches: [],
@@ -6277,33 +7552,6 @@
       }
 
       function nodeSearchText(node) {
-        const sourceText = node.evidence
-          .map((sourceId) => SOURCE_LIBRARY[sourceId]?.name || "")
-          .join(" ");
-        const playbookText = (playbookLinksByNode.get(node.id) || [])
-          .map((moduleId) => {
-            const module = playbookModuleMap.get(moduleId);
-            if (!module) return "";
-            return [
-              module.title,
-              module.question,
-              ...module.checks.flatMap((check) => [check.what, check.how, check.impact]),
-              ...module.patterns.flatMap((pattern) => [pattern.evidence, pattern.decision]),
-              ...module.examples.flatMap((example) => [
-                example.title,
-                example.before,
-                example.after,
-                example.why,
-              ]),
-              ...module.implementation.flatMap((step) => [
-                step.title,
-                step.instruction,
-                step.verify,
-              ]),
-              ...Object.values(module.measure),
-            ].join(" ");
-          })
-          .join(" ");
         return [
           node.title,
           node.explanation,
@@ -6311,15 +7559,48 @@
           ...(node.systems || []),
           ...(node.tags || []),
           node.caveat,
-          sourceText,
           STAGE_META[node.stage]?.label,
           branchMap.get(node.branch)?.name,
-          OWNER_META[node.owner]?.label,
-          playbookText,
+          node.interventionType ? INTERVENTION_META[node.interventionType]?.label : "",
+          ...node.interventions.map((type) => INTERVENTION_META[type]?.label || ""),
+          ...node.executors.map((executor) => EXECUTOR_META[executor]?.label || ""),
         ]
           .filter(Boolean)
           .join(" ")
           .toLowerCase();
+      }
+
+      function scoreSearchNode(node, terms) {
+        const title = node.title.toLowerCase();
+        const explanation = node.explanation.toLowerCase();
+        const checks = node.checks.join(" ").toLowerCase();
+        const systems = node.systems.join(" ").toLowerCase();
+        const metadata = [
+          STAGE_META[node.stage]?.label,
+          branchMap.get(node.branch)?.name,
+          ...node.interventions.map((type) => INTERVENTION_META[type]?.label || ""),
+          ...node.executors.map((executor) => EXECUTOR_META[executor]?.label || ""),
+        ]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase();
+        if (!terms.every((term) => nodeSearchText(node).includes(term))) return null;
+
+        const score =
+          terms.reduce(
+            (total, term) =>
+              total +
+              (title.includes(term) ? 30 : 0) +
+              (explanation.includes(term) ? 12 : 0) +
+              (checks.includes(term) ? 8 : 0) +
+              (systems.includes(term) ? 4 : 0) +
+              (metadata.includes(term) ? 2 : 0),
+            0,
+          ) + (node.branch === state.activeBranch ? 3 : 0);
+        const matchingCheck = node.checks.find((check) =>
+          terms.some((term) => check.toLowerCase().includes(term)),
+        );
+        return { node, score, excerpt: matchingCheck || node.explanation };
       }
 
       function validateGraph() {
@@ -6330,7 +7611,7 @@
           if (ids.has(node.id)) errors.push(`Duplicate node ID: ${node.id}`);
           ids.add(node.id);
 
-          ["id", "stage", "branch", "title", "explanation", "evidence", "owner", "connects"].forEach(
+          ["id", "stage", "branch", "title", "explanation", "evidence", "connects"].forEach(
             (field) => {
               if (!(field in node)) errors.push(`${node.id} is missing ${field}`);
             },
@@ -6348,10 +7629,18 @@
             node.candidates.forEach((id) => {
               if (nodeMap.get(id)?.stage !== "fix") errors.push(`${node.id} has invalid candidate ${id}`);
             });
+            node.candidateRules.forEach((rule) => {
+              if (nodeMap.get(rule.fixId)?.stage !== "fix") {
+                errors.push(`${node.id} has invalid candidate rule ${rule.fixId}`);
+              }
+              if (!rule.when || !rule.minimumEvidence) {
+                errors.push(`${node.id} has an incomplete candidate rule`);
+              }
+            });
           }
 
           if (node.stage === "decision") {
-            if (!node.owner || !OWNER_META[node.owner]) {
+            if (!node.interventionType || !INTERVENTION_META[node.interventionType]) {
               errors.push(`${node.id} has no valid decision state`);
             }
             const incomingCauses = (incomingMap.get(node.id) || []).filter(
@@ -6363,7 +7652,14 @@
           }
 
           if (node.stage === "fix") {
-            if (!node.owner || !OWNER_META[node.owner]) errors.push(`${node.id} has no valid ownership`);
+            if (!node.interventions.length) errors.push(`${node.id} has no intervention type`);
+            node.interventions.forEach((type) => {
+              if (!INTERVENTION_META[type]) errors.push(`${node.id} has invalid intervention ${type}`);
+            });
+            if (!node.executors.length) errors.push(`${node.id} has no execution owner`);
+            node.executors.forEach((executor) => {
+              if (!EXECUTOR_META[executor]) errors.push(`${node.id} has invalid executor ${executor}`);
+            });
             const incomingDecisions = (incomingMap.get(node.id) || []).filter(
               (id) => nodeMap.get(id)?.stage === "decision",
             );
@@ -6403,6 +7699,16 @@
             if (!check.what || !check.how || !check.impact) {
               errors.push(`${module.id} check ${index + 1} is incomplete`);
             }
+          });
+          (module.nextPaths || []).forEach((path, index) => {
+            if (!path.when || !path.outcome || !path.reason) {
+              errors.push(`${module.id} next path ${index + 1} is incomplete`);
+            }
+            (path.nextModules || []).forEach((moduleId) => {
+              if (!playbookModuleMap.has(moduleId)) {
+                errors.push(`${module.id} routes to missing module ${moduleId}`);
+              }
+            });
           });
         });
 
@@ -6448,7 +7754,7 @@
           ["problem", "Problem", "The customer outcome at risk"],
           ["investigate", "What Carve investigates", "Evidence before explanation"],
           ["cause", "Current explanations", "Ranked by evidence and uncertainty"],
-          ["decision", "Decision", "Apply, test, route, or watch"],
+          ["decision", "Intervention", "Correct, test, decide, or watch"],
           ["fix", "Candidate actions", "The specific response Carve prepares"],
         ];
 
@@ -6547,7 +7853,8 @@
           card.dataset.nodeId = node.id;
           card.dataset.branch = branch.id;
           card.dataset.stage = stage;
-          if (node.owner) card.dataset.owner = node.owner;
+          const primaryIntervention = node.interventionType || node.interventions[0] || null;
+          if (primaryIntervention) card.dataset.owner = primaryIntervention;
           card.style.left = `${column.x}px`;
           card.style.top = `${positions[index]}px`;
           card.style.width = `${column.width}px`;
@@ -6557,8 +7864,13 @@
             `${branch.name} ${STAGE_META[stage].label}: ${node.title}`,
           );
 
-          const ownerBadge = node.owner
-            ? `<span class="ownership-badge" data-owner="${node.owner}">${OWNER_META[node.owner].label}</span>`
+          const interventionLabels = node.interventionType
+            ? [node.interventionType]
+            : node.interventions;
+          const ownerBadge = interventionLabels.length
+            ? `<span class="ownership-badge" data-owner="${interventionLabels[0]}">${interventionLabels
+                .map((type) => INTERVENTION_META[type].label)
+                .join(" · ")}</span>`
             : `<span class="node-count">${node.connects.length} path${node.connects.length === 1 ? "" : "s"}</span>`;
           const tags = node.tags
             .slice(0, 3)
@@ -6676,7 +7988,7 @@
               <a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer" title="${escapeHtml(
                 `${source.publisher} · ${source.kind || "Evidence"}`,
               )}">
-                ${escapeHtml(source.name)}
+                ${escapeHtml(source.kind || "Evidence")} · ${escapeHtml(source.name)}
               </a>
             `;
           })
@@ -6687,6 +7999,54 @@
         const countLabel = `${module.checks.length} checks · ${module.examples.length} example${
           module.examples.length === 1 ? "" : "s"
         }`;
+        const contractHtml =
+          module.entryWhen?.length || module.exitWhen?.length || module.outputs?.length
+            ? `
+              <p class="playbook-label">Module contract</p>
+              <div class="module-contract">
+                <div>
+                  <strong>Enter when</strong>
+                  <ul>${(module.entryWhen || []).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+                </div>
+                <div>
+                  <strong>Leave when</strong>
+                  <ul>${(module.exitWhen || []).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+                </div>
+                <div>
+                  <strong>Required output</strong>
+                  <ul>${(module.outputs || []).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+                </div>
+              </div>
+            `
+            : "";
+        const nextPathsHtml = module.nextPaths?.length
+          ? `
+              <p class="playbook-label">Go next</p>
+              <div class="next-paths">
+                ${module.nextPaths
+                  .map(
+                    (path) => `
+                      <article class="next-path">
+                        <small>${escapeHtml(path.outcome || "Continue")}</small>
+                        <strong>${escapeHtml(path.when)}</strong>
+                        <span>${escapeHtml(path.reason || "")}</span>
+                        ${(path.nextModules || [])
+                          .map((moduleId) => {
+                            const nextModule = playbookModuleMap.get(moduleId);
+                            return nextModule
+                              ? `<button type="button" data-next-module="${escapeHtml(moduleId)}">Open ${escapeHtml(
+                                  nextModule.number,
+                                )} · ${escapeHtml(nextModule.title)}</button>`
+                              : "";
+                          })
+                          .join("")}
+                      </article>
+                    `,
+                  )
+                  .join("")}
+              </div>
+            `
+          : "";
         return `
           <details class="playbook-module" id="playbook-${escapeHtml(module.id)}" data-playbook-module="${escapeHtml(
             module.id,
@@ -6698,6 +8058,7 @@
             </summary>
             <div class="playbook-module-body">
               <p class="playbook-question">${escapeHtml(module.question)}</p>
+              ${contractHtml}
 
               <p class="playbook-label">What Carve actually checks</p>
               <div class="check-table" role="table" aria-label="${escapeHtml(module.title)} checks">
@@ -6729,6 +8090,7 @@
                   )
                   .join("")}
               </div>
+              ${nextPathsHtml}
 
               <p class="playbook-label">Before → after examples</p>
               ${module.examples
@@ -6810,6 +8172,12 @@
         const module = playbookModuleMap.get(moduleId);
         if (!module) return;
         if (module.branch !== "all") setPlaybookBranch(module.branch, false);
+        elements.researchContent
+          .querySelectorAll(".playbook-module[open]")
+          .forEach((item) => {
+            item.open = false;
+          });
+        history.replaceState(null, "", `#playbook-${moduleId}`);
         openDrawer("research", trigger);
         window.setTimeout(() => {
           const details = elements.researchContent.querySelector(
@@ -6876,7 +8244,7 @@
                   </div>
                 </div>
                 ${playbook.modules
-                  .map((module, index) => renderPlaybookModule(module, index === 0))
+                  .map((module) => renderPlaybookModule(module, false))
                   .join("")}
               </section>
             `,
@@ -6904,44 +8272,6 @@
           </div>
 
           <section class="drawer-section">
-            <h3>Non-negotiable operating rules</h3>
-            ${rules
-              .map(
-                ([number, title, detail]) => `
-                  <div class="research-rule">
-                    <i>${number}</i>
-                    <div>
-                      <strong>${escapeHtml(title)}</strong>
-                      <span>${escapeHtml(detail)}</span>
-                    </div>
-                  </div>
-                `,
-              )
-              .join("")}
-          </section>
-
-          <section class="drawer-section">
-            <h3>The decision after investigation</h3>
-            <div class="decision-matrix">
-              ${Object.entries(OWNER_META)
-                .map(
-                  ([owner, meta]) => `
-                    <article data-owner="${escapeHtml(owner)}">
-                      <strong>${escapeHtml(meta.label)}</strong>
-                      <span>${escapeHtml(meta.detail)}</span>
-                    </article>
-                  `,
-                )
-                .join("")}
-            </div>
-          </section>
-
-          <section class="drawer-section">
-            <h3>Shared operating protocol</h3>
-            ${OPERATING_PROTOCOL.map((module, index) => renderPlaybookModule(module, index === 0)).join("")}
-          </section>
-
-          <section class="drawer-section">
             <h3>Choose a problem playbook</h3>
             <div class="playbook-index">
               ${Object.entries(PLAYBOOKS)
@@ -6960,6 +8290,101 @@
                 )
                 .join("")}
             </div>
+          </section>
+
+          <section class="drawer-section">
+            <h3>Non-negotiable operating rules</h3>
+            ${rules
+              .map(
+                ([number, title, detail]) => `
+                  <div class="research-rule">
+                    <i>${number}</i>
+                    <div>
+                      <strong>${escapeHtml(title)}</strong>
+                      <span>${escapeHtml(detail)}</span>
+                    </div>
+                  </div>
+                `,
+              )
+              .join("")}
+          </section>
+
+          <section class="drawer-section">
+            <h3>Evidence strength</h3>
+            <div class="evidence-ladder">
+              ${Object.values(EVIDENCE_LEVELS)
+                .map(
+                  (level) => `
+                    <article>
+                      <strong>${escapeHtml(level.label)}</strong>
+                      <span>${escapeHtml(level.meaning)}</span>
+                      <em>${escapeHtml(level.permits)}</em>
+                    </article>
+                  `,
+                )
+                .join("")}
+            </div>
+            <details class="playbook-module">
+              <summary>
+                <i>✓</i>
+                <strong>Decision-ready, stop, and urgent-containment rules</strong>
+                <span>${DECISION_POLICY.readyWhen.length} ready checks</span>
+              </summary>
+              <div class="playbook-module-body">
+                <p class="playbook-label">Decision-ready when</p>
+                <ul>${DECISION_POLICY.readyWhen.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+                <p class="playbook-label">Valid stop outcomes</p>
+                <ul>${DECISION_POLICY.stopOutcomes.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+                <p class="playbook-label">Contain urgently</p>
+                <ul>${DECISION_POLICY.urgentContainment.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+              </div>
+            </details>
+            <details class="playbook-module">
+              <summary>
+                <i>≡</i>
+                <strong>Metric glossary</strong>
+                <span>${Object.keys(METRIC_GLOSSARY).length} definitions</span>
+              </summary>
+              <div class="playbook-module-body">
+                <div class="source-list">
+                  ${Object.entries(METRIC_GLOSSARY)
+                    .map(
+                      ([term, meaning]) => `
+                        <div class="source-link">
+                          ${escapeHtml(term)}
+                          <small>${escapeHtml(meaning)}</small>
+                        </div>
+                      `,
+                    )
+                    .join("")}
+                </div>
+              </div>
+            </details>
+          </section>
+
+          <section class="drawer-section">
+            <h3>Choose the intervention—not the executor</h3>
+            <div class="decision-matrix">
+              ${Object.entries(INTERVENTION_META)
+                .map(
+                  ([intervention, meta]) => `
+                    <article data-owner="${escapeHtml(intervention)}">
+                      <strong>${escapeHtml(meta.label)}</strong>
+                      <span>${escapeHtml(meta.detail)}</span>
+                    </article>
+                  `,
+                )
+                .join("")}
+            </div>
+            <p class="caveat">
+              Execution is separate: Carve may execute, request approval, or deliver the same correction,
+              experiment, or business decision to its accountable owner.
+            </p>
+          </section>
+
+          <section class="drawer-section">
+            <h3>Shared operating protocol</h3>
+            ${OPERATING_PROTOCOL.map((module) => renderPlaybookModule(module, false)).join("")}
           </section>
 
           ${branchHtml}
@@ -6989,6 +8414,11 @@
               setPlaybookBranch(button.dataset.playbookBranchButton, true),
             );
           });
+        elements.researchContent.querySelectorAll("[data-next-module]").forEach((button) => {
+          button.addEventListener("click", () => {
+            openPlaybookModule(button.dataset.nextModule, button);
+          });
+        });
       }
 
       function initializeLayout() {
@@ -7083,42 +8513,74 @@
 
       function renderNodeDetail(node) {
         const branch = getBranchForNode(node);
-        const owner = node.owner ? OWNER_META[node.owner] : null;
+        const interventionTypes = node.interventionType
+          ? [node.interventionType]
+          : node.interventions;
+        const interventions = interventionTypes
+          .map((type) => ({ type, ...INTERVENTION_META[type] }))
+          .filter((item) => item.label);
+        const executors = node.executors
+          .map((executor) => EXECUTOR_META[executor]?.label)
+          .filter(Boolean);
         const badges = [
           ...(branch
             ? [`<span class="node-tag" style="color:${branchColor(branch.id)}">${escapeHtml(branch.name)}</span>`]
             : []),
           ...node.tags.map((tag) => `<span class="node-tag">${escapeHtml(tag)}</span>`),
-          ...(owner
-            ? [
-                `<span class="ownership-badge" data-owner="${node.owner}">${escapeHtml(owner.label)}</span>`,
-              ]
-            : []),
+          ...interventions.map(
+            (intervention) =>
+              `<span class="ownership-badge" data-owner="${escapeHtml(intervention.type)}">${escapeHtml(
+                intervention.label,
+              )}</span>`,
+          ),
         ].join("");
 
-        const ownerSection = owner
+        const decisionSection = interventions.length
           ? `
               <section class="drawer-section">
-                <h3>Decision state</h3>
-                <p class="caveat"><strong>${escapeHtml(owner.label)}.</strong> ${escapeHtml(owner.detail)}</p>
+                <h3>Intervention and execution</h3>
+                ${interventions
+                  .map(
+                    (intervention) =>
+                      `<p class="caveat"><strong>${escapeHtml(intervention.label)}.</strong> ${escapeHtml(
+                        intervention.detail,
+                      )}</p>`,
+                  )
+                  .join("")}
+                ${
+                  executors.length
+                    ? `<p class="caveat"><strong>Possible executors:</strong> ${escapeHtml(
+                        executors.join(", "),
+                      )}. The exact case and permission decide who executes.</p>`
+                    : ""
+                }
+                ${node.deliveryNote ? `<p class="caveat">${escapeHtml(node.deliveryNote)}</p>` : ""}
               </section>
             `
           : "";
 
         const candidateSection =
-          node.stage === "cause" && node.candidates.length
+          node.stage === "cause" && node.candidateRules.length
             ? `
                 <section class="drawer-section">
                   <h3>Relevant candidate actions</h3>
                   <div class="connected-list">
-                    ${node.candidates
-                      .map((id) => {
-                        const candidate = nodeMap.get(id);
+                    ${node.candidateRules
+                      .map((rule) => {
+                        const candidate = nodeMap.get(rule.fixId);
                         if (!candidate) return "";
+                        const types = candidate.interventions
+                          .map((type) => INTERVENTION_META[type].label)
+                          .join(" / ");
                         return `
-                          <button class="connected-button" type="button" data-connected-id="${escapeHtml(id)}">
-                            <small>${escapeHtml(OWNER_META[candidate.owner].label)} · Candidate action</small>
-                            <strong>${escapeHtml(candidate.title)}</strong>
+                          <button class="connected-button" type="button" data-connected-id="${escapeHtml(
+                            rule.fixId,
+                          )}">
+                            <small>${escapeHtml(types)} · Minimum: ${escapeHtml(rule.minimumEvidence)}</small>
+                            <div>
+                              <strong>${escapeHtml(candidate.title)}</strong>
+                              <em>${escapeHtml(rule.when)}</em>
+                            </div>
                             <span aria-hidden="true">→</span>
                           </button>
                         `;
@@ -7187,7 +8649,7 @@
             <h3>What this does not prove</h3>
             <p class="caveat">${escapeHtml(node.caveat)}</p>
           </section>
-          ${ownerSection}
+          ${decisionSection}
           ${candidateSection}
           ${measureSection}
           ${playbookSection}
@@ -7382,6 +8844,7 @@
         else state.collapsedBranches.add(branchId);
         syncCollapseControls();
         updateVisualState();
+        window.requestAnimationFrame(() => focusBranch(branchId));
         announce(
           `${branchMap.get(branchId).name} detail ${
             state.collapsedBranches.has(branchId) ? "collapsed" : "expanded"
@@ -7454,16 +8917,12 @@
         }
 
         const terms = query.split(/\s+/).filter(Boolean);
-        const matches = Array.from(nodeMap.values()).filter((node) => {
-          const haystack = nodeSearchText(node);
-          return terms.every((term) => haystack.includes(term));
-        });
+        const scoredMatches = Array.from(nodeMap.values())
+          .map((node) => scoreSearchNode(node, terms))
+          .filter(Boolean)
+          .sort((left, right) => right.score - left.score || left.node.title.localeCompare(right.node.title));
+        const matches = scoredMatches.map((entry) => entry.node);
         state.searchMatches = matches.map((node) => node.id);
-
-        matches.forEach((node) => {
-          if (node.branch !== "all") state.collapsedBranches.delete(node.branch);
-        });
-        syncCollapseControls();
 
         if (!matches.length) {
           elements.searchResults.innerHTML = `
@@ -7476,9 +8935,10 @@
             </div>
           `;
         } else {
-          elements.searchResults.innerHTML = matches
+          elements.searchResults.innerHTML = scoredMatches
             .slice(0, 14)
-            .map((node, index) => {
+            .map((entry, index) => {
+              const node = entry.node;
               const branch = getBranchForNode(node);
               return `
                 <button
@@ -7494,7 +8954,7 @@
                   )}</small>
                   <span>
                     <strong>${escapeHtml(node.title)}</strong>
-                    <span>${escapeHtml(node.explanation)}</span>
+                    <span>${escapeHtml(entry.excerpt)}</span>
                   </span>
                 </button>
               `;
@@ -7552,7 +9012,20 @@
       }
 
       document.querySelectorAll(".branch-button").forEach((button) => {
-        button.addEventListener("click", () => setBranchFilter(button.dataset.branch));
+        button.addEventListener("click", () => {
+          const branchId = button.dataset.branch;
+          if (window.innerWidth <= 720 && branchId !== "all") {
+            setBranchFilter(branchId, false);
+            const problem = branchMap.get(branchId).problem;
+            selectNode(problem.id);
+            window.requestAnimationFrame(() => {
+              focusNode(problem.id, 0.92);
+              openNodeDetail(problem.id, button);
+            });
+            return;
+          }
+          setBranchFilter(branchId);
+        });
       });
 
       document.querySelectorAll(".opportunity-button").forEach((button) => {
@@ -7624,7 +9097,7 @@
         state.transform = clampTransform(state.transform);
         const { x, y, scale } = state.transform;
         elements.world.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${scale})`;
-        elements.world.classList.toggle("is-low-detail", scale < 0.72);
+        elements.world.classList.toggle("is-low-detail", scale < 0.86);
         elements.navigationScale.textContent = `${Math.round(scale * 100)}%`;
       }
 
@@ -7742,6 +9215,16 @@
         setTransform({ x, y, scale });
       }
 
+      function boundsForNodeIds(ids) {
+        const boxes = ids.map((id) => layoutMap.get(id)).filter(Boolean);
+        if (!boxes.length) return null;
+        const left = Math.min(...boxes.map((box) => box.x));
+        const top = Math.min(...boxes.map((box) => box.y));
+        const right = Math.max(...boxes.map((box) => box.x + box.width));
+        const bottom = Math.max(...boxes.map((box) => box.y + box.height));
+        return { x: left, y: top, width: right - left, height: bottom - top };
+      }
+
       function visibleBounds() {
         if (state.activeBranch !== "all") {
           const index = MAP_DATA.branches.findIndex((branch) => branch.id === state.activeBranch);
@@ -7768,6 +9251,14 @@
       function focusBranch(branchId) {
         const branch = branchMap.get(branchId);
         if (!branch) return;
+        if (state.collapsedBranches.has(branchId)) {
+          const bounds = boundsForNodeIds([
+            ...branch.signals.map((signal) => signal.id),
+            branch.problem.id,
+          ]);
+          if (bounds) fitBounds(bounds, window.innerWidth <= 720 ? 18 : 34, 0.72);
+          return;
+        }
         if (window.innerWidth <= 720) {
           focusNode(branch.problem.id, 0.82);
           return;
@@ -7833,7 +9324,7 @@
         stopGlide();
         state.activeBranch = "all";
         state.activeOpportunity = "all";
-        state.collapsedBranches = new Set();
+        state.collapsedBranches = new Set(MAP_DATA.branches.map((branch) => branch.id));
         state.selectedId = null;
         state.searchQuery = "";
         state.searchMatches = [];
@@ -8245,6 +9736,15 @@
 
       syncCollapseControls();
       updateVisualState();
+
+      function openPlaybookFromHash() {
+        if (!location.hash.startsWith("#playbook-")) return;
+        const moduleId = decodeURIComponent(location.hash.slice("#playbook-".length));
+        if (playbookModuleMap.has(moduleId)) openPlaybookModule(moduleId, elements.researchButton);
+      }
+
+      window.addEventListener("hashchange", openPlaybookFromHash);
+      window.setTimeout(openPlaybookFromHash, 0);
 
       window.requestAnimationFrame(() => {
         setBranchFilter("discovery", false);
