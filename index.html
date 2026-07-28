@@ -7448,7 +7448,7 @@
         activeBranch: "discovery",
         playbookBranch: "discovery",
         activeOpportunity: "all",
-        collapsedBranches: new Set(MAP_DATA.branches.map((branch) => branch.id)),
+        collapsedBranches: new Set(),
         selectedId: null,
         searchQuery: "",
         searchMatches: [],
@@ -9324,7 +9324,7 @@
         stopGlide();
         state.activeBranch = "all";
         state.activeOpportunity = "all";
-        state.collapsedBranches = new Set(MAP_DATA.branches.map((branch) => branch.id));
+        state.collapsedBranches = new Set();
         state.selectedId = null;
         state.searchQuery = "";
         state.searchMatches = [];
