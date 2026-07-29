@@ -1190,6 +1190,25 @@
         margin-top: 5px;
       }
 
+      .human-deep-details {
+        margin-top: 28px;
+        padding-top: 18px;
+        border-top: 1px solid var(--line);
+      }
+
+      .human-deep-details > summary {
+        color: #2c2723;
+        font-size: 11px;
+        font-weight: 720;
+        letter-spacing: 0.055em;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+
+      .human-deep-details .source-list {
+        margin-top: 14px;
+      }
+
       .human-before-after {
         display: grid;
         grid-template-columns: 1fr auto 1fr;
@@ -13226,20 +13245,20 @@
               "Start by separating demand from the store’s own visibility. Then trace the intended page and item from source truth to Google.",
             signals: Object.freeze([
               Object.freeze({
-                title: "Relevant searches do not show the product",
-                detail: "Shoppers use a customer job or product attribute this item truthfully serves, but coverage is weak or falling.",
+                title: "The product is missing from searches it should fit",
+                detail: "People are looking for something this product genuinely offers, but they rarely see it.",
               }),
               Object.freeze({
-                title: "The product appears for the wrong or generic searches",
-                detail: "Google understands the product too broadly, too narrowly, or around language customers do not use.",
+                title: "Google shows it for the wrong searches",
+                detail: "The product appears for vague or irrelevant needs instead of the needs it actually serves.",
               }),
               Object.freeze({
-                title: "The wrong variant, image, or product facts appear",
-                detail: "The listing no longer describes the same buyable color, size, market item, or offer.",
+                title: "The wrong version of the product is shown",
+                detail: "The result shows the wrong colour, size, image, price, stock state, or product facts.",
               }),
               Object.freeze({
-                title: "Google flags or limits the product listing",
-                detail: "A named publication, eligibility, or product-data issue prevents or restricts exposure.",
+                title: "Google says the product has a problem",
+                detail: "The exact product is unpublished, limited, rejected, or unavailable in the intended market.",
               }),
             ]),
             investigate: Object.freeze([
@@ -13359,20 +13378,20 @@
               "Hold the opportunity comparable, inspect what shoppers actually saw, and separate a false input from a truthful but weak proposition or offer.",
             signals: Object.freeze([
               Object.freeze({
-                title: "Impressions hold while clicks fall",
-                detail: "Comparable visibility remains, but fewer shoppers choose the result.",
+                title: "The product is still shown, but gets fewer clicks",
+                detail: "A similar number of comparable shoppers see it, but fewer choose it.",
               }),
               Object.freeze({
-                title: "A valuable cohort has weak CTR",
-                detail: "The same query/page/country/device and comparable position underperforms.",
+                title: "Important searches get fewer clicks",
+                detail: "The same valuable searches and products perform worse in a fair comparison.",
               }),
               Object.freeze({
-                title: "Free product listings lose clicks",
-                detail: "Items remain eligible and visible but attract fewer useful visits.",
+                title: "Shopping listings get fewer clicks",
+                detail: "The products are still visible in Shopping, but attract fewer useful visits.",
               }),
               Object.freeze({
-                title: "Clicks rise but quality or value worsens",
-                detail: "The presentation may attract the wrong expectation rather than better demand.",
+                title: "Comparable results win more clicks",
+                detail: "Nearby products serving the same need attract more of the available shoppers.",
               }),
             ]),
             investigate: Object.freeze([
@@ -13483,25 +13502,25 @@
           }),
           atc: Object.freeze({
             label: "Add to cart",
-            problem: "Shoppers reach an addable product page but do not successfully add the intended item.",
+            problem: "Shoppers reach a product they can buy, but do not add it—or they try and fail.",
             summary:
               "Start in Shopify’s native product funnel and the exact live PDP/offer. Run one clean add smoke test. Open GA4 or technical tooling only when native counts, live state, or the smoke test disagree.",
             signals: Object.freeze([
               Object.freeze({
-                title: "Healthy PDP traffic, fewer successful adds",
-                detail: "The page still receives qualified visits, but confirmed cart additions fall.",
+                title: "People view the product, but fewer add it",
+                detail: "The product still gets useful visits, but fewer people successfully add it.",
               }),
               Object.freeze({
-                title: "Fixed cohorts lose ATC",
-                detail: "The same product, source, device, market, and shopper cohort deteriorates.",
+                title: "The same kind of shoppers add less",
+                detail: "A fair comparison for the same product, source, device, or market gets worse.",
               }),
               Object.freeze({
-                title: "One variant, device, market, or template diverges",
-                detail: "A coherent slice breaks away from matched products or states.",
+                title: "One size, colour, device, or market performs worse",
+                detail: "One clear part of the product experience falls behind the parts that still work.",
               }),
               Object.freeze({
-                title: "Attempts and actual cart state disagree",
-                detail: "Shoppers click Add but the cart does not change—or analytics says something different.",
+                title: "People press Add, but nothing is added",
+                detail: "The button is used, but the correct item does not appear in the cart.",
               }),
             ]),
             investigate: Object.freeze([
@@ -13616,62 +13635,62 @@
       const HUMAN_OVERVIEW = Object.freeze({
         problem: "A product is creating less customer and business value than it reasonably should.",
         rule:
-          "Freeze one effective-dated product trading row before choosing a specialist explanation: exact product, variant, offer, page, market, lifecycle, stock, margin, source version, recent changes, raw counts, and actual versus plan, forecast, prior, and matched peers.",
+          "Name the affected product or variant, shoppers, market, period, fair comparison, and commercial loss. Note stock, price, promotion, season, lifecycle, and recent changes before blaming marketing.",
         signals: Object.freeze([
           {
-            title: "Trade moved against expectation",
+            title: "Sales, units or profit are below expectation",
             detail:
-              "Shopify Analytics → Reports: net sales, units, contribution or margin, traffic, CVR, AOV, discounts, returns, and cancellations versus plan, forecast, prior comparable period, and fair peers.",
+              "Compare with plan, forecast, the same prior period, and genuinely similar products. Show the gap in money and units—not only percentages.",
           },
           {
-            title: "Stock or product economics changed",
+            title: "Traffic or conversion weakened",
             detail:
-              "Products → Insights/Analytics: wanted-variant availability, sell-through, cover, incoming stock, price/promotion, lifecycle, launch, and returns. An out-of-stock winner is not an unwanted in-stock item.",
+              "Work out whether fewer shoppers arrived, fewer chose the product, fewer added it, or value was lost later.",
           },
           {
-            title: "One coherent slice diverged",
+            title: "Stock, price, promotion or returns changed",
             detail:
-              "Locate the product, variant, category, market, channel, source, device, template, or release that explains the movement. Keep different measurement systems in separate named columns.",
+              "Check whether important variants sold out, the offer changed, a promotion started or ended, or returns rose. This may explain the result or limit the sensible fix.",
           },
           {
-            title: "Useful demand or catalog coverage is missed",
+            title: "Shoppers want something we are not surfacing",
             detail:
-              "Search Console, Merchant Center, onsite search, paid search terms, customer language, and market evidence show a truthful customer job the catalog fails to cover or surface.",
+              "Searches, customer questions, and competing products reveal a real need this product serves, but shoppers are not finding it.",
           },
         ]),
         routes: Object.freeze([
           {
             branch: "discovery",
             when:
-              "Relevant impressions, query coverage, indexing, eligibility, or the intended page/item breaks first.",
+              "People are looking for something the product genuinely serves, but the right page or listing receives too little Google exposure.",
           },
           {
             branch: "ctr",
             when:
-              "Comparable Google opportunity remains, but qualified clicks or valid landings break first.",
+              "The product is still shown to comparable shoppers, but fewer choose it.",
+          },
+          {
+            branch: "outside",
+            label: "Onsite discovery · sibling route",
+            title: "Shoppers cannot find or choose the product inside the store.",
+            when:
+              "If the journey begins inside the store, shoppers browse or search but the product is missing, buried, confusing, or leads to the wrong choice.",
           },
           {
             branch: "atc",
             when:
-              "Qualified, addable PDP views remain, but successful additions of the intended item break first.",
+              "Relevant shoppers reach an available product, but do not add it—or they try and fail.",
           },
           {
             branch: "outside",
-            label: "Onsite discovery",
-            title: "The product is live but shoppers cannot find or choose it onsite.",
+            label: "Commercial economics or downstream",
+            title: "The marketing journey is healthy; value is lost elsewhere.",
             when:
-              "The onsite ledger first breaks at collection inclusion, search indexing, query/filter match, useful position, product-card clarity, or click-through. Route the exact product/query/filter/template case to the onsite-discovery system.",
-          },
-          {
-            branch: "outside",
-            label: "Route downstream",
-            title: "The first break is after add to cart.",
-            when:
-              "Successful adds hold, but checkout, purchase, margin, cancellations, returns, or fulfilment value breaks later.",
+              "Discovery, clicks, and adds remain healthy, but profit or customer value falls through discounts, cost, mix, cart, checkout, fulfilment, cancellations, or returns.",
           },
         ]),
-        cadence:
-          "Carve keeps truth, eligibility, availability, and recent changes reconciled continuously; checks complete-day exceptions daily; brings decisions to the weekly trade loop; reviews category/test learning monthly; and audits contracts after major releases or quarterly.",
+        response:
+          "Correct facts or functions proven wrong. Test plausible but uncertain presentation changes. Bring price, stock, creative, technical, or product decisions to the right owner. Do nothing when the movement is normal or the evidence is weak.",
       });
 
       const HUMAN_OPERATOR_PATHS = Object.freeze({
@@ -15397,6 +15416,761 @@
         }),
       });
 
+      const HUMAN_VISIBLE_ROWS = Object.freeze({
+        discovery: Object.freeze({
+          0: Object.freeze({
+            question: "Is the product simply unpublished, limited, or rejected?",
+            check:
+              "Open the Shopify product, Merchant product status, and—only when relevant—the page’s Google status.",
+            cause: "A clear platform block prevents the product from appearing.",
+            proof:
+              "The exact product is unpublished, unavailable to the market, rejected, or inaccessible, with a stated reason.",
+            action:
+              "Correct an accidental publication setting, hand off a platform fault, or take no action when the exclusion is intentional.",
+            current: "Product SE-123 should be live in Sweden, but its Shopify Sweden publication is accidentally off.",
+            proposed: "Publish that exact product to Sweden and verify it is available; leave intentional market exclusions unchanged.",
+          }),
+          1: Object.freeze({
+            question: "Are people still looking for this kind of product?",
+            check:
+              "Look at Search Console queries, onsite search, Google Trends, category sales, seasonality, and the product itself.",
+            cause: "Demand fell—or this product does not honestly fit what people want.",
+            proof:
+              "Related searches and fair peers move together while this product’s relative share stays stable, or the shopper need would require a different product or an untrue claim. Falling share leaves a product-specific loss to investigate.",
+            action:
+              "Update the expectation, or bring a genuine unmet-product opportunity to Product or Buying.",
+            current: "Searches for insulated winter jackets rise, so an uninsulated shell is renamed “winter jacket.”",
+            proposed: "Keep the shell truthful; record seasonality or route the insulated demand as a separate product opportunity.",
+          }),
+          2: Object.freeze({
+            question: "Does the product record contain the facts shoppers search and choose by?",
+            check:
+              "Open the Shopify product and variants, important metafields or PIM facts, and the matching Merchant item.",
+            cause: "Important product facts are missing, vague, or attached to the wrong level.",
+            proof:
+              "A repeated shopper need matches a verified product fact, but that fact is missing or unusable in the product record.",
+            action: "Add the verified product and variant facts that are genuinely missing.",
+            current: "Product type = “Shoes”; gender, material, waterproof rating, and use case are blank.",
+            proposed: "Product type = “Women’s hiking boots”; add verified leather, 20K waterproof, and wet-day hiking use.",
+          }),
+          3: Object.freeze({
+            question: "Do Google-facing fields clearly describe the product for that need?",
+            check:
+              "Compare the Shopify title, description, and category with the Google-facing item, relevant searches, and stronger sister products.",
+            cause: "Verified facts are hidden, badly expressed, or placed in the wrong category.",
+            proof:
+              "A category is factually wrong, or verified distinguishing facts are absent from Google-facing fields while relevant searches remain uncovered. Clearer wording is still a test.",
+            action:
+              "Correct a wrong category; otherwise test one truthful title or description change.",
+            current: "Product title = “Nova | Acme.”",
+            proposed: "Product title test = “Nova Women’s 20K Waterproof Hiking Boot | Acme”; leave every other field unchanged.",
+          }),
+          4: Object.freeze({
+            question: "Is the intended variant represented clearly and truthfully?",
+            check:
+              "Put the Shopify variant, Merchant item, and Google result side by side for the same market.",
+            cause: "The intended variant is missing or represented by a sibling variant.",
+            proof:
+              "The Shopify or Merchant item for the intended colour or size is missing, or its source image and attributes belong to a sibling. If those sources are truthful and Google alone displays something else, this is not a source-data correction.",
+            action:
+              "Correct a wrong source item; if the source is truthful, refresh, watch, or hand off without corrupting it.",
+            current: "The Moss / Medium item uses Blue / Small attributes and the Blue image.",
+            proposed: "Use Moss / Medium attributes and the approved Moss image for that exact item.",
+          }),
+          5: Object.freeze({
+            question: "Does Google have a clear reason to show this product for that need?",
+            check:
+              "Compare the shopper need, this product’s role and facts, sister products Google shows instead, onsite search language, and the live results.",
+            cause: "The product’s role is unclear or overlaps with another product.",
+            proof:
+              "Demand and basic facts hold, but the intended need is not clearly owned by this product and Google repeatedly shows a better-aligned sister product. Treat this as a hypothesis until tested.",
+            action:
+              "Test one truthful product-positioning distinction, or decide this product should not compete for that need.",
+            current: "Packlite product title = “Women’s Waterproof Jacket,” the same role used by its heavier sister product.",
+            proposed: "If true, test “Packlite Women’s Lightweight Packable Rain Jacket”; leave the sister product and offer unchanged.",
+          }),
+        }),
+        ctr: Object.freeze({
+          0: Object.freeze({
+            question: "Did the same searches and products really lose clicks?",
+            check:
+              "Compare the same Search Console searches and pages, or the same Merchant products, with organic and Shopping kept separate.",
+            cause: "The average changed because the traffic or exposure mix changed.",
+            proof:
+              "Established valuable searches still perform normally and the fall comes from new broader or lower-position exposure.",
+            action: "Keep useful reach and compare like with like; make no listing change.",
+            current: "Overall CTR falls from 4.0% to 1.4%, so every title is queued for rewriting.",
+            proposed: "Established-search CTR still holds at 4.0%; keep the new reach and watch the original shoppers.",
+          }),
+          1: Object.freeze({
+            question: "Did position or the search page change first?",
+            check:
+              "Compare the same searches, pages, market, device, and position; look at repeated live Google results.",
+            cause: "There were fewer good chances to click, so listing appeal may be fine.",
+            proof:
+              "Lower position, fewer impressions, or a repeated new search-page layout explains the missing clicks.",
+            action: "Move lost visibility to Discovery, or watch a Google-controlled layout change.",
+            current: "The product drops from position 3 to 9 and the proposed fix is a description rewrite.",
+            proposed: "Move the case to Discovery; reopen CTR only if the same click opportunity returns.",
+          }),
+          2: Object.freeze({
+            question: "Does the result itself show the right product and variant?",
+            check:
+              "Inspect the product name, model, variant label, and image shown in the result or Shopping item; compare them with the intended item.",
+            cause: "The result visibly represents the wrong product or variant.",
+            proof:
+              "The visible product name, model, variant label, or image belongs to a different item. Confirm whether Shopify or Merchant is wrong; if both are truthful and Google alone differs, do not rewrite correct data as a factual fix.",
+            action:
+              "Correct a wrong source identity; otherwise watch, refresh, test a truthful input, or hand off Google-controlled display.",
+            current: "The Moss listing visibly uses the Blue variant’s image and colour name.",
+            proposed: "Show the approved Moss image and colour name; leave the landing and offer unchanged.",
+          }),
+          3: Object.freeze({
+            question: "Is anything shown wrong or out of date?",
+            check:
+              "After confirming it is the right item, compare its visible price, stock, promotion, and delivery facts with current reality.",
+            cause: "The right item is shown, but one offer fact is stale or false.",
+            proof:
+              "The first clear price, stock, promotion, or delivery mismatch is repeatable for the same item and market. Confirm the source is wrong before editing it.",
+            action:
+              "Correct the wrong source value; if the source is already true, refresh, watch, or hand off the stale display.",
+            current: "The listing says 799 SEK while the current live offer is 899 SEK.",
+            proposed: "Correct the listing price to 899 SEK; leave image, title, stock, and landing unchanged.",
+          }),
+          4: Object.freeze({
+            question: "Can shoppers immediately tell what it is and why it fits?",
+            check:
+              "Look at the actual result, customer search wording, current title and image, approved alternatives, and nearby competitors.",
+            cause: "The result is accurate but hard to understand.",
+            proof:
+              "Other explanations are cleared and repeated customer evidence points to one missing distinction; the change remains a hypothesis until tested.",
+            action: "Test one clearer truthful title or one existing approved image.",
+            current: "Merchant variant title = “Trail Tee – Moss – M – Carve.”",
+            proposed: "Merchant variant title test = “Carve Men’s Trail T‑Shirt, Moss, M”; leave the shared organic page title and offer unchanged.",
+          }),
+          5: Object.freeze({
+            question: "Is the visible offer weaker than the alternatives?",
+            check:
+              "Compare the price, delivery, stock, reviews, promotion, and other facts visible before the click with fair alternatives.",
+            cause: "The offer visible in the result gives shoppers a better reason to click elsewhere.",
+            proof:
+              "The same searches and positions lose clicks where a repeated like-for-like visible offer disadvantage exists. Treat the disadvantage as plausible until time, market, or test evidence supports it.",
+            action:
+              "Ask the owner to test one real offer improvement; move checkout-only promise problems downstream.",
+            current: "Our result shows 7–10 day delivery while comparable results show free two-day delivery.",
+            proposed: "Ask Logistics to approve or reject one bounded two-day-delivery pilot for the affected market.",
+          }),
+        }),
+        atc: Object.freeze({
+          0: Object.freeze({
+            question: "Do fewer visitors really add this product?",
+            check:
+              "Open Shopify’s product views, adds, checkout, and purchases; open the live product and add the intended variant once.",
+            cause: "The apparent add-to-cart loss is not real.",
+            proof:
+              "The fall disappears when successful adds, complete dates, comparable shoppers, and the actual cart state are used. If a real loss remains, this cause is rejected and the investigation continues.",
+            action: "Close or recalculate the case; make no product-page change.",
+            current: "A button click is counted as an add even when the cart never changes.",
+            proposed: "Judge the case from successful Shopify adds; close it if the apparent loss disappears.",
+          }),
+          1: Object.freeze({
+            question: "Are the right shoppers landing on what they expected?",
+            check:
+              "Open the source that sent them, the exact landing page, and performance for that source, market, and device.",
+            cause: "The source promise and landed product do not match.",
+            proof:
+              "One source repeatedly promises a different product, fit, use, price, image, or variant while other shoppers behave normally.",
+            action: "Ask the source owner to change the exact wording, image, or destination.",
+            current: "“Warm three-season hiking jacket” lands on an uninsulated rain shell.",
+            proposed: "“Packable waterproof rain shell” lands on the exact advertised variant.",
+          }),
+          2: Object.freeze({
+            question: "Can shoppers quickly answer what they need to choose?",
+            check:
+              "Read the live page, customer questions, reviews, returns, support, recordings, and matched product pages.",
+            cause: "One unanswered decision question is a plausible blocker.",
+            proof:
+              "The same question appears repeatedly, the page does not answer it clearly, and a truthful answer exists. This earns a focused test; it does not prove the cause.",
+            action:
+              "Test one verified answer or placement for the single repeated question.",
+            current: "Shoppers repeatedly ask “What size should I buy?” and the existing size guide sits below reviews.",
+            proposed: "Move the same verified size guide beside the size selector; keep all other content and the offer unchanged.",
+          }),
+          3: Object.freeze({
+            question: "Is the wanted size or colour available, and is the total offer acceptable?",
+            check:
+              "Check the exact variant, stock, price, promotion, delivery, returns, checkout, and fair competitors.",
+            cause: "A real availability or offer disadvantage may be blocking the decision.",
+            proof:
+              "ATC changes when the same variant, market, or period gains or loses the disadvantage, or a bounded offer test supports it. A static competitor gap alone is only a clue.",
+            action: "Correct a false displayed fact, or ask the owner to choose a real stock, price, or delivery action.",
+            current: "The page says free delivery while checkout charges 79 SEK, or M/L are usually unavailable.",
+            proposed: "Confirm the approved delivery promise; fix checkout if free delivery is intended, otherwise correct the page. Never assume either side is automatically right.",
+          }),
+          4: Object.freeze({
+            question: "Can a shopper choose a variant and add it normally?",
+            check:
+              "Try the exact affected product and one working comparison. Only investigate the page further when the simple add fails.",
+            cause: "Variant selection or add to cart is broken.",
+            proof:
+              "The same shopper journey repeatedly fails at the same step or adds the wrong item.",
+            action: "Give Engineering the reproduced fault and the exact successful behaviour required.",
+            current: "Selecting Medium adds Small, or a mobile overlay blocks the Add button.",
+            proposed: "Selecting Medium adds Medium once; the Add button remains usable on mobile.",
+          }),
+          5: Object.freeze({
+            question: "Do shoppers understand everything and still choose another product?",
+            check:
+              "Compare qualified shoppers, named substitute products, interviews, reviews, returns, stock, and product economics.",
+            cause: "The product itself is being rejected for this customer need.",
+            proof:
+              "Traffic, page function, information, imagery, variants, and offer are all acceptable, yet shoppers repeatedly prefer the same alternative for the same reason.",
+            action:
+              "Ask Product or Buying to reposition, recommend a substitute, redesign, change assortment, retire, or deliberately watch.",
+            current: "Shoppers understand the 1.8 kg trail pack but repeatedly choose lighter substitutes.",
+            proposed: "Decide whether it serves commuters, should recommend a lighter option, needs redesign, or should leave the range.",
+          }),
+        }),
+      });
+
+      const HUMAN_ACTION_PLAYBOOK = Object.freeze({
+        discovery: Object.freeze({
+          0: Object.freeze({
+            label: "Fix, ask, or no action",
+            owner: "Ecommerce manager for publication; marketplace or platform owner for faults outside the product record",
+            steps: Object.freeze([
+              "Capture the exact product, market, status, and reason shown.",
+              "Classify it as intentional exclusion, accidental Shopify publication/market state, or an owner-controlled platform fault.",
+              "Take no action for an intentional exclusion; correct only the accidental product setting; hand off the exact outside fault.",
+              "Open the same item again after any correction or owner release before judging impressions.",
+            ]),
+            check:
+              "The intended state is respected: intentional exclusions stay excluded, while accidental or owner-controlled blocks are resolved.",
+          }),
+          1: Object.freeze({
+            label: "Do nothing or ask owner",
+            owner: "Ecommerce manager; Product or Buying owns a genuine unmet-product decision",
+            steps: Object.freeze([
+              "Compare the shopper need across the right seasonal period, related searches, fair peer products, and this product’s relative share.",
+              "Separate demand the product truthfully serves from demand that needs a different product.",
+              "If demand fell normally, update the expectation and make no catalog change.",
+              "If attractive demand needs a different product, write the customer need and bring it to Product or Buying.",
+            ]),
+            check:
+              "The explanation continues to fit the category and peers while relative share holds; no product-specific residual is hidden.",
+          }),
+          2: Object.freeze({
+            label: "Fix product data",
+            owner: "Ecommerce manager; Product confirms any fact that is unknown",
+            steps: Object.freeze([
+              "List the product facts shoppers repeatedly use to find and choose this item.",
+              "Mark which facts are verified, missing, vague, or attached to the wrong variant.",
+              "Add only verified facts to the product or variant record; request unknown facts instead of guessing.",
+              "Check the live page and Google-facing listing to make sure the facts reached the right item.",
+            ]),
+            check:
+              "The missing facts are accurate, sit at the correct product or variant level, and do not leak to sibling products.",
+          }),
+          3: Object.freeze({
+            label: "Correct or test one field",
+            owner: "Ecommerce manager",
+            steps: Object.freeze([
+              "Decide whether the field is factually wrong or merely unclear.",
+              "Correct a wrong category or false value directly; do not treat truth as an experiment.",
+              "For unclear wording, draft one exact title or description change using verified facts and keep other fields unchanged.",
+              "Check delivery to the live result; measure relevant visibility and downstream value only for the wording test.",
+            ]),
+            check:
+              "A correction is truthful everywhere. A wording test either earns a keep/expand decision or is undone without restoring a known error.",
+          }),
+          4: Object.freeze({
+            label: "Fix the mismatch",
+            owner: "Ecommerce manager for product and variant data",
+            steps: Object.freeze([
+              "Choose the exact intended colour, size, and market item.",
+              "Compare its Shopify truth, Merchant item, Google display, and one sibling variant to find where the difference begins.",
+              "Correct only a source or Merchant value that is actually wrong.",
+              "If Shopify and Merchant are truthful but Google differs, request a refresh or handoff, or watch; do not falsify the source to force the display.",
+              "Check the intended item and the sibling again after the update.",
+            ]),
+            check:
+              "The intended item keeps truthful variant facts, the sibling stays unchanged, and any Google-controlled difference is recorded honestly.",
+          }),
+          5: Object.freeze({
+            label: "Test positioning or do nothing",
+            owner: "Ecommerce manager; Product or Buying decides whether the product should serve this need",
+            steps: Object.freeze([
+              "Name the customer need and the sister products Google shows instead.",
+              "Write one truthful role for each overlapping product; do not invent a difference the products do not have.",
+              "Test one product-type or use-case distinction while keeping the offer and other fields unchanged.",
+              "If this product should not serve the need, record that decision and make no visibility change.",
+            ]),
+            check:
+              "The intended product gains relevant visibility and value without stealing the wrong demand from its sister products.",
+          }),
+        }),
+        ctr: Object.freeze({
+          0: Object.freeze({
+            label: "Do nothing",
+            owner: "Ecommerce manager",
+            steps: Object.freeze([
+              "Separate organic Search, free listings, and paid Shopping.",
+              "Compare the same searches, products, market, device, and similar position.",
+              "Show established demand and new broader exposure separately.",
+              "If the established shoppers still click normally, keep the reach and make no listing change.",
+            ]),
+            check:
+              "The original valuable searches remain healthy; only the mix changed.",
+          }),
+          1: Object.freeze({
+            label: "Move or watch",
+            owner: "Ecommerce manager; move product-specific visibility loss to Discovery",
+            steps: Object.freeze([
+              "Compare the same search and product at a similar position.",
+              "Look at repeated live results to see whether Google added or removed competing features.",
+              "If the good click opportunities disappeared, move the case to Discovery or watch the layout change.",
+              "Only reopen CTR when comparable opportunities still exist and shoppers choose another result.",
+            ]),
+            check:
+              "The case sits at the journey step that actually weakened; no copy change was made to solve lost position.",
+          }),
+          2: Object.freeze({
+            label: "Fix the result or move downstream",
+            owner: "Ecommerce manager for visible product data; downstream owner for a post-click-only mismatch",
+            steps: Object.freeze([
+              "Open the exact result and record the product name, model, variant label, and image visible before the click.",
+              "Compare that visible identity with Shopify and the Merchant item to find where the difference begins.",
+              "Correct the source only when it is wrong; if Google alone differs, refresh, watch, test one truthful input, or hand off.",
+              "If the result is accurate and the mismatch appears only after clicking, close the CTR cause and move the case downstream.",
+            ]),
+            check:
+              "The source remains truthful, the result represents the intended item where controllable, and post-click behaviour is judged in its own journey step.",
+          }),
+          3: Object.freeze({
+            label: "Fix the wrong fact",
+            owner: "Ecommerce manager",
+            steps: Object.freeze([
+              "Put Shopify, Merchant, the live page, and the actual result side by side.",
+              "After confirming the item identity is right, find the first stale price, stock, promotion, or delivery value.",
+              "Correct the source only when it is wrong; if the source and Merchant item are current but Google is stale, refresh, watch, or hand off.",
+              "Wait for the listing to refresh, then check the same item and market again.",
+            ]),
+            check:
+              "The corrected offer fact agrees with the item a shopper can actually buy, and every unrelated field stayed unchanged.",
+          }),
+          4: Object.freeze({
+            label: "Test one presentation change",
+            owner: "Ecommerce manager",
+            steps: Object.freeze([
+              "Name the one distinction the shopper needs but cannot understand at a glance.",
+              "Choose one exact surface and field—such as a Merchant variant title, an organic page title, or one existing approved image.",
+              "Draft one truthful treatment for that field; never put variant-only values into a shared page title.",
+              "Assign the products before the test and leave the offer and other presentation unchanged.",
+              "Compare qualified clicks and downstream value, not CTR alone.",
+            ]),
+            check:
+              "The treatment reached every assigned item and improved valuable behaviour without attracting worse traffic.",
+          }),
+          5: Object.freeze({
+            label: "Ask owner to test the offer",
+            owner: "Commercial or Logistics owns a real visible-offer decision",
+            steps: Object.freeze([
+              "Compare only the price, stock, delivery, reviews, and promotion visible before the click.",
+              "Check whether the disadvantage appears in the same searches, positions, markets, and periods that lose clicks.",
+              "Describe one bounded offer change, its cost, margin, stock, capacity, and stop rule.",
+              "Ask the owner to approve, reject, or revise it; move checkout-only promise faults downstream.",
+            ]),
+            check:
+              "The approved visible-offer pilot improves customer value within cost, margin, stock, and service limits.",
+          }),
+        }),
+        atc: Object.freeze({
+          0: Object.freeze({
+            label: "Close or continue",
+            owner: "Ecommerce manager",
+            steps: Object.freeze([
+              "Use Shopify’s successful product adds, checkout, and purchase data for the same products and shoppers.",
+              "Open the live product, choose the intended variant, add it once, and confirm the cart changed.",
+              "Recalculate the loss after removing misleading clicks, incomplete dates, or changed traffic mix.",
+              "Close the case without a page change if the product-level loss is not real.",
+            ]),
+            check:
+              "The apparent loss either disappears and the case closes, or a real loss remains and the next question begins.",
+          }),
+          1: Object.freeze({
+            label: "Fix the source promise",
+            owner: "The owner of the search result, campaign, email, or other traffic source",
+            steps: Object.freeze([
+              "Open the exact message or result that sent the affected shoppers.",
+              "Compare its product, image, price, fit, use case, and variant promise with the landed page.",
+              "Change that exact wording, image, audience, or destination so the promise and product agree.",
+              "Compare ATC for that source while protecting other valuable traffic.",
+            ]),
+            check:
+              "The same source now sends shoppers who expected this product, and their downstream value improves.",
+          }),
+          2: Object.freeze({
+            label: "Test one answer",
+            owner: "Ecommerce manager; Creative or Product supplies missing proof or assets",
+            steps: Object.freeze([
+              "Collect repeated customer questions from reviews, returns, support, search, and observed sessions.",
+              "Choose one unanswered question for which a verified answer already exists.",
+              "Change only that answer or its placement; leave other content and the offer unchanged.",
+              "Assign the products before launch and compare adds, purchases, and returns for the affected shoppers.",
+            ]),
+            check:
+              "The focused test improves adds or purchase value without worse returns; otherwise undo the test, not the underlying truth.",
+          }),
+          3: Object.freeze({
+            label: "Fix truth or ask owner",
+            owner: "Ecommerce manager corrects false display; Inventory, Commercial, or Logistics owns the real offer",
+            steps: Object.freeze([
+              "Check wanted variants, total price, promotion, delivery date and cost, returns, and the approved commercial promise in the affected market.",
+              "When page and checkout disagree, confirm which side violates the approved promise; correct that side.",
+              "If the disadvantage is real, quantify the affected demand and offer one concrete replenishment, price, promotion, or delivery option.",
+              "Ask the owner to decide; recommend an available substitute while the constraint remains.",
+            ]),
+            check:
+              "The page is truthful, and any owner-approved action improves fulfilled value rather than only the add rate.",
+          }),
+          4: Object.freeze({
+            label: "Ask Engineering",
+            owner: "Engineering or the storefront owner",
+            steps: Object.freeze([
+              "Reproduce the failure on the exact product, variant, device, and market; record the step where it first breaks.",
+              "Repeat the same action on one working product to show the expected behaviour.",
+              "Hand over a short case: what the shopper does, what happens, what should happen, and the affected scope.",
+              "After release, repeat both journeys and confirm the correct item reaches the cart once.",
+            ]),
+            check:
+              "The affected journey works, the correct variant reaches the cart, and the working comparison still works.",
+          }),
+          5: Object.freeze({
+            label: "Ask Product or do nothing",
+            owner: "Product, Buying, or the ecommerce trading owner",
+            steps: Object.freeze([
+              "Confirm traffic, page function, decision information, imagery, variants, and offer are all acceptable.",
+              "Name the products shoppers choose instead and the repeated reason they give or reveal.",
+              "Show the commercial consequence: demand, margin, returns, stock exposure, and likely customer fit.",
+              "Ask the owner to reposition, recommend a substitute, redesign, change the range, retire, or deliberately watch.",
+            ]),
+            check:
+              "The owner makes a product decision; the team stops cycling through page edits that do not address the rejection.",
+          }),
+        }),
+      });
+
+      const HUMAN_CHECK_PLAYBOOK = Object.freeze({
+        discovery: Object.freeze({
+          0: Object.freeze({
+            open: Object.freeze([
+              "Shopify Admin → Products → the exact product and variants → Status, Publishing, Markets, and Inventory.",
+              "Merchant Center → Products → the exact item → visibility, status, and the stated issue.",
+              "Only when the Merchant issue points to the page: Search Console → URL inspection for that exact page.",
+            ]),
+            compare: Object.freeze([
+              "What should be live in this market versus what is actually live.",
+              "The affected product versus one similar product that appears normally.",
+              "The exact stated reason versus the owner who can change it.",
+            ]),
+            reject:
+              "Do not call it a platform block because impressions are low. Require a named, repeatable publication, market, page, or Merchant issue.",
+            next:
+              "If no named block exists, return to demand and product-data checks; do not create a platform handoff.",
+          }),
+          1: Object.freeze({
+            open: Object.freeze([
+              "Search Console → Performance → Search results → Queries and Pages for the product and important shopper needs.",
+              "Google Trends for the same topic and market.",
+              "Shopify Analytics for the category, similar products, and onsite-search terms.",
+              "The season, promotion, stock, launch, and lifecycle calendar.",
+            ]),
+            compare: Object.freeze([
+              "The same seasonal weeks, not simply the previous few days.",
+              "This product versus fair category peers with similar stock and promotion.",
+              "Total demand versus this product’s share of that demand.",
+              "The words shoppers now use versus needs the product can truthfully serve.",
+            ]),
+            reject:
+              "One quiet week, one Trends line, or peers that were out of stock is not enough. Category decline also fails to close the case when this product loses relative share.",
+            next:
+              "If demand does not explain the movement, inspect the product facts.",
+          }),
+          2: Object.freeze({
+            open: Object.freeze([
+              "Shopify Admin → Products → the exact product and every important variant.",
+              "Product metafields, the connected product-information system, or the approved specification sheet.",
+              "Merchant Center → Products → the exact item.",
+              "Search terms, support questions, and customer wording for this kind of product.",
+            ]),
+            compare: Object.freeze([
+              "Repeated shopper language versus verified product facts.",
+              "Facts that belong to the whole product versus facts that belong to one variant.",
+              "This product’s completed fields versus a strong, genuinely similar product.",
+            ]),
+            reject:
+              "A competitor mentioning a feature does not prove this product has it. Unknown facts must be requested, not invented.",
+            next:
+              "If the required facts already exist and are correctly scoped, inspect how the Google-facing fields use them.",
+          }),
+          3: Object.freeze({
+            open: Object.freeze([
+              "Shopify Admin → Products → Title, Description, Category, Product type, and Search engine listing.",
+              "Merchant Center → Products → the exact item’s title, description, and category.",
+              "The live Google result and the live product page.",
+              "One or two stronger sister products that serve a similar need.",
+            ]),
+            compare: Object.freeze([
+              "Verified product facts versus the title, category, and opening description shoppers and Google receive.",
+              "A factually wrong category versus wording that is merely unclear.",
+              "Relevant searches this product should serve versus the distinctions its fields actually express.",
+            ]),
+            reject:
+              "A wording preference, a keyword score, or one competitor title is not proof. Google may also rewrite organic titles.",
+            next:
+              "If the category and Google-facing wording are already accurate and clear, inspect whether the intended variant is represented correctly.",
+          }),
+          4: Object.freeze({
+            open: Object.freeze([
+              "Shopify Admin → the exact product and affected variant.",
+              "Merchant Center → the exact item and the image, colour, size, price, stock, and link it shows.",
+              "The live Google result for the same market.",
+            ]),
+            compare: Object.freeze([
+              "The intended variant’s image and attributes versus its Shopify truth.",
+              "The intended variant versus one sibling variant.",
+              "The affected market versus a market where the item is represented correctly.",
+            ]),
+            reject:
+              "Do not call a product-level result wrong merely because it does not show every variant. If Shopify and Merchant are truthful and Google alone differs, do not corrupt source data to force the display.",
+            next:
+              "If the intended variant is already represented truthfully, inspect whether this product has a clear role for the shopper need.",
+          }),
+          5: Object.freeze({
+            open: Object.freeze([
+              "Search Console queries and pages for the intended shopper need.",
+              "The live Google results and the sister products Google shows instead.",
+              "Shopify product facts, title, category, collections, and the role of nearby products.",
+              "Onsite-search wording and repeated customer questions.",
+            ]),
+            compare: Object.freeze([
+              "The customer need versus the truthful role of each overlapping product.",
+              "This product’s distinguishing facts versus the sister product that currently owns the need.",
+              "One proposed positioning distinction while price, stock, image, and other fields stay unchanged.",
+            ]),
+            reject:
+              "A competitor ranking, a generic best practice, or a difference the product does not truly have is not a reason to reposition it.",
+            next:
+              "If the product role is already clear and no repeated visibility explanation remains, watch the case rather than inventing another change.",
+          }),
+        }),
+        ctr: Object.freeze({
+          0: Object.freeze({
+            open: Object.freeze([
+              "Search Console → Performance → the same Queries and Pages, with clicks, impressions, CTR, and position.",
+              "Merchant Center performance for the same products when the issue is in Shopping.",
+              "The actual Google result for the important searches.",
+            ]),
+            compare: Object.freeze([
+              "Organic Search, free listings, and paid Shopping separately.",
+              "The same search, product, market, device, and similar position.",
+              "Established valuable searches versus new broader exposure.",
+              "Both the rate and the number and value of clicks behind it.",
+            ]),
+            reject:
+              "A lower blended CTR is not a listing problem when established searches still perform normally.",
+            next:
+              "If the mix does not explain the loss, ask whether position or the results page changed.",
+          }),
+          1: Object.freeze({
+            open: Object.freeze([
+              "Search Console for the same searches, pages, market, device, impressions, clicks, and position.",
+              "Repeated live Google results for those searches.",
+              "The calendar for major season, promotion, or Google-layout changes.",
+            ]),
+            compare: Object.freeze([
+              "The same search at a similar position.",
+              "How many useful impressions existed before and after.",
+              "The surrounding ads, panels, maps, images, or other result features shoppers saw.",
+            ]),
+            reject:
+              "One personal Google search is not enough; results vary. Look for a repeated pattern and the matching performance change.",
+            next:
+              "If the click opportunity is still comparable, inspect whether the result visibly represents the right product and variant.",
+          }),
+          2: Object.freeze({
+            open: Object.freeze([
+              "The exact Google Search or Shopping result.",
+              "Merchant Center’s exact product item or preview.",
+              "The intended Shopify product and variant.",
+            ]),
+            compare: Object.freeze([
+              "The product name, model, variant label, and image visible before the click.",
+              "The item shoppers think they are choosing versus the item the result actually depicts.",
+              "The affected result versus a correct sibling result.",
+            ]),
+            reject:
+              "A mismatch that appears only after the click is downstream. If Shopify and Merchant are truthful and Google alone differs, do not rewrite correct source data as a factual fix.",
+            next:
+              "If the result shows the right product and variant, inspect whether one offer fact is stale or false.",
+          }),
+          3: Object.freeze({
+            open: Object.freeze([
+              "Shopify’s exact product and variant.",
+              "Merchant Center’s exact item.",
+              "The live product page and the actual Google result.",
+            ]),
+            compare: Object.freeze([
+              "The correct item’s visible price, stock, promotion, and delivery versus current reality.",
+              "The first place one offer value becomes wrong or stale.",
+              "The affected item versus one that is updating normally.",
+            ]),
+            reject:
+              "A stylistic preference is not a factual error. A truthful, current Shopify and Merchant value that Google has not yet adopted is not a source-data fault.",
+            next:
+              "If every visible offer fact is accurate, test whether the result is simply hard to understand.",
+          }),
+          4: Object.freeze({
+            open: Object.freeze([
+              "Repeated captures of the actual result for the important searches.",
+              "Customer wording from queries, onsite search, support, and reviews.",
+              "Current and approved alternative titles or images.",
+              "Nearby results that serve the same shopper need.",
+            ]),
+            compare: Object.freeze([
+              "Whether a shopper can identify the product type and useful difference at a glance.",
+              "One title or image treatment while the offer and other presentation stay fixed.",
+              "Qualified clicks, purchases, and value—not CTR alone.",
+            ]),
+            reject:
+              "“Competitors use lifestyle images” or “this title sounds better” only creates an idea; it does not prove the cause.",
+            next:
+              "If clarity is already strong or the hypothesis is unsupported, compare the visible offer.",
+          }),
+          5: Object.freeze({
+            open: Object.freeze([
+              "The live result for the affected searches.",
+              "Merchant Center → Analytics → Competitors, Pricing, and Popular products where available.",
+              "Fair competing results and their visible price, stock, delivery, reviews, and promotion.",
+              "The product’s margin, stock, and delivery constraints before proposing a pilot.",
+            ]),
+            compare: Object.freeze([
+              "Only facts visible before the click.",
+              "Like-for-like products in the same market and time.",
+              "Markets or periods with and without the disadvantage.",
+              "Customer value and economics, not clicks alone.",
+            ]),
+            reject:
+              "A problem revealed only on the product page or in checkout is downstream. A static competitor gap is only a clue until the timing, market, or a test supports it.",
+            next:
+              "If no visible offer disadvantage fits, watch the unresolved CTR case or move any post-click evidence downstream; do not propose an offer pilot.",
+          }),
+        }),
+        atc: Object.freeze({
+          0: Object.freeze({
+            open: Object.freeze([
+              "Shopify Analytics → product views, successful adds, checkout, purchases, and sales for the affected product.",
+              "The exact live product page on the affected device and market.",
+              "The Shopify product and affected variants.",
+            ]),
+            compare: Object.freeze([
+              "Successful adds, not button clicks that leave the cart unchanged.",
+              "The same product, shoppers, market, device, and complete period.",
+              "The affected product versus fair products that still behave normally.",
+            ]),
+            reject:
+              "A large percentage on a small sample or a button-click event alone is not a confirmed ATC loss.",
+            next:
+              "If a real loss remains, jump to the broken-add exception only when the live add fails; otherwise inspect who arrived.",
+          }),
+          1: Object.freeze({
+            open: Object.freeze([
+              "The exact search result, ad, email, collection card, or recommendation that sent the shoppers.",
+              "The exact landed product page and selected variant.",
+              "Shopify performance for that source, market, and device.",
+            ]),
+            compare: Object.freeze([
+              "The product, image, price, fit, use case, and variant promised before the click versus what landed.",
+              "The affected source versus other sources that send good shoppers.",
+              "ATC, purchase value, returns, and margin—not ATC alone.",
+            ]),
+            reject:
+              "Broad traffic with lower ATC may still create valuable new customers. Require a false promise or clear source-specific value problem.",
+            next:
+              "If shoppers arrive with the right expectation and value, inspect the decision questions on the page.",
+          }),
+          2: Object.freeze({
+            open: Object.freeze([
+              "The live product page, starting with the first screen and the variant decision.",
+              "Customer reviews, return reasons, support questions, and onsite-search wording.",
+              "Relevant session recordings or usability observations.",
+              "The best-matched internal and competitor product pages.",
+            ]),
+            compare: Object.freeze([
+              "One repeated unanswered question versus the answer currently available.",
+              "The affected product versus a fair product that answers the same question clearly.",
+              "One answer or placement change while other content and the offer stay fixed.",
+            ]),
+            reject:
+              "Repeated questions justify a hypothesis, not a causal claim. One complaint or a generic best practice is not enough.",
+            next:
+              "If shoppers can already answer the important questions, inspect availability and the total offer.",
+          }),
+          3: Object.freeze({
+            open: Object.freeze([
+              "The exact Shopify product and wanted variants.",
+              "The live product page and checkout for price, promotion, delivery, and returns.",
+              "The approved commercial promise or shipping policy for that market.",
+              "Stock history and fair internal or competitor alternatives.",
+            ]),
+            compare: Object.freeze([
+              "Wanted sizes or colours versus variants that are available.",
+              "The affected market or period versus one without the offer disadvantage.",
+              "The page and checkout against the approved promise; neither is assumed to be correct.",
+              "The full landed cost and delivery promise, not headline price alone.",
+              "Adds, fulfilled sales, margin, cancellations, and returns.",
+            ]),
+            reject:
+              "One competitor with a better offer is only a clue. Look for timing, market, variant, or pilot evidence that changes shopper behaviour.",
+            next:
+              "If the offer is truthful and acceptable, examine whether shoppers prefer another product.",
+          }),
+          4: Object.freeze({
+            open: Object.freeze([
+              "The exact live product page on the affected device and market.",
+              "The affected variant and one working product for comparison.",
+              "A short screen recording of the failed selection or add.",
+            ]),
+            compare: Object.freeze([
+              "What the shopper does, what happens, and what should happen.",
+              "The affected product or device versus the working comparison.",
+              "The selected item versus the item that reaches the cart.",
+            ]),
+            reject:
+              "One failed attempt, an unavailable variant, or user error is not a reproduced product-page fault.",
+            next:
+              "If selection and add work reliably, do not create an Engineering case; return to traffic, decision information, offer, or product preference.",
+          }),
+          5: Object.freeze({
+            open: Object.freeze([
+              "Products shoppers choose instead and the paths they take there.",
+              "Customer interviews, reviews, returns, support, and preference research.",
+              "The product’s sales, margin, returns, stock exposure, and lifecycle plan.",
+              "The completed evidence from every earlier ATC question.",
+            ]),
+            compare: Object.freeze([
+              "The same shopper need across genuinely substitutable products.",
+              "Repeated reasons for choosing the alternative.",
+              "The product’s value to the business versus the cost of more page work.",
+            ]),
+            reject:
+              "One comment, weak broad traffic, a broken page, missing information, or an uncompetitive offer does not prove product rejection.",
+            next:
+              "If product rejection is not supported, reopen the earliest unresolved question or watch; do not ask for a product or assortment change.",
+          }),
+        }),
+      });
+
       const HUMAN_WORKTREE_PATHS = Object.freeze({
         ...HUMAN_OPERATOR_PATHS,
         discovery: Object.freeze([
@@ -15426,17 +16200,18 @@
           ),
         ),
         atc: Object.freeze(
-          HUMAN_OPERATOR_PATHS.atc.map((path, index) =>
-            Object.freeze({
+          [0, 1, 4, 3, 5, 2].map((originalIndex) => {
+            const path = HUMAN_OPERATOR_PATHS.atc[originalIndex];
+            return Object.freeze({
               ...path,
               evidenceStatus: HUMAN_EVIDENCE_REQUIREMENTS.atc[path.causeIndex],
-              capability: HUMAN_BRANCH_CAPABILITIES.atc[index],
+              capability: HUMAN_BRANCH_CAPABILITIES.atc[originalIndex],
               fix: Object.freeze({
                 ...path.fix,
-                ...HUMAN_BRANCH_FIX_OVERRIDES.atc[index],
+                ...HUMAN_BRANCH_FIX_OVERRIDES.atc[originalIndex],
               }),
-            }),
-          ),
+            });
+          }),
         ),
       });
 
@@ -20298,15 +21073,67 @@
         `;
       }
 
+      function humanVisibleRow(branchId, path) {
+        return HUMAN_VISIBLE_ROWS[branchId]?.[path.causeIndex] || {};
+      }
+
+      function humanActionPlaybook(branchId, path) {
+        return HUMAN_ACTION_PLAYBOOK[branchId]?.[path.causeIndex] || {
+          label: humanVisibleActionLabel(path.modes),
+          owner: "Ecommerce manager",
+          steps: [
+            "Confirm the explanation fits the affected products and shoppers.",
+            "Make the smallest change that addresses that explanation.",
+            "Check the live customer journey and the original business result.",
+          ],
+          check: "Keep, adjust, undo, or investigate again based on what happened.",
+        };
+      }
+
+      function humanCheckPlaybook(branchId, path) {
+        return HUMAN_CHECK_PLAYBOOK[branchId]?.[path.causeIndex] || {
+          open: [humanVisibleRow(branchId, path).check],
+          compare: path.compare || [],
+          reject: path.notProof || "Reject the explanation when the fair comparison does not support it.",
+          next: path.ifNo || "Keep investigating the next plausible explanation.",
+        };
+      }
+
+      function humanVisibleActionLabel(modes) {
+        const set = new Set(modes || []);
+        if (set.has("correct") && (set.has("decide") || set.has("route"))) {
+          return "Fix or ask owner";
+        }
+        if (set.has("test") && (set.has("decide") || set.has("route"))) {
+          return "Test or ask owner";
+        }
+        if (set.has("correct")) return "Fix";
+        if (set.has("test")) return "Test";
+        if (set.has("decide") || set.has("route")) return "Ask owner";
+        return "Do nothing";
+      }
+
       function compactHumanText(value, maximum = 124) {
         const text = String(value || "").replace(/\s+/g, " ").trim();
         return text.length <= maximum ? text : `${text.slice(0, maximum - 1).trim()}…`;
       }
 
-      function renderHumanActionDiff(fix) {
+      function renderHumanActionDiff(fix, visible = null) {
         const example = fix.examples?.[0] || {};
-        const current = example.current || example.before || fix.before;
-        const proposed = example.proposed || example.after || fix.after;
+        const current = visible?.current || example.current || example.before || fix.before;
+        const proposed = visible?.proposed || example.proposed || example.after || fix.after;
+        if (visible) {
+          return `
+            <div class="human-action-diff">
+              <div><b>Before</b><span data-action-before>${escapeHtml(
+                compactHumanText(current),
+              )}</span></div>
+              <div><b>What changes</b><span data-action-after>${escapeHtml(
+                compactHumanText(proposed),
+              )}</span></div>
+            </div>
+          `;
+        }
         const target = example.target || fix.where;
         const untouched =
           example.unchangedScope ||
@@ -20392,21 +21219,21 @@
             style="--tree-width:${width}px;--tree-height:${height}px;--branch-color:${color}"
           >
             <header class="human-tree-intro">
-              <small>Trading system · every product stays understood</small>
-              <h1>Start with the trade. Freeze one product row. Find the first real break.</h1>
+              <small>How a great ecommerce manager investigates</small>
+              <h1>See what changed. Find where shoppers are being lost. Fix the first real problem.</h1>
               <p>
-                Priority changes human interruption, test traffic, spend, and rollout order—not whether
-                Carve investigates. Search Console, Merchant, paid, Shopify, and GA4 remain separate
-                evidence panels joined only through stable product identity.
+                Start with the business result, narrow it to the affected product and shoppers, then walk
+                their journey. Fix a proven fault; test an uncertain explanation. Every product gets
+                checked—priority only decides what needs a person, budget, or rollout first.
               </p>
             </header>
             <div class="human-tree-gesture-hint">
               Drag or scroll to move · pinch or Command/Control + scroll to zoom · double-click to zoom
             </div>
-            ${humanStageLabel(60, "01 · Read the trade")}
-            ${humanStageLabel(500, "02 · Freeze the case")}
-            ${humanStageLabel(1030, "03 · Reconcile coverage")}
-            ${humanStageLabel(1570, "04 · Open the first break")}
+            ${humanStageLabel(60, "01 · See what changed")}
+            ${humanStageLabel(500, "02 · Define the problem")}
+            ${humanStageLabel(1030, "03 · Walk the shopper journey")}
+            ${humanStageLabel(1570, "04 · Follow the first real break")}
             ${humanConnectorSvg(paths, color)}
             ${HUMAN_OVERVIEW.signals
               .map((signal, index) =>
@@ -20434,10 +21261,10 @@
               top: 525,
               width: 380,
               height: 210,
-              kicker: "One effective-dated trading row",
-              title: HUMAN_OVERVIEW.problem,
+              kicker: "Frame the case",
+              title: "What changed, for whom, when, and by how much?",
               detail: HUMAN_OVERVIEW.rule,
-              footer: "See exact fields and forbidden joins →",
+              footer: "Make sure this is the right problem →",
             })}
             ${humanNode({
               id: "overview-route",
@@ -20447,11 +21274,11 @@
               top: 525,
               width: 360,
               height: 210,
-              kicker: "Coverage ledger + customer journey",
-              title: "Where does the first supported set difference appear?",
+              kicker: "Follow the shopper",
+              title: "Where is the earliest step that stops working?",
               detail:
-                "Shared catalog → Organic Search → Merchant listings → onsite discovery; then impressions → qualified clicks / valid landings → eligible PDP views → successful adds → fulfilled value.",
-              footer: "Open every ledger stage and routing rule →",
+                "Google path: demand → visibility → click → product page. Store path: onsite search or browse → product page. Both continue through add, order, and customer value.",
+              footer: "Choose the first weak step →",
             })}
             ${HUMAN_OVERVIEW.routes
               .map((route, index) => {
@@ -20474,17 +21301,17 @@
               })
               .join("")}
             ${humanNode({
-              id: "overview-cadence",
+              id: "overview-response",
               branch: "all",
               kind: "cadence",
               left: 60,
               top: 1100,
               width: 1330,
               height: 132,
-              kicker: "Operating cadence",
-              title: "Continuous truth → daily exceptions → weekly decisions → monthly learning → quarterly contract audit",
-              detail: HUMAN_OVERVIEW.cadence,
-              footer: "Open cadence and decision-queue rules →",
+              kicker: "After investigating",
+              title: "Correct, test, ask an owner, or deliberately do nothing",
+              detail: HUMAN_OVERVIEW.response,
+              footer: "Choose only the response the evidence supports →",
             })}
             <div class="human-tree-rule" style="left:1425px;top:602px">first supported break →</div>
           </div>
@@ -20499,10 +21326,10 @@
         if (!branch || !operatorPaths) return renderHumanOverview();
         const branchSummary =
           branchId === "discovery"
-            ? "Start with real customer demand. Then inspect the product facts, how those facts are assembled for Google, and whether each listing still describes the right buyable variant. Technical faults are a short routed exception."
+            ? "Start with customer demand. Then check the product facts, how Google-facing fields explain them, whether the right item appears, and whether this product has a clear truthful role. Only open the platform-block exception when there is a stated issue."
             : branchId === "ctr"
-              ? "Keep organic Search, Merchant organic, and paid evidence separate. Hold opportunity comparable; inspect the actual result, product data, and offer. Open landing/routing only when wrong-item or clicks-to-valid-landing evidence points there."
-              : branch.summary;
+              ? "First make sure the click comparison is fair. Then look at the actual result: did the opportunity change, is the right item shown, is anything wrong, is it clear, and is the offer competitive?"
+              : "Start with Shopify and shop the exact product yourself. If it adds normally, inspect who arrived, the decision information, the available offer, and finally whether shoppers simply prefer another product.";
 
         const branchIndex = ["discovery", "ctr", "atc"].indexOf(branchId) + 1;
         const color = HUMAN_BRANCH_COLORS[branchId];
@@ -20518,6 +21345,8 @@
         const measureX = 2515;
         const measureTop = startY + ((operatorPaths.length - 1) * rowGap) / 2;
         const connectorPaths = [];
+        const hasTerminalException =
+          branchId === "discovery" || branchId === "atc";
 
         signalY.forEach((y) =>
           connectorPaths.push(humanCurve(360, y + 65, 440, problemTop + 108)),
@@ -20525,7 +21354,7 @@
         connectorPaths.push(
           humanCurve(790, problemTop + 108, checkX, startY + 112),
         );
-        if (branchId === "discovery") {
+        if (hasTerminalException) {
           const exceptionY = startY + (operatorPaths.length - 1) * rowGap;
           connectorPaths.push(
             `<path class="is-continuation" d="M 615 ${
@@ -20539,11 +21368,11 @@
         operatorPaths.forEach((path, index) => {
           const rowY = startY + index * rowGap;
           connectorPaths.push(humanCurve(checkX + 380, rowY + 112, causeX, rowY + 112));
-          connectorPaths.push(humanCurve(causeX + 370, rowY + 112, fixX, rowY + 165));
-          connectorPaths.push(humanCurve(fixX + 480, rowY + 165, measureX, measureTop + 118));
-          const separatesDiscoveryException =
-            branchId === "discovery" && index === operatorPaths.length - 2;
-          if (index < operatorPaths.length - 1 && !separatesDiscoveryException) {
+          connectorPaths.push(humanCurve(causeX + 370, rowY + 112, fixX, rowY + 150));
+          connectorPaths.push(humanCurve(fixX + 480, rowY + 150, measureX, measureTop + 118));
+          const separatesTerminalException =
+            hasTerminalException && index === operatorPaths.length - 2;
+          if (index < operatorPaths.length - 1 && !separatesTerminalException) {
             connectorPaths.push(
               humanVertical(checkX + 190, rowY + 226, checkX + 190, rowY + rowGap),
             );
@@ -20566,26 +21395,23 @@
             style="--tree-width:${width}px;--tree-height:${height}px;--branch-color:${color}"
           >
             <header class="human-tree-intro">
-              <small>0${branchIndex} · ${escapeHtml(branch.label)} · expert operator worktree</small>
+              <small>0${branchIndex} · ${escapeHtml(branch.label)} · how an ecommerce manager investigates</small>
               <h1>${escapeHtml(branch.problem)}</h1>
               <p>
-                The dashed spine is the default reading order, not a mandatory sequence: jump straight
-                to a deterministic fault when it is already reproduced. Otherwise continue only when
-                the current check does not explain the case.
-                A cause is identified by its rule—not by the metric pattern alone. Open any card for
-                exact tabs, fields, proof, before/after change, QA, measurement, and rollback.
-                Carve edits only approved connected product data; every other action is a named owner handoff.
+                Start at the top when the cause is unclear. If you have already found an obvious problem,
+                jump to that row. Each row asks one question. Only choose its possible cause when what
+                you find fits. Open a card for the screens, comparisons, next step, and ownership.
               </p>
             </header>
             <div class="human-tree-gesture-hint">
               Drag or scroll to move · pinch or Command/Control + scroll to zoom · double-click to zoom
             </div>
-            ${humanStageLabel(60, "01 · Signal")}
-            ${humanStageLabel(440, "02 · Problem")}
-            ${humanStageLabel(checkX, "03 · Open and compare")}
-            ${humanStageLabel(causeX, "04 · Identify cause")}
-            ${humanStageLabel(fixX, "05 · Change or hand off")}
-            ${humanStageLabel(measureX, "06 · Prove and learn")}
+            ${humanStageLabel(60, "01 · What looked wrong")}
+            ${humanStageLabel(440, "02 · The problem")}
+            ${humanStageLabel(checkX, "03 · What I check")}
+            ${humanStageLabel(causeX, "04 · What it may mean")}
+            ${humanStageLabel(fixX, "05 · What I do")}
+            ${humanStageLabel(measureX, "06 · Did it work?")}
             ${humanConnectorSvg(connectorPaths, color)}
             ${branch.signals
               .map((signal, index) =>
@@ -20621,7 +21447,8 @@
             ${operatorPaths
               .map((path, index) => {
                 const rowY = startY + index * rowGap;
-                const cause = path.cause || branch.causes[path.causeIndex];
+                const visible = humanVisibleRow(branchId, path);
+                const actionPlaybook = humanActionPlaybook(branchId, path);
                 const primaryMode = path.modes[0];
                 return `
                   ${humanNode({
@@ -20633,12 +21460,10 @@
                     top: rowY,
                     width: 380,
                     height: 226,
-                    kicker: `Check 0${index + 1} · open ${path.open.length} source${
-                      path.open.length === 1 ? "" : "s"
-                    }`,
-                    title: path.question,
-                    detail: `Open first: ${path.open[0]}`,
-                    footer: "Exact tabs, fields, and decision rule →",
+                    kicker: `Question 0${index + 1}`,
+                    title: visible.question,
+                    detail: `What I open: ${visible.check}`,
+                    footer: "See what I compare and why →",
                   })}
                   ${humanNode({
                     id: "cause",
@@ -20649,13 +21474,13 @@
                     top: rowY,
                     width: 370,
                     height: 226,
-                    kicker: `Cause 0${index + 1} · only if the rule passes`,
-                    title: cause.title,
-                    detail: `Identify when: ${path.identify}`,
-                    extra: `<div class="human-evidence-required"><b>Evidence required:</b> ${escapeHtml(
-                      path.evidenceStatus,
+                    kicker: `Possible cause 0${index + 1}`,
+                    title: visible.cause,
+                    detail: "",
+                    extra: `<div class="human-evidence-required"><b>What would convince me:</b> ${escapeHtml(
+                      visible.proof,
                     )}</div>`,
-                    footer: "Evidence for, against, and what is not proof →",
+                    footer: "See how to confirm or rule this out →",
                   })}
                   ${humanNode({
                     id: "fix",
@@ -20665,35 +21490,36 @@
                     left: fixX,
                     top: rowY,
                     width: 480,
-                    height: 330,
-                    kicker: `Action 0${index + 1} · reusable template, not approval`,
-                    title: path.fix.title,
-                    detail: `Owner / surface: ${path.fix.where}`,
-                    extra: `${renderHumanActionBadges(path.modes)}${renderHumanCapability(
-                      path,
-                      true,
-                    )}${renderHumanActionDiff(path.fix)}`,
-                    footer: "Permission · exact change · QA · measure · stop · safe fallback →",
+                    height: 300,
+                    kicker: `${actionPlaybook.label} · response 0${index + 1}`,
+                    title: visible.action,
+                    detail: "",
+                    extra: renderHumanActionDiff(path.fix, visible),
+                    footer: "See the steps, owner, result, and fallback →",
                     actionColor: HUMAN_ACTION_COLORS[primaryMode],
                   })}
                   ${
                     index < operatorPaths.length - 1 &&
-                    !(branchId === "discovery" && index === operatorPaths.length - 2)
+                    !(hasTerminalException && index === operatorPaths.length - 2)
                       ? `<div class="human-tree-rule" style="left:${
                           checkX + 212
-                        }px;top:${rowY + 288}px">not proven · continue ↓</div>`
+                        }px;top:${rowY + 288}px">If not, keep looking ↓</div>`
                       : ""
                   }
                   ${
-                    branchId === "discovery" && index === operatorPaths.length - 1
+                    hasTerminalException && index === operatorPaths.length - 1
                       ? `<div class="human-tree-rule" style="left:${
-                          checkX - 8
-                        }px;top:${rowY - 38}px">exception only · open when a named platform block exists</div>`
+                        checkX - 8
+                        }px;top:${rowY - 38}px">${
+                          branchId === "discovery"
+                            ? "Only use this row when a clear platform block appears"
+                            : "Only use this row when choosing or adding the item actually fails"
+                        }</div>`
                       : ""
                   }
                   <div class="human-tree-rule" style="left:${
                     causeX + 382
-                  }px;top:${rowY + 90}px">cause survives → exact action</div>
+                  }px;top:${rowY + 90}px">If this fits →</div>
                 `;
               })
               .join("")}
@@ -20705,17 +21531,18 @@
               top: measureTop,
               width: 350,
               height: 236,
-              kicker: "Measurement loop",
-              title: "Prove delivery first. Then prove value or harm.",
-              detail: branch.measure,
-              footer: "Every result can keep, expand, revise, reverse, or reopen the case →",
+              kicker: "Check the result",
+              title: "Did the original problem improve?",
+              detail:
+                "Corrections: verify truth. Tests: keep or undo by customer value. Owner decisions: review economics. No action: watch the reason to reopen.",
+              footer: "The ending depends on what kind of response it was →",
             })}
             <div class="human-tree-rule" style="left:${measureX - 36}px;top:${
               measureTop + 84
-            }px">all actions report here →</div>
+            }px">every response is checked →</div>
             <div class="human-tree-rule" style="left:1320px;top:${
               height - 76
-            }px">result reopens the original signal</div>
+            }px">what happened feeds the next investigation</div>
           </div>
         `;
         bindHumanTreeEvents();
@@ -20747,7 +21574,7 @@
         if (!screens?.length) return "";
         return `
           <section class="drawer-section">
-            <h3>Merchant market screens</h3>
+            <h3>Useful Merchant Center views</h3>
             <div class="human-detail-grid">
               ${screens
                 .map(
@@ -20755,9 +21582,9 @@
                     <div class="human-detail-cell">
                       <strong>${escapeHtml(screen.path)}</strong>
                       <span><b>Filter:</b> ${escapeHtml(screen.filters)}</span>
-                      <span><b>Read:</b> ${escapeHtml(screen.read)}</span>
-                      <span><b>Decision use:</b> ${escapeHtml(screen.decisionUse)}</span>
-                      <span><b>Caveat:</b> ${escapeHtml(screen.caveat)}</span>
+                      <span><b>Look for:</b> ${escapeHtml(screen.read)}</span>
+                      <span><b>Why it matters:</b> ${escapeHtml(screen.decisionUse)}</span>
+                      <span><b>Be careful:</b> ${escapeHtml(screen.caveat)}</span>
                     </div>
                   `,
                 )
@@ -20795,91 +21622,93 @@
         if (branchId === "all") {
           const signal = HUMAN_OVERVIEW.signals[index] || HUMAN_OVERVIEW.signals[0];
           const route = HUMAN_OVERVIEW.routes[index] || HUMAN_OVERVIEW.routes[0];
-          elements.detailKicker.textContent = "Start here · catalog trading system";
+          elements.detailKicker.textContent = "How an ecommerce manager investigates";
 
           if (kind === "signal") {
             elements.detailTitle.textContent = signal.title;
             elements.detailContent.innerHTML = `
               <p class="human-detail-lead">${escapeHtml(signal.detail)}</p>
               <section class="drawer-section">
-                <h3>Open these first</h3>
+                <h3>What I open first</h3>
                 ${humanDetailList([
-                  "Shopify Analytics → Reports: one saved product/variant trade view with net sales, units, discounts, returns, sessions, conversion, AOV, and contribution or margin where available.",
-                  "Shopify Products → exact product/variant → Insights or Analytics, Inventory, price/promotion, publishing, markets, incoming stock, sell-through, and lifecycle.",
-                  "The promotion, launch, season, merchandising, and release/change calendar for the same effective dates.",
-                  "Then open Search Console, Merchant, paid Shopping, onsite, or GA4 only in its own named evidence panel.",
+                  "Shopify’s product and sales reports for the affected product and important variants.",
+                  "The product itself: stock, price, promotion, returns, lifecycle, and market availability.",
+                  "The trading plan or forecast and the promotion, launch, season, and recent-change calendar.",
+                  "Only then, the channel or journey report that appears to be weak.",
                 ])}
               </section>
               <section class="drawer-section">
-                <h3>What decides whether this is a case</h3>
-                ${humanDetailList(CATALOG_OPERATING_MODEL.intakeGate)}
+                <h3>What I compare</h3>
+                ${humanDetailList([
+                  "Actual performance versus plan or forecast.",
+                  "The same product versus a genuinely comparable period.",
+                  "The product versus similar products with similar stock, price, lifecycle, and promotion.",
+                  "The affected market, device, source, and variant versus the parts that still work normally.",
+                ])}
               </section>
               <section class="drawer-section">
-                <h3>Priority does not delete work</h3>
+                <h3>When I keep investigating</h3>
+                ${humanDetailList([
+                  "The comparison is reliable enough to show a real change, even when the product is small.",
+                  "A stock, price, promotion, season, lifecycle, or reporting change does not already explain it.",
+                  "The comparison is fair and shows both the rate and the number of shoppers or orders behind it.",
+                ])}
+              </section>
+              <section class="drawer-section">
+                <h3>What priority changes</h3>
                 <p class="caveat">
-                  Carve reconciles and investigates every product. The queue controls human interruption,
-                  spend, scarce experiment traffic, owner time, and rollout order only.
+                  Every product is checked. Commercial value decides human interruption,
+                  test traffic, budget, and rollout order—not whether the product is understood.
                 </p>
               </section>
             `;
           } else if (kind === "problem") {
-            elements.detailTitle.textContent = "Freeze one effective-dated product trading row";
+            elements.detailTitle.textContent = "Define the problem before explaining it";
             elements.detailContent.innerHTML = `
               <p class="human-detail-lead">${escapeHtml(HUMAN_OVERVIEW.rule)}</p>
               <section class="drawer-section">
-                <h3>Identity and source state</h3>
+                <h3>Write down these answers</h3>
                 ${humanDetailList([
-                  ...CATALOG_OPERATING_MODEL.tradingRecord.identity,
-                  ...CATALOG_OPERATING_MODEL.tradingRecord.sourceState,
+                  "Which product or variants are affected?",
+                  "Which shoppers, market, device, or source are affected?",
+                  "When did it begin, and what is the fair comparison?",
+                  "How much sales, profit, or customer value is being lost?",
+                  "What changed immediately beforehand?",
+                  "What still works normally?",
                 ])}
               </section>
               <section class="drawer-section">
-                <h3>Commercial context</h3>
-                ${humanDetailList(CATALOG_OPERATING_MODEL.tradingRecord.commercialState)}
-              </section>
-              <section class="drawer-section">
-                <h3>Separate evidence panels</h3>
-                ${humanDetailList(
-                  Object.values(CATALOG_OPERATING_MODEL.tradingRecord.evidencePanels).map(
-                    (panel) =>
-                      `${panel.source}. Grain: ${panel.grain}. Read: ${panel.metrics.join(
-                        ", ",
-                      )}. Rule: ${panel.joinPolicy}`,
-                  ),
-                )}
-              </section>
-              <section class="drawer-section">
-                <h3>Never make these joins</h3>
-                ${humanDetailList(CATALOG_OPERATING_MODEL.tradingRecord.forbiddenJoins)}
+                <h3>The rule</h3>
+                <p class="caveat">
+                  A metric change is a clue, not a cause. Do not start with a title rewrite,
+                  page redesign, discount, or technical theory. First show exactly where the
+                  shopper journey changed.
+                </p>
               </section>
             `;
           } else if (kind === "check") {
-            const ledger = CATALOG_OPERATING_MODEL.coverageLedger;
-            elements.detailTitle.textContent = "Reconcile the catalog coverage ledger";
+            elements.detailTitle.textContent =
+              "Walk the shopper journey and stop at the first real break";
             elements.detailContent.innerHTML = `
               <p class="human-detail-lead">
-                For the same product, variant, market, surface, and time, find the first intended state
-                that is absent from the observed state. That set difference decides where the case starts.
+                Compare what should happen with what actually happens at each step. The first
+                step that clearly fails decides which worktree to use.
               </p>
               <section class="drawer-section">
-                <h3>Shared catalog state</h3>
-                ${humanDetailList(ledger.sharedStages)}
+                <h3>Ask in this order</h3>
+                ${humanDetailList([
+                  "Google path: Are people looking? Can they see the right product? Do they click? Does the product page earn an add?",
+                  "Store path: Can shoppers find the product through onsite search, collections, and recommendations? Does the product page earn an add?",
+                  "Shared path: Does the order complete and create customer and business value?",
+                  "Commercial path: If traffic and conversion are healthy, did discounting, cost, mix, fulfilment, returns, or cancellations reduce profit?",
+                ])}
               </section>
               <section class="drawer-section">
-                <h3>Organic Search</h3>
-                ${humanDetailList(ledger.organicStages)}
-              </section>
-              <section class="drawer-section">
-                <h3>Merchant listings</h3>
-                ${humanDetailList(ledger.merchantStages)}
-              </section>
-              <section class="drawer-section">
-                <h3>Onsite discovery</h3>
-                ${humanDetailList(ledger.onsiteStages)}
-              </section>
-              <section class="drawer-section">
-                <h3>Routing rule</h3>
-                <p class="caveat">${escapeHtml(ledger.rule)}</p>
+                <h3>How I choose</h3>
+                <p class="caveat">
+                  Use the earliest weak step that the evidence supports. If many products broke
+                  in the same way after the same change, treat them as one shared problem.
+                </p>
               </section>
             `;
           } else if (kind === "cause") {
@@ -20888,16 +21717,16 @@
             elements.detailContent.innerHTML = `
               <p class="human-detail-lead">${escapeHtml(route.when)}</p>
               <section class="drawer-section">
-                <h3>Why this route</h3>
+                <h3>Use this route when</h3>
                 ${humanDetailList([
-                  "Use the earliest supported break, not the most familiar team or tool.",
-                  "Transfer the frozen product row, exact cohort, source versions, first divergent ledger state, contrary evidence, and recent changes.",
-                  "Keep one root incident when the same account, feed, source rule, release, template, or market state affects many products.",
-                  "If the evidence remains ambiguous, keep the case open or Watch; do not force a branch or a catalog edit.",
+                  "The earlier journey steps still work normally.",
+                  "This is the first place the affected shoppers or products clearly behave differently.",
+                  "A stock, price, promotion, season, or measurement change does not explain the movement first.",
+                  "If the evidence is still unclear, keep investigating or watch it—do not force a fix.",
                 ])}
               </section>
               <section class="drawer-section">
-                <h3>All available routes</h3>
+                <h3>The full journey</h3>
                 ${humanDetailList(
                   HUMAN_OVERVIEW.routes.map(
                     (candidate) =>
@@ -20909,47 +21738,37 @@
               </section>
             `;
           } else {
-            elements.detailTitle.textContent = "Run the catalog as a cadence, not a pile of alerts";
+            elements.detailTitle.textContent =
+              "Correct, test, ask an owner, or deliberately do nothing";
             elements.detailContent.innerHTML = `
-              <p class="human-detail-lead">${escapeHtml(HUMAN_OVERVIEW.cadence)}</p>
-              ${CATALOG_OPERATING_MODEL.cadences
-                .map(
-                  (cadence) => `
-                    <section class="drawer-section">
-                      <h3>${escapeHtml(cadence.id)} · ${escapeHtml(cadence.trigger)}</h3>
-                      ${humanDetailList(cadence.checks)}
-                      <p class="caveat"><strong>Output:</strong> ${escapeHtml(
-                        cadence.output,
-                      )}<br><strong>Owner:</strong> ${escapeHtml(cadence.owner)}</p>
-                    </section>
-                  `,
-                )
-                .join("")}
+              <p class="human-detail-lead">${escapeHtml(HUMAN_OVERVIEW.response)}</p>
+              <div class="human-detail-grid">
+                <div class="human-detail-cell">
+                  <strong>Correct</strong>
+                  <span>A fact or customer-facing function is proven wrong. Repair that exact fault.</span>
+                </div>
+                <div class="human-detail-cell">
+                  <strong>Test</strong>
+                  <span>A truthful presentation idea is plausible but uncertain. Change one thing and compare it fairly.</span>
+                </div>
+                <div class="human-detail-cell">
+                  <strong>Ask an owner</strong>
+                  <span>The real issue is price, stock, delivery, creative, technical behaviour, assortment, or the product itself.</span>
+                </div>
+                <div class="human-detail-cell">
+                  <strong>Do nothing</strong>
+                  <span>The movement is normal, the evidence is weak, the exclusion is intentional, or the opportunity is unattractive.</span>
+                </div>
+              </div>
               <section class="drawer-section">
-                <h3>Decision-queue order</h3>
-                ${humanDetailList(CATALOG_OPERATING_MODEL.queue.priorityOrder)}
+                <h3>Every response is checked</h3>
                 <p class="caveat">
-                  Queue priority controls ${escapeHtml(
-                    CATALOG_OPERATING_MODEL.queue.queueDecisionScope.join(", "),
-                  )}. ${escapeHtml(CATALOG_OPERATING_MODEL.queue.excludedScope)}
+                  Confirm it happened, compare the same shoppers and products, then keep it,
+                  adjust it, undo it, or investigate again.
                 </p>
               </section>
             `;
           }
-          elements.detailContent.innerHTML += `
-            <section class="drawer-section">
-              <h3>Evidence basis</h3>
-              <div class="source-list">${humanSourceLinks([
-                "shopifyBehaviorReports",
-                "shopifyEcommerceReports",
-                "shopifyProductContent",
-                "asosTradingRole",
-                "frasersTradingRole",
-                "screwfixTradingRole",
-                "tradingCadence",
-              ])}</div>
-            </section>
-          `;
           openDrawer("detail", trigger);
           return;
         }
@@ -20959,31 +21778,73 @@
         if (!branch || !operatorPaths) return;
         const branchSummary =
           branchId === "discovery"
-            ? "Start with real customer demand. Then inspect the product facts, how those facts are assembled for Google, and whether each listing still describes the right buyable variant. Technical faults are a short routed exception."
+            ? "Start with customer demand. Then check the product facts, how Google-facing fields explain them, whether the right item appears, and whether this product has a clear truthful role. Only open the platform-block exception when there is a stated issue."
             : branchId === "ctr"
-              ? "Keep organic Search, Merchant organic, and paid evidence separate. Hold opportunity comparable; inspect the actual result, product data, and offer. Open landing/routing only when wrong-item or clicks-to-valid-landing evidence points there."
-              : branch.summary;
+              ? "First make sure the click comparison is fair. Then look at the actual result: did the opportunity change, is the right item shown, is anything wrong, is it clear, and is the offer competitive?"
+              : "Start with Shopify and shop the exact product yourself. If it adds normally, inspect who arrived, the decision information, the available offer, and finally whether shoppers simply prefer another product.";
         const path = operatorPaths[index] || operatorPaths[0];
         const cause = path.cause || branch.causes[path.causeIndex];
+        const visible = humanVisibleRow(branchId, path);
+        const actionPlaybook = humanActionPlaybook(branchId, path);
+        const checkPlaybook = humanCheckPlaybook(branchId, path);
+        const firstScreens = {
+          discovery: [
+            "Shopify product and variant details.",
+            "Search Console queries and pages for the product.",
+            "Merchant Center’s exact product item.",
+            "The live Google result and product page.",
+          ],
+          ctr: [
+            "Search Console or Merchant performance for the same product and shopper opportunity.",
+            "The actual Google Search or Shopping result.",
+            "The Shopify product and live product page.",
+            "The nearby competing results.",
+          ],
+          atc: [
+            "Shopify’s product views, adds, checkout, and purchases.",
+            "The exact live product page on the affected device.",
+            "The source that sent those shoppers.",
+            "The product and important variants in Shopify.",
+          ],
+        };
 
         if (kind === "signal") {
           const signal = branch.signals[index] || branch.signals[0];
-          elements.detailKicker.textContent = `${branch.label} · signal definition`;
+          const signalStartIndexes = {
+            discovery: [0, 1, 3, 5],
+            ctr: [0, 0, 0, 0],
+            atc: [0, 0, 0, 5],
+          };
+          const signalStartIndex = signalStartIndexes[branchId]?.[index] ?? 0;
+          elements.detailKicker.textContent = `${branch.label} · what looked wrong`;
           elements.detailTitle.textContent = signal.title;
           elements.detailContent.innerHTML = `
             <p class="human-detail-lead">${escapeHtml(signal.detail)}</p>
             <section class="drawer-section">
-              <h3>It becomes a case only when</h3>
+              <h3>What I open first</h3>
+              ${humanDetailList(firstScreens[branchId])}
+            </section>
+            <section class="drawer-section">
+              <h3>It becomes a real case when</h3>
               ${humanDetailList([
-                "The identity, market, surface, device/source where supported, stock state, lifecycle, and complete dates are explicit.",
-                "The movement is outside that product’s expected range, persists in a coherent slice, is reproducible as a state fault, or represents persistently absent relevant demand.",
-                "Raw counts and downstream value are shown beside the rate; small samples remain uncertain.",
-                "The first check starts with measurement and identity—not a favourite fix.",
+                "The affected product, shoppers, market, period, and comparison are clear.",
+                "The comparison is reliable enough to separate a real movement from incomplete data or ordinary noise.",
+                "The shopper counts and commercial value are shown beside the rate, including when they are small or uncertain.",
+                "Stock, price, promotion, season, lifecycle, and recent changes do not already explain it.",
               ])}
             </section>
             <section class="drawer-section">
-              <h3>Next</h3>
-              <p class="caveat">${escapeHtml(operatorPaths[0].question)}</p>
+              <h3>What priority changes</h3>
+              <p class="caveat">
+                Every product is checked. Value decides human attention, experiment traffic,
+                budget, and rollout order—not whether the product is investigated.
+              </p>
+            </section>
+            <section class="drawer-section">
+              <h3>First question</h3>
+              <p class="caveat">${escapeHtml(
+                humanVisibleRow(branchId, operatorPaths[signalStartIndex]).question,
+              )}</p>
             </section>
           `;
         } else if (kind === "problem") {
@@ -20992,164 +21853,143 @@
           elements.detailContent.innerHTML = `
             <p class="human-detail-lead">${escapeHtml(branchSummary)}</p>
             <section class="drawer-section">
-              <h3>How to use this branch</h3>
+              <h3>How I work through it</h3>
               ${humanDetailList([
-                "Run the checks in information order, but jump directly to a deterministic state fault when it is already reproduced.",
-                "A metric pattern creates hypotheses. The identification rule decides whether a cause survives.",
-                "If a check does not explain the case, preserve the evidence and continue down the dashed spine.",
-                "Repair proven faults, test truthful uncertainty, ask an owner for commercial/product choices, or Watch when no change is earned.",
+                "Start at the first question unless an obvious fault has already been reproduced.",
+                "At each row, open the normal screens and make the fair comparison shown.",
+                "Choose the possible cause only when the evidence in that row fits the affected shoppers.",
+                "If it does not fit, keep looking. Stop when one explanation accounts for the loss.",
+                "Correct a proven error; test an uncertain presentation idea; ask the right owner about reality you cannot change.",
               ])}
             </section>
           `;
         } else if (kind === "check") {
-          elements.detailKicker.textContent = `${branch.label} · check 0${index + 1}`;
-          elements.detailTitle.textContent = path.question;
+          elements.detailKicker.textContent = `${branch.label} · question 0${index + 1}`;
+          elements.detailTitle.textContent = visible.question;
           elements.detailContent.innerHTML = `
-            <p class="human-detail-lead">
-              This check is trying to distinguish <strong>${escapeHtml(
-                cause.title,
-              )}</strong> from the explanations that remain.
-            </p>
+            <p class="human-detail-lead">${escapeHtml(visible.check)}</p>
             <section class="drawer-section">
-              <h3>Evidence required before action</h3>
-              <p class="caveat">${escapeHtml(path.evidenceStatus)}</p>
+              <h3>What I open</h3>
+              ${humanDetailList(checkPlaybook.open)}
             </section>
             <section class="drawer-section">
-              <h3>Open these tabs and objects</h3>
-              ${humanDetailList(path.open)}
-            </section>
-            ${renderHumanMarketScreens(path.marketScreens)}
-            <section class="drawer-section">
-              <h3>Compare these exact things</h3>
-              ${humanDetailList(path.compare)}
+              <h3>What I compare</h3>
+              ${humanDetailList(checkPlaybook.compare)}
             </section>
             <section class="drawer-section">
-              <h3>The identification rule</h3>
-              <p class="caveat">${escapeHtml(path.identify)}</p>
+              <h3>When this explanation fits</h3>
+              <p class="caveat">${escapeHtml(visible.proof)}</p>
             </section>
             <section class="drawer-section">
-              <h3>What is not proof</h3>
-              <p class="caveat">${escapeHtml(path.notProof)}</p>
+              <h3>What would make me reject it</h3>
+              <p class="caveat">${escapeHtml(checkPlaybook.reject)}</p>
             </section>
             <section class="drawer-section">
-              <h3>If the rule does not pass</h3>
-              <p class="caveat">${escapeHtml(path.ifNo)}</p>
+              <h3>If it does not fit</h3>
+              <p class="caveat">${escapeHtml(checkPlaybook.next)}</p>
             </section>
-            <section class="drawer-section">
-              <h3>Evidence basis</h3>
+            <details class="human-deep-details">
+              <summary>Research sources</summary>
               <div class="source-list">${humanSourceLinks(path.sources)}</div>
-            </section>
+            </details>
           `;
         } else if (kind === "cause") {
-          elements.detailKicker.textContent = `${branch.label} · cause 0${index + 1}`;
-          elements.detailTitle.textContent = cause.title;
+          elements.detailKicker.textContent = `${branch.label} · possible cause 0${index + 1}`;
+          elements.detailTitle.textContent = visible.cause;
           elements.detailContent.innerHTML = `
-            <p class="human-detail-lead">${escapeHtml(cause.detail)}</p>
+            <p class="human-detail-lead"><strong>What would convince me:</strong> ${escapeHtml(
+              visible.proof,
+            )}</p>
             <div class="human-detail-grid">
               <div class="human-detail-cell">
-                <strong>Evidence that supports it</strong>
-                <span>${escapeHtml(cause.supports)}</span>
+                <strong>What fits</strong>
+                <span>${escapeHtml(visible.proof)}</span>
               </div>
               <div class="human-detail-cell">
-                <strong>Evidence that weakens it</strong>
-                <span>${escapeHtml(cause.weakens)}</span>
+                <strong>What rules it out</strong>
+                <span>${escapeHtml(checkPlaybook.reject)}</span>
               </div>
             </div>
             <section class="drawer-section">
-              <h3>Call this the cause only when</h3>
-              <p class="caveat">${escapeHtml(path.identify)}</p>
+              <h3>If it does not fit</h3>
+              <p class="caveat">${escapeHtml(checkPlaybook.next)}</p>
             </section>
             <section class="drawer-section">
-              <h3>Evidence required</h3>
-              <p class="caveat">${escapeHtml(path.evidenceStatus)}</p>
+              <h3>If it fits</h3>
+              <p class="caveat"><strong>${escapeHtml(visible.action)}</strong></p>
+              ${renderHumanActionDiff(path.fix, visible)}
             </section>
-            <section class="drawer-section">
-              <h3>Do not mistake this for proof</h3>
-              <p class="caveat">${escapeHtml(path.notProof)}</p>
-            </section>
-            <section class="drawer-section">
-              <h3>The action this evidence can earn</h3>
-              ${renderHumanActionBadges(path.modes)}
-              ${renderHumanCapability(path)}
-              <p class="caveat"><strong>${escapeHtml(path.fix.title)}</strong><br>${escapeHtml(
-                path.fix.where,
-              )}</p>
-            </section>
-            <section class="drawer-section">
-              <h3>Evidence basis</h3>
+            <details class="human-deep-details">
+              <summary>Research sources</summary>
               <div class="source-list">${humanSourceLinks(path.sources)}</div>
-            </section>
+            </details>
           `;
         } else if (kind === "fix") {
-          elements.detailKicker.textContent = `${branch.label} · exact action 0${index + 1}`;
-          elements.detailTitle.textContent = path.fix.title;
+          elements.detailKicker.textContent = `${branch.label} · ${actionPlaybook.label.toLowerCase()} 0${index + 1}`;
+          elements.detailTitle.textContent = visible.action;
           elements.detailContent.innerHTML = `
-            <p class="human-detail-lead"><strong>Owner / surface:</strong> ${escapeHtml(
-              path.fix.where,
-            )}</p>
-            ${renderHumanActionBadges(path.modes)}
-            ${renderHumanCapability(path)}
+            <p class="human-detail-lead">
+              <strong>Only do this when:</strong> ${escapeHtml(visible.proof)}
+            </p>
             <section class="drawer-section">
-              <h3>This template is not approval</h3>
-              <p class="caveat">
-                A live action must resolve the exact IDs, source object and field/component,
-                observed current → one proposed value, untouched scope, executor, permission or approval,
-                expected source version, dry-run diff, QA fixtures, outcome, stop rule, and safe fallback.
-                Any unresolved value or newer source version blocks the write.
-              </p>
-            </section>
-            <section class="drawer-section">
-              <h3>Worked current → proposed change</h3>
+              <h3>A real example</h3>
               <div class="human-before-after">
-                <div><strong>Current</strong>${escapeHtml(path.fix.before)}</div>
+                <div><strong>Before</strong>${escapeHtml(visible.current)}</div>
                 <b aria-hidden="true">→</b>
-                <div><strong>Proposed</strong>${escapeHtml(path.fix.after)}</div>
+                <div><strong>What changes</strong>${escapeHtml(visible.proposed)}</div>
               </div>
             </section>
-            ${renderHumanFixExamples(path.fix)}
             <section class="drawer-section">
-              <h3>Do it in this order</h3>
-              <ol>${path.fix.steps
+              <h3>Who owns it</h3>
+              <p class="caveat">${escapeHtml(actionPlaybook.owner)}</p>
+            </section>
+            <section class="drawer-section">
+              <h3>How to do it</h3>
+              <ol>${actionPlaybook.steps
                 .map((step) => `<li>${escapeHtml(step)}</li>`)
                 .join("")}</ol>
             </section>
+            <section class="drawer-section">
+              <h3>How I know the work is complete</h3>
+              <p class="caveat">${escapeHtml(actionPlaybook.check)}</p>
+            </section>
+            <details class="human-deep-details">
+              <summary>Research sources</summary>
+              <div class="source-list">${humanSourceLinks(path.sources)}</div>
+            </details>
+          `;
+        } else {
+          elements.detailKicker.textContent = `${branch.label} · did it work?`;
+          elements.detailTitle.textContent = "Did the original problem improve?";
+          elements.detailContent.innerHTML = `
+            <p class="human-detail-lead">
+              First check that the change actually happened. Then compare the same products
+              and shoppers using the original business result and the journey step you expected to move.
+            </p>
             <div class="human-detail-grid">
               <div class="human-detail-cell">
-                <strong>QA / proof of delivery</strong>
-                <span>${escapeHtml(path.fix.verify)}</span>
+                <strong>Factual correction</strong>
+                <span>Verify the correct truth reached every intended place. Never restore a known-wrong price, stock state, colour, category, or variant because performance moved.</span>
               </div>
               <div class="human-detail-cell">
-                <strong>How to know it worked</strong>
-                <span>${escapeHtml(path.fix.measure)}</span>
+                <strong>Presentation test</strong>
+                <span>Keep, expand, adjust, or undo it using the same shopper comparison and customer value guardrails.</span>
               </div>
               <div class="human-detail-cell">
-                <strong>Rollback / reopen</strong>
-                <span>${escapeHtml(path.fix.rollback)}</span>
+                <strong>Owner decision</strong>
+                <span>Review the approved price, stock, delivery, creative, or product action against its economics and customer outcome.</span>
               </div>
               <div class="human-detail-cell">
-                <strong>Why this action</strong>
-                <span>${escapeHtml(path.identify)}</span>
+                <strong>No action</strong>
+                <span>Keep the saved explanation and reopen when demand, relative performance, stock, product truth, or the chosen watch condition changes.</span>
               </div>
             </div>
             <section class="drawer-section">
-              <h3>Evidence basis</h3>
-              <div class="source-list">${humanSourceLinks(path.sources)}</div>
-            </section>
-          `;
-        } else {
-          elements.detailKicker.textContent = `${branch.label} · measurement loop`;
-          elements.detailTitle.textContent = "Prove delivery first. Then prove value or harm.";
-          elements.detailContent.innerHTML = `
-            <p class="human-detail-lead">${escapeHtml(branch.measure)}</p>
-            <section class="drawer-section">
-              <h3>Every case closes as one of these</h3>
-              ${humanDetailList([
-                "Keep: the exact correction is delivered, or the test improves the primary outcome without unacceptable harm.",
-                "Expand: the mechanism transfers only to products, markets, templates, intents, and states inside the tested boundary.",
-                "Revise: delivery failed or evidence points to a different mechanism.",
-                "Reverse: a reversible treatment crosses its predeclared harm/stop rule.",
-                "Reopen or Watch: evidence stays uncertain, the world changes, or the original signal returns.",
-              ])}
+              <h3>If the problem remains</h3>
+              <p class="caveat">
+                The explanation was incomplete, the response was not delivered, or another journey
+                step also weakened. Return to the first unresolved question; do not stack unrelated changes.
+              </p>
             </section>
           `;
         }
@@ -21303,10 +22143,12 @@
         elements.shell.classList.toggle("is-human", human);
         elements.shell.classList.toggle("is-system", !human);
         document.body.classList.toggle("human-mode", human);
-        elements.expandAll.textContent = human ? "System detail" : "Simple view";
+        elements.expandAll.textContent = human ? "Full evidence map" : "Human flow";
         elements.expandAll.setAttribute(
           "aria-label",
-          human ? "Open the complete system map" : "Return to the human investigation view",
+          human
+            ? "Open the complete evidence and implementation map"
+            : "Return to the human investigation flow",
         );
         if (human) {
           setHumanBranch(state.humanBranch);
@@ -23400,7 +24242,7 @@
           }
         });
         elements.expandAll.textContent =
-          state.viewMode === "human" ? "System detail" : "Simple view";
+          state.viewMode === "human" ? "Full evidence map" : "Human flow";
       }
 
       function toggleBranchCollapse(branchId) {
@@ -24559,6 +25401,9 @@
       window.CARVE_CATALOG_OPERATING_MODEL = CATALOG_OPERATING_MODEL;
       window.CARVE_HUMAN_WORKTREE_PATHS = HUMAN_WORKTREE_PATHS;
       window.CARVE_HUMAN_OVERVIEW = HUMAN_OVERVIEW;
+      window.CARVE_HUMAN_VISIBLE_ROWS = HUMAN_VISIBLE_ROWS;
+      window.CARVE_HUMAN_ACTION_PLAYBOOK = HUMAN_ACTION_PLAYBOOK;
+      window.CARVE_HUMAN_CHECK_PLAYBOOK = HUMAN_CHECK_PLAYBOOK;
 
       window.CARVE_MAP_DEBUG = Object.freeze({
         getState() {
