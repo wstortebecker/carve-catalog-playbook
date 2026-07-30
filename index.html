@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta
       name="description"
-      content="A research-backed map of the human flow an ecommerce manager follows—and Carve will replicate—to investigate product discovery, click-through, and add-to-cart problems."
+      content="A research-backed map of how Carve reasons like a world-class ecommerce manager across product discovery, click-through, and add-to-cart problems."
     />
-    <title>Carve — Catalog investigation flow map</title>
+    <title>Carve — Agentic catalog investigation map</title>
     <link
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%23191714' stroke-width='2'/%3E%3Cellipse cx='16' cy='16' rx='5' ry='14' fill='none' stroke='%238b4a2c' stroke-width='2' transform='rotate(-38 16 16)'/%3E%3C/svg%3E"
@@ -842,7 +842,7 @@
       .human-tree-gesture-hint {
         position: absolute;
         top: 56px;
-        left: 870px;
+        left: var(--gesture-left, 870px);
         z-index: 3;
         max-width: 420px;
         padding: 11px 14px;
@@ -1002,6 +1002,161 @@
         color: #141210;
       }
 
+      .human-tool-chips {
+        margin-top: 9px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        align-items: center;
+      }
+
+      .human-tool-chips > b {
+        margin-right: 2px;
+        color: #403a35;
+        font-size: 9px;
+        font-weight: 790;
+        letter-spacing: 0.065em;
+        text-transform: uppercase;
+      }
+
+      .human-tool-chips > span {
+        padding: 4px 7px;
+        border: 1px solid #cfc7bd;
+        border-radius: 999px;
+        background: #f6f1e9;
+        color: #27231f;
+        font-size: 9.5px;
+        font-weight: 680;
+        line-height: 1.2;
+      }
+
+      .human-agent-board {
+        position: absolute;
+        z-index: 3;
+        width: var(--agent-width, 720px);
+        min-height: var(--agent-height, 250px);
+        padding: 20px 22px;
+        border: 1px solid #1b1815;
+        border-top: 5px solid var(--branch-color, var(--accent));
+        border-radius: 14px;
+        background: #f4efe8;
+        color: #141210;
+        box-shadow: 0 18px 40px rgba(20, 18, 16, 0.1);
+      }
+
+      .human-agent-board > small {
+        color: var(--accent);
+        font-size: 9.8px;
+        font-weight: 780;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .human-agent-board h2 {
+        margin: 7px 0 0;
+        font-size: 23px;
+        font-weight: 670;
+        letter-spacing: -0.035em;
+        line-height: 1.13;
+      }
+
+      .human-agent-board > p {
+        margin: 9px 0 0;
+        color: #302b27;
+        font-size: 13px;
+        line-height: 1.48;
+      }
+
+      .human-agent-memory {
+        margin-top: 12px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 7px;
+      }
+
+      .human-agent-memory span {
+        padding: 8px 9px;
+        border: 1px solid #d2c9bf;
+        border-radius: 7px;
+        background: rgba(255, 254, 250, 0.78);
+        color: #292521;
+        font-size: 11.5px;
+        font-weight: 610;
+        line-height: 1.38;
+      }
+
+      .human-agent-memory b {
+        color: #141210;
+      }
+
+      .human-agent-rule {
+        margin-top: 9px;
+        padding: 8px 10px;
+        border-left: 3px solid var(--branch-color, var(--accent));
+        background: #fffefa;
+        color: #2d2925;
+        font-size: 11.5px;
+        font-weight: 650;
+        line-height: 1.42;
+      }
+
+      .human-fork-grid,
+      .human-response-grid {
+        margin-top: 10px;
+        display: grid;
+        gap: 7px;
+      }
+
+      .human-fork-outcome,
+      .human-response-outcome {
+        min-width: 0;
+        padding: 9px 10px;
+        border: 1px solid #d5cec5;
+        border-left: 4px solid #6a635d;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.74);
+        color: #292521;
+        font-size: 11.8px;
+        line-height: 1.4;
+      }
+
+      .human-fork-outcome b,
+      .human-response-outcome b {
+        display: block;
+        margin-bottom: 3px;
+        color: #141210;
+        font-size: 9.5px;
+        font-weight: 800;
+        letter-spacing: 0.072em;
+        text-transform: uppercase;
+      }
+
+      .human-fork-outcome[data-outcome="verified"],
+      .human-response-outcome[data-outcome="verified"] {
+        border-left-color: #2f6a52;
+        background: #f2f8f4;
+      }
+
+      .human-fork-outcome[data-outcome="supported"],
+      .human-response-outcome[data-outcome="supported"] {
+        border-left-color: #9a741f;
+        background: #fbf6e9;
+      }
+
+      .human-fork-outcome[data-outcome="cleared"],
+      .human-response-outcome[data-outcome="cleared"] {
+        border-left-color: #625c56;
+        background: #f5f1eb;
+      }
+
+      .human-response-principle {
+        margin-top: 8px;
+        color: #403a35;
+        font-size: 10.8px;
+        font-weight: 650;
+        line-height: 1.4;
+      }
+
       .human-action-diff {
         margin-top: 9px;
         display: grid;
@@ -1093,8 +1248,18 @@
         background: color-mix(in srgb, var(--branch-color) 7%, #fffefa);
       }
 
+      .human-tree-node[data-kind="decision"] {
+        border-color: color-mix(in srgb, var(--branch-color) 42%, #c8c0b6);
+        background: color-mix(in srgb, var(--branch-color) 6%, #fffefa);
+      }
+
       .human-tree-node[data-kind="fix"] {
         border-left: 5px solid var(--action-color, var(--apply));
+        background: #fffefa;
+      }
+
+      .human-tree-node[data-kind="response"] {
+        border-left: 5px solid var(--branch-color, var(--accent));
         background: #fffefa;
       }
 
@@ -1204,6 +1369,29 @@
         stroke: #2c2824;
         stroke-dasharray: 8 7;
         opacity: 0.62;
+      }
+
+      .human-tree-connectors path.is-outcome {
+        stroke-width: 2.25;
+        opacity: 0.9;
+      }
+
+      .human-tree-connectors path.is-outcome-verified {
+        stroke: #2f6a52;
+      }
+
+      .human-tree-connectors path.is-outcome-supported {
+        stroke: #9a741f;
+      }
+
+      .human-tree-connectors path.is-outcome-cleared {
+        stroke: #625c56;
+      }
+
+      .human-tree-connectors path.is-local-residual {
+        stroke: #625c56;
+        stroke-dasharray: 6 6;
+        opacity: 0.72;
       }
 
       .human-tree-connectors text {
@@ -13772,7 +13960,7 @@
       const HUMAN_OVERVIEW = Object.freeze({
         problem: "A product is creating less customer and business value than it reasonably should.",
         rule:
-          "Name the affected product or variant, shoppers, market, period, fair comparison, and commercial loss. Note stock, price, promotion, season, lifecycle, and recent changes before blaming marketing.",
+          "Carve holds the affected product or variant, shoppers, market, period, fair comparison, and value gap beside retailer truth: what the product is, who it serves, its variants, promise, price, stock, lifecycle, intentional exclusions, and recent changes. When an explanation fits only part of the scope, Carve splits that part and keeps the remainder open.",
         signals: Object.freeze([
           {
             title: "Sales, units or profit are below expectation",
@@ -13808,7 +13996,7 @@
           },
           {
             branch: "outside",
-            label: "Onsite discovery · sibling route",
+            label: "Onsite discovery · related investigation",
             title: "Shoppers cannot find or choose the product inside the store.",
             when:
               "If the journey begins inside the store, shoppers browse or search but the product is missing, buried, confusing, or leads to the wrong choice.",
@@ -13820,14 +14008,14 @@
           },
           {
             branch: "outside",
-            label: "Commercial economics or downstream",
+            label: "Profit or customer value · related investigation",
             title: "The marketing journey is healthy; value is lost elsewhere.",
             when:
               "Discovery, clicks, and adds remain healthy, but profit or customer value falls through discounts, cost, mix, cart, checkout, fulfilment, cancellations, or returns.",
           },
         ]),
         response:
-          "Correct facts or functions proven wrong. Test plausible but uncertain presentation changes. Bring price, stock, creative, technical, or product decisions to the right owner. Do nothing when the movement is normal or the evidence is weak.",
+          "Correct a proven fault. Test one truthful idea when the experience works but may perform better. Bring the accountable owner a prepared price, stock, creative, technical, assortment, or product decision. Deliberately make no change when the movement is explained or evidence is weak. Evidence chooses the response; permission chooses who acts.",
       });
 
       const HUMAN_OPERATOR_PATHS = Object.freeze({
@@ -15686,6 +15874,437 @@
             label: "Residual product decision",
             rule:
               "Only after earlier explanations are cleared, repeated substitute choice can earn a positioning, product, assortment, retirement, or no-action decision.",
+          }),
+        }),
+      });
+
+      const HUMAN_AGENT_MODEL = Object.freeze({
+        title: "Carve keeps a living investigation—not a checklist.",
+        description:
+          "It holds retailer truth, the exact affected scope, several competing explanations, the evidence for and against each one, permissions, and the value still unexplained. It can open several tools, follow the strongest lead, split the case, jump to another question, or reopen an earlier conclusion.",
+        memory: Object.freeze([
+          "<b>Known truth:</b> product, variants, promise, offer, lifecycle, intentional exclusions",
+          "<b>Case:</b> affected products, shoppers, market, period, comparison, value gap",
+          "<b>Beliefs:</b> live explanations, confidence, contradictions, and missing evidence",
+          "<b>Control:</b> permissions, owners, changes made, measured result, unresolved residual",
+        ]),
+        choice:
+          "The next move is the evidence that best separates the live explanations. Carve may run independent checks in parallel; dependencies, risk, and missing truth—not a fixed row order—control what happens next.",
+        principles: Object.freeze([
+          "Investigate every product. Value decides human attention, test budget, and rollout—not whether Carve investigates.",
+          "Retailer truth is the boundary. Unknown facts stay unknown.",
+          "A metric locates the problem; it does not identify the cause.",
+          "Keep competing explanations alive until evidence separates them.",
+          "Split a mixed case instead of forcing one story across unlike products or shoppers.",
+          "Evidence determines whether Carve corrects, tests, asks an owner, or makes no change. Permission determines who acts.",
+          "Judge downstream customer and business value, then carry every unexplained remainder forward.",
+        ]),
+      });
+
+      const HUMAN_AGENT_CASES = Object.freeze({
+        discovery: Object.freeze({
+          start:
+            "Illustrative case: a jacket family loses valuable Google exposure in Sweden while the main sizes remain buyable.",
+          moves: Object.freeze([
+            "Carve fixes the product, variant, URL, market, and date cohort, then opens Search Console, Merchant Center, Shopify product records, and the live result together.",
+            "Demand and fair category peers hold, so broad seasonality is weakened. Merchant names a Sweden-only limitation for nine offers; those are split into a scoped publication case.",
+            "Among the remaining offers, eighteen variants are missing an approved material value in Shopify. Carve corrects only those connected facts; unknown values go to Product.",
+            "Fourteen offers have no block, data fault, identity mismatch, or supported presentation mechanism. Carve makes no generic title edit and keeps that residual open.",
+          ]),
+          result:
+            "One alert becomes three truthful outcomes: a platform handoff, an approved product-data correction, and an unresolved cohort that Carve continues to investigate.",
+        }),
+        ctr: Object.freeze({
+          start:
+            "Illustrative case: blended CTR falls from 3.8% to 2.1% for a trail-shirt family.",
+          moves: Object.freeze([
+            "Carve freezes clicks, impressions, query, page, country, device, position, result appearance, and downstream value before opening the listing.",
+            "The old high-intent cohort still clicks at 3.8%; new broad impressions appeared at lower positions. Carve closes that explained slice with no title change.",
+            "A valuable Moss-variant cohort still loses clicks at comparable opportunity, so Carve keeps only that residual and replays result → landing → selected item.",
+            "The visible Moss item uses the Blue image in the connected Merchant input. Carve corrects that exact existing image mapping and leaves title, offer, IDs, and other variants unchanged.",
+          ]),
+          result:
+            "Carve does not force one CTR story: it records a harmless mix change for most traffic and one proven item-identity correction for the residual.",
+        }),
+        atc: Object.freeze({
+          start:
+            "Illustrative case: mobile add-to-cart falls for one pack family while desktop remains stable.",
+          moves: Object.freeze([
+            "Carve confirms the matched Shopify loss, then shops the affected product and a working comparison on the same mobile device.",
+            "Most variants add normally. Medium adds Small only on the affected template, so Carve splits that exact fixture and prepares Engineering a reproducible case and pass test.",
+            "The remaining loss is concentrated in an email campaign promising a waterproof hiking pack, while the approved product truth is a water-resistant daypack. Carve prepares the exact source promise and destination correction for the channel owner.",
+            "Traffic with a matching promise and working add still underperforms. Carve keeps it open and investigates offer, decision support, and product choice without waiting for the other owners.",
+          ]),
+          result:
+            "Carve pursues two proven faults and one unresolved shopper-choice case at the same time; each keeps its own scope, owner, evidence, and measurement.",
+        }),
+      });
+
+      const HUMAN_DECISION_FORKS = Object.freeze({
+        discovery: Object.freeze({
+          0: Object.freeze({
+            verified: Object.freeze({
+              evidence:
+                "The exact item, country, and named surface has a blocking state or intentional exclusion; include marketing method only for Merchant surfaces.",
+              action:
+                "Correct only an accidental connected state Carve may change. Otherwise route the item, error, scope, owner, and pass test. Preserve intentional exclusions.",
+            }),
+            supported: Object.freeze({
+              evidence:
+                "The status is unclear, still processing, or observed on a different surface or market.",
+              action:
+                "Recheck the exact surface: Merchant processed-item status for Merchant, or publication, live page, and Search Console state for organic Web. Make no content change while the scope is unproven.",
+            }),
+            cleared: Object.freeze({
+              evidence:
+                "No named block covers the loss, or it explains only some affected items.",
+              action:
+                "Close the cleared scope. Split blocked items from the remaining visibility gap and investigate demand, facts, identity, or presentation.",
+            }),
+          }),
+          1: Object.freeze({
+            verified: Object.freeze({
+              evidence:
+                "Relevant demand signals and fair peers move together while this product’s relative coverage and eligibility remain stable—or the product cannot truthfully serve the need.",
+              action:
+                "Make no catalog edit. Record the explanation and prepare the reforecast decision for Trading, or give Product/Buying the exact unmet-product need.",
+            }),
+            supported: Object.freeze({
+              evidence:
+                "Demand may have moved, but the pattern is incomplete or the product lost more share than its peers.",
+              action:
+                "Keep the product truthful. Split market movement from the product-specific residual and gather the missing demand comparison.",
+            }),
+            cleared: Object.freeze({
+              evidence:
+                "Demand holds and the product genuinely fits the shopper need.",
+              action:
+                "Keep demand as ruled out for this scope and open the product facts, composition, identity, or role that can explain the residual.",
+            }),
+          }),
+          2: Object.freeze({
+            verified: Object.freeze({
+              evidence:
+                "An approved decision fact or existing image is missing, false, assigned to the wrong level, or attached to the wrong variant.",
+              action:
+                "Correct the exact authoritative connected field within permission. Route unknown facts, new assets, and high-impact category decisions for approval.",
+            }),
+            supported: Object.freeze({
+              evidence:
+                "A useful fact appears absent, but no approved source confirms what the value should be.",
+              action:
+                "Ask Product for the fact and source. Do not infer a material, claim, identifier, compatibility, or certification.",
+            }),
+            cleared: Object.freeze({
+              evidence:
+                "The relevant product and variant facts are complete, approved, and carried correctly.",
+              action:
+                "Leave those facts alone. Split deficient items from clean ones and test another explanation for the remaining gap.",
+            }),
+          }),
+          3: Object.freeze({
+            verified: Object.freeze({
+              evidence:
+                "The exact Google-facing input is false, conflicts with approved truth, or breaks an approved naming rule.",
+              action:
+                "Correct that surface-specific field. Record every surface fed by it; route shared templates, feed rules, or code.",
+            }),
+            supported: Object.freeze({
+              evidence:
+                "The output is truthful, but repeated customer language suggests one important distinction is hidden.",
+              action:
+                "Run one bounded, surface-specific title or description test within permission. Hold IDs, offer, link, and other inputs fixed; send image hypotheses to the presentation row.",
+            }),
+            cleared: Object.freeze({
+              evidence:
+                "The delivered wording is truthful and clear, or a valid delivered test does not support the mechanism. A treatment that was not rendered is inconclusive, not cleared.",
+              action:
+                "If delivery failed, repair or close the invalid test before judging the idea. Otherwise split the affected surface and investigate identity, role, offer, or platform evidence.",
+            }),
+          }),
+          4: Object.freeze({
+            verified: Object.freeze({
+              evidence:
+                "The same offer changes identity between source, Merchant, result, landing, selected variant, or cart.",
+              action:
+                "Correct the first wrong controlled field. Route connector mapping, routing, preselection, or platform behaviour with the exact fixture.",
+            }),
+            supported: Object.freeze({
+              evidence:
+                "The item looks inconsistent, but the exact offer, market, landing, and selected variant have not been replayed.",
+              action:
+                "Reproduce the full item journey. If Merchant sources are truthful, request the normal connected resync or route connector/platform behaviour. If organic Search alone differs, inspect, watch, or route it—do not imply Carve can reprocess Google.",
+            }),
+            cleared: Object.freeze({
+              evidence:
+                "Product, variant, image, offer, landing, and cart identity agree—or only a subset fails.",
+              action:
+                "Keep aligned items unchanged. Split mismatched offers from the clean residual and investigate another explanation.",
+            }),
+          }),
+          5: Object.freeze({
+            verified: Object.freeze({
+              evidence:
+                "A valid assigned test supports one presentation mechanism, or repeated evidence proves one asset, offer, assortment, or product gap.",
+              action:
+                "Keep or expand only the tested field. Route a real image, price, stock, delivery, assortment, or product decision to its owner.",
+            }),
+            supported: Object.freeze({
+              evidence:
+                "Earlier explanations are cleared and one truthful presentation or positioning difference remains plausible.",
+              action:
+                "Test one approved wording or existing-image change, or prepare one bounded owner pilot with economics and stop rules.",
+            }),
+            cleared: Object.freeze({
+              evidence:
+                "No repeatable presentation or competitive mechanism survives, or it fits only part of the case.",
+              action:
+                "Make no generic edit. Watch the unresolved scope and split out only products with specific supporting evidence.",
+            }),
+          }),
+        }),
+        ctr: Object.freeze({
+          0: Object.freeze({
+            verified: Object.freeze({
+              evidence:
+                "Recomputed fixed cohorts show reporting, identity joins, or exposure mix explains the apparent CTR decline.",
+              action:
+                "Correct Carve’s calculation and close that scope. Route tag or analytics faults. Change no listing.",
+            }),
+            supported: Object.freeze({
+              evidence:
+                "A blended mix or reporting fault is plausible, but raw counts and fixed cohorts do not yet reconcile.",
+              action:
+                "For Search, freeze query, page, country, device, and search type. For Merchant organic, use product/item group, Store = Online store, Traffic = Organic, and country only when supported by an export or custom report. Do not invent query, device, or position data.",
+            }),
+            cleared: Object.freeze({
+              evidence:
+                "A commercially valuable fixed cohort still loses clicks after the comparison is corrected.",
+              action:
+                "Carry only that residual forward. Split mix-explained traffic from the real click-choice problem.",
+            }),
+          }),
+          1: Object.freeze({
+            verified: Object.freeze({
+              evidence:
+                "Fewer impressions explain fewer clicks, or lower position materially accounts for the loss within matched Search cells. A repeated layout change is platform context unless a valid comparison links it to the loss.",
+              action:
+                "Move fewer-impression or lower-position cases to Discovery. Watch a platform-layout change when no controllable fault exists. Make no CTR copy edit.",
+            }),
+            supported: Object.freeze({
+              evidence:
+                "One search or average position suggests opportunity changed, but the matched query/page/market/device pattern is not repeatable.",
+              action:
+                "For Search, repeat matched query, page, country, and device observations. For Merchant organic, use product/item-group data, supported market exports, and repeated live-result context; do not invent position, query, or device dimensions.",
+            }),
+            cleared: Object.freeze({
+              evidence:
+                "Comparable click opportunities remain and the valuable cohort still chooses the result less often.",
+              action:
+                "Investigate result identity, visible facts, clarity, and offer. Split any opportunity loss from the residual.",
+            }),
+          }),
+          2: Object.freeze({
+            verified: Object.freeze({
+              evidence:
+                "The result repeatedly shows or opens the wrong item, and the first divergence has been located.",
+              action:
+                "Correct only a permitted connected field proven wrong. If Merchant sources are truthful, request the normal connected resync or route platform behaviour. If organic Search alone differs, inspect or route it. Redirects, preselection, market routing, theme, and load faults remain with their owners.",
+            }),
+            supported: Object.freeze({
+              evidence:
+                "The result may land incorrectly, but redirects, selected variant, and cart identity have not all been replayed.",
+              action:
+                "Replay the exact result through landing, selection, and cart. Make no field or code change yet.",
+            }),
+            cleared: Object.freeze({
+              evidence:
+                "Result, landing, selected item, and cart align—or the failure starts only after the click.",
+              action:
+                "Route post-click faults to the downstream case. Keep the aligned result and investigate visible facts, clarity, or offer.",
+            }),
+          }),
+          3: Object.freeze({
+            verified: Object.freeze({
+              evidence:
+                "A connected title, image, price, stock, promotion, shipping, identifier, or link is false, stale, invalid, or wrong-item.",
+              action:
+                "Correct the exact source field or remove the stale override. Route code, policy, and real price, stock, or shipping changes.",
+            }),
+            supported: Object.freeze({
+              evidence:
+                "The rendered result differs, but source → submitted → processed → shown has not located where it first becomes wrong.",
+              action:
+                "Trace the value through every layer. Google rewrites and optional recommendations alone earn no source correction.",
+            }),
+            cleared: Object.freeze({
+              evidence:
+                "The submitted and processed inputs are truthful and valid, or only some items fail.",
+              action:
+                "Keep clean inputs unchanged. Split faulty items and investigate clarity or a real offer disadvantage for the residual.",
+            }),
+          }),
+          4: Object.freeze({
+            verified: Object.freeze({
+              evidence:
+                "A valid controlled, preassigned, and delivered test meets its predeclared rule for qualified clicks and downstream value without guardrail harm.",
+              action:
+                "Keep or expand exactly the tested title, description, or approved-image field. Preserve stable IDs and untouched inputs.",
+            }),
+            supported: Object.freeze({
+              evidence:
+                "Earlier explanations are cleared and repeated customer wording suggests one truthful distinction is hard to see.",
+              action:
+                "Run one single-field, preassigned test using approved truth. Hold offer, link, IDs, and other presentation fixed.",
+            }),
+            cleared: Object.freeze({
+              evidence:
+                "A valid delivered test fails its decision rule, or the idea lacks repeated evidence. An undelivered treatment is inconclusive, not cleared.",
+              action:
+                "Stop or reverse an unsupported treatment. If delivery failed, repair and rerun or close the test as invalid; do not roll out an unsupported segment pattern.",
+            }),
+          }),
+          5: Object.freeze({
+            verified: Object.freeze({
+              evidence:
+                "A visible promise is false, or a valid controlled owner pilot meets its predeclared rule for one price, delivery, stock, promotion, or intent mechanism.",
+              action:
+                "Correct the false promise. The accountable owner decides whether to keep, expand, or reverse the test-supported pilot; do not call an uncontrolled pilot proven.",
+            }),
+            supported: Object.freeze({
+              evidence:
+                "A repeated like-for-like visible disadvantage is plausible, but static competitor observation does not prove causality.",
+              action:
+                "Prepare one bounded owner pilot with economics, assigned products/market, guardrails, and stop rules. Do not disguise it with copy.",
+            }),
+            cleared: Object.freeze({
+              evidence:
+                "No pre-click offer mechanism survives, the issue begins after click, or only part of the cohort is affected.",
+              action:
+                "Make no CTR offer edit. Split false claims from truthful-offer cohorts and keep the unexplained scope open.",
+            }),
+          }),
+        }),
+        atc: Object.freeze({
+          0: Object.freeze({
+            verified: Object.freeze({
+              evidence:
+                "Corrected Shopify-based measurement makes the apparent product loss disappear.",
+              action:
+                "Recompute Carve’s case, route instrumentation faults, and close without a PDP change.",
+            }),
+            supported: Object.freeze({
+              evidence:
+                "A native session-based product loss remains, but the historical cohort is unresolved or the current live add journey has not been checked; these are separate questions.",
+              action:
+                "Validate the historical Shopify cohort and run the live same-item smoke test separately. Use GA4 only to diagnose instrumentation; one live journey cannot reconcile historical counts.",
+            }),
+            cleared: Object.freeze({
+              evidence:
+                "The matched loss is real. The report locates it, but does not explain why.",
+              action:
+                "Keep the real residual. If the live add fails, open the function inquiry; if it works, investigate source, offer, decision support, and product choice.",
+            }),
+          }),
+          1: Object.freeze({
+            verified: Object.freeze({
+              evidence:
+                "One named source repeatedly promises or lands on the wrong product, fit, use, price, image, or variant.",
+              action:
+                "Prepare the exact source wording, image, audience, or destination correction. The source owner applies it unless Carve is separately authorized.",
+            }),
+            supported: Object.freeze({
+              evidence:
+                "The source attracts lower-ATC traffic, but the promise is honest and its incremental customer/business value is unknown.",
+              action:
+                "Ask the source owner for a holdout or incrementality test before reducing honest traffic.",
+            }),
+            cleared: Object.freeze({
+              evidence:
+                "Promise, audience, product, selected state, and landing match—or only one source fails.",
+              action:
+                "Split faulty campaigns from clean traffic. Investigate function, complete offer, decision support, or product choice for the remainder.",
+            }),
+          }),
+          2: Object.freeze({
+            verified: Object.freeze({
+              evidence:
+                "An approved authoritative product fact is false or missing from its connected source field. If the fact is correct upstream but absent or misplaced at the decision point, that is a presentation hypothesis—not a verified data fault.",
+              action:
+                "Correct the permitted connected field. Route fact verification and storefront presentation work; do not duplicate correct truth to work around a template or placement problem.",
+            }),
+            supported: Object.freeze({
+              evidence:
+                "Repeated questions, hesitation, or a strong working comparison points to one presentation or decision-support gap.",
+              action:
+                "Carve may test one permitted connected content or existing-image field. Placement, image order, selector, size-guide UI, CTA feedback, and approved delivery/returns presentation go to the storefront/CRO owner; real offer terms go to the offer row.",
+            }),
+            cleared: Object.freeze({
+              evidence:
+                "Qualified shoppers can understand, trust, select, and evaluate the product—or only a subset struggles.",
+              action:
+                "Keep the clear experience. Split the specific friction cohort and investigate offer or product rejection for the residual.",
+            }),
+          }),
+          3: Object.freeze({
+            verified: Object.freeze({
+              evidence:
+                "The page and checkout contradict each other, or a displayed price, stock, delivery, promotion, or returns fact is false.",
+              action:
+                "Correct the false side to approved truth. Actual inventory, price, delivery, returns, checkout, or assortment changes stay with their owners.",
+            }),
+            supported: Object.freeze({
+              evidence:
+                "A real stock, price, delivery, returns, or wanted-variant disadvantage is repeated but not yet causal.",
+              action:
+                "Give the owner one bounded replenishment, preorder, substitution, price, or delivery pilot with economics and stop rules.",
+            }),
+            cleared: Object.freeze({
+              evidence:
+                "Wanted variants are available and the landed total offer is acceptable—or only some variants/markets are constrained.",
+              action:
+                "Split constrained variants or markets. Keep the clean offer and investigate decision support or product choice for the remainder.",
+            }),
+          }),
+          4: Object.freeze({
+            verified: Object.freeze({
+              evidence:
+                "One exact eligible journey repeatedly breaks at the same earliest selector, CTA, request, or cart step while a matched product works.",
+              action:
+                "Send Engineering the fixture, control, steps, observed result, expected cart line, scope, and pass test; retest the released fix.",
+            }),
+            supported: Object.freeze({
+              evidence:
+                "An add failed once or only under an unconfirmed state, device, variant, template, or app condition.",
+              action:
+                "Reproduce against a matched working product before routing. Make no theme, app, or cart-code change.",
+            }),
+            cleared: Object.freeze({
+              evidence:
+                "Selection and add work reliably, or only a bounded slice fails.",
+              action:
+                "Do not open a generic Engineering ticket. Split the failing fixture and return working traffic to source, offer, decision, or product evidence.",
+            }),
+          }),
+          5: Object.freeze({
+            verified: Object.freeze({
+              evidence:
+                "After earlier explanations are cleared, qualified shoppers repeatedly reject the same attribute for the same named alternative.",
+              action:
+                "Give Product/Buying the evidence, economics, and explicit reposition, substitute, redesign, range, retire, or no-action choices. Make no cosmetic edit.",
+            }),
+            supported: Object.freeze({
+              evidence:
+                "Product rejection is plausible, but interviews, reviews, substitutions, or controlled positioning evidence are incomplete.",
+              action:
+                "Keep it as a hypothesis and gather separating evidence or run one owner-approved positioning/recommendation pilot.",
+            }),
+            cleared: Object.freeze({
+              evidence:
+                "Rejection is not repeatable, earlier causes remain unresolved, or different shopper jobs choose different substitutes.",
+              action:
+                "Reopen the earliest unresolved explanation. Split genuinely different customer jobs; do not ask for an unsupported product or range change.",
+            }),
           }),
         }),
       });
@@ -21838,6 +22457,25 @@
         );
       }
 
+      function humanDecisionForkFor(branchId, path) {
+        return (
+          HUMAN_DECISION_FORKS[branchId]?.[path.causeIndex] || {
+            verified: {
+              evidence: "The explanation is reproduced and covers the named scope.",
+              action: "Correct the exact fault or record the verified explanation.",
+            },
+            supported: {
+              evidence: "The explanation is plausible, but separating evidence is still missing.",
+              action: "Gather the missing evidence or run one bounded truthful test.",
+            },
+            cleared: {
+              evidence: "The explanation is ruled out, mixed, or covers only part of the case.",
+              action: "Split the explained scope and choose the next inquiry for the residual.",
+            },
+          }
+        );
+      }
+
       function humanVisibleActionLabel(modes) {
         const set = new Set(modes || []);
         if (set.has("correct") && (set.has("decide") || set.has("route"))) {
@@ -21877,12 +22515,43 @@
         `;
       }
 
+      function humanToolLabels(checkPlaybook) {
+        const text = [
+          ...(checkPlaybook.open || []),
+          ...(checkPlaybook.lookAt || []),
+          ...(checkPlaybook.compare || []),
+        ].join(" ");
+        const candidates = [
+          [/Search Console/i, "Search Console"],
+          [/Merchant Center|Merchant item|Merchant organic/i, "Merchant Center"],
+          [/Shopify/i, "Shopify"],
+          [/Google Trends/i, "Google Trends"],
+          [/\bGA4\b|Google Analytics/i, "GA4"],
+          [/live Google|actual Google|Google result|search result/i, "Live Google"],
+          [/\bPDP\b|live product|live page|cart journey|storefront/i, "Live shop"],
+          [/customer|support|review|interview|survey|session recording/i, "Customer evidence"],
+          [/competitor|fair peer|category sales|market evidence/i, "Market / peers"],
+        ];
+        return candidates
+          .filter(([pattern]) => pattern.test(text))
+          .map(([, label]) => label)
+          .slice(0, 6);
+      }
+
       function renderHumanCheckSummary(checkPlaybook) {
         const open = checkPlaybook.open?.[0] || "";
         const lookAt = (checkPlaybook.lookAt || []).slice(0, 2).join(" ");
         const compare = (checkPlaybook.compare || []).slice(0, 2).join(" ");
         const consider = (checkPlaybook.consider || []).slice(0, 2).join(" ");
+        const tools = humanToolLabels(checkPlaybook);
         return `
+          ${
+            tools.length
+              ? `<div class="human-tool-chips"><b>May use together</b>${tools
+                  .map((tool) => `<span>${escapeHtml(tool)}</span>`)
+                  .join("")}</div>`
+              : ""
+          }
           <div class="human-card-stack">
             ${humanCardLine("Open", open, "", 205)}
             ${humanCardLine("Look at", lookAt, "", 225)}
@@ -21907,6 +22576,27 @@
         `;
       }
 
+      function renderHumanDecisionFork(branchId, path) {
+        const fork = humanDecisionForkFor(branchId, path);
+        return `
+          <div class="human-fork-grid">
+            <div class="human-fork-outcome" data-outcome="verified">
+              <b>Proven or explained</b>
+              ${escapeHtml(compactHumanText(fork.verified.evidence, 245))}
+            </div>
+            <div class="human-fork-outcome" data-outcome="supported">
+              <b>Plausible, not proven</b>
+              ${escapeHtml(compactHumanText(fork.supported.evidence, 245))}
+            </div>
+            <div class="human-fork-outcome" data-outcome="cleared">
+              <b>Cleared, partial, or mixed</b>
+              ${escapeHtml(compactHumanText(fork.cleared.evidence, 245))}
+            </div>
+          </div>
+          <div class="human-card-next"><b>Carve keeps all three possible until the evidence separates them.</b></div>
+        `;
+      }
+
       function renderHumanFixSummary(branchId, path, visible, actionPlaybook) {
         const firstSteps = actionPlaybook.steps.slice(0, 2).join(" ");
         return `
@@ -21922,6 +22612,34 @@
         `;
       }
 
+      function renderHumanResponseFork(branchId, path, visible, actionPlaybook) {
+        const fork = humanDecisionForkFor(branchId, path);
+        return `
+          <div class="human-response-grid">
+            <div class="human-response-outcome" data-outcome="verified">
+              <b>If proven / explained</b>
+              ${escapeHtml(compactHumanText(fork.verified.action, 260))}
+            </div>
+            <div class="human-response-outcome" data-outcome="supported">
+              <b>If plausible / incomplete</b>
+              ${escapeHtml(compactHumanText(fork.supported.action, 260))}
+            </div>
+            <div class="human-response-outcome" data-outcome="cleared">
+              <b>If cleared / mixed</b>
+              ${escapeHtml(compactHumanText(fork.cleared.action, 260))}
+            </div>
+          </div>
+          ${renderHumanActionDiff(path.fix, visible)}
+          <div class="human-card-two">
+            ${humanCardLine("Carve may", humanCarveLabel(path, branchId), "owner", 150)}
+            ${humanCardLine("Owner", actionPlaybook.owner, "owner", 150)}
+          </div>
+          <div class="human-response-principle">
+            Evidence chooses the move. Permission chooses who carries it out.
+          </div>
+        `;
+      }
+
       function renderHumanMeasureSummary(branchId) {
         const measure = HUMAN_MEASUREMENT_PLAYBOOK[branchId];
         return `
@@ -21930,6 +22648,12 @@
             ${humanCardLine("2 · Read", measure.outcome, "proof", 210)}
             ${humanCardLine("3 · Protect", measure.guardrails, "caution", 210)}
             ${humanCardLine("4 · Decide", measure.decide, "", 210)}
+            ${humanCardLine(
+              "5 · Carry forward",
+              "Close only the explained product, cohort, market, and value. Put every unresolved remainder back into the live case.",
+              "reject",
+              210,
+            )}
           </div>
         `;
       }
@@ -21979,9 +22703,106 @@
               <marker id="human-arrow-muted" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
                 <path d="M 0 0 L 10 5 L 0 10 z" fill="#8a8178"></path>
               </marker>
+              <marker id="human-arrow-verified" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#2f6a52"></path>
+              </marker>
+              <marker id="human-arrow-supported" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#9a741f"></path>
+              </marker>
+              <marker id="human-arrow-cleared" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#625c56"></path>
+              </marker>
             </defs>
             ${paths.join("")}
           </svg>
+        `;
+      }
+
+      function syncHumanOutcomeConnectors() {
+        const world = getHumanWorld();
+        if (!world || world.dataset.treeKind !== "branch") return;
+        const outcomes = ["verified", "supported", "cleared"];
+        outcomes.forEach((outcome) => {
+          world
+            .querySelectorAll(`[data-outcome-connector="${outcome}"]`)
+            .forEach((pathElement) => {
+              const index = Number(pathElement.dataset.rowIndex || 0);
+              const cause = world.querySelector(
+                `[data-human-kind="cause"][data-human-index="${index}"]`,
+              );
+              const response = world.querySelector(
+                `[data-human-kind="fix"][data-human-index="${index}"]`,
+              );
+              const from = cause?.querySelector(
+                `.human-fork-outcome[data-outcome="${outcome}"]`,
+              );
+              const to = response?.querySelector(
+                `.human-response-outcome[data-outcome="${outcome}"]`,
+              );
+              if (!cause || !response || !from || !to) return;
+              const fromX = cause.offsetLeft + cause.offsetWidth;
+              const fromY =
+                cause.offsetTop + from.offsetTop + from.offsetHeight / 2;
+              const toX = response.offsetLeft;
+              const toY =
+                response.offsetTop + to.offsetTop + to.offsetHeight / 2;
+              const bend = Math.max(34, (toX - fromX) * 0.48);
+              pathElement.setAttribute(
+                "d",
+                `M ${fromX} ${fromY} C ${fromX + bend} ${fromY}, ${
+                  toX - bend
+                } ${toY}, ${toX} ${toY}`,
+              );
+            });
+        });
+
+        world.querySelectorAll("[data-local-residual]").forEach((pathElement) => {
+          const index = Number(pathElement.dataset.rowIndex || 0);
+          const cause = world.querySelector(
+            `[data-human-kind="cause"][data-human-index="${index}"]`,
+          );
+          const mixed = cause?.querySelector(
+            '.human-fork-outcome[data-outcome="cleared"]',
+          );
+          if (!cause || !mixed) return;
+          const fromX = cause.offsetLeft + 18;
+          const fromY = cause.offsetTop + mixed.offsetTop + mixed.offsetHeight / 2;
+          const gapY = cause.offsetTop + 660;
+          const busX = 970;
+          pathElement.setAttribute(
+            "d",
+            `M ${fromX} ${fromY} C ${fromX - 46} ${fromY + 82}, ${
+              fromX - 68
+            } ${gapY}, ${cause.offsetLeft - 90} ${gapY} L ${busX} ${gapY}`,
+          );
+        });
+      }
+
+      function humanAgentBoard({
+        left,
+        top,
+        width = 760,
+        height = 290,
+        title = HUMAN_AGENT_MODEL.title,
+        description = HUMAN_AGENT_MODEL.description,
+        memory = HUMAN_AGENT_MODEL.memory,
+        choice = HUMAN_AGENT_MODEL.choice,
+        kicker = "Carve’s reasoning workspace",
+      }) {
+        return `
+          <section
+            class="human-agent-board"
+            style="left:${left}px;top:${top}px;--agent-width:${width}px;--agent-height:${height}px"
+            aria-label="${escapeHtml(kicker)}"
+          >
+            <small>${escapeHtml(kicker)}</small>
+            <h2>${escapeHtml(title)}</h2>
+            <p>${escapeHtml(description)}</p>
+            <div class="human-agent-memory">
+              ${memory.map((item) => `<span>${item}</span>`).join("")}
+            </div>
+            <div class="human-agent-rule">${escapeHtml(choice)}</div>
+          </section>
         `;
       }
 
@@ -22015,16 +22836,37 @@
       }
 
       function renderHumanOverview() {
-        const width = 2220;
-        const height = 1780;
+        const width = 2680;
+        const height = 2140;
         const color = "#8b4a2c";
         const paths = [];
-        const signalY = [460, 710, 960, 1210];
-        const routeY = [430, 660, 890, 1120, 1350];
+        const signalY = [560, 810, 1060, 1310];
+        const problemTop = 930;
+        const agentLeft = 1030;
+        const agentTop = 700;
+        const routeX = 1920;
+        const routeY = [470, 700, 930, 1160, 1390];
+        const learnTop = 1570;
 
-        signalY.forEach((y) => paths.push(humanCurve(390, y + 67, 500, 700)));
-        paths.push(humanCurve(880, 700, 1030, 700));
-        routeY.forEach((y) => paths.push(humanCurve(1390, 700, 1570, y + 73)));
+        signalY.forEach((y) =>
+          paths.push(humanCurve(410, y + 92, 500, problemTop + 150)),
+        );
+        paths.push(humanCurve(920, problemTop + 150, agentLeft, agentTop + 255));
+        routeY.forEach((y) =>
+          paths.push(humanCurve(agentLeft + 700, agentTop + 255, routeX, y + 88)),
+        );
+        paths.push(
+          `<path class="is-loop" d="M ${agentLeft + 350} ${agentTop + 510} C ${
+            agentLeft + 350
+          } ${learnTop - 70}, ${agentLeft + 350} ${learnTop - 70}, ${
+            agentLeft + 350
+          } ${learnTop}" marker-end="url(#human-arrow-muted)"></path>`,
+        );
+        paths.push(
+          `<path class="is-loop" d="M ${agentLeft} ${learnTop + 155} C 790 ${
+            learnTop + 155
+          }, 720 ${problemTop + 320}, 710 ${problemTop + 300}" marker-end="url(#human-arrow-muted)"></path>`,
+        );
 
         elements.humanView.innerHTML = `
           <div
@@ -22032,26 +22874,27 @@
             data-tree-kind="overview"
             data-tree-width="${width}"
             data-tree-height="${height}"
-            style="--tree-width:${width}px;--tree-height:${height}px;--branch-color:${color}"
+            style="--tree-width:${width}px;--tree-height:${height}px;--branch-color:${color};--gesture-left:880px"
           >
             <header class="human-tree-intro">
-              <small>The human investigation flow Carve will replicate</small>
-              <h1>See what changed. Find where shoppers are being lost. Fix each real problem.</h1>
+              <small>How Carve investigates every product</small>
+              <h1>One live case. Several possible explanations. Carve follows the evidence.</h1>
               <p>
-                Start with the business result, narrow it to the affected product and shoppers, then walk
-                their journey. Fix a proven fault; test an uncertain explanation. Keep investigating any
-                residual the explanation does not cover. Every product gets checked—priority only decides
-                what needs a person, budget, or rollout first.
+                Carve is an agent, not a fixed workflow. It can open several tools, pursue competing
+                explanations, split unlike products or shoppers, jump when evidence conflicts, and
+                revisit any conclusion. Every product is investigated; commercial value decides when
+                to involve people, spend budget, or seek approval.
               </p>
             </header>
             <div class="human-tree-gesture-hint">
               <span class="human-gesture-desktop">Drag or scroll to move · pinch or Command/Control + scroll to zoom · double-click to zoom</span>
               <span class="human-gesture-touch">Drag to move · pinch to zoom · tap a card to open it</span>
             </div>
-            ${humanStageLabel(60, "01 · See what changed")}
-            ${humanStageLabel(500, "02 · Define the problem")}
-            ${humanStageLabel(1030, "03 · Walk the shopper journey")}
-            ${humanStageLabel(1570, "04 · Follow each supported break")}
+            ${humanStageLabel(60, "Evidence that wakes the investigation", 500)}
+            ${humanStageLabel(500, "The live value gap", 500)}
+            ${humanStageLabel(agentLeft, "Carve’s reasoning workspace", 640)}
+            ${humanStageLabel(routeX, "Where the evidence may lead", 410)}
+            ${humanStageLabel(agentLeft, "Observed results update the case", 1510)}
             ${humanConnectorSvg(paths, color)}
             ${HUMAN_OVERVIEW.signals
               .map((signal, index) =>
@@ -22062,9 +22905,9 @@
                   index,
                   left: 60,
                   top: signalY[index],
-                  width: 330,
-                  height: 132,
-                  kicker: `Signal 0${index + 1}`,
+                  width: 350,
+                  height: 185,
+                  kicker: "Possible value signal",
                   title: signal.title,
                   detail: signal.detail,
                   footer: "Inspect the definition →",
@@ -22076,27 +22919,19 @@
               branch: "all",
               kind: "problem",
               left: 500,
-              top: 595,
-              width: 380,
-              height: 210,
-              kicker: "Frame the case",
-              title: "What changed, for whom, when, and by how much?",
+              top: problemTop,
+              width: 420,
+              height: 300,
+              kicker: "Live case",
+              title: HUMAN_OVERVIEW.problem,
               detail: HUMAN_OVERVIEW.rule,
-              footer: "Make sure this is the right problem →",
+              footer: "Open exact scope, truth, comparison, and value →",
             })}
-            ${humanNode({
-              id: "overview-route",
-              branch: "all",
-              kind: "check",
-              left: 1030,
-              top: 595,
-              width: 360,
-              height: 210,
-              kicker: "Follow the shopper",
-              title: "Where is the earliest step that stops working?",
-              detail:
-                "Google path: demand → visibility → click → product page. Store path: onsite search or browse → product page. Both continue through add, order, and customer value.",
-              footer: "Choose the first weak step →",
+            ${humanAgentBoard({
+              left: agentLeft,
+              top: agentTop,
+              width: 700,
+              height: 510,
             })}
             ${HUMAN_OVERVIEW.routes
               .map((route, index) => {
@@ -22106,14 +22941,16 @@
                   branch: "all",
                   kind: "cause",
                   index,
-                  left: 1570,
+                  left: routeX,
                   top: routeY[index],
                   width: 430,
-                  height: 145,
+                  height: 175,
                   kicker: branch ? branch.label : route.label,
                   title: branch ? branch.problem : route.title,
                   detail: route.when,
-                  footer: branch ? "Open this worktree →" : "Route a complete sibling-system case →",
+                  footer: branch
+                    ? "Open this worktree →"
+                    : "Open the relevant Carve investigation with the evidence intact →",
                   branchTarget: branch ? route.branch : "",
                 });
               })
@@ -22121,17 +22958,31 @@
             ${humanNode({
               id: "overview-response",
               branch: "all",
-              kind: "cadence",
-              left: 60,
-              top: 1490,
-              width: 1330,
-              height: 132,
-              kicker: "After investigating",
-              title: "Correct, test, ask an owner, or deliberately do nothing",
-              detail: HUMAN_OVERVIEW.response,
-              footer: "Choose only the response the evidence supports →",
+              kind: "measure",
+              left: agentLeft,
+              top: learnTop,
+              width: 700,
+              height: 310,
+              kicker: "Learn and reopen",
+              title: "What changed, what remains, and what should Carve believe now?",
+              detail:
+                "Confirm the response happened. Judge the same shoppers and products on downstream customer and business value. Keep truth corrections; keep or reverse tests by their rule; record owner decisions. Close only the explained slice and put every residual back into the live case.",
+              footer: "The result changes the next investigation →",
             })}
-            <div class="human-tree-rule" style="left:1425px;top:672px">first supported break →</div>
+            ${humanAgentBoard({
+              left: 60,
+              top: 1690,
+              width: 860,
+              height: 315,
+              kicker: "Rules Carve does not break",
+              title: "Intelligence is constrained by truth, evidence, and permission.",
+              description:
+                "Carve may move freely through the evidence, but it may not invent product truth, force one explanation onto a mixed case, or turn an owner decision into an unauthorized action.",
+              memory: HUMAN_AGENT_MODEL.principles.slice(0, 4),
+              choice: HUMAN_AGENT_MODEL.principles.slice(4).join(" "),
+            })}
+            <div class="human-tree-rule" style="left:945px;top:${problemTop + 114}px">several explanations stay live →</div>
+            <div class="human-tree-rule" style="left:${routeX - 115}px;top:${agentTop + 214}px">open one or several evidence areas →</div>
           </div>
         `;
         bindHumanTreeEvents();
@@ -22144,63 +22995,76 @@
         if (!branch || !operatorPaths) return renderHumanOverview();
         const branchSummary =
           branchId === "discovery"
-            ? "Start with customer demand. Then check the product facts, how Google-facing fields explain them, whether the right item appears, and whether this product has a clear truthful role. Only open the platform-block exception when there is a stated issue."
+            ? "Carve keeps customer demand, retailer-approved product facts, the words and images Google receives, the item or variant shown, the product’s intended selling role, and any named Google block as separate explanations. It can inspect them together, jump to a reproduced fault, and split products or markets when the evidence differs."
             : branchId === "ctr"
-              ? "First make sure the click comparison is fair. Then look at the actual result: did the opportunity change, is the right item shown, is anything wrong, is it clear, and is the offer competitive?"
-              : "Start with Shopify and shop the exact product yourself. If it adds normally, inspect who arrived, the decision information, the available offer, and finally whether shoppers simply prefer another product.";
+              ? "Carve makes the click comparison fair, then checks which searches changed, what shoppers actually saw, whether the right item and facts appeared, whether the result was easy to understand, and how the offer compared. These inquiries can run together; a CTR drop alone never earns a copy change."
+              : "Carve combines Shopify performance with shopping the exact product. It checks what brought the shopper, whether the intended product and variant were available, whether the page answered the buying questions, whether price, delivery, and returns were acceptable, and whether selecting or adding actually worked. These inquiries can run together.";
 
-        const branchIndex = ["discovery", "ctr", "atc"].indexOf(branchId) + 1;
         const color = HUMAN_BRANCH_COLORS[branchId];
-        const width = 3420;
-        const startY = 520;
-        const rowGap = 620;
-        const height = startY + operatorPaths.length * rowGap + 330;
-        const signalY = [520, 1020, 1520, 2020];
-        const problemTop = 1170;
-        const checkX = 960;
-        const causeX = 1535;
-        const fixX = 2075;
-        const measureX = 2910;
-        const measureTop = startY + ((operatorPaths.length - 1) * rowGap) / 2;
+        const width = 4070;
+        const startY = 580;
+        const rowGap = 720;
+        const height = startY + operatorPaths.length * rowGap + 360;
+        const signalY = [580, 1060, 1540, 2020];
+        const problemTop = 1380;
+        const checkX = 1050;
+        const causeX = 1640;
+        const fixX = 2350;
+        const responseBusX = 3245;
+        const measureX = 3390;
+        const measureTop = startY + ((operatorPaths.length - 1) * rowGap) / 2 - 10;
         const connectorPaths = [];
-        const hasTerminalException =
-          branchId === "discovery" || branchId === "atc";
 
         signalY.forEach((y) =>
           connectorPaths.push(humanCurve(420, y + 160, 500, problemTop + 125)),
         );
         connectorPaths.push(
-          humanCurve(880, problemTop + 125, checkX, startY + 215),
+          `<path d="M 880 ${problemTop + 125} C 930 ${problemTop + 125}, 970 ${
+            problemTop + 125
+          }, 970 ${problemTop + 125}" marker-end="url(#human-arrow)"></path>`,
         );
-        if (hasTerminalException) {
-          const exceptionY = startY + (operatorPaths.length - 1) * rowGap;
-          connectorPaths.push(
-            `<path class="is-continuation" d="M 615 ${
-              problemTop + 250
-            } C 615 ${exceptionY - 80}, 840 ${exceptionY + 215}, ${checkX} ${
-              exceptionY + 215
-            }" marker-end="url(#human-arrow-muted)"></path>`,
-          );
-        }
+        connectorPaths.push(
+          `<path class="is-continuation" d="M 970 ${startY + 270} L 970 ${
+            startY + (operatorPaths.length - 1) * rowGap + 660
+          }"></path>`,
+        );
+        connectorPaths.push(
+          `<path class="is-continuation" d="M ${responseBusX} ${startY + 310} L ${responseBusX} ${
+            startY + (operatorPaths.length - 1) * rowGap + 310
+          }"></path>`,
+        );
+        connectorPaths.push(
+          `<path class="is-loop" d="M 1415 392 C 1415 480, 970 470, 970 ${
+            startY + 270
+          }" marker-end="url(#human-arrow-muted)"></path>`,
+        );
 
         operatorPaths.forEach((path, index) => {
           const rowY = startY + index * rowGap;
-          connectorPaths.push(humanCurve(checkX + 470, rowY + 215, causeX, rowY + 215));
-          connectorPaths.push(humanCurve(causeX + 440, rowY + 215, fixX, rowY + 240));
-          connectorPaths.push(humanCurve(fixX + 560, rowY + 240, measureX, measureTop + 215));
-          const separatesTerminalException =
-            hasTerminalException && index === operatorPaths.length - 2;
-          if (index < operatorPaths.length - 1 && !separatesTerminalException) {
+          connectorPaths.push(humanCurve(970, rowY + 270, checkX, rowY + 270));
+          connectorPaths.push(humanCurve(checkX + 500, rowY + 270, causeX, rowY + 260));
+          ["verified", "supported", "cleared"].forEach((outcome) => {
             connectorPaths.push(
-              humanVertical(checkX + 235, rowY + 430, checkX + 235, rowY + rowGap),
+              `<path class="is-outcome is-outcome-${outcome}" data-outcome-connector="${outcome}" data-row-index="${index}" marker-end="url(#human-arrow-${outcome})"></path>`,
             );
-          }
+          });
+          connectorPaths.push(
+            `<path class="is-local-residual" data-local-residual data-row-index="${index}" marker-end="url(#human-arrow-muted)"></path>`,
+          );
+          connectorPaths.push(
+            `<path d="M ${fixX + 700} ${rowY + 310} L ${responseBusX} ${
+              rowY + 310
+            }"></path>`,
+          );
         });
         connectorPaths.push(
-          `<path class="is-loop" d="M ${measureX + 215} ${measureTop + 430} C ${
-            measureX + 190
-          } ${height - 45}, 560 ${height - 45}, 690 ${
-            problemTop + 260
+          humanCurve(responseBusX, measureTop + 280, measureX, measureTop + 280),
+        );
+        connectorPaths.push(
+          `<path class="is-loop" d="M ${measureX + 250} ${measureTop + 560} C ${
+            measureX + 250
+          } ${height - 65}, 970 ${height - 65}, 970 ${
+            startY + 270
           }" marker-end="url(#human-arrow-muted)"></path>`,
         );
 
@@ -22210,27 +23074,37 @@
             data-tree-kind="branch"
             data-tree-width="${width}"
             data-tree-height="${height}"
-            style="--tree-width:${width}px;--tree-height:${height}px;--branch-color:${color}"
+            style="--tree-width:${width}px;--tree-height:${height}px;--branch-color:${color};--gesture-left:1980px"
           >
             <header class="human-tree-intro">
-              <small>0${branchIndex} · ${escapeHtml(branch.label)} · the human flow Carve will replicate</small>
+              <small>${escapeHtml(branch.label)} · how Carve investigates</small>
               <h1>${escapeHtml(branch.problem)}</h1>
               <p>
-                This maps judgment, not a rigid checklist. Enter where reliable evidence stops; each row
-                shows what the manager opens, sees, concludes, and does. Corrections need proven faults,
-                tests need supported hypotheses, and any unexplained remainder keeps moving through the map.
+                This is a worktree, not a sequence. Each row is an independently open line of inquiry.
+                Carve can use several tools and pursue several explanations at once, then split, jump,
+                close, or reopen them as the evidence changes.
               </p>
             </header>
+            ${humanAgentBoard({
+              left: 890,
+              top: 52,
+              width: 1050,
+              height: 340,
+              title: "Carve carries one living case across every tool and hypothesis.",
+              description: branchSummary,
+              choice:
+                "It opens the check that best separates the explanations still alive. Independent checks can run together. A dependency, contradiction, missing fact, or risk can change the next move immediately.",
+            })}
             <div class="human-tree-gesture-hint">
               <span class="human-gesture-desktop">Drag or scroll to move · pinch or Command/Control + scroll to zoom · double-click to zoom</span>
               <span class="human-gesture-touch">Drag to move · pinch to zoom · tap a card to open it</span>
             </div>
-            ${humanStageLabel(60, "01 · What looked wrong", 450)}
-            ${humanStageLabel(500, "02 · The problem", 450)}
-            ${humanStageLabel(checkX, "03 · What I check", 450)}
-            ${humanStageLabel(causeX, "04 · What the evidence earns", 450)}
-            ${humanStageLabel(fixX, "05 · The exact response", 450)}
-            ${humanStageLabel(measureX, "06 · Did it work?", 450)}
+            ${humanStageLabel(60, "Signals that may open the case", 500)}
+            ${humanStageLabel(500, "The live case", 500)}
+            ${humanStageLabel(checkX, "What Carve may inspect", 500)}
+            ${humanStageLabel(causeX, "Competing evidence outcomes", 500)}
+            ${humanStageLabel(fixX, "Evidence-driven Carve responses", 500)}
+            ${humanStageLabel(measureX, "Learn, split, or reopen", 500)}
             ${humanConnectorSvg(connectorPaths, color)}
             ${branch.signals
               .map((signal, index) =>
@@ -22243,7 +23117,7 @@
                   top: signalY[index],
                   width: 360,
                   height: 320,
-                  kicker: `Signal 0${index + 1}`,
+                  kicker: "Possible signal",
                   title: signal.title,
                   detail: "",
                   extra: renderHumanSignalSummary(branchId, index),
@@ -22259,10 +23133,10 @@
               top: problemTop,
               width: 380,
               height: 250,
-              kicker: "Problem",
+              kicker: "Living case · changes as evidence arrives",
               title: branch.problem,
               detail: branchSummary,
-              footer: "The metric is not the cause →",
+              footer: "Hold scope, truth, hypotheses, evidence, permissions, and residual →",
             })}
             ${operatorPaths
               .map((path, index) => {
@@ -22279,13 +23153,13 @@
                     index,
                     left: checkX,
                     top: rowY,
-                    width: 470,
-                    height: 430,
-                    kicker: `Question 0${index + 1}`,
+                    width: 500,
+                    height: 540,
+                    kicker: "Independent line of inquiry",
                     title: visible.question,
                     detail: "",
                     extra: renderHumanCheckSummary(checkPlaybook),
-                    footer: "Open every screen, comparison, and caveat →",
+                    footer: "Open every screen, exact comparison, and caveat →",
                   })}
                   ${humanNode({
                     id: "cause",
@@ -22294,13 +23168,13 @@
                     index,
                     left: causeX,
                     top: rowY,
-                    width: 440,
-                    height: 430,
-                    kicker: `${humanEvidenceFor(branchId, path).label} · 0${index + 1}`,
+                    width: 590,
+                    height: 520,
+                    kicker: "Working explanation under test",
                     title: visible.cause,
                     detail: "",
-                    extra: renderHumanCauseSummary(branchId, path, visible, checkPlaybook),
-                    footer: "Open the full identification rule →",
+                    extra: renderHumanDecisionFork(branchId, path),
+                    footer: "Open proof, counter-evidence, and the scope-split rule →",
                   })}
                   ${humanNode({
                     id: "fix",
@@ -22309,12 +23183,12 @@
                     index,
                     left: fixX,
                     top: rowY,
-                    width: 560,
-                    height: 480,
-                    kicker: `${actionPlaybook.label} · response 0${index + 1}`,
-                    title: visible.action,
+                    width: 700,
+                    height: 620,
+                    kicker: "What Carve does with each outcome",
+                    title: "Carve chooses a different response for each evidence state.",
                     detail: "",
-                    extra: renderHumanFixSummary(
+                    extra: renderHumanResponseFork(
                       branchId,
                       path,
                       visible,
@@ -22324,27 +23198,20 @@
                     actionColor: HUMAN_ACTION_COLORS[primaryMode],
                   })}
                   ${
-                    index < operatorPaths.length - 1 &&
-                    !(hasTerminalException && index === operatorPaths.length - 2)
+                    (branchId === "discovery" && path.causeIndex === 0) ||
+                    (branchId === "atc" && path.causeIndex === 4)
                       ? `<div class="human-tree-rule" style="left:${
-                          checkX + 258
-                        }px;top:${rowY + 505}px">If ruled out, keep looking ↓</div>`
-                      : ""
-                  }
-                  ${
-                    hasTerminalException && index === operatorPaths.length - 1
-                      ? `<div class="human-tree-rule" style="left:${
-                        checkX - 8
+                          checkX - 8
                         }px;top:${rowY - 42}px">${
                           branchId === "discovery"
-                            ? "Only use this row when a clear platform block appears"
-                            : "Only use this row when choosing or adding the item actually fails"
+                            ? "Open immediately when a named platform state appears"
+                            : "Open immediately when selecting or adding actually fails"
                         }</div>`
                       : ""
                   }
                   <div class="human-tree-rule" style="left:${
-                    causeX + 452
-                  }px;top:${rowY + 190}px">If supported →</div>
+                    causeX + 24
+                  }px;top:${rowY + 642}px">partial or mixed → split what remains and reopen</div>
                 `;
               })
               .join("")}
@@ -22354,24 +23221,32 @@
               kind: "measure",
               left: measureX,
               top: measureTop,
-              width: 430,
-              height: 430,
-              kicker: "Check the result",
-              title: "Did the original problem improve?",
+              width: 500,
+              height: 560,
+              kicker: "Carve updates the living case",
+              title: "What changed, what remains, and what should happen next?",
               detail: "",
               extra: renderHumanMeasureSummary(branchId),
-              footer: "Open the full measurement and decision rule →",
+              footer: "Open delivery, value, guardrails, and next-decision rules →",
             })}
-            <div class="human-tree-rule" style="left:${measureX - 36}px;top:${
-              measureTop + 84
-            }px">every response is checked →</div>
-            <div class="human-tree-rule" style="left:1320px;top:${
-              height - 76
-            }px">what happened feeds the next investigation</div>
+            <div class="human-tree-rule" style="left:900px;top:${startY + 208}px">choose the evidence that best separates live explanations →</div>
+            <div class="human-tree-rule" style="left:${responseBusX - 115}px;top:${
+              measureTop + 205
+            }px">every response writes back to the case →</div>
+            <div class="human-tree-rule" style="left:1280px;top:${
+              height - 88
+            }px">unexplained product · variant · market · source · device · value → split and reopen</div>
           </div>
         `;
         bindHumanTreeEvents();
-        window.requestAnimationFrame(() => resetHumanTransform("branch"));
+        window.requestAnimationFrame(() => {
+          syncHumanOutcomeConnectors();
+          resetHumanTransform("branch");
+        });
+        window.setTimeout(syncHumanOutcomeConnectors, 180);
+        if (document.fonts?.ready) {
+          document.fonts.ready.then(syncHumanOutcomeConnectors);
+        }
       }
 
       function humanSourceLinks(sourceIds) {
@@ -22453,23 +23328,23 @@
         if (branchId === "all") {
           const signal = HUMAN_OVERVIEW.signals[index] || HUMAN_OVERVIEW.signals[0];
           const route = HUMAN_OVERVIEW.routes[index] || HUMAN_OVERVIEW.routes[0];
-          elements.detailKicker.textContent = "How an ecommerce manager investigates";
+          elements.detailKicker.textContent = "How Carve investigates like an ecommerce manager";
 
           if (kind === "signal") {
             elements.detailTitle.textContent = signal.title;
             elements.detailContent.innerHTML = `
               <p class="human-detail-lead">${escapeHtml(signal.detail)}</p>
               <section class="drawer-section">
-                <h3>What I open first</h3>
+                <h3>Evidence Carve may open</h3>
                 ${humanDetailList([
                   "Shopify’s product and sales reports for the affected product and important variants.",
                   "The product itself: stock, price, promotion, returns, lifecycle, and market availability.",
                   "The trading plan or forecast and the promotion, launch, season, and recent-change calendar.",
-                  "Only then, the channel or journey report that appears to be weak.",
+                  "The channel or journey report that best separates the current explanations; Carve may open it alongside the trading context.",
                 ])}
               </section>
               <section class="drawer-section">
-                <h3>What I compare</h3>
+                <h3>Comparisons Carve holds together</h3>
                 ${humanDetailList([
                   "Actual performance versus plan or forecast.",
                   "The same product versus a genuinely comparable period.",
@@ -22478,7 +23353,7 @@
                 ])}
               </section>
               <section class="drawer-section">
-                <h3>When I keep investigating</h3>
+                <h3>When Carve keeps the case open</h3>
                 ${humanDetailList([
                   "The comparison is reliable enough to show a real change, even when the product is small.",
                   "A stock, price, promotion, season, lifecycle, or reporting change does not already explain it.",
@@ -22512,21 +23387,21 @@
                 <h3>The rule</h3>
                 <p class="caveat">
                   A metric change is a clue, not a cause. Do not start with a title rewrite,
-                  page redesign, discount, or technical theory. First show exactly where the
-                  shopper journey changed.
+                  page redesign, discount, or technical theory. Show where the affected shopper
+                  journey diverges before choosing a response.
                 </p>
               </section>
             `;
           } else if (kind === "check") {
             elements.detailTitle.textContent =
-              "Walk the shopper journey and find the earliest supported break";
+              "Use the shopper journey to locate the loss";
             elements.detailContent.innerHTML = `
               <p class="human-detail-lead">
-                Compare what should happen with what actually happens at each step. The first
-                step that clearly fails decides which worktree to use.
+                Compare what should happen with what actually happens at each customer step.
+                This locates the work; it does not force Carve through a fixed sequence.
               </p>
               <section class="drawer-section">
-                <h3>Ask in this order</h3>
+                <h3>Possible journey evidence</h3>
                 ${humanDetailList([
                   "Google path: Are people looking? Can they see the right product? Do they click? Does the product page earn an add?",
                   "Store path: Can shoppers find the product through onsite search, collections, and recommendations? Does the product page earn an add?",
@@ -22535,12 +23410,12 @@
                 ])}
               </section>
               <section class="drawer-section">
-                <h3>How I choose</h3>
+                <h3>How Carve chooses</h3>
                 <p class="caveat">
-                  Use the earliest weak step that the evidence supports. If many products broke
-                  in the same way after the same change, treat them as one shared problem.
-                  Split the case and keep investigating when one explanation covers only part
-                  of the affected products, variants, markets, sources, or value.
+                  Prefer the earliest weak customer step the evidence supports, because a loss
+                  there can explain everything downstream. Carve may still open independent
+                  checks in parallel, jump when evidence conflicts, and split the case whenever
+                  one explanation covers only part of the scope or value.
                 </p>
               </section>
             `;
@@ -22550,12 +23425,12 @@
             elements.detailContent.innerHTML = `
               <p class="human-detail-lead">${escapeHtml(route.when)}</p>
               <section class="drawer-section">
-                <h3>Use this route when</h3>
+                <h3>Use this evidence area when</h3>
                 ${humanDetailList([
-                  "The earlier journey steps still work normally.",
-                  "This is the first place the affected shoppers or products clearly behave differently.",
-                  "A stock, price, promotion, season, or measurement change does not explain the movement first.",
-                  "If the evidence is still unclear, keep investigating or watch it—do not force a fix.",
+                  "The conditions before this point are healthy enough that they do not explain the loss.",
+                  "Affected shoppers or products diverge here from a working comparison.",
+                  "No stronger stock, price, promotion, season, measurement, or earlier-journey explanation accounts for the movement.",
+                  "If evidence remains unclear, Carve keeps competing explanations open or watches; it does not force a fix.",
                 ])}
               </section>
               <section class="drawer-section">
@@ -22572,7 +23447,7 @@
             `;
           } else {
             elements.detailTitle.textContent =
-              "Correct, test, ask an owner, or deliberately do nothing";
+              "Learn from the result, split what remains unexplained, and choose the next move";
             elements.detailContent.innerHTML = `
               <p class="human-detail-lead">${escapeHtml(HUMAN_OVERVIEW.response)}</p>
               <div class="human-detail-grid">
@@ -22594,10 +23469,12 @@
                 </div>
               </div>
               <section class="drawer-section">
-                <h3>Every response is checked</h3>
+                <h3>Every response updates the living case</h3>
                 <p class="caveat">
                   Confirm it happened, compare the same shoppers and products, then keep it,
-                  adjust it, undo it, or investigate again.
+                  adjust it, undo a reversible test, or investigate again. Keep truthful
+                  corrections even when performance does not rise. Close only the exact scope
+                  and value the explanation covers; every residual remains open.
                 </p>
               </section>
             `;
@@ -22606,7 +23483,7 @@
             "beforeend",
             `
               <details class="human-deep-details">
-                <summary>Research behind the human flow</summary>
+                <summary>Research behind the investigation</summary>
                 <div class="source-list">${humanSourceLinks([
                   "shopifyRetailReports",
                   "frasersTradingRole",
@@ -22623,17 +23500,19 @@
         const branch = HUMAN_GUIDE.branches[branchId];
         const operatorPaths = HUMAN_WORKTREE_PATHS[branchId];
         if (!branch || !operatorPaths) return;
+        const agentCase = HUMAN_AGENT_CASES[branchId];
         const branchSummary =
           branchId === "discovery"
-            ? "Start with customer demand. Then check the product facts, how Google-facing fields explain them, whether the right item appears, and whether this product has a clear truthful role. Only open the platform-block exception when there is a stated issue."
+            ? "Carve keeps customer demand, retailer-approved product facts, the words and images Google receives, the item or variant shown, the product’s intended selling role, and any named Google block as separate explanations. It can inspect them together, jump to a reproduced fault, and split products or markets when the evidence differs."
             : branchId === "ctr"
-              ? "First make sure the click comparison is fair. Then look at the actual result: did the opportunity change, is the right item shown, is anything wrong, is it clear, and is the offer competitive?"
-              : "Start with Shopify and shop the exact product yourself. If it adds normally, inspect who arrived, the decision information, the available offer, and finally whether shoppers simply prefer another product.";
+              ? "Carve makes the click comparison fair, then checks which searches changed, what shoppers actually saw, whether the right item and facts appeared, whether the result was easy to understand, and how the offer compared. These inquiries can run together; a CTR drop alone never earns a copy change."
+              : "Carve combines Shopify performance with shopping the exact product. It checks what brought the shopper, whether the intended product and variant were available, whether the page answered the buying questions, whether price, delivery, and returns were acceptable, and whether selecting or adding actually worked. These inquiries can run together.";
         const path = operatorPaths[index] || operatorPaths[0];
         const cause = path.cause || branch.causes[path.causeIndex];
         const visible = humanVisibleRow(branchId, path);
         const actionPlaybook = humanActionPlaybook(branchId, path);
         const checkPlaybook = humanCheckPlaybook(branchId, path);
+        const decisionFork = humanDecisionForkFor(branchId, path);
         const firstScreens = {
           discovery: [
             "Search Console → Performance → Search results → Compare dates; turn on Impressions, Clicks, and Position; filter the page, country, device, and search type.",
@@ -22669,11 +23548,11 @@
           elements.detailContent.innerHTML = `
             <p class="human-detail-lead">${escapeHtml(signal.detail)}</p>
             <section class="drawer-section">
-              <h3>What I open first</h3>
+              <h3>Evidence Carve may open</h3>
               ${humanDetailList(firstScreens[branchId])}
             </section>
             <section class="drawer-section">
-              <h3>What I look at</h3>
+              <h3>What Carve reads</h3>
               <p class="caveat">${escapeHtml(signalPlaybook.lookAt)}</p>
             </section>
             <section class="drawer-section">
@@ -22701,10 +23580,14 @@
               </p>
             </section>
             <section class="drawer-section">
-              <h3>A useful next question</h3>
+              <h3>One useful inquiry</h3>
               <p class="caveat">${escapeHtml(
                 humanVisibleRow(branchId, operatorPaths[signalStartIndex]).question,
               )}</p>
+              <p class="caveat">
+                This is a useful starting lead, not a required next step. Carve may open any
+                other inquiry—or several at once—when it better separates the live explanations.
+              </p>
             </section>
             <details class="human-deep-details">
               <summary>Research sources</summary>
@@ -22719,46 +23602,63 @@
           elements.detailContent.innerHTML = `
             <p class="human-detail-lead">${escapeHtml(branchSummary)}</p>
             <section class="drawer-section">
-              <h3>How I work through it</h3>
+              <h3>How Carve reasons through it</h3>
               ${humanDetailList([
-                "The visual order shows the usual reasoning path, not mandatory clicks. Enter at the earliest question that reliable evidence has not already answered.",
-                "At each row, open the normal screens and make the fair comparison shown.",
-                "Use only the response the evidence earns: correction, test, owner decision, or no action.",
-                "If it does not fit, keep looking. Stop only when the verified explanation fully accounts for the affected scope and value.",
-                "If one explanation covers only part of the products, variants, sources, markets, or loss, split the case and investigate the residual.",
-                "Correct a proven error; test an uncertain presentation idea; ask the right owner about reality you cannot change.",
+                "There is no required row order. Each row is a live explanation Carve may open whenever the evidence makes it useful.",
+                "Carve can use several tools and investigate independent explanations in parallel.",
+                "It records evidence for and against every explanation instead of committing to the first plausible story.",
+                "A proven fault earns an exact correction or handoff. A truthful but uncertain improvement earns a bounded test. A commercial reality earns an owner choice.",
+                "When one explanation fits only some products, variants, sources, markets, devices, or value, Carve splits the case and keeps the residual alive.",
+                "A new result can contradict an earlier conclusion. Carve reopens it instead of protecting the old answer.",
               ])}
+            </section>
+            <section class="drawer-section">
+              <h3>An illustrative Carve investigation</h3>
+              <p class="caveat"><strong>${escapeHtml(agentCase.start)}</strong></p>
+              <ol>${agentCase.moves.map((move) => `<li>${escapeHtml(move)}</li>`).join("")}</ol>
+              <p class="caveat"><strong>Result:</strong> ${escapeHtml(agentCase.result)}</p>
             </section>
           `;
         } else if (kind === "check") {
-          elements.detailKicker.textContent = `${branch.label} · question 0${index + 1}`;
+          elements.detailKicker.textContent = `${branch.label} · independent line of inquiry`;
           elements.detailTitle.textContent = visible.question;
           elements.detailContent.innerHTML = `
             <p class="human-detail-lead">${escapeHtml(visible.check)}</p>
             <section class="drawer-section">
-              <h3>What I open</h3>
+              <h3>Evidence Carve opens</h3>
               ${humanDetailList(checkPlaybook.open)}
             </section>
             <section class="drawer-section">
-              <h3>What I look at</h3>
+              <h3>What Carve reads</h3>
               ${humanDetailList(checkPlaybook.lookAt)}
             </section>
             <section class="drawer-section">
-              <h3>What I compare</h3>
+              <h3>Comparisons Carve makes</h3>
               ${humanDetailList(checkPlaybook.compare)}
             </section>
             <section class="drawer-section">
-              <h3>What I consider before deciding</h3>
+              <h3>What may change Carve’s conclusion</h3>
               ${humanDetailList(checkPlaybook.consider)}
             </section>
             <section class="drawer-section">
-              <h3>What this evidence earns</h3>
-              <p class="caveat"><strong>${escapeHtml(
-                humanEvidenceFor(branchId, path).label,
-              )}:</strong> ${escapeHtml(humanEvidenceFor(branchId, path).rule)}</p>
+              <h3>The three outcomes Carve keeps open</h3>
+              <div class="human-detail-grid">
+                <div class="human-detail-cell">
+                  <strong>Proven or explained</strong>
+                  <span>${escapeHtml(decisionFork.verified.evidence)}</span>
+                </div>
+                <div class="human-detail-cell">
+                  <strong>Plausible, not proven</strong>
+                  <span>${escapeHtml(decisionFork.supported.evidence)}</span>
+                </div>
+                <div class="human-detail-cell">
+                  <strong>Cleared, partial, or mixed</strong>
+                  <span>${escapeHtml(decisionFork.cleared.evidence)}</span>
+                </div>
+              </div>
             </section>
             <section class="drawer-section">
-              <h3>What would make me reject it</h3>
+              <h3>What makes Carve reject this explanation</h3>
               <p class="caveat">${escapeHtml(checkPlaybook.reject)}</p>
             </section>
             <section class="drawer-section">
@@ -22773,31 +23673,45 @@
             </details>
           `;
         } else if (kind === "cause") {
-          const evidence = humanEvidenceFor(branchId, path);
-          elements.detailKicker.textContent = `${branch.label} · ${evidence.label.toLowerCase()} 0${index + 1}`;
+          elements.detailKicker.textContent = `${branch.label} · competing evidence outcomes`;
           elements.detailTitle.textContent = visible.cause;
           elements.detailContent.innerHTML = `
-            <p class="human-detail-lead"><strong>What this evidence earns:</strong> ${escapeHtml(
-              evidence.rule,
-            )}</p>
+            <p class="human-detail-lead">
+              Carve does not turn a plausible explanation into “the cause.” It keeps the
+              following outcomes open until the exact evidence and affected scope separate them.
+            </p>
             <div class="human-detail-grid">
               <div class="human-detail-cell">
-                <strong>Evidence that fits</strong>
-                <span>${escapeHtml(visible.proof)}</span>
+                <strong>Proven or explained</strong>
+                <span>${escapeHtml(decisionFork.verified.evidence)}</span>
+                <span><b>Response:</b> ${escapeHtml(decisionFork.verified.action)}</span>
               </div>
               <div class="human-detail-cell">
-                <strong>What rules it out</strong>
-                <span>${escapeHtml(checkPlaybook.reject)}</span>
+                <strong>Plausible, not proven</strong>
+                <span>${escapeHtml(decisionFork.supported.evidence)}</span>
+                <span><b>Response:</b> ${escapeHtml(decisionFork.supported.action)}</span>
+              </div>
+              <div class="human-detail-cell">
+                <strong>Cleared, partial, or mixed</strong>
+                <span>${escapeHtml(decisionFork.cleared.evidence)}</span>
+                <span><b>Response:</b> ${escapeHtml(decisionFork.cleared.action)}</span>
               </div>
             </div>
             <section class="drawer-section">
-              <h3>If it does not fit</h3>
-              <p class="caveat">${escapeHtml(checkPlaybook.next)}</p>
+              <h3>The strongest evidence for the main explanation</h3>
+              <p class="caveat">${escapeHtml(visible.proof)}</p>
             </section>
             <section class="drawer-section">
-              <h3>The response this supports</h3>
-              <p class="caveat"><strong>${escapeHtml(visible.action)}</strong></p>
-              ${renderHumanActionDiff(path.fix, visible)}
+              <h3>What rules it out</h3>
+              <p class="caveat">${escapeHtml(checkPlaybook.reject)}</p>
+            </section>
+            <section class="drawer-section">
+              <h3>How scope splitting works</h3>
+              <p class="caveat">
+                Record the exact products, variants, searches, markets, sources, devices,
+                dates, and value this explanation covers. Send only that slice to its
+                response. Every unmatched row and euro stays in the living case.
+              </p>
             </section>
             <details class="human-deep-details">
               <summary>Research sources</summary>
@@ -22808,12 +23722,28 @@
           `;
         } else if (kind === "fix") {
           const capability = humanCapabilityFor(path, branchId);
-          elements.detailKicker.textContent = `${branch.label} · ${actionPlaybook.label.toLowerCase()} 0${index + 1}`;
+          elements.detailKicker.textContent = `${branch.label} · evidence-driven response`;
           elements.detailTitle.textContent = visible.action;
           elements.detailContent.innerHTML = `
             <p class="human-detail-lead">
-              <strong>Only do this when:</strong> ${escapeHtml(visible.proof)}
+              The response changes with the evidence. Confidence decides whether Carve
+              corrects, gathers evidence, tests, asks an owner, or leaves the experience alone.
+              Permission separately decides who may execute it.
             </p>
+            <div class="human-detail-grid">
+              <div class="human-detail-cell">
+                <strong>If proven or explained</strong>
+                <span>${escapeHtml(decisionFork.verified.action)}</span>
+              </div>
+              <div class="human-detail-cell">
+                <strong>If plausible or incomplete</strong>
+                <span>${escapeHtml(decisionFork.supported.action)}</span>
+              </div>
+              <div class="human-detail-cell">
+                <strong>If cleared, partial, or mixed</strong>
+                <span>${escapeHtml(decisionFork.cleared.action)}</span>
+              </div>
+            </div>
             <section class="drawer-section">
               <h3>A real example</h3>
               <div class="human-before-after">
@@ -22840,7 +23770,7 @@
                 .join("")}</ol>
             </section>
             <section class="drawer-section">
-              <h3>How I know the work is complete</h3>
+              <h3>What makes the response complete</h3>
               <p class="caveat">${escapeHtml(actionPlaybook.check)}</p>
             </section>
             <details class="human-deep-details">
@@ -22852,12 +23782,14 @@
           `;
         } else {
           const measure = HUMAN_MEASUREMENT_PLAYBOOK[branchId];
-          elements.detailKicker.textContent = `${branch.label} · did it work?`;
-          elements.detailTitle.textContent = "Did the original problem improve?";
+          elements.detailKicker.textContent = `${branch.label} · learn, split, or reopen`;
+          elements.detailTitle.textContent =
+            "What changed, what remains, and what should Carve do next?";
           elements.detailContent.innerHTML = `
             <p class="human-detail-lead">
               Save the expected change before acting. First prove the response was delivered.
               Then compare the same products and shoppers on customer and business value.
+              The result updates the living case; it does not merely close a task.
             </p>
             <div class="human-detail-grid">
               <div class="human-detail-cell">
@@ -22889,8 +23821,10 @@
             <section class="drawer-section">
               <h3>If the problem remains</h3>
               <p class="caveat">
-                The explanation was incomplete, the response was not delivered, or another journey
-                step also weakened. Return to the first unresolved question; do not stack unrelated changes.
+                The explanation was incomplete, the response was not delivered, or another mechanism
+                also weakened. Keep the exact unresolved products, variants, shoppers, markets, sources,
+                devices, dates, and value in the case. Carve may reopen any prior conclusion or pursue
+                several remaining explanations together.
               </p>
             </section>
           `;
@@ -25274,6 +26208,7 @@
             const check = humanCheckPlaybook(branchId, path);
             const action = humanActionPlaybook(branchId, path);
             const evidence = humanEvidenceFor(branchId, path);
+            const fork = humanDecisionForkFor(branchId, path);
             const shared = [
               visible.question,
               visible.check,
@@ -25293,6 +26228,12 @@
               action.check,
               evidence.label,
               evidence.rule,
+              fork.verified.evidence,
+              fork.verified.action,
+              fork.supported.evidence,
+              fork.supported.action,
+              fork.cleared.evidence,
+              fork.cleared.action,
             ]
               .join(" ")
               .toLowerCase();
@@ -25310,9 +26251,9 @@
                 branch: branchId,
                 kind: "cause",
                 index,
-                label: "Evidence rule",
+                label: "Evidence outcomes",
                 title: visible.cause,
-                excerpt: evidence.rule,
+                excerpt: fork.verified.evidence,
                 text: shared,
               },
               {
@@ -26529,6 +27470,9 @@
       window.CARVE_HUMAN_ACTION_PLAYBOOK = HUMAN_ACTION_PLAYBOOK;
       window.CARVE_HUMAN_CHECK_PLAYBOOK = HUMAN_CHECK_PLAYBOOK;
       window.CARVE_HUMAN_EVIDENCE_MEANING = HUMAN_EVIDENCE_MEANING;
+      window.CARVE_HUMAN_AGENT_MODEL = HUMAN_AGENT_MODEL;
+      window.CARVE_HUMAN_AGENT_CASES = HUMAN_AGENT_CASES;
+      window.CARVE_HUMAN_DECISION_FORKS = HUMAN_DECISION_FORKS;
 
       window.CARVE_MAP_DEBUG = Object.freeze({
         getState() {
