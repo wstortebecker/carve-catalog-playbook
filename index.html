@@ -1533,6 +1533,24 @@
         filter: saturate(0.72);
       }
 
+      .human-tree-world.is-signal-focus .human-tree-node.is-trail-related,
+      .human-tree-world.is-signal-focus .human-tree-node.is-trail-primary {
+        z-index: 6;
+        opacity: 1;
+        filter: none;
+        border-color: #171411;
+        box-shadow:
+          0 0 0 4px color-mix(in srgb, var(--branch-color) 15%, transparent),
+          0 18px 36px rgba(20, 18, 16, 0.13);
+      }
+
+      .human-tree-world.is-signal-focus .human-trail-row-band.is-trail-related,
+      .human-tree-world.is-signal-focus .human-trail-row-band.is-trail-primary {
+        opacity: 0.34;
+        border-color: color-mix(in srgb, var(--branch-color) 38%, #bdb5ab);
+        background: color-mix(in srgb, var(--branch-color) 4%, rgba(255, 254, 250, 0.56));
+      }
+
       .human-tree-world.is-trail-active .human-tree-intro,
       .human-tree-world.is-trail-active .human-agent-board,
       .human-tree-world.is-trail-active .human-tree-stage-label,
@@ -1561,7 +1579,7 @@
         top: 14px;
         left: 50%;
         z-index: 24;
-        width: min(720px, calc(100% - 32px));
+        width: min(980px, calc(100% - 32px));
         padding: 12px 15px;
         border: 1px solid #bdb5ab;
         border-top: 4px solid var(--trail-color, var(--accent));
@@ -1599,6 +1617,92 @@
         color: #4a433d;
         font-size: 10.5px;
         line-height: 1.35;
+      }
+
+      .human-trail-options {
+        display: grid;
+        grid-template-columns: repeat(var(--trail-option-count, 3), minmax(0, 1fr));
+        gap: 6px;
+        margin-top: 9px;
+        pointer-events: auto;
+      }
+
+      .human-trail-option {
+        min-width: 0;
+        padding: 8px 9px;
+        border: 1px solid #cec6bc;
+        border-radius: 8px;
+        background: #fffefa;
+        color: #171411;
+        font: inherit;
+        text-align: left;
+        cursor: pointer;
+      }
+
+      .human-trail-option:first-child {
+        border-color: var(--trail-color, var(--accent));
+        background: color-mix(in srgb, var(--trail-color, var(--accent)) 7%, #fffefa);
+      }
+
+      .human-trail-option small,
+      .human-trail-stage-button small {
+        display: block;
+        margin: 0;
+        color: #6d3c2b;
+        font-size: 8px;
+        font-weight: 800;
+        letter-spacing: 0.065em;
+        line-height: 1.2;
+        text-transform: uppercase;
+      }
+
+      .human-trail-option b {
+        display: block;
+        margin-top: 3px;
+        font-size: 10.5px;
+        line-height: 1.28;
+      }
+
+      .human-trail-option:hover,
+      .human-trail-option:focus-visible,
+      .human-trail-stage-button:hover,
+      .human-trail-stage-button:focus-visible {
+        border-color: #171411;
+        outline: 2px solid color-mix(in srgb, var(--trail-color, var(--accent)) 28%, transparent);
+        outline-offset: 1px;
+      }
+
+      .human-trail-stage-rail {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 5px;
+        margin-top: 9px;
+        pointer-events: auto;
+      }
+
+      .human-trail-stage-button {
+        min-width: 0;
+        padding: 7px 8px;
+        border: 1px solid #d0c8bf;
+        border-radius: 7px;
+        background: #fffefa;
+        color: #302b27;
+        font: inherit;
+        font-size: 9px;
+        font-weight: 720;
+        line-height: 1.25;
+        text-align: left;
+        cursor: pointer;
+      }
+
+      .human-trail-stage-button[aria-current="step"] {
+        border-color: #171411;
+        background: #171411;
+        color: #fffdfa;
+      }
+
+      .human-trail-stage-button[aria-current="step"] small {
+        color: #dca685;
       }
 
       body:has(#detailDrawer.is-open) .human-trail-hud {
@@ -1733,6 +1837,17 @@
         stroke: var(--branch-color, var(--accent));
         stroke-width: 2.2;
         opacity: 0.32;
+      }
+
+      .human-tree-world.is-signal-focus .human-tree-connectors path.is-trail-related,
+      .human-tree-world.is-signal-focus .human-tree-connectors path.is-trail-primary {
+        stroke: var(--branch-color, var(--accent));
+        stroke-width: 2.8;
+        opacity: 0.9;
+      }
+
+      .human-tree-world.is-signal-focus .human-tree-connectors path.is-trail-related {
+        stroke-dasharray: 7 6;
       }
 
       .human-tree-connectors path.is-loop {
@@ -1966,6 +2081,28 @@
 
         .human-trail-hud span {
           display: none;
+        }
+
+        .human-trail-options {
+          display: flex;
+          overflow-x: auto;
+          padding-bottom: 3px;
+          scroll-snap-type: x proximity;
+        }
+
+        .human-trail-option {
+          flex: 0 0 238px;
+          scroll-snap-align: start;
+        }
+
+        .human-trail-stage-button {
+          padding: 6px 4px;
+          font-size: 0;
+          text-align: center;
+        }
+
+        .human-trail-stage-button small {
+          font-size: 8px;
         }
 
         .human-tree-intro {
@@ -25856,7 +25993,7 @@
         humanSearchMatches: [],
         searchIndex: -1,
         humanTrail: null,
-        humanTrailPreview: null,
+        humanTrailStage: 1,
         drawer: null,
         lastTrigger: null,
         transformFrame: null,
@@ -26515,13 +26652,7 @@
         };
         cards.forEach((node, index) => {
           node.tabIndex = index === 0 ? 0 : -1;
-          node.addEventListener("focus", () => {
-            setRovingCard(node);
-            previewHumanTrailForNode(node);
-          });
-          node.addEventListener("blur", restoreHumanTrailAfterPreview);
-          node.addEventListener("pointerenter", () => previewHumanTrailForNode(node));
-          node.addEventListener("pointerleave", restoreHumanTrailAfterPreview);
+          node.addEventListener("focus", () => setRovingCard(node));
           node.addEventListener("pointerdown", () => setRovingCard(node));
           node.addEventListener("keydown", (event) => {
             if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) return;
@@ -26673,9 +26804,73 @@
         return nodes.filter(Boolean);
       }
 
+      function humanTrailStageForNode(node) {
+        const kind = node?.dataset.humanKind;
+        return kind === "expert-signal"
+          ? 1
+          : kind === "expert-inquiry"
+            ? 2
+            : kind === "expert-judgment"
+              ? 3
+              : kind === "expert-response"
+                ? 4
+                : kind === "expert-measure"
+                  ? 5
+                  : null;
+      }
+
+      function humanTrailNodeForStage(trail, stage) {
+        const world = getHumanWorld();
+        if (!trail || !world) return null;
+        if (stage === 1 && Number.isInteger(trail.signalIndex)) {
+          return world.querySelector(
+            `[data-human-kind="expert-signal"][data-human-index="${trail.signalIndex}"]`,
+          );
+        }
+        const kind =
+          stage === 2
+            ? "expert-inquiry"
+            : stage === 3
+              ? "expert-judgment"
+              : stage === 4
+                ? "expert-response"
+                : stage === 5
+                  ? "expert-measure"
+                  : "";
+        if (!kind) return null;
+        return world.querySelector(
+          kind === "expert-measure"
+            ? '[data-human-kind="expert-measure"]'
+            : `[data-human-kind="${kind}"][data-human-index="${trail.primaryRow}"]`,
+        );
+      }
+
+      function syncHumanTrailStage(stage = state.humanTrailStage) {
+        const world = getHumanWorld();
+        const hud = elements.humanView.querySelector("[data-human-trail-hud]");
+        state.humanTrailStage = clamp(Number(stage) || 1, 1, 5);
+        world
+          ?.querySelectorAll('[aria-current="step"]')
+          .forEach((item) => item.removeAttribute("aria-current"));
+        humanTrailNodeForStage(state.humanTrail, state.humanTrailStage)?.setAttribute(
+          "aria-current",
+          "step",
+        );
+        hud
+          ?.querySelectorAll("[data-human-trail-stage]")
+          .forEach((button) =>
+            button.setAttribute(
+              "aria-current",
+              Number(button.dataset.humanTrailStage) === state.humanTrailStage
+                ? "step"
+                : "false",
+            ),
+          );
+      }
+
       function syncHumanTrailVisualState() {
         const world = getHumanWorld();
-        const trail = state.humanTrailPreview || state.humanTrail;
+        const trail = state.humanTrail;
         const hud = elements.humanView.querySelector("[data-human-trail-hud]");
         if (!world || world.dataset.treeKind !== "branch") {
           if (hud) hud.hidden = true;
@@ -26683,6 +26878,7 @@
         }
 
         world.classList.toggle("is-trail-active", Boolean(trail));
+        world.classList.toggle("is-signal-focus", trail?.origin === "signal");
         world
           .querySelectorAll(".is-trail-primary, .is-trail-related, .is-trail-end")
           .forEach((item) => item.classList.remove("is-trail-primary", "is-trail-related", "is-trail-end"));
@@ -26701,7 +26897,6 @@
             )
           : null;
         signalNode?.classList.add("is-trail-primary");
-        signalNode?.setAttribute("aria-current", "step");
 
         const markRow = (row, className) => {
           if (!Number.isInteger(row)) return;
@@ -26716,34 +26911,40 @@
             .querySelectorAll(`.is-trail-segment[data-trail-row="${row}"], .human-trail-row-band[data-trail-row="${row}"]`)
             .forEach((item) => item.classList.add(className));
         };
-        markRow(trail.primaryRow, "is-trail-primary");
-        trail.relatedRows.forEach((row) => markRow(row, "is-trail-related"));
-        if (Number.isInteger(trail.signalIndex)) {
+
+        const signalFocus = trail.origin === "signal";
+        if (signalFocus) {
+          [trail.primaryRow, ...trail.relatedRows].forEach((row, routeIndex) => {
+            const className = routeIndex === 0 ? "is-trail-primary" : "is-trail-related";
+            world
+              .querySelector(
+                `[data-human-kind="expert-inquiry"][data-human-index="${row}"]`,
+              )
+              ?.classList.add(className);
+            world
+              .querySelector(`.human-trail-row-band[data-trail-row="${row}"]`)
+              ?.classList.add(className);
+            world
+              .querySelectorAll(
+                `[data-trail-signal="${trail.signalIndex}"][data-trail-row="${row}"]`,
+              )
+              .forEach((item) => item.classList.add(className));
+          });
+        } else {
+          markRow(trail.primaryRow, "is-trail-primary");
+        }
+        if (!signalFocus && Number.isInteger(trail.signalIndex)) {
           world
             .querySelectorAll(
               `[data-trail-signal="${trail.signalIndex}"][data-trail-row="${trail.primaryRow}"]`,
             )
             .forEach((item) => item.classList.add("is-trail-primary"));
-          trail.relatedRows.forEach((row) => {
-            world
-              .querySelectorAll(
-                `[data-trail-signal="${trail.signalIndex}"][data-trail-row="${row}"]`,
-              )
-              .forEach((item) => item.classList.add("is-trail-related"));
-          });
         }
 
-        const primaryNodes = world.querySelectorAll(
-          `[data-human-index="${trail.primaryRow}"][data-human-kind="expert-inquiry"],` +
-            `[data-human-index="${trail.primaryRow}"][data-human-kind="expert-judgment"],` +
-            `[data-human-index="${trail.primaryRow}"][data-human-kind="expert-response"]`,
-        );
-        primaryNodes.forEach((item) => item.setAttribute("aria-current", "step"));
         const measureNode = world.querySelector('[data-human-kind="expert-measure"]');
-        measureNode?.classList.add("is-trail-end");
-        measureNode?.setAttribute("aria-current", "step");
+        if (!signalFocus) measureNode?.classList.add("is-trail-end");
 
-        if (activeConnector && measureNode) {
+        if (!signalFocus && activeConnector && measureNode) {
           const responseNode = world.querySelector(
             `[data-human-kind="expert-response"][data-human-index="${trail.primaryRow}"]`,
           );
@@ -26764,67 +26965,147 @@
           const signalTitle = Number.isInteger(trail.signalIndex)
             ? HUMAN_EXPERT_SIGNALS[trail.branchId]?.[trail.signalIndex]?.title
             : "Any precise signal that makes this explanation plausible";
-          const inquiryTitle = HUMAN_EXPERT_BRANCHES[trail.branchId]?.inquiries[
-            trail.primaryRow
-          ]?.title;
-          const previewing = Boolean(state.humanTrailPreview && !state.humanTrail);
+          const branchInquiries = HUMAN_EXPERT_BRANCHES[trail.branchId]?.inquiries || [];
+          const inquiryTitle = branchInquiries[trail.primaryRow]?.title;
+          const optionBox = hud.querySelector("[data-human-trail-options]");
+          const stageRail = hud.querySelector("[data-human-trail-stage-rail]");
           hud.style.setProperty(
             "--trail-color",
             HUMAN_BRANCH_COLORS[trail.branchId] || HUMAN_BRANCH_COLORS.discovery,
           );
-          hud.querySelector("small").textContent = previewing
-            ? "Previewing one live line of reasoning"
-            : "Following one live line of reasoning";
-          hud.querySelector("strong").textContent = `${signalTitle} → ${inquiryTitle}`;
-          hud.querySelector("span").textContent = trail.relatedRows.length
-            ? `01 Observe → 02 Investigate → 03 Identify or rule out → 04 Respond → 05 Learn. Use ←/→ to move through it. ${trail.relatedRows.length} other high-information investigation${trail.relatedRows.length === 1 ? " remains" : "s remain"} visible as alternatives.`
-            : "01 Observe → 02 Investigate → 03 Identify or rule out → 04 Respond → 05 Learn. Use ←/→ to move through it. This is one evidence line, not a mandatory sequence.";
+          if (signalFocus) {
+            const rows = [trail.primaryRow, ...trail.relatedRows];
+            hud.querySelector("small").textContent = `Signal focus · ${rows.length} high-information starting investigations`;
+            hud.querySelector("strong").textContent = signalTitle;
+            hud.querySelector("span").textContent =
+              "These are useful starting points, not assumed causes or a complete possibility set. Choose one to inspect its evidence, responses, and measurement. Every other expert lens remains available; click empty space or press Esc to show all.";
+            optionBox.style.setProperty("--trail-option-count", String(Math.min(rows.length, 4)));
+            optionBox.innerHTML = rows
+              .map((row, routeIndex) => {
+                const inquiry = branchInquiries[row];
+                return `<button type="button" class="human-trail-option" data-human-focus-row="${row}"><small>${
+                  routeIndex === 0
+                    ? "Highest-information starting point"
+                    : "Also investigate"
+                }</small><b>${escapeHtml(inquiry?.title || "Open investigation")}</b></button>`;
+              })
+              .join("");
+            optionBox.hidden = false;
+            stageRail.hidden = true;
+            optionBox.querySelectorAll("[data-human-focus-row]").forEach((button) => {
+              button.addEventListener("click", () => {
+                const row = Number(button.dataset.humanFocusRow);
+                const node = world.querySelector(
+                  `[data-human-kind="expert-inquiry"][data-human-index="${row}"]`,
+                );
+                if (!node) return;
+                commitHumanTrailForNode(node);
+                focusHumanNode(
+                  node,
+                  elements.humanView.clientWidth <= 720 ? 0.88 : 0.98,
+                );
+                if (elements.humanView.clientWidth <= 720) {
+                  openHumanExpertDetail(
+                    trail.branchId,
+                    "expert-inquiry",
+                    row,
+                    node,
+                  );
+                }
+              });
+            });
+          } else {
+            hud.querySelector("small").textContent = "One selected investigation · the original signal stays attached";
+            hud.querySelector("strong").textContent = inquiryTitle;
+            hud.querySelector("span").textContent =
+              "Jump between stages without losing the line. This is one live investigation, not a mandatory sequence or final cause.";
+            optionBox.hidden = true;
+            optionBox.innerHTML = "";
+            const stageLabels = [
+              ["01", "Signal"],
+              ["02", "Investigate"],
+              ["03", "Identify"],
+              ["04", "Respond"],
+              ["05", "Learn"],
+            ];
+            stageRail.innerHTML = stageLabels
+              .map(
+                ([number, label], stageIndex) =>
+                  `<button type="button" class="human-trail-stage-button" data-human-trail-stage="${
+                    stageIndex + 1
+                  }"><small>${number}</small>${label}</button>`,
+              )
+              .join("");
+            stageRail.hidden = false;
+            stageRail.querySelectorAll("[data-human-trail-stage]").forEach((button) => {
+              button.addEventListener("click", () => {
+                const stage = Number(button.dataset.humanTrailStage);
+                const node = humanTrailNodeForStage(state.humanTrail, stage);
+                if (!node) return;
+                syncHumanTrailStage(stage);
+                focusHumanNode(
+                  node,
+                  elements.humanView.clientWidth <= 720 ? 0.88 : 0.98,
+                );
+                if (elements.humanView.clientWidth <= 720) {
+                  openHumanExpertDetail(
+                    state.humanTrail.branchId,
+                    node.dataset.humanKind,
+                    Number(node.dataset.humanIndex || 0),
+                    node,
+                  );
+                }
+              });
+            });
+          }
           hud.hidden = false;
+          syncHumanTrailStage(signalFocus ? 1 : state.humanTrailStage);
         }
-      }
-
-      function previewHumanTrailForNode(node) {
-        if (state.humanTrail) return;
-        state.humanTrailPreview = humanTrailForNode(node);
-        syncHumanTrailVisualState();
-      }
-
-      function restoreHumanTrailAfterPreview() {
-        state.humanTrailPreview = null;
-        syncHumanTrailVisualState();
       }
 
       function commitHumanTrailForNode(node, announceChange = true) {
         const trail = humanTrailForNode(node);
         if (!trail) return false;
         state.humanTrail = trail;
-        state.humanTrailPreview = null;
+        state.humanTrailStage = humanTrailStageForNode(node) || 1;
         syncHumanTrailVisualState();
         if (announceChange) {
           const inquiryTitle = HUMAN_EXPERT_BRANCHES[trail.branchId]?.inquiries[
             trail.primaryRow
           ]?.title;
-          announce(`Following one evidence trail: ${inquiryTitle}`);
+          announce(
+            trail.origin === "signal"
+              ? `${1 + trail.relatedRows.length} relevant investigations shown for this signal`
+              : `Following one evidence line: ${inquiryTitle}`,
+          );
         }
         return true;
       }
 
       function clearHumanTrail(announceChange = false) {
-        const hadTrail = Boolean(state.humanTrail || state.humanTrailPreview);
+        const hadTrail = Boolean(state.humanTrail);
         state.humanTrail = null;
-        state.humanTrailPreview = null;
+        state.humanTrailStage = 1;
         syncHumanTrailVisualState();
         if (hadTrail && announceChange) announce("Reasoning trail cleared; every investigation is visible");
       }
 
       function focusHumanTrailStage(direction) {
-        const nodes = humanTrailNodes();
-        if (!nodes.length) return false;
-        const currentIndex = nodes.indexOf(document.activeElement);
-        const nextIndex = currentIndex < 0
-          ? 0
-          : clamp(currentIndex + direction, 0, nodes.length - 1);
-        const next = nodes[nextIndex];
+        if (!state.humanTrail) return false;
+        if (state.humanTrail.origin === "signal" && direction > 0) {
+          const inquiry = humanTrailNodeForStage(state.humanTrail, 2);
+          if (!inquiry) return false;
+          commitHumanTrailForNode(inquiry);
+          focusHumanNode(
+            inquiry,
+            elements.humanView.clientWidth <= 720 ? 0.88 : 0.98,
+          );
+          return true;
+        }
+        const nextStage = clamp(state.humanTrailStage + direction, 1, 5);
+        const next = humanTrailNodeForStage(state.humanTrail, nextStage);
+        if (!next) return false;
+        syncHumanTrailStage(nextStage);
         focusHumanNode(next, elements.humanView.clientWidth <= 720 ? 0.88 : 0.98);
         return true;
       }
@@ -27036,6 +27317,8 @@
           <div class="human-trail-hud" data-human-trail-hud hidden>
             <small>Following one live line of reasoning</small>
             <strong></strong>
+            <div class="human-trail-options" data-human-trail-options hidden></div>
+            <nav class="human-trail-stage-rail" data-human-trail-stage-rail hidden aria-label="Move through this evidence line"></nav>
             <span></span>
           </div>
           <div
@@ -27088,8 +27371,8 @@
               footer: "Open the full ecommerce evidence stack, exact views, and limits →",
             })}
             <div class="human-tree-gesture-hint">
-              <span class="human-gesture-desktop">Drag or scroll to move · pinch or Command/Control + scroll to zoom · hover to preview a reasoning trail · click to keep it visible</span>
-              <span class="human-gesture-touch">Drag to move · pinch to zoom · tap a signal or investigation to follow its reasoning trail</span>
+              <span class="human-gesture-desktop">Drag or scroll to move · pinch or Command/Control + scroll to zoom · click a signal to reveal its investigations</span>
+              <span class="human-gesture-touch">Drag to move · pinch to zoom · tap a signal to reveal its investigations</span>
             </div>
             ${humanStageLabel(signalX, "01 · Observe — preserve the precise signal", 540)}
             ${humanStageLabel(caseX, "Persistent case memory—not an intermediate problem", 430)}
@@ -28823,7 +29106,7 @@
         state.humanBranch = nextBranch;
         state.activeBranch = nextBranch;
         state.humanTrail = null;
-        state.humanTrailPreview = null;
+        state.humanTrailStage = 1;
         syncHumanBranchButtons(nextBranch);
         if (nextBranch === "all") renderHumanOverview();
         else renderHumanBranch(nextBranch);
@@ -31817,6 +32100,7 @@
       elements.humanView.addEventListener(
         "wheel",
         (event) => {
+          if (event.target.closest(".human-trail-hud")) return;
           event.preventDefault();
           stopHumanGlide();
           const rect = elements.humanView.getBoundingClientRect();
@@ -31844,7 +32128,7 @@
       );
 
       elements.humanView.addEventListener("dblclick", (event) => {
-        if (event.target.closest(".human-tree-node, input, a")) return;
+        if (event.target.closest(".human-tree-node, .human-trail-hud, input, a, button")) return;
         stopHumanGlide();
         const rect = elements.humanView.getBoundingClientRect();
         zoomHumanBy(event.altKey || event.shiftKey ? 1 / 1.38 : 1.38, {
@@ -31885,7 +32169,7 @@
 
       elements.humanView.addEventListener("click", (event) => {
         if (!state.humanTrail) return;
-        if (event.target.closest(".human-tree-node, a, button, input, summary")) return;
+        if (event.target.closest(".human-tree-node, .human-trail-hud, a, button, input, summary")) return;
         clearHumanTrail(true);
       });
 
@@ -31914,7 +32198,7 @@
 
       elements.humanView.addEventListener("pointerdown", (event) => {
         if (event.pointerType === "mouse" && event.button !== 0 && event.button !== 1) return;
-        if (event.target.closest("a, input")) return;
+        if (event.target.closest("a, input, button, .human-trail-hud")) return;
         stopHumanGlide();
         const point = humanPointFromEvent(event);
         const startedOnInteractive = Boolean(event.target.closest(".human-tree-node"));
