@@ -1036,13 +1036,13 @@
         <div class="brandline">
           <div class="brand">Carve</div>
           <div class="titleblock">
-            <h1>The product performance worktree</h1>
-            <p>What an expert notices, opens, concludes, changes, and learns—across every product.</p>
+            <h1>The ecommerce worktree</h1>
+            <p>How Carve improves demand coverage, product CTR, PDP conversion, checkout, returns and product economics—across every SKU.</p>
           </div>
         </div>
         <div class="top-status">
-          <strong id="activeCaseLabel">Unserved demand · missing answer</strong>
-          <span>Branches are questions, not steps. Combine causes and evidence when reality does.</span>
+          <strong id="activeCaseLabel">Demand capture · catalog gap</strong>
+          <span>Branches are hypotheses, not funnel steps. Combine causes when the evidence supports more than one.</span>
         </div>
       </header>
 
@@ -5826,11 +5826,11 @@
 const SIGNAL_DEFINITIONS = [
         {
           id: "unserved-demand",
-          shortLabel: "Unserved demand · missing answer",
-          signalType: "Capture · demand gap",
-          signal: "Customers want something the store does not answer well",
-          signalCopy: "A valuable customer job appears in the market or customer language, but the catalog has no clear, credible answer.",
-          seenIn: "market demand · onsite search · customer voice · AI/agentic tasks",
+          shortLabel: "Demand capture · catalog gap",
+          signalType: "Capture · demand coverage",
+          signal: "Addressable demand is not captured by the catalog",
+          signalCopy: "Relevant query clusters, onsite searches or customer jobs have no strong product, collection or content response.",
+          seenIn: "keyword demand · onsite search · customer voice · Shopping/AI visibility",
           opportunities: ["Capture", "Improve"],
           signalDetail: "This is not limited to a keyword with volume. It is evidence that real customers are trying to solve a job, compare an attribute, or answer a question that the retailer could credibly serve better. The opportunity may require expressing an existing product more clearly, improving a collection, creating a useful page, changing the range, or doing nothing when the fit is weak.",
           signalViews: [
@@ -5851,8 +5851,8 @@ const SIGNAL_DEFINITIONS = [
           ],
           signalDoesNotProve: "Demand does not prove the retailer deserves a page, that a new collection will rank, or that more copy will create value. Volume can hide mixed intent, paid data can reflect broad matching, and competitor coverage can be a poor fit for this brand or range.",
           signalSources: ["keywordPlanner", "googleTrends", "gscPerformance", "shopifySearch", "algoliaAnalytics", "gorgiasInsights", "yotpoInsights", "merchantAiInsights", "shopifyAgentic", "semrushAi"],
-          caseTitle: "A valuable customer job is absent, hidden, or weakly expressed",
-          caseCopy: "Any product or range · any discovery surface · any market. First understand the job, then decide whether and how the store should answer it.",
+          caseTitle: "A valuable demand cluster lacks a credible catalog response",
+          caseCopy: "Determine whether the gap is product data, content, collection architecture, distribution, offer or assortment—not automatically a new page.",
           caseDetail: "The general problem is a gap between customer demand and a useful, truthful store answer. The agent keeps product fit, page role, presentation, offer, authority and commercial reality live as competing explanations. It does not assume that the answer is a new SEO page.",
           scope: "Customer job × addressable products × discovery surface × market × period",
           frame: [
@@ -5888,11 +5888,11 @@ const SIGNAL_DEFINITIONS = [
         },
         {
           id: "weak-reach",
-          shortLabel: "Weak reach · hard to find",
-          signalType: "Recover / improve · reach",
-          signal: "Relevant customers do not reliably find the right product",
-          signalCopy: "Qualified exposure is falling, persistently weak, missing for expected demand, or directed to the wrong item or page.",
-          seenIn: "Search · Shopping · AI/agentic · onsite search · product traffic",
+          shortLabel: "Qualified discovery · below potential",
+          signalType: "Recover / improve · discovery",
+          signal: "Qualified product discovery is weak or declining",
+          signalCopy: "The intended product or landing page earns too few relevant impressions, rankings, listing appearances or onsite exposures.",
+          seenIn: "GSC · Merchant Center/Ads · rank/AI visibility · onsite search",
           opportunities: ["Recover", "Improve", "Capture"],
           signalDetail: "Reach is surface-specific. Organic Search, paid and free Shopping, onsite search, recommendations, marketplaces and AI systems expose different data and do not share one universal rank. Start by naming the surface and reporting grain, then ask whether the right customers can encounter the right sellable answer.",
           signalViews: [
@@ -5905,8 +5905,8 @@ const SIGNAL_DEFINITIONS = [
           signalQualifies: ["The surface, market, device, item/page identity and comparison period are explicit.", "Relevant demand or internal customer need exists; low exposure alone is not an opportunity.", "The pattern persists or is commercially meaningful and is not fully explained by planned stock, season, campaign or intentional exclusion.", "The intended destination is useful and sellable enough that increasing qualified reach would help customers."],
           signalDoesNotProve: "Low or falling exposure does not by itself prove a technical problem, poor SEO, a bad feed, or a need for more text. Demand, page role, product fit, competition, offer and eligibility can all produce the same observation. Search Console average position is not exact carousel placement; aggregate Merchant or PMax product data may span multiple surfaces.",
           signalSources: ["gscPerformance", "gscPosition", "gscAiPerformance", "merchantPerformance", "merchantAiInsights", "merchantSurfaces", "adsProductReporting", "shoppingShare", "algoliaAnalytics", "shopifyAgentic", "semrushAi"],
-          caseTitle: "The right customer and the right sellable answer are not meeting",
-          caseCopy: "Any discovery surface · any product/page · any market. Determine whether the constraint is demand, meaning, eligibility, distribution, retrieval, presentation or product reality.",
+          caseTitle: "Relevant demand and the correct sellable product are not connecting",
+          caseCopy: "Separate lost demand from ranking, listing eligibility, page targeting, internal discovery, distribution or product-range constraints.",
           caseDetail: "The general problem is qualified findability, not simply impressions. The agent traces the observation at the source where it was measured, identifies which product/page should appear for which customer job, and compares explanations before changing content, product data, merchandising or channel settings.",
           scope: "Discovery surface × customer job × intended product/page × market/device × period",
           frame: ["Name the surface and metric definition before comparing it; do not merge organic results, Shopping surfaces, onsite results and AI answers into one rank.", "Define intended demand and destination. A product should not be made visible for every loosely related phrase.", "Separate signal data from diagnostic evidence: the first shows the reach gap; the second explains whether demand, page/product meaning, eligibility, competition or distribution caused it.", "Inspect product data and on-page language early: title, H1, collection/PDP text, descriptions, attributes, media, feed fields and structured facts all help systems and customers understand the answer.", "Treat crawl/index/template work as conditional. Open it only when the symptom predicts a delivery, selection or shared-template failure."],
@@ -5939,11 +5939,11 @@ const SIGNAL_DEFINITIONS = [
         },
         {
           id: "shown-not-chosen",
-          shortLabel: "Shown, not chosen · weak choice",
-          signalType: "Recover / improve · choice",
-          signal: "The product is shown, but the right shopper does not choose it",
-          signalCopy: "Exposure is present while result, listing, card or recommendation selection is weak or falling for a relevant audience.",
-          seenIn: "organic results · Shopping tiles · collection cards · recommendations",
+          shortLabel: "Product-tile selection · weak",
+          signalType: "Recover / improve · CTR / selection",
+          signal: "Product-tile CTR or selection rate is underperforming",
+          signalCopy: "The item is exposed in Search, Shopping, collections or recommendations, but relevant shoppers choose competing results.",
+          seenIn: "GSC CTR · Shopping clicks/share · PLP/card CTR · recommendations",
           opportunities: ["Recover", "Improve"],
           signalDetail: "This signal occurs at a choice surface: an organic result, Shopping item, onsite result, collection card, recommendation, email or marketplace listing. Measure exposure and selection within one defined surface, then understand what the shopper actually saw and which alternatives surrounded it.",
           signalViews: ["Organic Search: Search Console → Performance → Search results → Web. Read clicks, impressions and CTR by query × page × device × country in the unfiltered view, then filter Merchant listings and Product snippets separately where available; do not sum appearance views.", "Shopping: Merchant organic clicks/impressions for organic listings; Google Ads product clicks/impressions under a fixed campaign/network scope; supported share metrics at their real grain. Use timestamped SERP/Shopping monitoring for exact carousel tile/order questions.", "Onsite: card/result/recommendation impressions and clicks, position and collection/query context. If impressions are not instrumented, use page exposure and click observations with explicit limits."],
@@ -5951,8 +5951,8 @@ const SIGNAL_DEFINITIONS = [
           signalQualifies: ["Exposure and selection are measured at a compatible grain for the same surface, period and item/page.", "The intended audience/job is relevant; weak CTR from broader low-intent exposure is not automatically a presentation failure.", "Position/order, device, market, offer, stock and result composition are compared before attributing the gap to copy or imagery.", "Downstream quality is known or explicitly unknown; attracting more clicks is not valuable if the item is wrong for the shopper."],
           signalDoesNotProve: "CTR does not reveal one universal creative truth. It changes with position, query mix, device, competitors, price, stock, badges and result type. Google does not provide exact organic Shopping-carousel slot history in its standard reports; aggregate product metrics must not be labelled as exact Search-carousel performance.",
           signalSources: ["gscData", "gscPosition", "googleTitleLinks", "googleSnippets", "merchantPerformance", "adsProductReporting", "shoppingClickShare", "baymardLists"],
-          caseTitle: "The available choice does not earn selection from the intended customer",
-          caseCopy: "Any result, listing, product card or recommendation. Reconstruct the choice set before deciding whether meaning, presentation, offer or audience is wrong.",
+          caseTitle: "The product loses within the visible choice set",
+          caseCopy: "Compare the actual tile, rank, image, title, price, offer, reviews, availability and surrounding alternatives before changing it.",
           caseDetail: "The problem lives at the moment of comparative choice. The agent compares like-for-like exposure, reconstructs the visible treatment and alternatives, and follows selected traffic downstream before changing a title, description, image, product card, offer or destination.",
           scope: "Choice surface × customer job × item/page × market/device × position/context × period",
           frame: ["Fix one surface and grain. A Search result CTR, paid Shopping item CTR and onsite card click rate are not interchangeable.", "Reconstruct what the customer saw—including product variant and offer—not only what the CMS or feed currently contains.", "Separate being shown to the wrong audience from losing a fair comparison among relevant shoppers.", "Inspect all presentation layers: title, headings, snippet/source text, collection/PDP description, attributes, image, badges, reviews, price, delivery and landing continuity.", "Judge the click together with qualified landing, add-to-cart, purchase and kept-order quality."],
@@ -5984,11 +5984,11 @@ const SIGNAL_DEFINITIONS = [
         },
         {
           id: "evaluated-not-selected",
-          shortLabel: "Evaluated, not selected · PDP",
-          signalType: "Recover / improve · product decision",
-          signal: "Shoppers evaluate the product but do not confidently select it",
-          signalCopy: "Qualified product views are healthy, yet variant selection or add-to-cart is weak, falling, or worse than matched alternatives.",
-          seenIn: "product funnel · behavior analytics · customer voice · live PDP",
+          shortLabel: "PDP conversion · weak ATC",
+          signalType: "Recover / improve · PDP / ATC",
+          signal: "PDP-to-add-to-cart conversion is weak or declining",
+          signalCopy: "Qualified product-detail views do not produce the expected variant selection, add-to-cart rate or confident product choice.",
+          seenIn: "view_item → ATC · variant interactions · replay/heatmaps · customer voice",
           opportunities: ["Recover", "Improve"],
           signalDetail: "A PDP is a decision experience, not a template checklist. The signal is a meaningful gap between qualified evaluation and confident product selection. The investigation joins behavior, customer language, product truth, offer, availability and the live page to learn which decision remains unresolved.",
           signalViews: ["Product-level funnel: view_item, variant/size selection, add_to_cart and purchase by product/variant, device, market, source and customer cohort. Content-exposure or interaction events can locate where behavior diverges, but do not explain why on their own."],
@@ -5996,8 +5996,8 @@ const SIGNAL_DEFINITIONS = [
           signalQualifies: ["Product-view and add-to-cart definitions are valid and the gap survives relevant segmentation.", "Traffic is plausibly qualified; a low ATC rate from information-seeking or wrong-campaign traffic is not automatically a PDP problem.", "Comparable products/cohorts match on customer job, price band, stock, market, device and acquisition context as far as the data permits.", "The evidence points to a customer decision or experience mechanism that can be changed truthfully, or to a real product/offer constraint that should be routed."],
           signalDoesNotProve: "Low ATC does not prove the button, page design, description or image is wrong. It can reflect traffic intent, missing variants, price, delivery, product-market fit, measurement or a broken interaction. A heatmap hotspot and a few replays do not estimate causal impact by themselves.",
           signalSources: ["ga4Ecommerce", "contentsquarePdp", "hotjarRecordings", "baymardPdp", "baymardDescriptions", "yotpoInsights", "gorgiasInsights"],
-          caseTitle: "The product decision remains unresolved at evaluation",
-          caseCopy: "Any PDP/product family · any qualified cohort. Identify the decision, friction or product reality that separates confident selectors from otherwise comparable non-selectors.",
+          caseTitle: "The PDP does not resolve the product decision",
+          caseCopy: "Distinguish traffic mismatch, unclear positioning, missing product information or proof, offer weakness, availability, assortment and PDP friction.",
           caseDetail: "The general problem is not that the PDP fails a best-practice score. It is that the experience, offer or product does not help the intended shopper make an accurate decision. The next evidence depends on the live explanations and the retailer's available tools.",
           scope: "Product/variant × customer job/cohort × market/device/source × period",
           frame: ["Define the decision: understand value, judge use/fit/compatibility, trust proof, choose variant, accept offer and delivery, or add successfully.", "Read the whole journey into the PDP so wrong traffic is not diagnosed as poor page content.", "Inspect actual page words and product truth—not only fields or events. Description, collection context, highlights, specs, imagery and comparisons can all change understanding.", "Use quantitative evidence to locate divergence and qualitative/customer evidence to explain the mechanism.", "Carry purchase quality: an ATC lift that increases cancellations, returns or wrong-product orders is not success."],
@@ -6028,11 +6028,11 @@ const SIGNAL_DEFINITIONS = [
         },
         {
           id: "intent-not-ordered",
-          shortLabel: "Intent, not ordered · cart / checkout",
-          signalType: "Recover / improve · purchase completion",
-          signal: "Shoppers show purchase intent but do not complete the order",
-          signalCopy: "Adds or checkout starts are healthy, while cart, checkout, payment or order completion is weak or deteriorating.",
-          seenIn: "commerce funnel · checkout/payment · behavior evidence · support",
+          shortLabel: "Checkout completion · leakage",
+          signalType: "Recover / improve · cart / checkout",
+          signal: "Cart-to-order or checkout completion is underperforming",
+          signalCopy: "Add-to-cart and checkout intent exist, but customers drop before a valid order—at cart, delivery, payment or confirmation.",
+          seenIn: "ATC → checkout → order · checkout/payment logs · replay · support",
           opportunities: ["Recover", "Improve"],
           signalDetail: "This signal begins after meaningful purchase intent. The problem may be total cost, availability, delivery, payment, trust, journey behavior, measurement or a reproducible experience failure. Carve should diagnose and prepare the decision even when the final fix belongs to commerce, operations, pricing or engineering.",
           signalViews: ["Commerce and analytics funnel: add_to_cart, view_cart, begin_checkout, shipping/payment steps and valid purchase/order by product/variant, market, device, source and customer type."],
@@ -6040,8 +6040,8 @@ const SIGNAL_DEFINITIONS = [
           signalQualifies: ["The divergence point is identified with valid event/order definitions and the affected cohort is explicit.", "The gap is meaningful after accounting for traffic mix, basket mix, promotions, season, stock and payment-market differences.", "A plausible mechanism connects the observed step to customer or system evidence.", "The proposed intervention respects checkout/platform permissions and has an owner when Carve cannot execute it."],
           signalDoesNotProve: "Cart or checkout abandonment is not automatically a UX bug. Shoppers use carts as wishlists, discover total cost late, compare elsewhere, encounter stock or delivery constraints, or return later across devices. Analytics can also lose events through consent, redirects or payment domains.",
           signalSources: ["ga4Ecommerce", "shopifyDiscrepancies", "hotjarRecordings", "contentsquarePdp", "gorgiasInsights", "cxlHypotheses"],
-          caseTitle: "Something after purchase intent changes or blocks the decision",
-          caseCopy: "Any product-led basket or checkout cohort. Locate the first real divergence, then distinguish offer, availability, fulfillment, behavior, experience and measurement.",
+          caseTitle: "Purchase intent is lost before a valid order",
+          caseCopy: "Locate the first meaningful step divergence and separate offer, delivery, stock, payment, checkout UX and measurement causes.",
           caseDetail: "The general problem is order completion after expressed intent. Carve follows the product through the basket and transaction, but it does not assume ownership of checkout code, payment, pricing, stock or operations. It produces a precise action or prepared owner decision.",
           scope: "Product/basket × purchase step × customer/market/device/source × period",
           frame: ["Find the first meaningful divergence from add-to-cart to valid order, not simply the lowest absolute funnel rate.", "Reconcile analytics with commerce, payment and order truth before reading behavior.", "Reconstruct total price, discount, stock, delivery and payment state exactly as the affected customer saw them.", "Distinguish normal delayed/multi-session shopping from an avoidable failure.", "Assign the diagnosed mechanism to the right owner; Carve can prepare or safely apply only within permission."],
@@ -6082,11 +6082,11 @@ const SIGNAL_DEFINITIONS = [
         },
         {
           id: "purchased-not-kept",
-          shortLabel: "Post-purchase · not kept or repeated",
-          signalType: "Recover / improve · post-purchase quality",
-          signal: "Customers buy, but the product relationship does not hold",
-          signalCopy: "Returns, exchanges, cancellations, negative outcomes, or weak repeat/replenishment where it should exist reveal a post-purchase gap.",
-          seenIn: "returns/exchanges · support/reviews · repeat/replenishment cohorts",
+          shortLabel: "Kept-order quality · weak",
+          signalType: "Recover / improve · post-purchase",
+          signal: "Kept-order quality or expected repeat rate is weak",
+          signalCopy: "Returns, exchanges, cancellations, support burden, poor reviews or weak replenishment expose a post-purchase product gap.",
+          seenIn: "kept orders/returns · support/reviews · repeat/replenishment",
           opportunities: ["Recover", "Improve"],
           signalDetail: "A completed order is not the end of the product decision. This signal covers both purchase quality—did the customer keep and value what was promised?—and an expected next product relationship such as replenishment, replacement, compatible follow-on purchase or repeat. The second applies only when the product and customer job genuinely have a repeat cadence.",
           signalViews: ["Returns, cancellations and exchanges by product/variant, normalized reason, one-kept versus all-returned brackets, exchange destination, refund value and mature outcome window.", "Eligible repeat/replenishment cohorts: time to expected next need, next order/product, subscription or reorder where relevant, lapse, and product/customer cohort. Define eligibility and cadence before calling non-repeat a weakness.", "CRM/ESP or customer-data capabilities where connected: eligible cohort, lifecycle-flow exposure, reminder response, next order/product and holdout or matched unexposed comparison. A message view does not prove it caused repeat.", "Subscription capabilities where relevant: start, active cadence, skip, pause, cancel reason, payment failure, save action, resubscribe and contribution after support/discounts.", "Customer outcomes: support, reviews, surveys and other feedback by product/outcome cohort, treated as signal themes rather than diagnoses."],
@@ -6094,8 +6094,8 @@ const SIGNAL_DEFINITIONS = [
           signalQualifies: ["The outcome cohort is mature and reason, repeat or replenishment definitions are usable.", "For repeat, the product/customer job has a defensible next-need cadence; durable, gifted or one-off products are not penalized for non-repeat.", "The pattern is specific enough to a product, variant, batch, promise, customer cohort or fulfillment path to investigate.", "The action aims to improve expectation, use, kept value or a genuinely useful next relationship—not suppress valid returns or manufacture retention."],
           signalDoesNotProve: "A high return rate does not prove bad copy, bad fit or bad product. Low repeat does not prove dissatisfaction when the item is durable, infrequently needed, gifted or naturally substituted. Bracketing, exchanges, category norms, acquisition mix, fulfillment and measurement can change both numbers.",
           signalSources: ["loopAnalytics", "loopSizing", "yotpoInsights", "gorgiasInsights", "shopifyDiscrepancies", "ga4Ecommerce", "baymardDescriptions"],
-          caseTitle: "The promise, lived product experience, or useful next relationship does not hold",
-          caseCopy: "Any mature product/customer cohort after purchase. Distinguish expectation, product reality, fulfillment, behavior, lifecycle, offer and measurement.",
+          caseTitle: "The purchase promise, product experience or next-order relationship breaks",
+          caseCopy: "Separate expectation mismatch, product quality or fit, fulfillment, misuse, service, lifecycle, offer and measurement.",
           caseDetail: "The general problem is post-purchase product value. Carve traces the order-time promise into the actual product and fulfillment outcome, or into the next need when one genuinely exists, then corrects customer-facing truth or prepares the product, lifecycle, supplier, policy or operations decision.",
           scope: "Product/variant/batch × customer cohort × order-time promise or next-need cadence × mature outcome window",
           frame: ["Name the outcome: cancellation, exchange, single-item return, bracketing, all-returned basket, retained order, expected replenishment/replacement, or broader repeat.", "Normalize customer language rather than trusting one catch-all reason code.", "Reconstruct what the customer saw and selected at order time; today's page may differ.", "Distinguish expectation, real product/quality, fulfillment, lifecycle and ordinary customer behavior.", "Optimize kept value, useful continuity and trust—not a lower return rate or higher repeat rate at any cost."],
@@ -6124,11 +6124,11 @@ const SIGNAL_DEFINITIONS = [
         },
         {
           id: "commercial-quality",
-          shortLabel: "Weak commercial quality · portfolio",
-          signalType: "Improve · commercial quality",
-          signal: "The product performs, but not in a healthy way",
-          signalCopy: "Revenue can look acceptable while margin, discount dependence, stock productivity, cannibalization, support, cancellations or returns make the outcome weak.",
-          seenIn: "net orders/margin · inventory · promotions · post-purchase quality",
+          shortLabel: "Commercial quality · weak",
+          signalType: "Improve · contribution / inventory",
+          signal: "Revenue is not converting into healthy product economics",
+          signalCopy: "Sales look acceptable, but contribution, discount dependence, returns, stock productivity, cannibalization or service cost is weak.",
+          seenIn: "net/kept contribution · sell-through/cover · promo dependence · returns",
           opportunities: ["Improve", "Recover"],
           signalDetail: "This signal prevents local funnel optimization from becoming the goal. A product can gain clicks, adds and orders while destroying margin, consuming scarce stock badly, shifting demand from a better item, creating support or returns, or attracting customers the product cannot serve.",
           signalViews: ["Order-line and contribution evidence: net price, discount, cost, shipping, fees, returns, support and channel cost where available.", "Inventory and trading: sell-through, cover, aged stock, stockouts, allocation, replenishment, promotion and markdown history by product/variant/market.", "Portfolio behavior: substitution, bundle/attach, recommendation paths, collection share and whether value grows or only moves between products.", "Customer quality: cancellation, kept-order, return reason, support, review and repeat/retention outcomes at a defensible attribution level."],
@@ -6136,8 +6136,8 @@ const SIGNAL_DEFINITIONS = [
           signalQualifies: ["The commercial metric is defined after returns/discounts/costs to the extent the retailer can support.", "The product/variant/market cohort and time horizon match the business decision.", "A customer or commercial mechanism—not merely a ranking table—explains why the outcome is weak.", "The recommendation states trade-offs and owner; Carve does not change price, buying or assortment without permission."],
           signalDoesNotProve: "Low margin, slow stock or high discount share is not automatically a content problem. It may be intentional acquisition, lifecycle clearance, launch investment or strategic range support. Conversely, strong gross revenue can hide poor kept value.",
           signalSources: ["shopifyDiscrepancies", "ga4Ecommerce", "adsCartData", "loopAnalytics", "algoliaMerch", "nostoMerch", "cxlHypotheses"],
-          caseTitle: "The local metric and the real customer/business outcome disagree",
-          caseCopy: "Any product/variant/market or portfolio cohort. Diagnose whether demand, audience, offer, product, allocation or downstream cost makes the performance unhealthy.",
+          caseTitle: "Topline performance overstates the product's real value",
+          caseCopy: "Assess contribution, inventory role, incrementality, purchase quality and downstream cost across the category—not the SKU in isolation.",
           caseDetail: "The general problem is value quality, not lack of activity. Carve connects product discovery and conversion evidence to inventory, margin and post-purchase consequences, then applies safe merchandising/content changes or prepares the trading/product decision.",
           scope: "Product/variant/portfolio × market/channel/customer cohort × full commercial horizon",
           frame: ["Define success beyond the local metric: kept contribution, strategic role, inventory objective and customer outcome.", "Separate intentional strategy from accidental underperformance.", "Include opportunity cost and substitution where evidence permits; do not claim causal cannibalization from correlation alone.", "Trace the mechanism back into presentation, offer, product fit, traffic and allocation.", "Route decisions that spend price, inventory, media, assortment or policy authority."],
@@ -6169,11 +6169,11 @@ const SIGNAL_DEFINITIONS = [
         },
         {
           id: "proactive-potential",
-          shortLabel: "No alert · below potential",
+          shortLabel: "Optimization headroom · no alert",
           signalType: "Improve / capture · proactive",
-          signal: "Nothing is broken, but the customer experience is below credible potential",
-          signalCopy: "Avoidable customer work, weak expression or unused product truth remains even when topline performance is stable.",
-          seenIn: "live journey · product truth · customer voice · market comparison",
+          signal: "The product experience has credible conversion or merchandising headroom",
+          signalCopy: "No anomaly exists, but product data, positioning, content, imagery, comparison, discovery or journey quality can objectively improve.",
+          seenIn: "catalog review · journey/CRO review · customer voice · competitive research",
           opportunities: ["Improve", "Capture"],
           signalDetail: "Carve does not wait for a dashboard anomaly. It continually asks how each product could become easier to discover, understand, compare, choose and keep. A proactive opportunity must still connect a real customer decision, a credible gap and truthful action; a generic best-practice score is not enough.",
           signalViews: ["Expert journey review: walk representative mobile and desktop paths from acquisition/result through collection/search, card, PDP, variant choice, cart and post-purchase help; record avoidable customer work, not aesthetic preference.", "Catalog/content review: scan product and collection experiences for generic or duplicated descriptions, weak names, unused approved attributes, unclear range roles, missing comparisons and thin media.", "Customer-language review: recurring onsite searches, support, reviews, Q&A, surveys and returns reveal questions and expectations the experience could resolve earlier."],
@@ -6181,8 +6181,8 @@ const SIGNAL_DEFINITIONS = [
           signalQualifies: ["The gap affects a real customer decision or access need, not aesthetic preference alone.", "The improvement is grounded in approved truth or a clear owner brief for new evidence/media.", "The action is specific and reversible or proportionate to its cost/risk.", "Expected value includes qualified discovery, choice, purchase quality, margin, returns and customer trust—not only engagement.", "No-action remains valid when information is unnecessary, evidence is weak, demand is unattractive or the current experience is already appropriate."],
           signalDoesNotProve: "A best-practice gap does not prove conversion harm. Customers can ignore content because the decision is already easy, compare several products deliberately, or prefer a simpler experience. Competitor polish is not evidence that their treatment works.",
           signalSources: ["baymardPdp", "baymardDescriptions", "baymardLists", "contentsquarePdp", "hotjarRecordings", "gorgiasInsights", "yotpoInsights"],
-          caseTitle: "Useful product value and customer understanding are not fully expressed",
-          caseCopy: "Any product, collection or journey without an alert. Find objective customer work or credible unexpressed value, then choose the smallest truthful improvement.",
+          caseTitle: "Customer understanding and product value are under-expressed",
+          caseCopy: "Identify defensible improvements across product data, content, merchandising and journey design without inventing a problem from a checklist.",
           caseDetail: "The general problem is avoidable decision work or missed value, not a broken system. Carve researches the live experience, product truth, customer language, market and matched products, keeps several explanations live, and acts only when the improvement follows from evidence.",
           scope: "Product/range × customer job × relevant journey surfaces × market/device",
           frame: ["Begin with the customer decision, not a field-completeness checklist.", "Read the product and collection as language and experience: positioning, descriptions, headings, imagery, specifications, range role, comparisons and alternatives.", "Distinguish customer-facing improvement from plumbing; both can matter, but technical work is conditional on an observed access/delivery mechanism.", "Use retailer evidence first and external research as a prior, never as a universal prescription.", "Choose the smallest change that can resolve the decision and learn, while routing real offer/product/creative constraints."],
@@ -6217,100 +6217,100 @@ const SIGNAL_DEFINITIONS = [
 
       const CAUSE_SURFACE_LABELS = {
         "demand-context": {
-          cause: "Demand or the market context changed",
-          investigate: "Compare total demand, relative capture, and response",
-          identify: "Demand moved while relative capture stayed stable",
-          action: "Adapt timing or target—or deliberately watch"
+          cause: "Demand, seasonality or market mix changed",
+          investigate: "Compare market demand, traffic mix and relative capture",
+          identify: "Demand moved while visibility share and conversion held",
+          action: "Retarget timing, market or intent—or hold"
         },
         "audience-intent": {
-          cause: "The audience, intent, or promise is wrong",
-          investigate: "Join acquisition context to the job and downstream behavior",
-          identify: "The weakness follows a distinct mismatched cohort",
-          action: "Align the audience, promise, and destination"
+          cause: "Traffic or query intent does not match the offer",
+          investigate: "Break performance down by query, source, campaign and cohort",
+          identify: "The loss concentrates in a mismatched traffic cohort",
+          action: "Fix targeting, message and landing destination"
         },
         "product-truth": {
-          cause: "Product truth is missing, weak, or inconsistent",
-          investigate: "Trace each decision-critical fact from source to surface",
-          identify: "A material fact is absent, unclear, or conflicting",
-          action: "Correct the truth and every useful expression"
+          cause: "Key product data or content is missing, vague or inconsistent",
+          investigate: "Audit source data across PDPs, cards, feeds and variants",
+          identify: "A decision-critical attribute is missing or conflicting",
+          action: "Fix the source field, then update PDP, feed and card content"
         },
         "availability-eligibility": {
-          cause: "The product cannot be shown, bought, or delivered as expected",
-          investigate: "Trace the exact item, variant, market, stock, and eligibility state",
-          identify: "The loss follows an unavailable or ineligible state",
-          action: "Correct the state—or route the real constraint"
+          cause: "Stock, variant, channel or market eligibility blocks the sale",
+          investigate: "Check SKU stock, publication, feed status and delivery eligibility",
+          identify: "The loss follows an unavailable, suppressed or undeliverable SKU",
+          action: "Fix catalog/feed state—or route the stock constraint"
         },
         "authority-distribution": {
-          cause: "The answer lacks distribution or credible corroboration",
-          investigate: "Map internal prominence, channel coverage, and external evidence",
-          identify: "A useful answer is materially less encountered or trusted",
-          action: "Earn useful distribution and trustworthy evidence"
+          cause: "The page or product lacks organic authority or channel coverage",
+          investigate: "Compare internal links, channel coverage, backlinks and citations",
+          identify: "A useful answer is consistently under-distributed",
+          action: "Strengthen internal discovery and earn credible distribution"
         },
         "ia-retrieval": {
-          cause: "The store does not lead customers to the right answer",
-          investigate: "Trace the task through pages, collections, search, filters, and links",
-          identify: "The right answer exists but the route repeatedly misses it",
-          action: "Repair the smallest route that fails the customer job"
+          cause: "Navigation, collections or onsite search bury the right product",
+          investigate: "Trace collection membership, filters, search, sort and links",
+          identify: "Relevant products exist but shoppers repeatedly miss them",
+          action: "Fix the collection, filters, synonyms, sort or internal links"
         },
         "positioning-presentation": {
-          cause: "The product's relevance or difference is hard to recognize",
-          investigate: "Join customer language to approved truth and the exact presentation",
-          identify: "Useful product truth is not legible at the point of choice",
-          action: "Express the real job and difference clearly"
+          cause: "Positioning, copy or imagery does not sell the difference",
+          investigate: "Compare customer language with the title, card, PDP copy and imagery",
+          identify: "A valuable product difference is not visible at the choice point",
+          action: "Rewrite positioning and improve decision imagery"
         },
         "decision-proof": {
-          cause: "A customer decision lacks information or proof",
-          investigate: "Map questions and hesitation to the evidence currently shown",
-          identify: "One consequential question remains credibly unanswered",
-          action: "Put the smallest useful answer where the decision happens"
+          cause: "The PDP lacks the information or proof needed to buy",
+          investigate: "Map objections to specs, fit, reviews, comparison and media",
+          identify: "A recurring purchase question remains unanswered",
+          action: "Add the answer or proof beside the decision"
         },
         "offer-value": {
-          cause: "The total offer is not the best choice",
-          investigate: "Compare like-for-like price, delivery, terms, trust, and economics",
+          cause: "Price, promotion, delivery or returns weaken the offer",
+          investigate: "Benchmark like-for-like total value, terms and margin",
           identify: "A specific offer disadvantage explains the loss",
-          action: "Clarify the truth—or route the commercial decision"
+          action: "Clarify value—or route the price, promo or service decision"
         },
         "product-assortment": {
-          cause: "The product or range does not fit the real need",
-          investigate: "Compare the customer job with product reality and range economics",
-          identify: "An honest product or range limitation remains",
-          action: "Recommend honestly—or prepare the product decision"
+          cause: "The product or range does not meet the demand",
+          investigate: "Compare demand, substitution, variants, returns and range economics",
+          identify: "No current SKU can honestly serve the need",
+          action: "Recommend an alternative—or route a range change"
         },
         "experience-function": {
-          cause: "The live experience blocks or burdens the task",
-          investigate: "Reproduce the journey and join behavior, errors, and releases",
-          identify: "A repeatable experience failure explains the divergence",
-          action: "Repair the exact failing interaction or delivery mechanism"
+          cause: "PDP, mobile UX or site performance blocks purchase",
+          investigate: "Reproduce the journey; inspect errors, speed, replays and releases",
+          identify: "A repeatable UX or function failure explains conversion loss",
+          action: "Fix the exact interaction, template or performance issue"
         },
         "merchandising-promotion": {
-          cause: "Allocation, ranking, or promotion favors the wrong choice",
-          investigate: "Trace eligible products through rules, exposure, and total value",
-          identify: "A governed allocation—not relevance—creates the weakness",
-          action: "Change the bounded rule with portfolio guardrails"
+          cause: "Merchandising or promotion sends demand to the wrong SKU",
+          investigate: "Inspect collection sort, search boosts, recommendations and promo exposure",
+          identify: "A controllable rule favors the weaker product",
+          action: "Change the rule, placement or promotion with category guardrails"
         },
         "customer-journey": {
-          cause: "The customer's real journey differs from the assumed funnel",
-          investigate: "Study paths, timing, comparison, substitution, and direct evidence",
-          identify: "A recurring legitimate journey explains the apparent loss",
-          action: "Support the real journey—or measure it correctly"
+          cause: "Customers are comparing, saving or replenishing—not abandoning",
+          investigate: "Segment journeys by customer, basket, timing and product role",
+          identify: "A legitimate shopping pattern explains the apparent drop",
+          action: "Support the journey and measure it with the right KPI"
         },
         "fulfillment-expectation": {
-          cause: "The delivery or post-purchase promise fails",
-          investigate: "Join the promise shown to fulfillment and customer outcomes",
-          identify: "A specific operational path breaks an otherwise sound decision",
+          cause: "Fulfillment or product expectation breaks after purchase",
+          investigate: "Join the PDP promise to orders, support, carrier and return outcomes",
+          identify: "A specific fulfillment path drives cancellations or returns",
           action: "Correct the promise and route the operational fix"
         },
         "checkout-delivery-promise": {
-          cause: "The available delivery promise loses the order",
-          investigate: "Reconstruct promise, address, available method, and checkout outcome",
-          identify: "A specific delivery reveal or constraint explains the loss",
-          action: "Clarify the promise—or route the real shipping constraint"
+          cause: "Shipping cost, speed or availability loses checkout",
+          investigate: "Rebuild baskets and addresses; compare methods, costs and dates",
+          identify: "Drop-off follows a specific delivery reveal or constraint",
+          action: "Show the true promise earlier—or route the shipping change"
         },
         "measurement-definition": {
-          cause: "The measurement or comparison is misleading",
-          investigate: "Reconcile definitions, identity, events, scope, and source truth",
-          identify: "The apparent problem changes under a valid definition",
-          action: "Repair the evidence and rerun the decision"
+          cause: "Tracking or KPI definition misstates performance",
+          investigate: "Reconcile analytics, platform and order data by SKU and cohort",
+          identify: "The diagnosis changes under valid events or net economics",
+          action: "Fix tracking or reporting, then rerun the analysis"
         }
       };
 
@@ -6340,13 +6340,13 @@ const SIGNAL_DEFINITIONS = [
       const CASES = SIGNAL_DEFINITIONS.map(buildGeneralCase);
 
       const STAGES = [
-        { key: "signal", x: 350, number: "SIGNAL", title: "What may be underperforming", copy: "A general outcome pattern, seen in named source data." },
-        { key: "case", x: 680, number: "PROBLEM", title: "What may be failing", copy: "The broad customer or commercial problem—not a made-up example case." },
-        { key: "hypothesis", x: 1010, number: "POSSIBLE CAUSES", title: "What could explain it", copy: "Reusable cause families. Several can be true together." },
-        { key: "evidence", x: 1340, number: "INVESTIGATE", title: "What I open and compare", copy: "The next evidence chosen for its ability to separate live explanations." },
-        { key: "finding", x: 1670, number: "IDENTIFY", title: "When I call it the cause", copy: "Positive evidence, evidence against alternatives, and a bounded conclusion." },
-        { key: "action", x: 2000, number: "CHANGE", title: "What I actually change", copy: "Concrete work that follows from the identified mechanism." },
-        { key: "learn", x: 2330, number: "LEARN", title: "What happened next", copy: "Verify delivery, measure the full outcome, then keep, revise, expand, reverse, or watch." }
+        { key: "signal", x: 350, number: "SIGNAL", title: "Demand, discovery, conversion or value signal", copy: "A measurable ecommerce performance pattern." },
+        { key: "case", x: 680, number: "PROBLEM", title: "Customer or commercial outcome at risk", copy: "The bounded ecommerce problem—not an invented example case." },
+        { key: "hypothesis", x: 1010, number: "POSSIBLE CAUSES", title: "What could be driving the metric", copy: "Live ecommerce hypotheses. Several can be true together." },
+        { key: "evidence", x: 1340, number: "INVESTIGATE", title: "Reports, pages and cohorts to compare", copy: "The next evidence chosen for its diagnostic value." },
+        { key: "finding", x: 1670, number: "DIAGNOSE", title: "Evidence threshold for the diagnosis", copy: "Supporting evidence, weakened alternatives and a bounded conclusion." },
+        { key: "action", x: 2000, number: "ACTION", title: "Content, merchandising or business change", copy: "Concrete ecommerce work tied to the diagnosed mechanism." },
+        { key: "learn", x: 2330, number: "MEASURE", title: "Conversion and downstream value", copy: "Verify delivery, measure the full outcome, then keep, revise, expand, reverse or hold." }
       ];
 
       const ACTION_TYPES_BY_MODE = Object.freeze({
@@ -6779,10 +6779,10 @@ const SIGNAL_DEFINITIONS = [
           kind: "root",
           x: 24,
           y: Math.max(240, (signalPositions[0] + signalPositions[signalPositions.length - 1]) / 2 - 20),
-          kicker: "Carve · every product",
-          title: "Continuous expert attention",
-          copy: "Find the missed opportunity, keep competing causes live, combine the evidence, change the supported mechanism, and keep learning.",
-          meta: "Value changes what Carve does—not whether Carve looks."
+          kicker: "Carve · every SKU / range",
+          title: "Always-on ecommerce intelligence",
+          copy: "Monitor discovery, selection, conversion and post-purchase value; diagnose the cause, make the supported change and learn.",
+          meta: "Priority changes the action—not the attention."
         });
 
         CASES.forEach(function (item, index) {
@@ -6809,7 +6809,7 @@ const SIGNAL_DEFINITIONS = [
           caseId: activeCase.id,
           x: STAGES[1].x,
           y: frameY,
-          kicker: "General problem",
+          kicker: "Ecommerce problem",
           title: activeCase.caseTitle,
           copy: activeCase.caseCopy,
           meta: activeCase.scope
@@ -6834,7 +6834,7 @@ const SIGNAL_DEFINITIONS = [
             kicker: "Possible cause",
             title: hypothesis.surface && hypothesis.surface.cause || hypothesis.title,
             copy: hypothesis.hypothesisCopy,
-            meta: "Not a conclusion yet"
+            meta: "Keep competing causes live"
           });
           addNode({
             id: evidenceId,
@@ -6844,7 +6844,7 @@ const SIGNAL_DEFINITIONS = [
             route: route,
             x: STAGES[3].x,
             y: y,
-            kicker: "Best separating evidence",
+            kicker: "Next best evidence",
             title: hypothesis.surface && hypothesis.surface.investigate || hypothesis.evidenceTitle,
             copy: hypothesis.evidenceCopy,
             meta: hypothesis.evidenceCapability
@@ -6857,7 +6857,7 @@ const SIGNAL_DEFINITIONS = [
             route: route,
             x: STAGES[4].x,
             y: y,
-            kicker: "Identify it only when",
+            kicker: "Diagnosis threshold",
             title: hypothesis.surface && hypothesis.surface.identify || hypothesis.findingTitle,
             copy: hypothesis.findingCopy,
             meta: "Support it—and weaken the nearest alternatives"
@@ -6870,11 +6870,11 @@ const SIGNAL_DEFINITIONS = [
             route: route,
             x: STAGES[5].x,
             y: y,
-            kicker: "Then change the mechanism",
+            kicker: "Supported action",
             actionTypes: actionTypesFor(hypothesis),
             title: hypothesis.surface && hypothesis.surface.action || hypothesis.actionTitle,
             copy: hypothesis.actionCopy,
-            meta: "Permission follows ownership and risk"
+            meta: "Apply, route or hold by ownership and risk"
           });
           addEdge("case-" + activeCase.id, hypothesisId, route);
           addEdge(hypothesisId, evidenceId, route);
@@ -6888,7 +6888,7 @@ const SIGNAL_DEFINITIONS = [
           caseId: activeCase.id,
           x: STAGES[6].x,
           y: frameY,
-          kicker: "Measure · protect · reopen",
+          kicker: "Measure · protect · learn",
           title: activeCase.learn.title,
           copy: activeCase.learn.copy,
           meta: activeCase.learn.meta
