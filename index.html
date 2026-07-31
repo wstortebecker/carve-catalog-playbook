@@ -1390,6 +1390,24 @@
         line-height: 1.55;
       }
 
+      .human-tree-world[data-tree-kind="branch"] .human-tree-intro {
+        width: 700px;
+        padding: 18px 20px;
+      }
+
+      .human-tree-world[data-tree-kind="branch"] .human-tree-intro h1 {
+        max-width: 650px;
+        font-size: 31px;
+        line-height: 1.07;
+      }
+
+      .human-tree-world[data-tree-kind="branch"] .human-tree-intro p {
+        max-width: 650px;
+        margin-top: 9px;
+        font-size: 12.8px;
+        line-height: 1.43;
+      }
+
       .human-tree-gesture-hint {
         position: absolute;
         top: 56px;
@@ -1463,13 +1481,18 @@
         color: #fffdfa;
       }
 
-      .human-tree-node:hover,
+      .human-tree-node:hover {
+        z-index: 3;
+        transform: none;
+      }
+
       .human-tree-node:focus-visible {
         z-index: 5;
         border-color: #1b1815;
-        outline: none;
+        outline: 3px solid color-mix(in srgb, var(--branch-color, var(--accent)) 26%, transparent);
+        outline-offset: 2px;
         box-shadow: 0 17px 34px rgba(20, 18, 16, 0.12);
-        transform: translateY(-2px);
+        transform: none;
       }
 
       .human-tree-node h2,
@@ -2063,9 +2086,25 @@
         text-transform: uppercase;
       }
 
+      .human-trail-row-band.is-context {
+        border-left-color: #8f8378;
+        background: rgba(246, 242, 236, 0.48);
+      }
+
+      .human-trail-row-band.is-conditional {
+        border-style: dashed;
+        border-left-color: #8f8378;
+        background: rgba(239, 235, 229, 0.58);
+      }
+
+      .human-trail-row-band.is-context > span,
+      .human-trail-row-band.is-conditional > span {
+        color: #3f3934;
+      }
+
       .human-tree-world.is-trail-active .human-tree-node {
-        opacity: 0.13;
-        filter: saturate(0.35);
+        opacity: 0.36;
+        filter: none;
       }
 
       .human-tree-world.is-trail-active .human-tree-node.is-trail-primary,
@@ -2108,7 +2147,15 @@
       .human-tree-world.is-trail-active .human-tree-stage-label,
       .human-tree-world.is-trail-active .human-tree-rule,
       .human-tree-world.is-trail-active .human-tree-gesture-hint {
-        opacity: 0.22;
+        opacity: 0.48;
+      }
+
+      .human-tree-world.is-signal-focus .human-tree-intro,
+      .human-tree-world.is-signal-focus .human-agent-board,
+      .human-tree-world.is-signal-focus .human-tree-stage-label,
+      .human-tree-world.is-signal-focus .human-tree-rule,
+      .human-tree-world.is-signal-focus .human-tree-gesture-hint {
+        opacity: 0.82;
       }
 
       .human-tree-world.is-trail-active .human-trail-row-band {
@@ -2124,6 +2171,11 @@
 
       .human-tree-world.is-trail-active .human-trail-row-band.is-trail-related {
         opacity: 0.38;
+      }
+
+      .human-tree-world.is-signal-focus .human-trail-row-band.is-trail-primary,
+      .human-tree-world.is-signal-focus .human-trail-row-band.is-trail-related {
+        opacity: 0.72;
       }
 
       .human-trail-hud {
@@ -2383,7 +2435,7 @@
       }
 
       .human-tree-world.is-trail-active .human-tree-connectors path {
-        opacity: 0.035;
+        opacity: 0.12;
       }
 
       .human-tree-world.is-trail-active .human-tree-connectors path.is-trail-primary,
@@ -4862,6 +4914,10 @@
           padding: 22px 16px 72px;
         }
 
+        .human-view:not(.is-simple) {
+          padding: 0;
+        }
+
         .human-overview h1,
         .human-branch h1 {
           font-size: 34px;
@@ -5219,7 +5275,7 @@
         <span class="legend-item"><i class="legend-mark test"></i>Test</span>
         <span class="legend-item"><i class="legend-mark route"></i>Decide / transfer</span>
         <span class="legend-item"><i class="legend-mark watch"></i>Watch</span>
-        <span>Hover an action for its exact change · click for the full contract</span>
+        <span>Click a card for the full evidence and exact change</span>
       </div>
 
     </main>
@@ -17963,10 +18019,10 @@
             doesNot: "It does not tell Carve whether demand, page role, product language, content, imagery, Merchant data, competition or a platform state caused it.",
           }),
           Object.freeze({
-            title: "Known customer demand exists, but this truthful product is barely or never represented",
-            observe: "Onsite search, paid terms, support/reviews, market research or category demand repeatedly expresses a job this product genuinely serves, while Google coverage is weak or absent.",
-            qualifies: "The demand cluster is durable and commercially useful, the product fit is supported by approved facts, and current Google/query-to-page coverage is materially weaker than the opportunity.",
-            doesNot: "One keyword estimate or competitor ranking is not enough, and a phrase the product cannot substantiate is not an opportunity.",
+            title: "Customer language reveals a valuable way this product could be discovered that its pages and listings do not yet express",
+            observe: "Onsite search, paid terms, support, reviews, research or category demand repeatedly expresses a job this product genuinely serves, while its PDP, collections, internal discovery or Google product representation barely communicates it.",
+            qualifies: "The need is durable and commercially useful, approved product facts support the fit, and the existing experience leaves meaningful truthful coverage or usefulness on the table—even if performance has not recently fallen.",
+            doesNot: "One keyword estimate, competitor phrase or unsupported claim is not an opportunity. The better expression must remain true to the product and useful to the shopper.",
           }),
           Object.freeze({
             title: "Google repeatedly chooses the wrong page for an intended organic-search need",
@@ -18018,6 +18074,12 @@
             qualifies: "The aggregate comparison is honest about the lack of a user-level Search Console ↔ GA4 query join and uses compatible page/market/device/time cohorts.",
             doesNot: "CTR alone is not the outcome. A higher rate can attract worse traffic; a lower rate can accompany useful incremental reach.",
           }),
+          Object.freeze({
+            title: "The product has meaningful visibility, but the result understates a truthful reason to choose it",
+            observe: "The live organic result or Shopping listing is eligible and seen for a valuable shopper task, but customer language, product evidence, stronger owned presentations or fair result comparisons reveal an important difference, use, proof point or visual fact that is not clear before the click.",
+            qualifies: "The distinction is approved, relevant to the query or shopping job, visible in customer choice evidence, and can be expressed without hiding price, availability, limitations or a weaker offer.",
+            doesNot: "A prettier title or competitor style is not automatically better. The opportunity must make the result more useful and improve qualified customer or business value—not only raw CTR.",
+          }),
         ]),
         atc: Object.freeze([
           Object.freeze({
@@ -18068,6 +18130,12 @@
             qualifies: "The events reconcile to real cart/order lines, outcome windows are mature, treatment exposure is known, and traffic/offer/stock mix is comparable enough to interpret.",
             doesNot: "Higher ATC is not success. The change may create accidental adds, wrong variants, false urgency, weak-intent baskets, discount loss or expectation mismatch.",
           }),
+          Object.freeze({
+            title: "Recurring questions, comparisons, or substitutions reveal a product decision the experience could make materially easier",
+            observe: "Customer questions, onsite search, reviews, support, research, recordings or product comparisons repeatedly expose a decision about meaning, difference, fit, compatibility, appearance, proof, variant, delivery or value that the current PDP or buying context handles poorly—even without a recent ATC decline.",
+            qualifies: "The question recurs for the same product/job, matters to a qualified shopper, and a truthful content, hierarchy, asset, choice or offer improvement could answer it without inventing evidence.",
+            doesNot: "One comment, heatmap pattern or competitor feature is not enough. The opportunity must be product-specific, decision-relevant, feasible and judged on purchase quality as well as ATC.",
+          }),
         ]),
         agentic: Object.freeze([
           Object.freeze({
@@ -18105,6 +18173,204 @@
             observe: "Retailer truth changes or a recurring conversational shopping need emerges, creating a product-readiness or coverage gap on AI surfaces even without a historical loss.",
             qualifies: "The fact or demand is real, approved, useful and connected to products with a viable offer; the opportunity is framed as readiness or capture—not a claimed performance cause.",
             doesNot: "Novelty alone does not justify publishing unsupported conversational copy, building every protocol, or optimizing for synthetic prompts with no customer value.",
+          }),
+        ]),
+      });
+
+      /*
+       * Signal detection is deliberately separate from causal investigation.
+       * These contracts say where the observation appears and how to confirm
+       * its exact scope. The inquiry cards below use tools to explain or improve it.
+       */
+      const HUMAN_SIGNAL_DETECTION = Object.freeze({
+        discovery: Object.freeze([
+          Object.freeze({
+            sources: "Google Search Console; the retailer’s page/product cohort map.",
+            inside: "Search Console → Performance → Search results. Use Search type: Web; select Clicks, Impressions, CTR and Average position; filter the exact Pages, Country, Device, Search appearance and complete comparison dates; inspect Queries and Pages or export query × page data.",
+            read: "For a fixed relevant query cluster and page cohort, compare raw impressions, clicks, distinct visible queries and the distribution of page/query coverage. Treat average position as context, not exact rank or market share.",
+            combine: "Search Console can establish the movement. Combine only with the retailer’s URL-to-product map so renamed, redirected, canonicalized or retired pages remain the same cohort.",
+            confirmedWhen: "Relevant coverage materially or persistently falls for the same cohort and complete comparison—not only one low-volume query or a change in average position.",
+          }),
+          Object.freeze({
+            sources: "Onsite search; Google Ads search terms; Search Console; support, reviews and research; Trends or Keyword Planner; approved product truth.",
+            inside: "Shopify → Analytics → Reports → Searches by search query, Searches with no results and Search conversions where available; Google Ads → Insights and reports → Search terms; Search Console → Performance → Queries; support/review topic views with raw verbatims; and the exact Shopify/PIM product record.",
+            read: "Normalize synonymous phrases into one shopper job by market and period. Count recurrence, no-result/no-click behavior, product interactions and commercial relevance; then map the job to a specific approved product fact or use.",
+            combine: "A demand source plus authoritative product truth is required. A second independent demand or customer-voice source strengthens the signal; no session-level join is implied.",
+            confirmedWhen: "A repeated valuable need is genuinely served by the product, while its PDP, collection, internal discovery or Google representation barely expresses that need—even without a recent decline.",
+          }),
+          Object.freeze({
+            sources: "Google Search Console; saved/live Google results or a fixed-query rank panel; the retailer’s intended page-role map.",
+            inside: "Search Console → Performance → Search results → Queries: select the query/regex, then open Pages to see which URLs Google showed. Repeat by Country, Device and date. Compare with a saved live result for the same location/device.",
+            read: "Measure how often the unsuitable page receives impressions/clicks for the named need, which other owned pages appear, and whether the mismatch repeats rather than rotating once.",
+            combine: "Combine query × page evidence with an explicit retailer decision about which page should satisfy that shopper job. A live result confirms presentation; it is not population-level proof by itself.",
+            confirmedWhen: "The same unsuitable page repeatedly owns a valuable need for which a more useful truthful page exists, and the mismatch creates customer or portfolio harm.",
+          }),
+          Object.freeze({
+            sources: "Google Merchant Center; the source feed/Shopify product; the live product listing and landing page.",
+            inside: "Merchant Center → Products → All products or Needs attention → open the exact item; choose the intended country and marketing method/destination; inspect status, visibility, processed attributes and data-source values. Then open the live listing where reproducible.",
+            read: "Resolve item ID/item group, market and surface. Compare processed title, description, image, price, availability, identifiers, shipping, returns and link with the submitted value and authoritative product/offer state at the same time.",
+            combine: "Merchant status plus the authoritative source and live destination are required to name the mismatch. Approval alone does not prove an impression or exact carousel placement.",
+            confirmedWhen: "The exact intended item is limited/missing for that surface, or a timestamped processed/live value disagrees with the intended product or offer.",
+          }),
+          Object.freeze({
+            sources: "Search Console or Merchant product performance; CMS/PIM/feed/theme/merchandising release history; an unaffected comparison cohort.",
+            inside: "Open the relevant performance report for the exact affected pages/items and annotate the release time. Open the change system’s before/after values, actual exposure and rollback state—not only the current record.",
+            read: "Compare complete pre/post periods, the changed objects, unaffected products/pages, and the first divergence. Preserve demand, stock, offer, campaign and simultaneous releases as separate context.",
+            combine: "Performance history and reconstructable change/exposure history are both required. The join is object × market × release time, not a claim of user-level attribution.",
+            confirmedWhen: "The movement begins after the named change, concentrates in exposed objects and differs from a useful control. This confirms the signal and mechanism candidate—not causality.",
+          }),
+        ]),
+        ctr: Object.freeze([
+          Object.freeze({
+            sources: "Google Search Console; optionally aggregate landing-page value from Shopify or GA4.",
+            inside: "Search Console → Performance → Search results; Search type: Web; select Clicks, Impressions, CTR and Average position; filter exact Query/regex, Page, Country, Device, Search appearance and complete comparison dates.",
+            read: "Compare raw counts and CTR inside the same valuable query/page opportunity. Export if needed to bucket comparable position ranges; do not treat one blended average position as the result shoppers saw.",
+            combine: "Search Console establishes click response. Shopify/GA4 may add page × market × device × period value context only; there is no supported Search Console query-to-user/session join.",
+            confirmedWhen: "Sufficient impressions remain in the fixed cohort while clicks/CTR and compatible downstream value weaken beyond ordinary variation or a position/query-mix explanation.",
+          }),
+          Object.freeze({
+            sources: "Merchant Center Analytics; Google Ads product reporting for paid traffic; item/source mapping.",
+            inside: "Merchant Center → Analytics → Products → View all; set Stores to Online store and Traffic to Organic or Ads, then filter the exact product/item, country and dates. For paid-only diagnosis, open Google Ads → Campaigns → Products and keep campaign/network scope comparable.",
+            read: "Use impressions, clicks and CTR for one resolved item/variant and marketing method. Keep Organic, Ads and ordinary Web results separate; annotate product-reporting scope changes.",
+            combine: "Combine with the item-to-product map and compatible Shopify/GA4 product value when qualification matters. Merchant does not supply exact carousel card position or an offer × search-query join.",
+            confirmedWhen: "The same useful item opportunity remains visible but earns fewer qualified clicks/value with stable identity, country, traffic type and reporting scope.",
+          }),
+          Object.freeze({
+            sources: "Saved/live SERP or Shopping-result captures; a fixed-query monitoring tool; Search Console or Merchant performance for scope.",
+            inside: "Open the exact query, country/location, device, date and surface in the capture history. For Shopping, also open Merchant Center → Products → exact item → processed attributes; for organic Web, open the rendered result and owned title/page inputs.",
+            read: "Compare visible title, snippet, image, product/variant, price, availability, rich details, destination and surrounding result composition before versus after.",
+            combine: "A repeated rendered-output capture plus the scoped performance movement is strongest. One personalized manual search is only a clue.",
+            confirmedWhen: "The visible result changed repeatedly for the affected opportunity and the timing/scope matches the observed click response.",
+          }),
+          Object.freeze({
+            sources: "Search Console, Merchant Center or Google Ads—whichever owns the surface; product/offer/stock history for matching.",
+            inside: "Build the same report and filters used for the target product, then add its own prior periods and a small set of truly comparable products/results with the same surface, market, intent and lifecycle.",
+            read: "Compare impressions, clicks, CTR and downstream value using raw counts. Match position/opportunity, price band, availability, brand demand, promotion and product role before interpreting the gap.",
+            combine: "Surface performance plus retailer product/offer context is required; a catalog average or visible competitor is not a fair benchmark.",
+            confirmedWhen: "The product repeatedly underperforms its own fair history or tightly matched internal peers under equivalent opportunity and commercial conditions.",
+          }),
+          Object.freeze({
+            sources: "Search Console or Merchant/Google Ads for pre-click response; Shopify or GA4 for post-click product/page value.",
+            inside: "Use the exact fixed pre-click cohort in its source report. Separately open Shopify product/landing reports or GA4 acquisition/exploration for the compatible page/item, market, device and complete dates.",
+            read: "Compare direction and magnitude of impressions, clicks/CTR, sessions, adds, purchases, contribution and returns. Preserve each source’s grain and denominator.",
+            combine: "This signal requires two aggregate sources. Join only on compatible cohort and time—not Search Console query to GA4 user/session.",
+            confirmedWhen: "Pre-click response and mature post-click value move in materially different directions for the same supported cohort.",
+          }),
+          Object.freeze({
+            sources: "Live/saved organic or Shopping results; Search Console or Merchant visibility; customer voice and approved product evidence.",
+            inside: "Open the exact visible result for a valuable query/job, its performance report, raw support/review/research language, and the approved product facts/assets that could be shown before the click.",
+            read: "Identify a repeated choice-driving distinction, use, proof point or visual fact that qualified shoppers need but the current title, snippet, image, attributes or rich presentation obscures.",
+            combine: "Meaningful visibility plus approved product truth and customer-choice evidence are required. A competitor style or prettier phrase alone is not the signal.",
+            confirmedWhen: "The result is seen for a valuable job yet materially understates a truthful decision-relevant difference that can be expressed without hiding an offer weakness or limitation.",
+          }),
+        ]),
+        atc: Object.freeze([
+          Object.freeze({
+            sources: "Shopify Analytics; the live PDP/cart; mature order and return outcomes.",
+            inside: "Shopify Admin → Analytics → Reports → create/customize a product-level report using Product viewed (session count) and Product added to cart (session count), plus product/variant, date, checkout/purchase, net sales and returns where available. Keep raw counts beside the calculated rate.",
+            read: "For one named product/family and complete matched periods, calculate added sessions ÷ viewed sessions; compare views, adds, purchases and value. Then perform one exact same-item add and inspect the cart line.",
+            combine: "Shopify native product fields establish the signal; the live cart confirms current operation. Use GA4 only when a needed dimension or event discrepancy requires it.",
+            confirmedWhen: "Product-view opportunity stays healthy while added-session counts/rate and mature product value materially or persistently weaken.",
+          }),
+          Object.freeze({
+            sources: "Shopify product reports; GA4 Explore where needed; Markets/catalog, variant, template/experiment and release exposure records.",
+            inside: "Start with the Shopify product-level report. For device/source use GA4 → Explore → Free form with Item ID/name, Device category, Session source/medium, Country and Date plus Items viewed/added/purchased. For market, variant, template or release use the retailer’s exact exposure/source record.",
+            read: "Reproduce one supported slice and a meaningful working comparison with the same product, dates and metric definition; keep item-scoped and session-scoped fields explicit.",
+            combine: "Use only the sources needed for the named dimension. Join product/item × compatible cohort × date; do not fabricate dimensions Shopify or GA4 cannot support.",
+            confirmedWhen: "One defined market, device, source, variant, template or exposed-release cohort diverges consistently while a valid comparison remains stable.",
+          }),
+          Object.freeze({
+            sources: "Hotjar, Microsoft Clarity or FullStory; onsite search; surveys/usability; support, Q&A and reviews.",
+            inside: "Filter one behavior tool’s recordings/heatmaps to the exact product URLs, market, device and dates; open onsite-search queries from those pages; inspect survey/usability tasks and raw support/review/Q&A verbatims for the product/job.",
+            read: "Name the decision—not the gesture: identity, difference, compatibility, fit, scale, proof, variant, delivery, returns or value. Count recurrence and affected qualified sessions/customers where the source allows.",
+            combine: "A recording or heatmap can locate friction; customer voice or observed task behavior is needed to name motive. Independent sources strengthen prevalence but are not forced into a false join.",
+            confirmedWhen: "The same product-specific decision question repeats for a qualified, buyable context across credible observations rather than one rage click or comment.",
+          }),
+          Object.freeze({
+            sources: "Live PDP and cart; browser Network/console; Shopify cart response; RUM/error monitoring and release history when needed.",
+            inside: "Replay the exact market, device, product and variant. Select a valid option, click Add once, inspect request/response, cart line ID/variant/quantity/price and UI feedback; then filter Sentry/Datadog/New Relic or equivalent to the same route/release/fixture.",
+            read: "Record the earliest divergence: selector state, disabled/covered control, delayed response, request error, wrong variant, duplicate line, stale price/stock or misleading confirmation.",
+            combine: "The live operation plus backend/cart truth is required. Telemetry and release logs explain intermittent or cohort-specific failure; an analytics event alone cannot prove success.",
+            confirmedWhen: "The intended valid item reproducibly fails, mis-adds or gives false feedback—or real-user evidence repeatedly shows an intermittent failure the clean smoke test misses.",
+          }),
+          Object.freeze({
+            sources: "Shopify product/order/substitution data; onsite search and recommendations; support/reviews/returns; offer and competitor captures.",
+            inside: "Open the exact product’s views, adds, orders, owned alternatives purchased, cancellations/returns and margin; inspect collection/search/recommendation paths and raw verbatims naming price, stock, delivery, return terms or a product attribute.",
+            read: "Resolve the customer job, rejected option/term/attribute and chosen alternative. Separate owned healthy substitution, offer rejection, misunderstanding and physical-product rejection.",
+            combine: "Behavioral choice plus named customer or post-purchase evidence is strongest. Offer/stock history is required when the rejected term changed.",
+            confirmedWhen: "The same job and named rejection or substitute repeat across independent evidence for qualified shoppers—not merely lower ATC.",
+          }),
+          Object.freeze({
+            sources: "Shopify product analytics; inventory, price/promotion, lifecycle, margin and return data; fair internal product-role map.",
+            inside: "Build a complete-period product table with views, adds, purchases, net sales/contribution and returns. Filter to in-stock mature products, then define a small matched peer set or the product’s own seasonal history.",
+            read: "Compare raw opportunity and value after matching market, source mix, price/promotion, lifecycle, stock depth and product role. Do not use a catalog-wide average as the target.",
+            combine: "Native product performance and retailer commercial/product context are both required to establish fair persistent weakness.",
+            confirmedWhen: "A mature available product remains economically weak across enough matched periods and fair comparisons to justify deeper product/customer improvement work.",
+          }),
+          Object.freeze({
+            sources: "Launch plan and exposure records; Shopify product analytics; campaign/on-site merchandising delivery; stock, price and market readiness.",
+            inside: "Open the stated launch targets by product, audience, market and ramp period; compare with actual eligible impressions/sessions, product views, adds, purchases and value; verify campaign/collection/search/recommendation exposure and buyable stock.",
+            read: "Compare actual versus the documented ramp and sibling/category baselines, with raw counts. Separate missing exposure from weak product-page decision behavior.",
+            combine: "The launch expectation and actual exposure/performance are both required. No prior-product baseline is invented.",
+            confirmedWhen: "The launched product receives enough intended exposure to judge, yet its customer or commercial response remains below a credible stated expectation after normal ramp uncertainty.",
+          }),
+          Object.freeze({
+            sources: "Shopify product/cart/order reports; warehouse contribution; cancellations, returns and customer outcomes; experiment/exposure logs when applicable.",
+            inside: "Build one product/treatment cohort from view and add through final order line; include purchases, discounts, contribution, cancellations, return reasons and outcome maturity. Verify assignment/delivery for any test.",
+            read: "Compare raw adds and ATC with ordered units/value and harm. Check wrong variants, duplicates, weak-intent baskets, discount loss and expectation mismatch.",
+            combine: "This signal requires product/cart data plus mature downstream order/customer data; reconcile by product/variant and approved cohort, not only sessions.",
+            confirmedWhen: "Adds improve for the delivered cohort while mature purchase quality, economics or customer outcome materially worsens.",
+          }),
+          Object.freeze({
+            sources: "Support, Q&A, reviews and onsite search; surveys/usability; one behavior tool; product comparisons and approved product truth.",
+            inside: "Open raw product-tagged questions and verbatims; onsite searches from/around the PDP; usability or survey tasks; filtered recordings for the product/device/market; and the current PDP plus authoritative facts/assets.",
+            read: "Cluster the exact recurring decision, count its recurrence and identify where the current experience fails to answer it. Check whether the desired option is buyable and the answer/asset/evidence actually exists or can be requested.",
+            combine: "A customer-decision source plus the current product experience is required; approved truth/assets establish whether a real improvement is possible. Performance decline is not required.",
+            confirmedWhen: "A repeated, important product decision can be made materially easier through truthful content, hierarchy, imagery, proof, choice or offer presentation.",
+          }),
+        ]),
+        agentic: Object.freeze([
+          Object.freeze({
+            sources: "A fixed-prompt AI visibility tool such as Profound, Scrunch, Semrush or Ahrefs Brand Radar; saved manual outputs; approved product-fit evidence.",
+            inside: "Open the named prompt/topic set by assistant/model, country/locale, date and account/device conditions where supported; inspect mentions, recommendations, citations, linked merchants/products and the raw saved answer.",
+            read: "Track inclusion/omission and cited/selected alternatives over the same fixed prompt panel. Keep prompt count and repeats visible; this is sample visibility, not total platform demand or exact rank.",
+            combine: "The fixed output sample plus approved evidence that the product genuinely fits the task are required. External cited sources may explain the observation later.",
+            confirmedWhen: "Across repeated comparable runs, a valuable fitting product is consistently omitted, misrepresented or displaced—not one stochastic answer.",
+          }),
+          Object.freeze({
+            sources: "GA4; Shopify Agentic/sales-channel analytics where available; server logs and warehouse orders.",
+            inside: "GA4 → Reports → Acquisition → Traffic acquisition or Explore: Session source/medium, full referrer where collected, Landing page, Country, Device and Date. In Shopify, open Sales channels → Agentic and the named Sales, Orders, Online store sessions or conversion view; reconcile orders in the warehouse.",
+            read: "Compare identifiable AI-referral sessions, landing products, purchases, revenue/contribution and returns using stable channel definitions. Keep referral and direct-agent sales separate where the platform allows.",
+            combine: "GA4/Shopify/server/order sources may be combined because referrers are incomplete; document overlap and treat measured referral as a lower bound, not total AI influence.",
+            confirmedWhen: "A defined identifiable AI-referral cohort changes materially in traffic or mature value under stable classification and bot/consent handling.",
+          }),
+          Object.freeze({
+            sources: "Timestamped AI answer/card capture; AI visibility or merchant-feed dashboard; Merchant/Shopify/PIM/site truth and source history.",
+            inside: "Open the raw saved answer/card for the exact assistant, prompt, market and time. Where enabled, open Shopify → Sales channels → Agentic → Catalog search preview and Listing insights; inspect any exposed citations or merchant; compare with Merchant/direct-feed fields and authoritative product/offer values available then.",
+            read: "Resolve product/variant, description, image, price, availability, delivery, returns, compatibility, merchant and link. State provenance as unknown when the surface does not expose it.",
+            combine: "Observed output and timestamped authoritative truth are required. Feed/site/third-party sources are candidate inputs, not assumed provenance.",
+            confirmedWhen: "The captured AI representation is materially wrong, stale, incomplete or non-buyable relative to truth available at that time.",
+          }),
+          Object.freeze({
+            sources: "Saved AI recommendation/referral; GA4 or server redirect/referrer logs; the final owned landing and product/variant/market state.",
+            inside: "Open the exact cited/recommended URL and promise, trace redirects and locale/market routing, then inspect the final page, selected variant, offer and source/referrer fields for the same fixture.",
+            read: "Compare promised product/job/variant/offer with final product identity, locale, availability and landing message.",
+            combine: "The saved recommendation and replayed owned journey are both required; aggregate AI traffic alone cannot identify continuity failure.",
+            confirmedWhen: "The same recommendation/referral reproducibly lands on the wrong product, variant, market, offer or contradictory owned experience.",
+          }),
+          Object.freeze({
+            sources: "Dated capability registry; authorized sandbox/test logs; agent-commerce platform dashboard; Shopify/cart/order/payment/reconciliation records.",
+            inside: "Confirm platform, account, market and product support first. In sandbox/test mode trace item lookup, current terms, cart, consent, payment, order, confirmation, cancellation and reconciliation IDs to the earliest mismatch.",
+            read: "Record exact expected/observed state, product/variant, price/stock, consent, charge/order IDs and whether customer risk exists. Never use an unapproved production charge as a diagnostic.",
+            combine: "Capability proof and transaction-state logs are mandatory; order/payment records confirm downstream integrity.",
+            confirmedWhen: "A supported authorized fixture fails at a named handoff/state or creates wrong-item, duplicate-order, charge, consent or reconciliation risk.",
+          }),
+          Object.freeze({
+            sources: "PIM/Shopify/DAM and release history; support/search/review questions; fixed-prompt visibility samples and relevant external sources.",
+            inside: "Open the newly approved product fact, asset, offer, season or customer question and every intended product. Where available, open Shopify → Sales channels → Agentic → Top search queries, Queries where your products appeared, Catalog search preview and Listing insights; then inspect a fixed set of real shopping prompts/outputs and cited sources.",
+            read: "Map the new truth or recurring need to product representation, page/feed readiness, external evidence and a viable offer. Do not require a prior AI-performance decline.",
+            combine: "Approved new truth or durable customer need plus a supported product/offer is enough to open the opportunity; sampled AI outputs define current coverage, not total demand.",
+            confirmedWhen: "A real approved change or recurring conversational need creates valuable truthful product-readiness or coverage work before performance falls.",
           }),
         ]),
       });
@@ -18230,6 +18496,14 @@
             Object.freeze({ inquiry: "c-offer", why: "Check whether a promotion, price, stock, delivery, or returns message changed click quality." }),
             Object.freeze({ inquiry: "c-paid-delivery", when: "Open only for paid traffic.", why: "Inspect terms, channels, clicked products, and purchased baskets before optimizing CTR." }),
           ]),
+          Object.freeze([
+            Object.freeze({ inquiry: "c-actual-result", why: "Capture what qualified shoppers actually see for the valuable task before proposing a better result." }),
+            Object.freeze({ inquiry: "c-proposition-proof", why: "Identify the approved product difference or proof that genuinely changes choice." }),
+            Object.freeze({ inquiry: "c-organic-copy", when: "Open for an organic Web result.", why: "Shape the owned title and page language around the useful distinction while preserving product truth." }),
+            Object.freeze({ inquiry: "c-shopping-listing", when: "Open for a free Merchant listing or paid Shopping item.", why: "Improve the processed title, image, attributes, and visible product meaning for the exact item." }),
+            Object.freeze({ inquiry: "c-organic-rich", when: "Useful eligible product detail could make the organic result more informative.", why: "Assess whether legitimate price, availability, rating, shipping, returns, image, or product information can help before the click." }),
+            Object.freeze({ inquiry: "c-offer", when: "The visible offer materially affects the shopper’s choice.", why: "Keep a real commercial disadvantage separate from a presentation opportunity." }),
+          ]),
         ]),
         atc: Object.freeze([
           Object.freeze([
@@ -18323,6 +18597,17 @@
             Object.freeze({ inquiry: "a-onsite-entry", when: "Merchandising pushes unsuitable substitution or wrong-product choice.", why: "Inspect the onsite decision path." }),
             Object.freeze({ inquiry: "a-trading-context", why: "Read contribution, discounts, cancellations, returns, and portfolio substitution—not ATC alone." }),
           ]),
+          Object.freeze([
+            Object.freeze({ inquiry: "a-identity-value", when: "The recurring decision is product purpose, audience, difference, or value.", why: "Make the product and its useful distinction understandable sooner." }),
+            Object.freeze({ inquiry: "a-description-specs", when: "The recurring decision is a fact, use, compatibility, limitation, care point, or included item.", why: "Turn approved product truth into useful decision support." }),
+            Object.freeze({ inquiry: "a-size-fit", when: "The recurring decision is size, fit, dimensions, capacity, or units.", why: "Create product-specific guidance that helps the shopper choose confidently." }),
+            Object.freeze({ inquiry: "a-imagery", when: "The recurring decision is appearance, scale, fit, detail, construction, use, or included items.", why: "Use approved imagery to answer the exact visual question." }),
+            Object.freeze({ inquiry: "a-trust-proof", when: "The recurring decision is quality, credibility, risk, warranty, reviews, or proof.", why: "Surface legitimate evidence instead of generic reassurance." }),
+            Object.freeze({ inquiry: "a-findability-hierarchy", when: "A useful answer exists but appears too late or in the wrong place.", why: "Move the answer to the moment it changes the decision." }),
+            Object.freeze({ inquiry: "a-variant-choice", when: "The recurring decision is option meaning, selection, availability, or consequence.", why: "Make valid choices and their consequences clear." }),
+            Object.freeze({ inquiry: "a-offer-availability", when: "The recurring decision is price, promotion, delivery, duties, returns, or stock.", why: "Clarify the exact offer and separate presentation from a real commercial constraint." }),
+            Object.freeze({ inquiry: "a-product-choice", when: "Qualified shoppers understand the offer but repeat one physical or value-based rejection.", why: "Improve positioning, recommend a better owned alternative, or prepare the product decision without disguising reality." }),
+          ]),
         ]),
         agentic: Object.freeze([
           Object.freeze([
@@ -18358,9 +18643,9 @@
 
       const HUMAN_EXPERT_BRANCHES = Object.freeze({
         discovery: Object.freeze({
-          title: "Understand every way a relevant product gains, loses, or fails to capture Google discovery.",
+          title: "Make every relevant product easier to discover for the customer jobs it can genuinely serve.",
           lede:
-            "Carve starts from the exact scoped observation and product truth, then generates the explanations capable of producing it. Demand, page role, full PDP and collection content, internal discovery, Merchant representation, competition and a named platform state can open in any order. A sudden post-release zero makes publication or eligibility highly informative; an uncovered customer need makes language, product truth and page usefulness more informative.",
+            "Carve looks for valuable customer language and product uses the current experience does not fully express. It can improve positioning, full PDP text, collection purpose and copy, page coverage, differentiation, imagery, internal discovery and Shopping representation. Product state, eligibility and technical exceptions remain available, but lead only when the signal points to them.",
           inquiries: Object.freeze([
             Object.freeze({
               id: "d-demand-language",
@@ -18489,7 +18774,7 @@
             Object.freeze({
               id: "d-product-truth",
               group: "Product truth",
-              title: "Is the underlying product data complete, specific, approved, and useful?",
+              title: "Which approved product facts, uses, and distinctions would make this product more useful and findable?",
               tools: ["Shopify / commerce", "PIM", "DAM", "Product specs", "Live PDP"],
               open: [
                 "Exact product and variant record: title, body, vendor, taxonomy, metafields, options, materials, dimensions, weight, capacity, compatibility, included items, care, claims, media, market/locale versions and history.",
@@ -18591,7 +18876,7 @@
             Object.freeze({
               id: "d-pdp-content",
               group: "Product representation",
-              title: "Does the full product page explain the product in the language and detail the search deserves?",
+              title: "How could the full PDP position and explain this product better for the real customer job?",
               tools: ["Live PDP", "Shopify content", "Search Console", "Customer language", "Competitor PDPs"],
               open: [
                 "The rendered H1, subtitle/opening proposition, entire description, headings, benefits, use cases, feature bullets, specifications, materials, dimensions, compatibility, included/excluded items, care, FAQs/Q&A, reviews, images/captions/alt text and variant-specific content.",
@@ -18637,7 +18922,7 @@
             Object.freeze({
               id: "d-collection",
               group: "Product representation",
-              title: "Does the collection clearly represent a useful Google-facing category and link to every intended product?",
+              title: "How could this collection become a better discovery and comparison experience?",
               tools: ["Live collection", "Shopify Collections", "Search Console", "Site navigation + crawl view", "Customer questions"],
               open: [
                 "Collection purpose, title/H1, short intro and full useful copy; products and membership rules; subcategories, filters, comparison dimensions, buying-help links and current inventory depth.",
@@ -18768,7 +19053,7 @@
             Object.freeze({
               id: "d-differentiation",
               group: "Portfolio coverage",
-              title: "Are similar products or pages genuinely distinct—or saying the same thing?",
+              title: "How should similar products be positioned so each has a clear, truthful reason to exist?",
               tools: ["Catalog family", "Search Console", "Live pages", "Onsite search", "Customer evidence"],
               open: [
                 "Sibling products/pages side by side: intended audience/job, physical facts, price, stock, title, opening, full description, images, collections, queries, landing value and selected substitutes.",
@@ -18814,7 +19099,7 @@
             Object.freeze({
               id: "d-merchant",
               group: "Channel representation",
-              title: "Does Google’s product listing receive the right item, attributes, image, and offer?",
+              title: "How could Google’s product listing express the item, its useful difference, imagery, and offer more effectively?",
               tools: ["Merchant Center", "Feed platform", "Shopify product", "Live landing"],
               open: [
                 "Merchant Products → exact item → status/visibility and processed attributes for the affected country/destination.",
@@ -18939,11 +19224,11 @@
                 Object.freeze({
                   mode: "route",
                   when: "The disadvantage is real and outside a safe product-content change.",
-                  title: "Route the exact market, offer, PR, link, product, or assortment decision.",
+                  title: "Route only the one observed disadvantage to its accountable owner.",
                   owner: "Commercial, Brand/PR, SEO, Product or Buying—one named owner per mechanism.",
                   before: "Action: “Improve SEO because competitors rank higher.”",
-                  after: "Decision: “For Sweden, matched jackets offer two-day delivery at SEK 1,049 versus our 7–10 days at SEK 1,299. Content is accurate. Commercial/Logistics must choose whether to test delivery or price; SEO evaluates a separate loss of category links after migration.”",
-                  how: ["Separate competitor differences into content, offer, product, authority and platform composition.", "Quantify affected demand/value and available options.", "Send each owner one bounded decision; do not disguise it with copy."],
+                  after: "Delivery decision only: “For Sweden, matched jackets offer two-day delivery while ours is 7–10 days. Content and product fit are accurate. Logistics/Commercial must choose whether to run a named two-day-delivery pilot for this cohort, with cost, capacity, success, and stop rules.”",
+                  how: ["Separate competitor differences into content, offer, product, authority and platform composition.", "Select only the mechanism supported in this case and quantify its affected demand/value.", "Send one owner one bounded decision; open other mechanisms as separate cases rather than bundling them."],
                   verify: "The accountable owner accepts/rejects the named option and the unresolved discovery case remains open until outcome evidence arrives.",
                 }),
               ]),
@@ -18984,9 +19269,9 @@
           ]),
         }),
         ctr: Object.freeze({
-          title: "Understand why the right Google impression becomes—or fails to become—a valuable click.",
+          title: "Make every truthful Google result and Shopping listing more useful and compelling to the right shopper.",
           lede:
-            "Carve starts with the exact scoped signal and identifies the Google surface before interpreting it. It reconstructs what was visible before the click, keeps organic product results, free Merchant listings and paid Shopping separate, and uses post-click value only as an outcome—not as a cause of the original click. A CTR number alone never earns a rewrite.",
+            "Carve studies what shoppers actually see, then improves the product difference, title and supporting page language, Shopping title and imagery, useful rich information, proof and offer presentation. Surface identity, fair-comparison and paid-delivery checks stay conditional so a dashboard definition never becomes the work itself.",
           inquiries: Object.freeze([
             Object.freeze({
               id: "c-google-product-surface",
@@ -19159,7 +19444,7 @@
             Object.freeze({
               id: "c-organic-copy",
               group: "Organic result inputs",
-              title: "Do the title, prominent page text, and full page give Google a clear truthful result?",
+              title: "Which truthful product difference should the organic result communicate before the click?",
               tools: ["Live result", "Rendered PDP", "Shopify SEO fields", "Search Console", "Customer language"],
               open: [
                 "Actual title link and snippet for representative queries; HTML `<title>`, meta description, H1, subtitle, first useful paragraph, prominent headings/body text and internal anchor text.",
@@ -19205,7 +19490,7 @@
             Object.freeze({
               id: "c-shopping-listing",
               group: "Shopping result inputs",
-              title: "Does the Shopping listing communicate the exact product before the click?",
+              title: "Which title, image, attribute, or offer would help the right shopper choose this Shopping listing?",
               tools: ["Merchant Center", "Feed platform", "Live Shopping", "Product record"],
               open: [
                 "Processed title, description, main/additional images, variant attributes, category/product type, identifiers, price/promotion, availability, shipping, returns and ratings for exact item/country/destination.",
@@ -19305,7 +19590,7 @@
             Object.freeze({
               id: "c-organic-rich",
               group: "Organic product presentation",
-              title: "Did useful price, availability, rating, shipping, return, image, or product detail disappear—or become wrong?",
+              title: "Which eligible product and offer details would make the organic result more useful before the click?",
               tools: ["Saved/live Google", "Search Console", "Merchant Center", "Rendered PDP", "Structured-data test"],
               open: [
                 "Saved and repeated result captures for the exact query, page, market, device and date. Record which product information actually appeared; do not infer it from markup alone.",
@@ -19342,9 +19627,9 @@
                   when: "All facts are correct but one truthful decision-relevant visual or proof input is weak and a controlled cohort is feasible.",
                   title: "Test one eligible representation input—not a bundle of rich-result changes.",
                   owner: "Ecommerce/SEO/Feed/Creative approves the bounded product cohort.",
-                  before: "A cookware family uses indistinguishable pack shots and hides verified pan diameter until late in titles.",
-                  after: "A representative assigned cohort tests approved scale imagery or earlier verified diameter while IDs, price, offer and campaigns remain stable; compare query quality, qualified clicks, purchase value and returns.",
-                  how: ["Choose one decision mechanism and representative SKU cohorts.", "Change one field; preserve IDs, source versions and untreated products.", "Allow processing/outcome lag and read all assigned products, including zero rows."],
+                  before: "A cookware family uses indistinguishable pack shots although an approved in-scale pan image already exists for every assigned product.",
+                  after: "For the preassigned cohort only, set the existing approved in-scale image as the primary eligible product image. Keep title, diameter wording, IDs, price, offer, campaigns, and unassigned products fixed.",
+                  how: ["Choose the one visual decision mechanism and representative SKU cohorts.", "Change only the approved primary-image field; preserve IDs, source versions and untreated products.", "Allow processing/outcome lag and read all assigned products, including zero rows."],
                   verify: "The treatment was processed and observed where possible; mature qualified value improves without truth, policy, margin or return harm.",
                 }),
               ]),
@@ -19468,9 +19753,9 @@
           ]),
         }),
         atc: Object.freeze({
-          title: "Understand what happened after a product-page visit—and why the intended product was or was not added.",
+          title: "Make every qualified product-page visit easier to understand, trust, and turn into the right purchase decision.",
           lede:
-            "Carve combines the native commerce signal with shopping the exact PDP. It investigates the source promise, product identity, complete description and specifications, fit, imagery, proof, information hierarchy, variants, offer and product reality as separate questions. It opens technical evidence immediately only when the buying action actually fails.",
+            "Carve improves the promise that brings the shopper, product identity and positioning, complete description and specifications, fit guidance, imagery, proof, information hierarchy, variants, offer and the choice between products. Measurement, alternate-path and technical checks stay conditional unless the observed signal directly names them.",
           inquiries: Object.freeze([
             Object.freeze({
               id: "a-signal-live",
@@ -19628,10 +19913,10 @@
                 Object.freeze({
                   mode: "correct",
                   when: "A localized product fact, translation, unit, catalog mapping, price/offer display, or market promise is objectively wrong relative to approved truth and applicable checkout.",
-                  title: "Correct the first market-specific representation fault.",
+                  title: "Correct one market-specific measurement meaning at its source.",
                   owner: "Carve may correct approved connected locale/product fields; Market/Product/Legal approve meaning and claims; catalogs, tax, duties, shipping, and checkout route to their owners.",
-                  before: "Swedish PDP translates “regular fit” as loose fit, labels garment width as body chest, and says duties included although checkout adds import fees.",
-                  after: "Use approved Swedish fit term, label garment measurement and correct cm/in conversion, and replace duties promise with the applicable approved term. Leave product facts, real fees, price, and other markets unchanged.",
+                  before: "The Swedish size table labels the jacket’s flat garment width as body chest circumference, causing shoppers to compare unlike measurements.",
+                  after: "For the Swedish locale only, label the field “Plaggets bröstbredd, mätt plant” and show the approved centimetre value. Leave fit wording, duties, price, delivery, claims, and every other market unchanged.",
                   how: ["Replay the exact market/locale/product/variant/customer state through checkout.", "Compare each localized field and unit with approved truth and identify the first controlled divergence.", "Correct or route only affected market fields; obtain local/Legal review and QA source, live PDP, selected variant, cart, and checkout."],
                   verify: "The market receives accurate local product meaning, units, catalog state, and applicable offer with no fallback, other-market, or sibling leakage.",
                 }),
@@ -19734,7 +20019,7 @@
             Object.freeze({
               id: "a-description-specs",
               group: "Answer the buying questions",
-              title: "Does the full description answer the facts, use cases, compatibility, and limitations needed to choose?",
+              title: "Which buying question should the description and product facts answer more clearly?",
               tools: ["Full PDP", "Product/PIM data", "Onsite search", "Support + Q&A", "Returns", "Competitors"],
               open: [
                 "Entire visible description, headings, highlights, benefits, use cases, specifications, materials, dimensions, capacity, compatibility, included/excluded items, care, warranty and limitations—plus where each appears on mobile.",
@@ -19836,7 +20121,7 @@
             Object.freeze({
               id: "a-imagery",
               group: "Answer the buying questions",
-              title: "Can imagery show fit, scale, detail, variant, and included parts well enough to decide?",
+              title: "Which visual decision should the image set make easier?",
               tools: ["PDP gallery", "DAM", "Recordings", "Reviews/UGC", "Competitors"],
               open: [
                 "Exact selected variant’s hero/gallery/video on mobile and desktop; approved asset inventory and mapping.",
@@ -19892,7 +20177,7 @@
             Object.freeze({
               id: "a-trust-proof",
               group: "Resolve risk",
-              title: "Does the shopper have credible proof for the risk they are taking?",
+              title: "Which real shopper risk needs stronger, credible proof?",
               tools: ["Reviews + ratings", "Q&A", "UGC", "Support", "Certifications / warranty", "PDP"],
               open: [
                 "Rating count, distribution and trend; verified/incentivized/syndicated status; negative reviews and merchant responses; variant/product grouping; customer media; unanswered Q&A.",
@@ -19915,10 +20200,10 @@
                 Object.freeze({
                   mode: "test",
                   when: "Verified relevant proof exists but is hard to evaluate or find.",
-                  title: "Expose representative proof at the point of uncertainty.",
+                  title: "Move one verified fit-proof summary beside size selection.",
                   owner: "Carve may rearrange approved content blocks if permitted; Reviews/Legal/Product own proof validity.",
-                  before: "“4.4 ★” only; 387 reviews and fit distribution are hidden; repeated Q&A about machine washing is unanswered.",
-                  after: "Show “4.4 from 387 verified reviews,” rating distribution, product-specific fit summary with method, representative UGC and approved care answer beside care details; retain accessible negative reviews.",
+                  before: "The page shows “4.4 ★,” while 126 verified fit responses indicating that this jacket runs slightly small are buried inside the review tool below the gallery.",
+                  after: "Beside size selection, show the existing verified fit summary: “Runs slightly small · based on 126 verified fit responses,” linked to the full distribution. Keep rating display, UGC, care copy, price, and selector behavior fixed.",
                   how: ["Resolve proof source, scope, verification and recency.", "Choose the exact customer risk and corresponding proof—not a generic trust-badge strip.", "Draft placement/block change and test with performance/accessibility guardrails."],
                   verify: "Proof is accurate and product-specific; decision completion improves without increased quality/expectation complaints.",
                 }),
@@ -19938,7 +20223,7 @@
             Object.freeze({
               id: "a-findability-hierarchy",
               group: "Resolve risk",
-              title: "Does the answer exist—but appear too late, in the wrong place, or in an unusable hierarchy?",
+              title: "Which important answer should move closer to the decision moment?",
               tools: ["Rendered mobile PDP", "Recordings / journeys", "Heatmaps with caution", "Usability", "Theme sections"],
               open: [
                 "The complete mobile/desktop information order and sticky elements; section/block visibility; accordion defaults; selector/add area; delivery, returns, size, compatibility, proof and key facts.",
@@ -19961,10 +20246,10 @@
                 Object.freeze({
                   mode: "test",
                   when: "A verified answer exists but repeated evidence shows it is missed at the decision point.",
-                  title: "Move only the relevant answer next to the choice it resolves.",
+                  title: "Move the verified compatibility answer beside model choice.",
                   owner: "Ecommerce/Design/Engineering owns template placement; Carve writes the exact before/after brief and test.",
-                  before: "Delivery and returns sit in a footer accordion; compatibility is under “More”; size guide opens far above the selector on mobile.",
-                  after: "Show delivery/returns beside Add, label “Compatibility” beside model choice, and open the product-specific size guide from the size selector. Leave price, claims and unrelated layout fixed.",
+                  before: "The verified compatible-device list is inside a generic “More” accordion below reviews; shoppers repeatedly leave the model selector to search for it.",
+                  after: "Move that unchanged compatibility list directly below model choice and label it “Compatible models.” Leave delivery, returns, size guide, price, claims, and every unrelated block fixed.",
                   how: ["Name the repeated task and existing answer/block ID.", "Specify exact current and proposed placement/label for affected template/products/devices.", "Run accessibility/performance QA and a controlled placement test."],
                   verify: "Qualified shoppers find the answer and progress; page speed, accessibility and purchase/return guardrails hold.",
                 }),
@@ -20196,9 +20481,9 @@
           ]),
         }),
         agentic: Object.freeze({
-          title: "Apply an AI and agent-commerce lens across product discovery, representation, referral, and supported transactions.",
+          title: "Make products easier for AI assistants to understand, recommend, hand off, and—where genuinely supported—buy safely.",
           lede:
-            "AI is an evidence overlay, not a second ecommerce funnel. Carve studies saved recommendations, citations, product cards, external sources, identifiable referrals, feed and Merchant outputs, supported agent handoffs, and orders. Representation findings bridge into Discovery/CTR; referrals carry their promise into the normal PDP/ATC investigation; only direct supported transactions keep a unique agentic path.",
+            "AI is an evidence overlay, not a second ecommerce funnel. Carve improves useful product representation, conversational coverage, cited evidence and referral continuity, then carries the shopper into the normal discovery, click and product-decision work. Measurement and direct-transaction checks appear only when that exact journey is observable and supported.",
           inquiries: Object.freeze([
             Object.freeze({
               id: "g-measurement-scope",
@@ -20325,7 +20610,7 @@
             Object.freeze({
               id: "g-product-representation",
               group: "Product truth across AI inputs",
-              title: "Which observable representation disagrees with current product truth—and what source, if any, is actually exposed?",
+              title: "How useful, complete, current, and legible is the product representation available to AI surfaces?",
               tools: ["PIM / Shopify", "Rendered PDP + collections", "Merchant Center", "Direct product feed", "Structured data", "Citations"],
               open: [
                 "Approved product and variant truth, full rendered PDP/collection/guide content, structured data, robots/access state, canonical page, brand/manufacturer material and dated source history.",
@@ -20359,11 +20644,11 @@
                 Object.freeze({
                   mode: "test",
                   when: "Inputs are truthful but an important product/job distinction is buried, generic, or absent from useful customer content.",
-                  title: "Rewrite the relevant product or collection content around the actual decision—not around ‘AI optimization.’",
+                  title: "Test one human-useful PDP decision block before wider propagation.",
                   owner: "Carve drafts; Brand/Product approve; Ecommerce owns page/collection role.",
                   before: "Ten sibling pans share ‘premium cookware for every kitchen’; nothing explains induction compatibility, oven limit, coating, weight or best use.",
-                  after: "Each PDP opens with its distinct job and proof; specs state induction compatibility and oven limit; the collection compares material, coating, weight and use; limitations stay explicit. Merchant/direct-feed descriptions are adapted from the same truth.",
-                  how: ["Build the category decision model and sibling role map from approved facts and customer questions.", "Rewrite full PDP/collection blocks and structured attributes with no unsupported claims or duplicate positioning.", "QA every surface and measure human discovery/conversion plus sampled AI representation; causal credit requires a valid test."],
+                  after: "For the assigned 28 cm pan PDPs only, replace the generic opening block with the verified decision: “Uncoated stainless-steel 28 cm pan for high-heat searing; induction compatible; oven safe to 260°C.” Keep collection copy, Merchant/direct-feed descriptions, imagery, price, and unassigned PDPs fixed.",
+                  how: ["Build the category decision model and choose the one product/job distinction this PDP treatment will test.", "Rewrite only the assigned opening block from approved facts, including the important limitation; freeze every other surface.", "QA delivery and measure human discovery/conversion plus sampled AI representation; propagate to other surfaces only as separately reviewed work."],
                   verify: "Shoppers and sampled assistants can distinguish the products using accurate evidence; sibling roles and downstream value do not worsen.",
                 }),
                 Object.freeze({
@@ -26898,8 +27183,8 @@
         minScale: 0.07,
         maxScale: 1.8,
         humanTransform: { x: 0, y: 0, scale: 0.86 },
-        humanMinScale: 0.2,
-        humanMaxScale: 1.45,
+        humanMinScale: 0.1,
+        humanMaxScale: 1.7,
         humanTransformFrame: null,
         humanGlideFrame: null,
         viewMode: "human",
@@ -27580,11 +27865,6 @@
           node.addEventListener("pointerdown", () => setRovingCard(node));
           node.addEventListener("keydown", (event) => {
             if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key)) return;
-            if (state.humanTrail && (event.key === "ArrowLeft" || event.key === "ArrowRight")) {
-              event.preventDefault();
-              focusHumanTrailStage(event.key === "ArrowLeft" ? -1 : 1);
-              return;
-            }
             event.preventDefault();
             moveByDirection(node, event.key);
           });
@@ -27600,8 +27880,33 @@
           });
         });
         elements.humanView.querySelectorAll("[data-human-detail]").forEach((node) => {
-          const openDetail = () => {
-            commitHumanTrailForNode(node);
+          const openDetail = (event, forceDrawer = false) => {
+            const isSignal = node.dataset.humanKind === "expert-signal";
+            if (isSignal) {
+              const signalIndex = Number(node.dataset.humanIndex || 0);
+              if (forceDrawer || event?.target?.closest?.(".node-open-line")) {
+                openHumanDetail(
+                  node.dataset.humanDetailBranch,
+                  "expert-signal",
+                  signalIndex,
+                  node,
+                );
+                return;
+              }
+              const alreadySelected =
+                state.humanTrail?.origin === "signal" &&
+                state.humanTrail.branchId === node.dataset.humanDetailBranch &&
+                state.humanTrail.signalIndex === signalIndex;
+              if (alreadySelected) {
+                clearHumanTrail(true);
+                renderHumanExpertBranch(node.dataset.humanDetailBranch);
+                return;
+              }
+              commitHumanTrailForNode(node);
+              const branchId = node.dataset.humanDetailBranch;
+              renderHumanExpertBranch(branchId);
+              return;
+            }
             openHumanDetail(
               node.dataset.humanDetailBranch,
               node.dataset.humanKind,
@@ -27609,11 +27914,14 @@
               node,
             );
           };
-          node.addEventListener("click", openDetail);
+          node.addEventListener("click", (event) => openDetail(event));
           node.addEventListener("keydown", (event) => {
-            if (event.key === "Enter" || event.key === " ") {
+            if (event.key === "Enter") {
               event.preventDefault();
-              openDetail();
+              openDetail(event, true);
+            } else if (event.key === " ") {
+              event.preventDefault();
+              openDetail(event);
             }
           });
         });
@@ -27808,6 +28116,9 @@
         world.classList.toggle("is-trail-active", Boolean(trail));
         world.classList.toggle("is-signal-focus", trail?.origin === "signal");
         world
+          .querySelectorAll('[data-human-kind="expert-signal"][aria-current]')
+          .forEach((item) => item.removeAttribute("aria-current"));
+        world
           .querySelectorAll(".is-trail-primary, .is-trail-related, .is-trail-end")
           .forEach((item) => item.classList.remove("is-trail-primary", "is-trail-related", "is-trail-end"));
         world.querySelectorAll('[aria-current="step"]').forEach((item) => item.removeAttribute("aria-current"));
@@ -27825,6 +28136,7 @@
             )
           : null;
         signalNode?.classList.add("is-trail-primary");
+        if (trail.origin === "signal") signalNode?.setAttribute("aria-current", "true");
 
         const markRow = (row, className) => {
           if (!Number.isInteger(row)) return;
@@ -27842,22 +28154,17 @@
 
         const signalFocus = trail.origin === "signal";
         if (signalFocus) {
-          [trail.primaryRow, ...trail.relatedRows].forEach((row, routeIndex) => {
-            const className = routeIndex === 0 ? "is-trail-primary" : "is-trail-related";
-            world
-              .querySelector(
-                `[data-human-kind="expert-inquiry"][data-human-index="${row}"]`,
-              )
-              ?.classList.add(className);
-            world
-              .querySelector(`.human-trail-row-band[data-trail-row="${row}"]`)
-              ?.classList.add(className);
+          [trail.primaryRow, ...trail.relatedRows].forEach((row) => {
+            markRow(row, "is-trail-primary");
             world
               .querySelectorAll(
                 `[data-trail-signal="${trail.signalIndex}"][data-trail-row="${row}"]`,
               )
-              .forEach((item) => item.classList.add(className));
+              .forEach((item) => item.classList.add("is-trail-primary"));
           });
+          world
+            .querySelectorAll(`[data-trail-signal="${trail.signalIndex}"], [data-trail-bus]`)
+            .forEach((item) => item.classList.add("is-trail-primary"));
         } else {
           markRow(trail.primaryRow, "is-trail-primary");
         }
@@ -27870,7 +28177,7 @@
         }
 
         const measureNode = world.querySelector('[data-human-kind="expert-measure"]');
-        if (!signalFocus) measureNode?.classList.add("is-trail-end");
+        measureNode?.classList.add("is-trail-end");
 
         if (!signalFocus && activeConnector && measureNode) {
           const responseNode = world.querySelector(
@@ -27996,7 +28303,9 @@
         if (!trail) return false;
         state.humanTrail = trail;
         state.humanTrailStage = humanTrailStageForNode(node) || 1;
+        state.humanSelectedSignal = trail.origin === "signal" ? trail.signalIndex : -1;
         syncHumanTrailVisualState();
+        updateStatus();
         if (announceChange) {
           const inquiryTitle = HUMAN_EXPERT_BRANCHES[trail.branchId]?.inquiries[
             trail.primaryRow
@@ -28014,7 +28323,9 @@
         const hadTrail = Boolean(state.humanTrail);
         state.humanTrail = null;
         state.humanTrailStage = 1;
+        state.humanSelectedSignal = -1;
         syncHumanTrailVisualState();
+        updateStatus();
         if (hadTrail && announceChange) announce("Reasoning trail cleared; every investigation is visible");
       }
 
@@ -28039,38 +28350,29 @@
       }
 
       function renderExpertSignalSummary(signal, branchId, signalIndex) {
-        const routes = HUMAN_SIGNAL_ROUTES[branchId]?.[signalIndex] || [];
+        const detection = HUMAN_SIGNAL_DETECTION[branchId]?.[signalIndex];
+        if (!detection) return "";
         return `
           <div class="human-card-stack">
-            ${humanCardLine("Observed", signal.observe, "", 235)}
-            ${humanCardLine("A real case when", signal.qualifies, "proof", 235)}
-            ${humanCardLine("Still unknown", signal.doesNot, "caution", 220)}
+            ${humanCardLine("See it in", detection.sources, "", 155)}
+            ${humanCardLine("Exact report or view", detection.inside, "", 190)}
+            ${humanCardLine("Treat it as a real signal when", detection.confirmedWhen, "proof", 180)}
           </div>
-          <div class="human-signal-routes">
-            ${routes
-              .slice(0, 3)
-              .map((route, index) => {
-                const inquiry = humanInquiryById(branchId, route.inquiry);
-                return `<div class="human-signal-route"><b>${
-                  index === 0 ? "Best first observation" : "Also highly informative"
-                }</b>${escapeHtml(inquiry?.title || route.inquiry)}</div>`;
-              })
-              .join("")}
-          </div>
+          <div class="human-card-next"><b>This opens the work; it does not choose the cause.</b> The full recipe contains fields, filters, source combinations, and limits.</div>
         `;
       }
 
       function renderExpertInquirySummary(inquiry) {
         return `
-          <div class="human-expert-group">${escapeHtml(inquiry.group)} · independent hypothesis</div>
-          <div class="human-tool-chips">
-            <b>May open together</b>
-            ${inquiry.tools.map((tool) => `<span>${escapeHtml(tool)}</span>`).join("")}
-          </div>
+          <div class="human-expert-group">${escapeHtml(inquiry.group)} · improvement or explanatory lens</div>
           <div class="human-card-stack">
-            ${humanCardLine("Open", inquiry.open.slice(0, 2).join(" "), "", 260)}
-            ${humanCardLine("Inspect for", inquiry.inspect.slice(0, 2).join(" "), "", 260)}
-            ${humanCardLine("Compare", inquiry.compare.join(" "), "caution", 225)}
+            ${humanCardLine("What to look for", inquiry.inspect.slice(0, 2).join(" "), "", 280)}
+            ${humanCardLine("The comparison that matters", inquiry.compare.join(" "), "caution", 230)}
+            ${humanCardLine("A useful first observation", inquiry.open[0], "", 205)}
+          </div>
+          <div class="human-tool-chips">
+            <b>Evidence available</b>
+            ${inquiry.tools.map((tool) => `<span>${escapeHtml(tool)}</span>`).join("")}
           </div>
         `;
       }
@@ -28078,23 +28380,35 @@
       function renderExpertJudgmentSummary(inquiry) {
         return `
           <div class="human-card-stack">
-            ${humanCardLine("Confidence rises when", inquiry.identifies, "proof", 320)}
-            ${humanCardLine("Confidence falls when", inquiry.against, "reject", 255)}
-            ${humanCardLine("Best next observation", inquiry.open[0], "", 210)}
+            ${humanCardLine("This mechanism is supported when", inquiry.identifies, "proof", 320)}
+            ${humanCardLine("It is weakened or ruled out when", inquiry.against, "reject", 255)}
+            ${humanCardLine("Useful next observation", inquiry.open[0], "", 210)}
             ${humanCardLine("Expert caveat", inquiry.caveat, "caution", 235)}
           </div>
           <div class="human-card-next"><b>Explained scope:</b> split only the products, variants, queries, markets, devices, sources, dates and value this evidence covers. Keep every contradiction and residual live.</div>
         `;
       }
 
-      function renderExpertResponseSummary(inquiry) {
-        const response = inquiry.responses[0];
+      function humanLeadResponse(branchId, inquiry) {
+        const conditional = HUMAN_CONDITIONAL_CHECKS[branchId]?.has(inquiry.id);
+        return conditional
+          ? inquiry.responses[0]
+          : inquiry.responses.find((item) => item.mode === "test") ||
+              inquiry.responses.find((item) => item.mode === "correct") ||
+              inquiry.responses[0];
+      }
+
+      function renderExpertResponseSummary(inquiry, branchId) {
+        const response = humanLeadResponse(branchId, inquiry);
+        const orderedResponses = [
+          response,
+          ...inquiry.responses.filter((item) => item !== response),
+        ];
         const modes = Array.from(new Set(inquiry.responses.map((item) => item.mode)));
         return `
           ${renderHumanActionBadges(modes)}
           <div class="human-response-preview">
-            <b>${escapeHtml(expertModeLabel(response.mode))} when the evidence earns it</b>
-            ${escapeHtml(response.title)}
+            <b>Why this is the right move when supported</b>
             <small>${escapeHtml(response.when)}</small>
           </div>
           <div class="human-action-diff">
@@ -28106,7 +28420,7 @@
             ${humanCardLine("Complete when", response.verify, "proof", 225)}
           </div>
           <div class="human-response-options">
-            ${inquiry.responses
+            ${orderedResponses
               .map(
                 (item) => `<div class="human-response-option"><b>${escapeHtml(
                   expertModeLabel(item.mode),
@@ -28122,10 +28436,10 @@
       const HUMAN_HYPOTHESIS_LABELS = Object.freeze({
         "d-demand-language": "Demand or customer language changed—or the product does not express a real need it serves.",
         "d-page-job": "The wrong page owns the shopper job, or several pages compete without clear roles.",
-        "d-product-truth": "Important approved product facts are missing, false, or inconsistent at source.",
+        "d-product-truth": "Approved facts, uses, and distinctions could make the product easier to understand and find.",
         "d-lifecycle-state": "The product’s temporary, seasonal, discontinued, replacement, or intentional-exclusion state is misrepresented or mishandled.",
-        "d-pdp-content": "The PDP does not clearly communicate the product’s searchable meaning and useful decision facts.",
-        "d-collection": "Collection purpose, copy, membership, or useful product links fail the category job.",
+        "d-pdp-content": "The PDP could position and explain the product more clearly for a real customer job.",
+        "d-collection": "The collection could become a more useful discovery and comparison experience.",
         "d-internal-links": "Useful navigation or internal discovery paths were removed, weakened, or never existed.",
         "d-new-page": "A valuable, distinct customer job has no useful page that can complete it.",
         "d-differentiation": "Sibling products or pages look interchangeable, despite a real distinction—or no defensible distinction exists.",
@@ -28137,10 +28451,10 @@
         "c-fair-comparison": "The apparent CTR loss is position, query, device, market, surface, or reporting mix—not weaker persuasion.",
         "c-actual-result": "The result shoppers actually saw changed or differs from the retailer’s intended representation.",
         "c-identity": "The visible product, variant, image, offer, or destination does not stay the same through the journey.",
-        "c-organic-copy": "Owned title or page text is false, contradictory, unclear, or hides a relevant truthful distinction.",
-        "c-shopping-listing": "The processed Shopping title, image, item, attribute, link, or offer is wrong or weak.",
+        "c-organic-copy": "Organic result inputs could communicate one useful, truthful product difference more clearly.",
+        "c-shopping-listing": "Shopping title, image, attributes, and offer could help the right shopper choose more confidently.",
         "c-paid-delivery": "Paid auction, budget, query, channel, or product-delivery economics changed—not listing persuasion.",
-        "c-organic-rich": "Useful organic product information became wrong, ineligible, or stopped appearing.",
+        "c-organic-rich": "Eligible product and offer details could make the organic result more useful before the click.",
         "c-proposition-proof": "The result lacks one understandable, truthful reason to prefer this product.",
         "c-offer": "Price, stock, promotion, delivery, returns, or seller trust is wrong, unclear, or less competitive.",
         "c-boundary": "A post-click problem is being mistaken for a pre-click CTR problem.",
@@ -28150,11 +28464,11 @@
         "a-market-localization": "The market receives the wrong language, units, product meaning, catalog state, landed offer, policy, or regulatory truth.",
         "a-buying-path": "Shoppers succeed through another valid buying path—or fail in a path the headline metric misses.",
         "a-identity-value": "Qualified shoppers do not quickly understand what the product is, who it is for, or why it is worth choosing.",
-        "a-description-specs": "A concrete product fact, compatibility answer, specification, or included item is missing or unclear.",
+        "a-description-specs": "Description and product facts could answer one important buying question more clearly.",
         "a-size-fit": "Size, fit, dimensions, capacity, units, or product-specific guidance leaves a real decision unresolved.",
-        "a-imagery": "The images fail to answer a specific question about appearance, scale, fit, detail, or included items.",
-        "a-trust-proof": "A real credibility or risk question lacks legitimate proof, reviews, policy, or reassurance.",
-        "a-findability-hierarchy": "The answer exists but shoppers cannot find or understand it at the decision moment.",
+        "a-imagery": "The image set could make one visual decision about appearance, scale, fit, detail, or included items easier.",
+        "a-trust-proof": "One real shopper risk could be answered with stronger, legitimate proof.",
+        "a-findability-hierarchy": "One important existing answer could move closer to the decision it resolves.",
         "a-variant-choice": "Option labels, availability, selection state, or variant consequences are confusing or wrong.",
         "a-offer-availability": "The desired option is unavailable, or price, promotion, delivery, duties, or returns are unacceptable or unclear.",
         "a-function-performance": "Selection or add-to-cart breaks, stalls, double-adds, or is obstructed for the affected fixture.",
@@ -28162,11 +28476,163 @@
         "a-product-choice": "Qualified shoppers understand the choice and repeatedly reject the physical product or its value for the same job.",
         "g-measurement-scope": "AI traffic or value is being measured with the wrong referrer, channel, session, order, or comparison boundary.",
         "g-visibility-recommendation": "Assistants do not select the product for a fitting task, or rely on different external evidence.",
-        "g-product-representation": "An observable AI representation disagrees with current product truth or a controlled source.",
+        "g-product-representation": "Useful product truth could be clearer and more legible to both assistants and shoppers.",
         "g-referral-continuity": "The recommendation, link, market, product, variant, or landing promise breaks during an AI referral.",
         "g-agentic-transaction": "A supported agent-mediated cart, consent, payment, order, or reconciliation handoff fails.",
         "g-value-learning": "AI activity changes, but its real customer and commercial value is misunderstood.",
       });
+
+      const HUMAN_WORKTREE_DISPLAY_ORDER = Object.freeze({
+        discovery: [
+          "d-demand-language",
+          "d-page-job",
+          "d-pdp-content",
+          "d-collection",
+          "d-differentiation",
+          "d-new-page",
+          "d-images",
+          "d-internal-links",
+          "d-product-truth",
+          "d-merchant",
+          "d-market-competition",
+          "d-lifecycle-state",
+          "d-platform-exception",
+        ],
+        ctr: [
+          "c-proposition-proof",
+          "c-organic-copy",
+          "c-shopping-listing",
+          "c-organic-rich",
+          "c-offer",
+          "c-actual-result",
+          "c-fair-comparison",
+          "c-google-product-surface",
+          "c-identity",
+          "c-paid-delivery",
+          "c-boundary",
+        ],
+        atc: [
+          "a-identity-value",
+          "a-description-specs",
+          "a-size-fit",
+          "a-imagery",
+          "a-trust-proof",
+          "a-findability-hierarchy",
+          "a-variant-choice",
+          "a-offer-availability",
+          "a-product-choice",
+          "a-onsite-entry",
+          "a-source-promise",
+          "a-market-localization",
+          "a-trading-context",
+          "a-buying-path",
+          "a-function-performance",
+          "a-signal-live",
+        ],
+        agentic: [
+          "g-visibility-recommendation",
+          "g-product-representation",
+          "g-referral-continuity",
+          "g-value-learning",
+          "g-measurement-scope",
+          "g-agentic-transaction",
+        ],
+      });
+
+      /*
+       * The source arrays retain stable indexes for routes, saved links, and cases.
+       * The visual order leads with proactive customer/product opportunity, then
+       * performance gaps, and only then reproduced operational exceptions.
+       */
+      const HUMAN_SIGNAL_DISPLAY_ORDER = Object.freeze({
+        discovery: [1, 0, 2, 4, 3],
+        ctr: [5, 3, 0, 1, 2, 4],
+        atc: [8, 2, 5, 6, 4, 0, 1, 7, 3],
+        agentic: [5, 0, 1, 2, 3, 4],
+      });
+
+      const HUMAN_OPPORTUNITY_SIGNALS = new Set([
+        "discovery:1",
+        "ctr:5",
+        "atc:8",
+        "agentic:5",
+      ]);
+
+      const HUMAN_OPERATION_SIGNALS = new Set([
+        "discovery:3",
+        "atc:3",
+        "agentic:4",
+      ]);
+
+      const HUMAN_CONDITIONAL_CHECKS = Object.freeze({
+        discovery: new Set(["d-lifecycle-state", "d-platform-exception"]),
+        ctr: new Set([
+          "c-fair-comparison",
+          "c-google-product-surface",
+          "c-identity",
+          "c-paid-delivery",
+          "c-boundary",
+        ]),
+        atc: new Set(["a-buying-path", "a-function-performance", "a-signal-live"]),
+        agentic: new Set(["g-measurement-scope", "g-agentic-transaction"]),
+      });
+
+      const HUMAN_CONTEXT_LENSES = Object.freeze({
+        discovery: new Set(),
+        ctr: new Set(["c-actual-result"]),
+        atc: new Set(["a-source-promise", "a-onsite-entry"]),
+        agentic: new Set(["g-value-learning"]),
+      });
+
+      function humanDisplayInquiries(branchId, inquiries) {
+        const order = HUMAN_WORKTREE_DISPLAY_ORDER[branchId] || [];
+        const rank = new Map(order.map((id, index) => [id, index]));
+        return inquiries
+          .map((inquiry, index) => ({ inquiry, index }))
+          .sort(
+            (left, right) =>
+              (rank.get(left.inquiry.id) ?? Number.MAX_SAFE_INTEGER) -
+                (rank.get(right.inquiry.id) ?? Number.MAX_SAFE_INTEGER) ||
+              left.index - right.index,
+          );
+      }
+
+      function humanDisplaySignals(branchId, signals) {
+        const order = HUMAN_SIGNAL_DISPLAY_ORDER[branchId] || signals.map((_, index) => index);
+        const seen = new Set();
+        return [
+          ...order
+            .filter((index) => Number.isInteger(index) && signals[index] && !seen.has(index))
+            .map((index) => {
+              seen.add(index);
+              return { signal: signals[index], index };
+            }),
+          ...signals
+            .map((signal, index) => ({ signal, index }))
+            .filter(({ index }) => !seen.has(index)),
+        ];
+      }
+
+      function humanSignalRoleLabel(branchId, signalIndex) {
+        const key = `${branchId}:${signalIndex}`;
+        if (HUMAN_OPPORTUNITY_SIGNALS.has(key)) {
+          return "Proactive improvement opportunity · no decline required";
+        }
+        if (HUMAN_OPERATION_SIGNALS.has(key)) {
+          return "Reproduced operation signal · open only when observed";
+        }
+        return "Performance signal · exact source and scope";
+      }
+
+      function humanInquiryRoleLabel(branchId, inquiryId) {
+        if (HUMAN_CONDITIONAL_CHECKS[branchId]?.has(inquiryId)) {
+          return "Only when indicated · confidence or operational exception";
+        }
+        if (HUMAN_CONTEXT_LENSES[branchId]?.has(inquiryId)) {
+          return "Shared customer or surface context · may route to another lens";
+        }
+        return "Product, customer, or market improvement lens";
+      }
 
       function humanHypothesisLabel(inquiry) {
         return HUMAN_HYPOTHESIS_LABELS[inquiry.id] || inquiry.title;
@@ -28483,7 +28949,7 @@
       }
 
       function renderHumanExpertBranch(branchId) {
-        return renderSimpleHumanBranch(branchId);
+        elements.humanView.classList.remove("is-simple");
         const branch = HUMAN_GUIDE.branches[branchId];
         const expertBranch = HUMAN_EXPERT_BRANCHES[branchId];
         const signals = HUMAN_EXPERT_SIGNALS[branchId];
@@ -28491,75 +28957,74 @@
 
         const color = HUMAN_BRANCH_COLORS[branchId];
         const inquiries = expertBranch.inquiries;
-        const width = 4400;
-        const startY = 620;
+        const allDisplayInquiries = humanDisplayInquiries(branchId, inquiries);
+        const selectedSignalIndex =
+          state.humanSelectedSignal >= 0 && HUMAN_SIGNAL_ROUTES[branchId]?.[state.humanSelectedSignal]
+            ? state.humanSelectedSignal
+            : -1;
+        const focusedInquiryIds = new Set(
+          selectedSignalIndex >= 0
+            ? HUMAN_SIGNAL_ROUTES[branchId][selectedSignalIndex].map((route) => route.inquiry)
+            : [],
+        );
+        const displayInquiries =
+          selectedSignalIndex >= 0
+            ? allDisplayInquiries.filter(({ inquiry }) => focusedInquiryIds.has(inquiry.id))
+            : allDisplayInquiries;
+        const allDisplaySignals = humanDisplaySignals(branchId, signals);
+        const displaySignals =
+          selectedSignalIndex >= 0
+            ? allDisplaySignals.filter(({ index }) => index === selectedSignalIndex)
+            : allDisplaySignals;
+        const width = 3820;
+        const startY = 470;
         const rowGap = 825;
         const signalX = 60;
-        const signalGap = 740;
-        const signalY = signals.map((_, index) => 600 + index * signalGap);
-        const proactiveX = 500;
-        const proactiveTop = signalY[signalY.length - 1] + signalGap;
-        const caseX = 3000;
+        const signalGap = 640;
+        const signalY = new Map(
+          displaySignals.map(({ index }, displayIndex) => [index, 460 + displayIndex * signalGap]),
+        );
+        const caseX = 2670;
         const caseTop = 52;
-        const inquiryBusX = 1020;
-        const inquiryX = 1100;
-        const judgmentX = 1790;
-        const responseX = 2490;
-        const responseBusX = 3400;
-        const measureX = 3550;
-        const measureTop = startY + ((inquiries.length - 1) * rowGap) / 2 - 20;
-        const height = Math.max(
-          startY + inquiries.length * rowGap + 310,
-          proactiveTop + 520,
-        );
+        const inquiryBusX = 650;
+        const inquiryX = 730;
+        const judgmentX = 1410;
+        const responseX = 2100;
+        const responseBusX = 2950;
+        const measureX = 3070;
+        const measureTop = startY + ((displayInquiries.length - 1) * rowGap) / 2 - 20;
+        const height = startY + displayInquiries.length * rowGap + 310;
         const connectors = [];
-        const inquiryIndexById = new Map(
-          inquiries.map((inquiry, index) => [inquiry.id, index]),
-        );
 
-        signals.forEach((_, signalIndex) => {
-          const routes = HUMAN_SIGNAL_ROUTES[branchId]?.[signalIndex] || [];
-          routes.forEach((route, routeIndex) => {
-            const inquiryIndex = inquiryIndexById.get(route.inquiry);
-            if (inquiryIndex === undefined) return;
-            connectors.push(
-              humanCurve(
-                signalX + 370,
-                signalY[signalIndex] + 405 + routeIndex * 44,
-                inquiryX,
-                startY + inquiryIndex * rowGap + 88 + routeIndex * 14,
-                "is-priority-route",
-                `data-trail-signal="${signalIndex}" data-trail-row="${inquiryIndex}" data-trail-rank="${routeIndex}"`,
-              ),
-            );
-          });
+        displaySignals.forEach(({ index: signalIndex }) => {
+          connectors.push(
+            humanCurve(
+              signalX + 370,
+              signalY.get(signalIndex) + 240,
+              inquiryBusX,
+              signalY.get(signalIndex) + 240,
+              selectedSignalIndex >= 0
+                ? "is-signal-bundle is-priority-route"
+                : "is-signal-bundle",
+              selectedSignalIndex >= 0
+                ? `data-trail-signal="${signalIndex}" data-signal-bundle="${signalIndex}"`
+                : `data-signal-bundle="${signalIndex}"`,
+            ),
+          );
         });
         connectors.push(
-          `<path class="is-continuation" d="M ${inquiryBusX} ${startY + 260} L ${inquiryBusX} ${
-            startY + (inquiries.length - 1) * rowGap + 300
+          `<path class="is-continuation" data-trail-bus d="M ${inquiryBusX} ${startY + 220} L ${inquiryBusX} ${
+            startY + (displayInquiries.length - 1) * rowGap + 300
           }"></path>`,
         );
         connectors.push(
           `<path class="is-continuation" d="M ${responseBusX} ${startY + 300} L ${responseBusX} ${
-            startY + (inquiries.length - 1) * rowGap + 300
+            startY + (displayInquiries.length - 1) * rowGap + 300
           }"></path>`,
         );
-        connectors.push(
-          `<path class="is-loop" d="M 1465 407 C 1465 485, ${inquiryBusX} 475, ${inquiryBusX} ${
-            startY + 260
-          }" marker-end="url(#human-arrow-muted)"></path>`,
-        );
-        connectors.push(
-          `<path class="is-loop" d="M 2470 390 C 2470 500, ${inquiryBusX + 120} 500, ${inquiryBusX} ${
-            startY + 260
-          }" marker-end="url(#human-arrow-muted)"></path>`,
-        );
-        connectors.push(
-          humanCurve(proactiveX + 430, proactiveTop + 205, inquiryBusX, proactiveTop + 205, "is-continuation"),
-        );
 
-        inquiries.forEach((inquiry, index) => {
-          const rowY = startY + index * rowGap;
+        displayInquiries.forEach(({ inquiry, index }, displayIndex) => {
+          const rowY = startY + displayIndex * rowGap;
           const trailAttributes = `data-trail-row="${index}"`;
           connectors.push(
             humanCurve(
@@ -28606,98 +29071,89 @@
 
         const caseExample = HUMAN_AGENT_CASES[branchId];
         elements.humanView.innerHTML = `
-          <div class="human-trail-hud" data-human-trail-hud hidden>
-            <small>Following one live line of reasoning</small>
-            <strong></strong>
-            <div class="human-trail-options" data-human-trail-options hidden></div>
-            <nav class="human-trail-stage-rail" data-human-trail-stage-rail hidden aria-label="Move through this evidence line"></nav>
-            <span></span>
-          </div>
           <div
             class="human-tree-world"
             data-tree-kind="branch"
             data-tree-width="${width}"
             data-tree-height="${height}"
-            style="--tree-width:${width}px;--tree-height:${height}px;--branch-color:${color};--gesture-left:3000px"
+            style="--tree-width:${width}px;--tree-height:${height}px;--branch-color:${color};--gesture-left:3290px"
           >
             <header class="human-tree-intro">
               <small>${escapeHtml(branch.label)} · one entry lens</small>
               <h1>${escapeHtml(expertBranch.title)}</h1>
               <p>
-                The heading names an initial evidence lens. It is not a diagnosis or reasoning step
-                and never replaces the precise signal. Carve carries the original
-                observation into a non-linear expert investigation and keeps several explanations live.
-                The cards are reusable expert lenses and examples—not a closed list of causes or moves.
+                Carve looks for ways to make the product easier to discover, understand, compare,
+                trust, and choose—even when nothing is broken. The precise signal opens a non-linear
+                investigation. Customer, product, positioning, content, imagery, offer, and experience
+                improvements lead; truth, measurement, eligibility, and technical checks are promoted
+                only when the observation makes them relevant.
               </p>
             </header>
             ${humanAgentBoard({
-              left: 900,
+              left: 800,
               top: 52,
-              width: 1130,
-              height: 355,
+              width: 1080,
+              height: 270,
               title: "Persistent expert attention for every product—not a checklist or queue.",
               description: expertBranch.lede,
               memory: [
-                "<b>Preserve:</b> the exact signal, scope, definition, value and comparison",
-                "<b>Hold:</b> several explanations, contradictions and evidence for/against",
-                "<b>Choose:</b> the observation that best separates what is still plausible",
-                "<b>Continue:</b> split, jump, route, learn and reopen until the residual is understood",
+                "<b>Improve:</b> product meaning, positioning, content, imagery, offer and customer decisions",
+                "<b>Reason:</b> hold several explanations; seek evidence for and against",
               ],
               choice:
                 "Analysis capacity is effectively unlimited. No product is ignored. Scarce traffic, approvals, creative production, inventory and customer risk still constrain action—not investigation.",
             })}
-            ${humanNode({
-              id: "expert-evidence",
-              branch: branchId,
-              kind: "expert-evidence",
-              left: 2120,
-              top: 52,
-              width: 770,
-              height: 355,
-              kicker: "Evidence universe · use what the retailer has",
-              title: "Carve chooses tools from the question—not the other way round.",
-              detail: "Commerce, product truth, storefront, Google, analytics, behavior, customer voice, returns, campaign, market and experiment evidence can be opened together when they separate the live explanations.",
-              extra: `<div class="human-evidence-mini">${HUMAN_EVIDENCE_STACK.slice(0, 8)
-                .map((item) => `<span>${escapeHtml(item.title)}</span>`)
-                .join("")}</div>`,
-              footer: "Open the full ecommerce evidence stack, exact views, and limits →",
-            })}
             <div class="human-tree-gesture-hint">
-              <span class="human-gesture-desktop">Drag or scroll to move · pinch or Command/Control + scroll to zoom · click a signal to reveal its investigations</span>
-              <span class="human-gesture-touch">Drag to move · pinch to zoom · tap a signal to reveal its investigations</span>
+              <span class="human-gesture-desktop">Drag or scroll to move · pinch or Command/Control + scroll to zoom · click a signal to focus every connected branch</span>
+              <span class="human-gesture-touch">Drag to move · pinch to zoom · tap a signal to focus every connected branch</span>
             </div>
-            ${humanStageLabel(signalX, "01 · Observe — preserve the precise signal", 540)}
-            ${humanStageLabel(caseX, "Persistent case memory—not an intermediate problem", 430)}
-            ${humanStageLabel(inquiryX, "02 · Investigate — open the best separating evidence", 540)}
-            ${humanStageLabel(judgmentX, "03 · Identify or rule out — demand enough proof", 540)}
-            ${humanStageLabel(responseX, "04 · Respond — make the exact supported move", 540)}
-            ${humanStageLabel(measureX, "05 · Learn — measure, split, or reopen", 540)}
-            ${inquiries
-              .map((inquiry, index) => {
-                const rowY = startY + index * rowGap;
-                return `<div class="human-trail-row-band" data-trail-row="${index}" style="left:${inquiryX - 34}px;top:${rowY - 48}px;width:${responseX + 836 - (inquiryX - 34)}px;height:770px"><span>${escapeHtml(
-                  inquiry.group,
-                )} · one possible evidence line</span></div>`;
+            ${humanStageLabel(signalX, "01 · Notice — where the opportunity or loss appears", 410)}
+            ${humanStageLabel(caseX, "The exact case stays attached throughout", 335)}
+            ${humanStageLabel(inquiryX, "02 · Explore — customer and product improvement questions first", 410)}
+            ${humanStageLabel(judgmentX, "03 · Understand — what the evidence actually supports", 410)}
+            ${humanStageLabel(responseX, "04 · Improve — one concrete change, owner, and reason", 410)}
+            ${humanStageLabel(measureX, "05 · Learn — measure, split, or reopen", 410)}
+            ${(() => {
+              const firstConditional = displayInquiries.findIndex(({ inquiry }) =>
+                HUMAN_CONDITIONAL_CHECKS[branchId]?.has(inquiry.id),
+              );
+              return firstConditional > 0
+                ? `<div class="human-tree-rule" style="left:${inquiryX}px;top:${
+                    startY + firstConditional * rowGap - 86
+                  }px">only if the signal or contradiction points here → measurement, integrity, or operational exceptions</div>`
+                : "";
+            })()}
+            ${displayInquiries
+              .map(({ inquiry, index }, displayIndex) => {
+                const rowY = startY + displayIndex * rowGap;
+                const rowClass = HUMAN_CONDITIONAL_CHECKS[branchId]?.has(inquiry.id)
+                  ? " is-conditional"
+                  : HUMAN_CONTEXT_LENSES[branchId]?.has(inquiry.id)
+                    ? " is-context"
+                    : "";
+                return `<div class="human-trail-row-band${rowClass}" data-trail-row="${index}" style="left:${inquiryX - 34}px;top:${rowY - 48}px;width:${responseX + 836 - (inquiryX - 34)}px;height:770px"><span>${escapeHtml(
+                  humanInquiryRoleLabel(branchId, inquiry.id),
+                )} · ${escapeHtml(inquiry.group)}</span></div>`;
               })
               .join("")}
             ${humanConnectorSvg(connectors, color)}
-            ${signals
-              .map((signal, index) =>
+            ${displaySignals
+              .map(({ signal, index }) =>
                 humanNode({
                   id: "expert-signal",
                   branch: branchId,
                   kind: "expert-signal",
                   index,
                   left: signalX,
-                  top: signalY[index],
+                  top: signalY.get(index),
                   width: 370,
-                  height: 600,
+                  height: 480,
                   step: "01",
-                  kicker: "Observed signal · retains its full grain",
+                  kicker: humanSignalRoleLabel(branchId, index),
                   title: signal.title,
                   detail: "",
                   extra: renderExpertSignalSummary(signal, branchId, index),
-                  footer: "Open qualification, uncertainty, and case fields →",
+                  footer: "Open the full detection recipe, limits, and connected branches →",
                 }),
               )
               .join("")}
@@ -28708,38 +29164,20 @@
               left: caseX,
               top: caseTop,
               width: 480,
-              height: 355,
+              height: 245,
               kicker: "Living case · never generalized away",
               title: "The original observation, exact scope, and unexplained value travel together.",
               detail: caseExample.start,
-              extra: `
-                <div class="human-card-stack">
-                  ${humanCardLine("Carries", "Product/variant/page/item/query or job · market/device/source/surface · dates/lifecycle · metric definition/counts/value · baseline · stock/offer · recent changes", "", 255)}
-                  ${humanCardLine("Never assumes", "that the branch label, one dashboard, one correlation, or one best practice is the cause", "caution", 220)}
-                </div>
-              `,
+              extra: `<div class="human-card-next"><b>Carries:</b> exact product/job, market, source, dates, value, offer, recent changes, live explanations, and unresolved remainder.</div>`,
               footer: "Open the full case memory and an expert investigation example →",
             })}
-            ${humanNode({
-              id: "expert-proactive",
-              branch: branchId,
-              kind: "expert-proactive",
-              left: proactiveX,
-              top: proactiveTop,
-              width: 430,
-              height: 430,
-              kicker: "Proactive attention · no decline required",
-              title: "Carve also opens cases when new truth or opportunity appears.",
-              detail: "New products, facts, assets, seasons, offers, customer questions, surfaces and proven shared faults deserve the same depth before a dashboard turns red.",
-              extra: `<div class="human-evidence-mini">${HUMAN_PROACTIVE_TRIGGERS.slice(0, 4)
-                .map((item) => `<span>${escapeHtml(item.title)}</span>`)
-                .join("")}</div>`,
-              footer: "Open proactive triggers and blast-radius logic →",
-            })}
-            ${inquiries
-              .map((inquiry, index) => {
-                const rowY = startY + index * rowGap;
-                const primaryMode = inquiry.responses[0]?.mode || "watch";
+            ${displayInquiries
+              .map(({ inquiry, index }, displayIndex) => {
+                const rowY = startY + displayIndex * rowGap;
+                const leadResponse = humanLeadResponse(branchId, inquiry);
+                const primaryMode = leadResponse?.mode || "watch";
+                const conditional = HUMAN_CONDITIONAL_CHECKS[branchId]?.has(inquiry.id);
+                const contextLens = HUMAN_CONTEXT_LENSES[branchId]?.has(inquiry.id);
                 return `
                   ${humanNode({
                     id: "expert-inquiry",
@@ -28751,7 +29189,7 @@
                     width: 610,
                     height: 535,
                     step: "02",
-                    kicker: "Independent expert investigation",
+                    kicker: humanInquiryRoleLabel(branchId, inquiry.id),
                     title: inquiry.title,
                     detail: "",
                     extra: renderExpertInquirySummary(inquiry),
@@ -28768,7 +29206,11 @@
                     height: 655,
                     step: "03",
                     kicker: "Evidence threshold · not a deterministic rule",
-                    title: "When would a world-class operator believe this explanation?",
+                    title: conditional
+                      ? "When does this exception materially constrain the result?"
+                      : contextLens
+                        ? "What does this context explain—and which improvement question should it open?"
+                      : "What shows this would create a genuinely better product or customer experience?",
                     detail: "",
                     extra: renderExpertJudgmentSummary(inquiry),
                     footer: "Open evidence levels, counter-evidence, and split logic →",
@@ -28783,10 +29225,18 @@
                     width: 800,
                     height: 700,
                     step: "04",
-                    kicker: "Concrete response · confidence and permission both matter",
-                    title: "What Carve could actually change, test, route, or leave alone",
+                    kicker: conditional
+                      ? "Conditional response · only when the exception is material"
+                      : contextLens
+                        ? "Context response · preserve the signal and open the right improvement lens"
+                      : "Concrete improvement · confidence and permission both matter",
+                    title:
+                      leadResponse?.title ||
+                      (conditional
+                        ? "Correct the exact fault, contain risk, or return to improvement work"
+                        : "Create one exact customer or product improvement"),
                     detail: "",
-                    extra: renderExpertResponseSummary(inquiry),
+                    extra: renderExpertResponseSummary(inquiry, branchId),
                     footer: "Open every valid outcome, exact how-to, owner, and completion test →",
                     actionColor: HUMAN_ACTION_COLORS[primaryMode] || HUMAN_ACTION_COLORS.watch,
                   })}
@@ -28809,7 +29259,7 @@
               extra: renderHumanMeasureSummary(branchId),
               footer: "Open outcome, guardrails, reversal, transfer, and reopen rules →",
             })}
-            <div class="human-tree-rule" style="left:485px;top:${startY - 50}px">each signal points to its highest-information first observations · every other inquiry remains available</div>
+            <div class="human-tree-rule" style="left:485px;top:${startY - 50}px">select a signal to gather its useful branches · click it again or press Escape for the full worktree</div>
             <div class="human-tree-rule" style="left:${responseBusX - 112}px;top:${measureTop + 215}px">all outcomes update the same living case</div>
             <div class="human-tree-rule" style="left:1370px;top:${height - 90}px">nothing unexplained is silently closed · no product is skipped because attention is scarce</div>
           </div>
@@ -28820,7 +29270,7 @@
       }
 
       function renderHumanOverview() {
-        return renderSimpleHumanOverview();
+        elements.humanView.classList.remove("is-simple");
         const width = 2680;
         const height = 2360;
         const color = "#8b4a2c";
@@ -29371,7 +29821,6 @@
                   `[data-human-kind="${kind}"][data-human-index="${button.dataset.followHumanIndex || ""}"]`,
                 );
                 if (!node) return;
-                commitHumanTrailForNode(node);
                 focusHumanNode(
                   node,
                   elements.humanView.clientWidth <= 720 ? 0.88 : 0.98,
@@ -29393,30 +29842,31 @@
 
         if (kind === "expert-signal") {
           const firstRoutes = HUMAN_SIGNAL_ROUTES[branchId]?.[index] || [];
+          const detection = HUMAN_SIGNAL_DETECTION[branchId]?.[index];
           elements.detailTitle.textContent = signal.title;
           elements.detailContent.innerHTML = `
             <p class="human-detail-lead">${escapeHtml(signal.observe)}</p>
             ${humanDrawerStages(1)}
-            <div class="human-detail-grid">
-              <div class="human-detail-cell">
-                <strong>This opens a real case when</strong>
-                <span>${escapeHtml(signal.qualifies)}</span>
-              </div>
-              <div class="human-detail-cell">
-                <strong>It still does not tell Carve</strong>
-                <span>${escapeHtml(signal.doesNot)}</span>
-              </div>
-            </div>
             <section class="drawer-section">
-              <h3>The signal is not replaced by “${escapeHtml(branch.label)}”</h3>
-              <p class="caveat">${escapeHtml(HUMAN_CASE_MEMORY.rule)}</p>
+              <h3>Where Carve detects this signal</h3>
+              <p class="caveat">This is the detection recipe. The investigation cards below use different reports, views, comparisons, and customer evidence to explain the movement or design a better experience.</p>
+              <div class="human-detail-grid">
+                <div class="human-detail-cell"><strong>Source systems</strong><span>${escapeHtml(detection?.sources || "")}</span></div>
+                <div class="human-detail-cell"><strong>Exact report, tab, and filters</strong><span>${escapeHtml(detection?.inside || "")}</span></div>
+                <div class="human-detail-cell"><strong>Fields, grain, and comparison</strong><span>${escapeHtml(detection?.read || "")}</span></div>
+                <div class="human-detail-cell"><strong>Sources to combine—and the join boundary</strong><span>${escapeHtml(detection?.combine || "")}</span></div>
+                <div class="human-detail-cell"><strong>Count it as a real signal when</strong><span>${escapeHtml(detection?.confirmedWhen || "")}</span></div>
+              </div>
             </section>
             <section class="drawer-section">
-              <h3>The live case retains all of this</h3>
-              ${humanDetailList(HUMAN_CASE_MEMORY.fields)}
+              <h3>What this observation means—and what it does not</h3>
+              <div class="human-detail-grid">
+                <div class="human-detail-cell"><strong>Enough to investigate</strong><span>${escapeHtml(signal.qualifies)}</span></div>
+                <div class="human-detail-cell"><strong>Not a diagnosis</strong><span>${escapeHtml(signal.doesNot)}</span></div>
+              </div>
             </section>
             <section class="drawer-section">
-              <h3>Live evidence branches for this exact signal</h3>
+              <h3>What Carve may investigate to understand or improve it</h3>
               <div class="human-detail-grid">
                 ${firstRoutes
                   .map((route, routeIndex) => {
@@ -29590,9 +30040,9 @@
           ).filter((entry) => entry.inquiry.id !== inquiry.id);
           elements.detailContent.innerHTML = `
             <p class="human-detail-lead">
-              This is one reusable evidence lens—not explanation ${index + 1} and not a cause by itself.
-              Carve opens it when its observations can separate the explanations still compatible
-              with the exact case, then combines what it finds with independent evidence.
+              Start with the customer or product question on the card. Open the exact views below
+              to understand the current experience, what shoppers need, and which concrete improvement
+              or real constraint the evidence supports. Carve may open several of these lenses together.
             </p>
             ${humanDrawerStages(kind === "expert-judgment" ? 3 : 2)}
             <section class="drawer-section">
@@ -30311,7 +30761,7 @@
         const viewportWidth = elements.humanView.clientWidth;
         const viewportHeight = elements.humanView.clientHeight;
         const mobile = viewportWidth <= 720;
-        const mobileScale = clamp(viewportWidth / 420, 0.82, 0.9);
+        const mobileScale = clamp(viewportWidth / 460, 0.8, 0.86);
         const scale =
           kind === "overview"
             ? mobile
@@ -30343,7 +30793,7 @@
         setHumanTransform({
           scale,
           x: mobile ? 8 : 28,
-          y: mobile ? 8 : kind === "branch" ? -430 : 18,
+          y: mobile ? 8 : 18,
         });
       }
 
@@ -30983,8 +31433,12 @@
         const expertIds = new Set();
         Object.entries(HUMAN_EXPERT_BRANCHES).forEach(([branchId, expertBranch]) => {
           const signals = HUMAN_EXPERT_SIGNALS[branchId] || [];
+          const signalDetection = HUMAN_SIGNAL_DETECTION[branchId] || [];
           const signalRoutes = HUMAN_SIGNAL_ROUTES[branchId] || [];
           if (signals.length < 4) errors.push(`${branchId} expert map needs at least four precise signals`);
+          if (signalDetection.length !== signals.length) {
+            errors.push(`${branchId} needs one detection contract per precise signal`);
+          }
           if (signalRoutes.length !== signals.length) {
             errors.push(`${branchId} needs one starting-observation set per precise signal`);
           }
@@ -30992,6 +31446,12 @@
             ["title", "observe", "qualifies", "doesNot"].forEach((field) => {
               if (!hasValue(signal[field])) {
                 errors.push(`${branchId} expert signal ${index + 1} is missing ${field}`);
+              }
+            });
+            const detection = signalDetection[index];
+            ["sources", "inside", "read", "combine", "confirmedWhen"].forEach((field) => {
+              if (!hasValue(detection?.[field])) {
+                errors.push(`${branchId} expert signal ${index + 1} detection is missing ${field}`);
               }
             });
           });
@@ -32673,7 +33133,11 @@
             state.humanBranch === "all"
               ? "All four investigation lenses"
               : HUMAN_GUIDE.branches[state.humanBranch].label;
-          elements.status.textContent = `${branchText} · human investigation`;
+          const selectedSignal =
+            state.humanBranch !== "all" && state.humanSelectedSignal >= 0
+              ? " · signal focused · click it again or press Escape for all"
+              : "";
+          elements.status.textContent = `${branchText}${selectedSignal} · human investigation`;
           return;
         }
         const branchText =
@@ -32695,17 +33159,33 @@
 
       function getHumanSearchEntries() {
         return Object.entries(HUMAN_EXPERT_BRANCHES).flatMap(([branchId, branch]) => {
-          const signals = HUMAN_EXPERT_SIGNALS[branchId].map((signal, index) => ({
-            branch: branchId,
-            kind: "expert-signal",
-            index,
-            label: "Precise signal",
-            title: signal.title,
-            excerpt: signal.observe,
-            text: [signal.title, signal.observe, signal.qualifies, signal.doesNot]
-              .join(" ")
-              .toLowerCase(),
-          }));
+          const signals = HUMAN_EXPERT_SIGNALS[branchId].map((signal, index) => {
+            const detection = HUMAN_SIGNAL_DETECTION[branchId]?.[index];
+            return {
+              branch: branchId,
+              kind: "expert-signal",
+              index,
+              label: HUMAN_OPPORTUNITY_SIGNALS.has(`${branchId}:${index}`)
+                ? "Proactive opportunity"
+                : "Precise signal",
+              title: signal.title,
+              excerpt: signal.observe,
+              text: [
+                signal.title,
+                signal.observe,
+                signal.qualifies,
+                signal.doesNot,
+                detection?.sources,
+                detection?.inside,
+                detection?.read,
+                detection?.combine,
+                detection?.confirmedWhen,
+              ]
+                .filter(Boolean)
+                .join(" ")
+                .toLowerCase(),
+            };
+          });
           const inquiries = branch.inquiries.flatMap((inquiry, index) => {
             const shared = [
               inquiry.group,
@@ -33001,7 +33481,9 @@
               `[data-human-kind="${entry.kind}"][data-human-index="${entry.index}"]`,
             );
             if (trigger) {
-              commitHumanTrailForNode(trigger, false);
+              if (entry.kind === "expert-signal") {
+                commitHumanTrailForNode(trigger, false);
+              }
               focusHumanNode(
                 trigger,
                 elements.humanView.clientWidth <= 720 ? 0.9 : 0.98,
@@ -33499,12 +33981,6 @@
         },
         true,
       );
-
-      elements.humanView.addEventListener("click", (event) => {
-        if (!state.humanTrail) return;
-        if (event.target.closest(".human-tree-node, .human-trail-hud, a, button, input, summary")) return;
-        clearHumanTrail(true);
-      });
 
       function beginHumanPinch() {
         const points = Array.from(humanPointers.values());
@@ -34009,7 +34485,11 @@
             clearSearch();
           } else if (state.humanTrail) {
             event.preventDefault();
+            const branchId = state.humanTrail.branchId;
             clearHumanTrail(true);
+            if (branchId && state.viewMode === "human") {
+              renderHumanExpertBranch(branchId);
+            }
           } else if (state.selectedId) {
             event.preventDefault();
             clearSelection();
@@ -34107,6 +34587,7 @@
           "State the expected result and falsifier, measure the delivered change, and reopen what remains.",
         ]),
         signals: HUMAN_EXPERT_SIGNALS,
+        signalDetection: HUMAN_SIGNAL_DETECTION,
         routes: HUMAN_SIGNAL_ROUTES,
         branches: HUMAN_EXPERT_BRANCHES,
         hypothesisLabels: HUMAN_HYPOTHESIS_LABELS,
@@ -34119,6 +34600,7 @@
             humanTransform: { ...state.humanTransform },
             viewMode: state.viewMode,
             humanBranch: state.humanBranch,
+            humanSelectedSignal: state.humanSelectedSignal,
             activeBranch: state.activeBranch,
             activeOpportunity: state.activeOpportunity,
             collapsedBranches: Array.from(state.collapsedBranches),
