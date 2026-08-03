@@ -306,6 +306,32 @@
         background: #fffaf2;
       }
 
+      .tree-card[data-kind="market-signal"] {
+        border-color: rgba(92, 74, 111, 0.62);
+        background: #f1edf4;
+        box-shadow: inset 4px 0 0 rgba(92, 74, 111, 0.72), 0 5px 18px rgba(49, 39, 28, 0.075);
+      }
+
+      .tree-card[data-kind="market-signal"] .card-copy {
+        display: none;
+      }
+
+      .tree-card[data-kind="market-signal"] .card-title {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+      }
+
+      .tree-card.is-market-route {
+        border-color: rgba(92, 74, 111, 0.62);
+        box-shadow: inset 4px 0 0 rgba(92, 74, 111, 0.72), 0 5px 18px rgba(49, 39, 28, 0.075);
+      }
+
+      .tree-card.is-market-route .card-kicker {
+        color: #4f3d5f;
+      }
+
       .tree-card[data-kind="signal"] .card-copy,
       .tree-card[data-kind="signal"] .tag-row {
         display: none;
@@ -3858,6 +3884,36 @@
         { key: "learn", x: 2060, number: "MEASURE", title: "Outcome, guardrails and learning", copy: "Verify delivery, measure the original outcome, then keep, revise, expand, reverse or hold." }
       ];
 
+      const MARKET_INVESTIGATION = Object.freeze({
+        "uncaptured-demand": {
+          investigate: "Compare local demand, SERPs, current pages and the range market by market",
+          identify: "A local demand, language, assortment or page-coverage difference explains the gap"
+        },
+        "poor-ranking": {
+          investigate: "Compare the same query, intended page, local answer and competitors by country",
+          identify: "A local intent, page, merchandising, prominence or authority difference explains rank"
+        },
+        "poor-organic-ctr": {
+          investigate: "Compare the actual text or product result and local choice set by country",
+          identify: "A local result, language, image, offer, proof or SERP-surface difference explains clicks"
+        },
+        "weak-pdp-atc": {
+          investigate: "Compare the same product decision, offer and rendered PDP across markets",
+          identify: "A local story, information, proof, choice, value or experience difference explains adds"
+        }
+      });
+
+      function marketInvestigationFor(item) {
+        const specific = MARKET_INVESTIGATION[item.id] || {};
+        return {
+          route: item.id + "-market-investigation",
+          cause: "This outcome differs materially by market",
+          investigate: specific.investigate || "Compare the same customer outcome across markets",
+          identify: specific.identify || "A specific local mechanism explains the performance gap",
+          action: "Route the market gap into the relevant cause branch—or several interacting causes"
+        };
+      }
+
       const ACTION_TYPES_BY_MODE = Object.freeze({
         "Apply with content approval": ["apply"],
         "Route brief + apply approved assets": ["apply", "route"],
@@ -4103,6 +4159,7 @@
         button.className = "tree-card";
         button.dataset.nodeId = node.id;
         button.dataset.kind = node.kind;
+        if (node.isMarketRoute) button.classList.add("is-market-route");
         button.style.left = node.x + "px";
         button.style.top = node.y + "px";
         if (node.width) button.style.width = node.width + "px";
@@ -4166,7 +4223,19 @@
       function cameraNodeIds(selected) {
         const item = getCase(state.activeCaseId);
         if (!selected || selected.kind === "root") return new Set(Array.from(state.nodes.keys()));
+        if (selected.kind === "market-signal") {
+          return new Set(["root", "market-signal"].concat(CASES.map(function (entry) { return "signal-" + entry.id; })));
+        }
         const ids = new Set(["signal-" + item.id, "case-" + item.id]);
+        if (selected.isMarketRoute) {
+          ["hypothesis-", "evidence-", "finding-", "action-"].forEach(function (prefix) {
+            ids.add(prefix + selected.route);
+          });
+          item.hypotheses.forEach(function (hypothesis) {
+            ids.add("hypothesis-" + item.id + "-" + hypothesis.id);
+          });
+          return ids;
+        }
         if (selected.route) {
           ["hypothesis-", "evidence-", "finding-", "action-"].forEach(function (prefix) {
             ids.add(prefix + selected.route);
@@ -4292,19 +4361,22 @@
         const signalPositions = CASES.map(function (_item, index) {
           return signalStartY + index * signalGap + (mobileStageGap && index >= activeIndex ? mobileStageGap : 0);
         });
+        const marketSignalY = signalPositions[signalPositions.length - 1] + signalGap;
         const activeSignalY = signalPositions[activeIndex];
-        const hypothesisStartY = Math.max(
+        const routeStartY = Math.max(
           signalStartY,
-          activeSignalY - ((activeCase.hypotheses.length - 1) * hypothesisGap) / 2
+          activeSignalY - (activeCase.hypotheses.length * hypothesisGap) / 2
         );
         const stageLabelTop = activeSignalY - 77;
-        const hypothesisPositions = activeCase.hypotheses.map(function (_hypothesis, index) {
-          const baseY = hypothesisStartY + index * hypothesisGap;
+        const routePositions = Array.from({ length: activeCase.hypotheses.length + 1 }, function (_value, index) {
+          const baseY = routeStartY + index * hypothesisGap;
           return baseY + (mobileStageGap && baseY >= stageLabelTop - 100 ? mobileStageGap : 0);
         });
+        const marketRouteY = routePositions[0];
+        const hypothesisPositions = routePositions.slice(1);
         const worldHeight = Math.max(
           1090,
-          signalPositions[signalPositions.length - 1] + 190,
+          marketSignalY + 190,
           hypothesisPositions[hypothesisPositions.length - 1] + 180
         );
         elements.world.style.width = "2410px";
@@ -4314,7 +4386,7 @@
           id: "root",
           kind: "root",
           x: 24,
-          y: Math.max(240, (signalPositions[0] + signalPositions[signalPositions.length - 1]) / 2 - 20),
+          y: Math.max(240, (signalPositions[0] + marketSignalY) / 2 - 20),
           kicker: "Carve · every product / page",
           title: "Always-on ecommerce performance intelligence",
           copy: "Find search and PDP headroom, research the customer decision, make the strongest concrete treatment and learn across every product and market.",
@@ -4338,6 +4410,19 @@
           addEdge("root", signalId, item.id);
         });
 
+        addNode({
+          id: "market-signal",
+          kind: "market-signal",
+          x: STAGES[0].x,
+          y: marketSignalY,
+          kicker: "Cross-market scan · entry point",
+          title: "Performance differs by market",
+          copy: "Locate whether the loss is demand, ranking, clicks or PDP-to-ATC, then enter the relevant worktree.",
+          meta: "Routes into the four outcomes · not a fifth problem",
+          tags: ["Market performance"]
+        });
+        addEdge("root", "market-signal", "market-scan");
+
         const frameY = activeSignalY;
         addNode({
           id: "case-" + activeCase.id,
@@ -4351,6 +4436,66 @@
           meta: activeCase.scope
         });
         addEdge("signal-" + activeCase.id, "case-" + activeCase.id, activeCase.id);
+
+        const marketInvestigation = marketInvestigationFor(activeCase);
+        const marketNodeIds = {
+          hypothesis: "hypothesis-" + marketInvestigation.route,
+          evidence: "evidence-" + marketInvestigation.route,
+          finding: "finding-" + marketInvestigation.route,
+          action: "action-" + marketInvestigation.route
+        };
+        addNode({
+          id: marketNodeIds.hypothesis,
+          kind: "hypothesis",
+          caseId: activeCase.id,
+          route: marketInvestigation.route,
+          isMarketRoute: true,
+          x: STAGES[2].x,
+          y: marketRouteY,
+          kicker: "Market fork",
+          title: marketInvestigation.cause,
+          meta: "A first-class investigation · not the diagnosis"
+        });
+        addNode({
+          id: marketNodeIds.evidence,
+          kind: "evidence",
+          caseId: activeCase.id,
+          route: marketInvestigation.route,
+          isMarketRoute: true,
+          x: STAGES[3].x,
+          y: marketRouteY,
+          kicker: "Compare markets",
+          title: marketInvestigation.investigate,
+          meta: "Hold the customer job constant where possible"
+        });
+        addNode({
+          id: marketNodeIds.finding,
+          kind: "finding",
+          caseId: activeCase.id,
+          route: marketInvestigation.route,
+          isMarketRoute: true,
+          x: STAGES[4].x,
+          y: marketRouteY,
+          kicker: "Local mechanism",
+          title: marketInvestigation.identify,
+          meta: "Country is evidence · name the actual cause"
+        });
+        addNode({
+          id: marketNodeIds.action,
+          kind: "action",
+          caseId: activeCase.id,
+          route: marketInvestigation.route,
+          isMarketRoute: true,
+          x: STAGES[5].x,
+          y: marketRouteY,
+          kicker: "Route into causes",
+          title: marketInvestigation.action,
+          meta: "Select the cause—or causes—that explain the local gap"
+        });
+        addEdge("case-" + activeCase.id, marketNodeIds.hypothesis, marketInvestigation.route);
+        addEdge(marketNodeIds.hypothesis, marketNodeIds.evidence, marketInvestigation.route);
+        addEdge(marketNodeIds.evidence, marketNodeIds.finding, marketInvestigation.route);
+        addEdge(marketNodeIds.finding, marketNodeIds.action, marketInvestigation.route);
 
         activeCase.hypotheses.forEach(function (hypothesis, index) {
           const y = hypothesisPositions[index];
@@ -4451,8 +4596,18 @@
       function relatedNodeIds(selected) {
         const activeCase = getCase(state.activeCaseId);
         if (!selected) return new Set();
+        if (selected.kind === "market-signal") {
+          return new Set(["root", "market-signal"].concat(CASES.map(function (item) { return "signal-" + item.id; })));
+        }
         const ids = new Set(["root", "signal-" + activeCase.id, "case-" + activeCase.id, "learn-" + activeCase.id]);
-        if (selected.route) {
+        if (selected.isMarketRoute) {
+          ["hypothesis-", "evidence-", "finding-", "action-"].forEach(function (prefix) {
+            ids.add(prefix + selected.route);
+          });
+          activeCase.hypotheses.forEach(function (hypothesis) {
+            ids.add("hypothesis-" + activeCase.id + "-" + hypothesis.id);
+          });
+        } else if (selected.route) {
           ["hypothesis-", "evidence-", "finding-", "action-"].forEach(function (prefix) {
             ids.add(prefix + selected.route);
           });
@@ -4482,7 +4637,7 @@
         Array.from(elements.connectors.querySelectorAll(".connector")).forEach(function (path) {
           const edge = state.edges[Number(path.dataset.edgeIndex)];
           const isRelated = !selected ? false : related.has(edge.from) && related.has(edge.to) &&
-            (!selected.route || !edge.route || edge.route === selected.route || edge.route === state.activeCaseId);
+            (!selected.route || selected.isMarketRoute || !edge.route || edge.route === selected.route || edge.route === state.activeCaseId);
           path.classList.toggle("is-related", isRelated);
         });
       }
@@ -4490,6 +4645,64 @@
       function getHypothesis(caseId, hypothesisId) {
         const item = getCase(caseId);
         return item.hypotheses.find(function (hypothesis) { return hypothesis.id === hypothesisId; });
+      }
+
+      function marketOutcomeLinksHtml() {
+        return '<div class="route-list">' + CASES.map(function (item, index) {
+          return '<button class="route-link" type="button" data-node-target="signal-' + escapeHtml(item.id) + '">' +
+            '<b>' + (index + 1) + '</b><span>' + escapeHtml(item.signal) + '</span></button>';
+        }).join("") + '</div>';
+      }
+
+      function marketSignalDetail() {
+        return {
+          kicker: "Cross-market performance scan",
+          title: "Performance differs by market",
+          body:
+            '<p class="lead">This is a first-class way into the work—not a fifth problem. Carve continuously compares countries and languages, locates where the customer journey diverges, then opens the relevant demand, ranking, CTR or PDP-to-ATC worktree.</p>' +
+            section("First locate the lost outcome", marketOutcomeLinksHtml()) +
+            section("Signal data · where the market gap appears", listHtml([
+              "Search visibility: Search Console query × page × country × device, country-specific rank history and target-market keyword demand.",
+              "Text and product-result clicks: Search Console Web/Search appearance plus Merchant Center Organic by item, category and country.",
+              "PDP decision: Shopify, GA4 or retailer BI product views and confirmed same-product adds by market, with device, source, availability, price and page version retained.",
+              "The scan can find a decline or persistent headroom. It does not require one market to fail before Carve investigates it."
+            ], false)) +
+            section("Compare markets without inventing a localization cause", listHtml([
+              "Hold the customer job, product/page, device, source mix, availability, price or promotion and period reasonably constant—or state what cannot be matched.",
+              "Open the live local SERP and storefront. Compare demand language, result types, competitors, intended URL, product range, currency, tax, delivery, returns, sizing, proof and rendered experience.",
+              "Use a healthy market to generate hypotheses, not as an automatic benchmark. Demand, competition, assortment and buying expectations may legitimately differ.",
+              "Name the concrete mechanism. ‘Germany is weak’ and ‘localization issue’ are observations, not diagnoses."
+            ], false)) +
+            section("Then enter the relevant worktree", paragraph("A local query gap becomes Uncaptured demand; a suitable page losing position becomes Poor ranking; visible results losing choice become CTR; shoppers reaching the PDP but not adding become PDP-to-ATC. More than one can be open for the same market.")) +
+            section("Research basis", sourceHtml(["gscDimensions", "gscPosition", "merchantPerformance", "ga4Ecommerce", "shopifyFields", "shopifyLocalization"]))
+        };
+      }
+
+      function marketRouteDetail(item, kind) {
+        const route = marketInvestigationFor(item);
+        const titles = {
+          hypothesis: route.cause,
+          evidence: route.investigate,
+          finding: route.identify,
+          action: route.action
+        };
+        const leads = {
+          hypothesis: "A country difference is large enough to investigate, but it does not yet say what is wrong.",
+          evidence: "Compare the same customer job across markets, then inspect every material local difference that could change this exact outcome.",
+          finding: "Turn geography into a specific mechanism that predicts what should change and in which market cohort.",
+          action: "Continue through the existing cause branch—or several branches—that explains the local difference. The treatment is market-specific; the reasoning is not a generic localization template."
+        };
+        return {
+          kicker: kind === "action" ? "Route market gap into causes" : "Market investigation · " + (kind === "finding" ? "local mechanism" : kind),
+          title: titles[kind] || route.cause,
+          body:
+            '<p class="lead">' + escapeHtml(leads[kind] || leads.hypothesis) + '</p>' +
+            section("Exact market investigation", marketLensHtml(item)) +
+            section("Possible causes this evidence can select", routeListHtml(item)) +
+            section("How to state the result", paragraph("In [market], [query/page/product cohort] underperforms because [specific local difference]. Changing [exact page, product, feed, offer or experience element] from [before] to [after] should improve [ranking, qualified clicks or confirmed adds], while [comparison and guardrail] remain healthy.")) +
+            section("Important boundary", paragraph("If the comparison only reveals different demand, competition or assortment, keep that context explicit. Do not manufacture a page or localization treatment merely to make markets look equal.")) +
+            section("Research basis", sourceHtml(["gscDimensions", "gscPosition", "merchantPerformance", "ga4Ecommerce", "shopifyFields", "shopifyLocalization"]))
+        };
       }
 
       function rootDetail() {
@@ -4511,7 +4724,7 @@
               "Turn the best-supported mechanism into a specific treatment with a before, after, implementation path, owner and expected metric. Several coordinated changes are valid when they form one customer answer.",
               "Measure the original cohort, protect adjacent performance, and update retailer-specific memory. A surprising result reopens the reasoning rather than ending it."
             ], false)) +
-            section("Country is a permanent lens", paragraph("Every opportunity is split by market, language and device. Geography never becomes a vague cause: it points to a concrete difference in local demand, vocabulary, SERP competition, page ownership, assortment, price, delivery, proof, sizing, availability or experience—and therefore to a specific treatment.")) +
+            section("Market performance is a first-class entry point", paragraph("Carve continuously scans for country and language divergence, first locates whether the lost outcome is demand, ranking, clicks or PDP-to-ATC, then runs the visible Compare markets investigation inside that worktree. Geography points to a concrete difference in demand, vocabulary, SERP competition, page ownership, assortment, offer, proof, sizing, availability or experience—it never becomes a vague diagnosis.")) +
             section("Guardrails stay quiet", paragraph("Carve checks whether the opportunity is real enough to pursue and whether the product can support the promise. Tracking defects, technical eligibility and commercial constraints are corrected or routed when material, but they do not dominate a map whose purpose is performance improvement.")) +
             section("When several causes are true", crossCauseRulesHtml()) +
             section("Research basis", sourceHtml(["memo", "gscPerformance", "ahrefsEcommerce", "aleydaEcommerce", "sistrixCtr", "baymardPdp", "cxlHypotheses", "shopifyLocalization"]))
@@ -4669,10 +4882,12 @@
 
       function detailForNode(node) {
         if (node.kind === "root") return rootDetail();
+        if (node.kind === "market-signal") return marketSignalDetail();
         const item = getCase(node.caseId || state.activeCaseId);
         if (node.kind === "signal") return signalDetail(item);
         if (node.kind === "case") return caseDetail(item);
         if (node.kind === "learn") return learnDetail(item);
+        if (node.isMarketRoute) return marketRouteDetail(item, node.kind);
         const hypothesis = getHypothesis(item.id, node.hypothesisId);
         return hypothesisDetail(item, hypothesis, node.kind);
       }
@@ -4686,7 +4901,22 @@
           return '<span class="drawer-path-nav">' + steps.join('<span class="path-arrow">→</span>') + "</span>";
         }
         if (node.kind === "root") return "<b>All signals</b> → choose one of Carve’s four outcomes, then inspect any plausible cause";
+        if (node.kind === "market-signal") return "<b>Market scan</b> → locate the lost outcome → enter the relevant worktree → compare markets → identify the local mechanism";
         const item = getCase(node.caseId || state.activeCaseId);
+        if (node.isMarketRoute) {
+          const marketRoute = item.id + "-market-investigation";
+          const marketStages = [
+            { key: "signal", label: "Signal", target: "signal-" + item.id },
+            { key: "case", label: "Problem", target: "case-" + item.id },
+            { key: "hypothesis", label: "Market divergence", target: "hypothesis-" + marketRoute },
+            { key: "evidence", label: "Compare markets", target: "evidence-" + marketRoute },
+            { key: "finding", label: "Local mechanism", target: "finding-" + marketRoute },
+            { key: "action", label: "Route into cause", target: "action-" + marketRoute }
+          ];
+          return joinSteps(marketStages.map(function (stage) {
+            return step(stage.target, stage.label, stage.key === node.kind);
+          }));
+        }
         if (node.kind === "signal" || node.kind === "case") {
           return joinSteps([
             step("signal-" + item.id, "Signal", node.kind === "signal"),
@@ -4779,6 +5009,19 @@
       function navigateToNode(nodeId) {
         const record = state.nodes.get(nodeId);
         if (!record) return;
+        if (record.data.kind === "signal" && record.data.caseId !== state.activeCaseId) {
+          state.activeCaseId = record.data.caseId;
+          state.selectedNodeId = nodeId;
+          renderTree();
+          requestAnimationFrame(function () {
+            const nextRecord = state.nodes.get(nodeId);
+            if (!nextRecord) return;
+            updateSelection();
+            openDrawer(nextRecord.data, null);
+            focusActiveRoute();
+          });
+          return;
+        }
         state.selectedNodeId = nodeId;
         updateSelection();
         openDrawer(record.data, null);
