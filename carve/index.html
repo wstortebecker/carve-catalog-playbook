@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#f5f0e8">
-    <title>How Carve works — System model</title>
-    <meta name="description" content="A first-principles model of how Carve observes, investigates, acts and learns across an ecommerce catalog.">
+    <title>How Carve works — System map</title>
+    <meta name="description" content="A first-principles map of how Carve connects ecommerce evidence, derives signals, investigates adaptively, acts across a catalog and learns from outcomes.">
     <link rel="icon" href="./orb.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,33 +13,35 @@
     <style>
       :root {
         --paper: #f5f0e8;
-        --paper-2: #ede7dc;
-        --paper-3: #e0d9ce;
-        --ink: #1a1410;
-        --body: #5c4f45;
-        --muted: #8e7d6e;
-        --accent: #8b4a2c;
-        --accent-dark: #71391f;
-        --accent-soft: rgba(139, 74, 44, .1);
-        --positive: #2d6a4f;
-        --positive-soft: rgba(45, 106, 79, .09);
-        --caution: #8b6430;
-        --caution-soft: rgba(139, 100, 48, .09);
-        --line: rgba(26, 20, 16, .11);
-        --line-strong: rgba(26, 20, 16, .2);
+        --paper-2: #ece5d9;
+        --paper-3: #ded5c7;
+        --ink: #19130f;
+        --body: #3d332c;
+        --muted: #78695c;
+        --line: rgba(25, 19, 15, .14);
+        --line-strong: rgba(25, 19, 15, .25);
+        --signal: #914b2b;
+        --signal-soft: #ead8cb;
+        --signal-pale: #f2e7df;
+        --learn: #315d49;
+        --learn-soft: #dde8df;
+        --source: #55616b;
+        --source-soft: #e2e6e7;
+        --sand: #856531;
+        --sand-soft: #ece4d4;
         --sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
       }
 
       * { box-sizing: border-box; }
-      html { scroll-behavior: smooth; }
+      html { scroll-behavior: smooth; scroll-padding-top: 86px; }
       html, body {
         margin: 0;
         max-width: 100%;
         min-height: 100%;
         overflow-x: hidden;
-        background: var(--paper);
         color: var(--ink);
+        background: var(--paper);
         font-family: var(--sans);
         -webkit-font-smoothing: antialiased;
       }
@@ -47,1054 +49,864 @@
         position: fixed;
         inset: 0;
         z-index: 100;
-        opacity: .028;
         pointer-events: none;
+        opacity: .023;
         content: "";
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
       }
       a { color: inherit; }
+      p { text-wrap: pretty; }
 
       .topbar {
         min-height: 66px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 24px;
+        gap: 22px;
         padding: 0 28px;
         border-bottom: 1px solid var(--line);
       }
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        text-decoration: none;
-      }
-      .brand img { width: 27px; height: 27px; }
-      .brand span {
-        font-family: Georgia, serif;
-        font-size: 18px;
-        font-weight: 600;
-        letter-spacing: .035em;
-      }
-      .top-meta {
-        min-width: 0;
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        color: var(--body);
-        font-size: 11px;
-      }
-      .top-meta a {
-        padding-bottom: 2px;
-        border-bottom: 1px solid var(--line-strong);
-        text-decoration: none;
-      }
+      .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+      .brand img { width: 28px; height: 28px; }
+      .brand span { font: 600 18px/1 Georgia, serif; letter-spacing: .04em; }
+      .top-links { display: flex; align-items: center; gap: 18px; color: var(--body); font-size: 12px; }
+      .top-links a { padding-bottom: 2px; border-bottom: 1px solid var(--line-strong); text-decoration: none; }
 
-      main {
-        width: min(1500px, calc(100% - 48px));
-        min-width: 0;
-        margin: 0 auto;
-        padding: 72px 0 100px;
-      }
-
-      .hero {
-        max-width: 1000px;
-        margin: 0 auto;
-        text-align: center;
-      }
-      .eyebrow, .label {
-        color: var(--accent);
-        font: 500 10px/1.3 var(--mono);
-        letter-spacing: .08em;
+      main { width: min(1260px, calc(100% - 48px)); margin: 0 auto; padding: 82px 0 96px; }
+      .eyebrow, .label, .section-number {
+        color: var(--signal);
+        font: 500 10px/1.35 var(--mono);
+        letter-spacing: .085em;
         text-transform: uppercase;
       }
+
+      .hero { max-width: 1080px; margin: 0 auto; text-align: center; }
       .hero h1 {
-        max-width: 900px;
-        margin: 18px auto 0;
-        font-size: clamp(44px, 6vw, 82px);
-        line-height: .98;
-        letter-spacing: -.065em;
+        margin: 16px 0 0;
+        font-size: clamp(58px, 8vw, 108px);
+        line-height: .92;
+        letter-spacing: -.072em;
         font-weight: 500;
       }
       .hero > p {
-        max-width: 790px;
+        max-width: 850px;
         margin: 28px auto 0;
         color: var(--body);
-        font-size: clamp(16px, 1.5vw, 20px);
-        line-height: 1.58;
+        font-size: clamp(17px, 1.6vw, 21px);
+        line-height: 1.55;
         letter-spacing: -.015em;
       }
-      .thesis {
-        max-width: 900px;
-        margin: 42px auto 0;
+      .scope-grid {
+        margin-top: 44px;
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         border: 1px solid var(--line);
-        border-radius: 12px;
+        border-radius: 14px;
         overflow: hidden;
         text-align: left;
       }
-      .thesis > div {
-        min-height: 118px;
-        padding: 20px;
-        background: rgba(255,255,255,.22);
-      }
-      .thesis > div + div { border-left: 1px solid var(--line); }
-      .thesis strong {
-        display: block;
-        font-size: 14px;
-        font-weight: 500;
-      }
-      .thesis span {
-        display: block;
-        margin-top: 8px;
+      .scope-card { min-width: 0; min-height: 136px; padding: 22px; background: rgba(255,255,255,.22); }
+      .scope-card + .scope-card { border-left: 1px solid var(--line); }
+      .scope-card strong { display: block; font-size: 15px; line-height: 1.3; font-weight: 600; }
+      .scope-card span { display: block; margin-top: 9px; color: var(--body); font-size: 13px; line-height: 1.48; }
+      .dimension-rail {
+        margin-top: 12px;
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        border-radius: 8px;
         color: var(--body);
+        background: var(--paper-2);
         font-size: 12px;
-        line-height: 1.5;
       }
+      .dimension-rail strong { color: var(--ink); font-weight: 600; }
 
-      .section {
-        margin-top: 96px;
-      }
+      .section { margin-top: 112px; }
       .section-head {
-        max-width: 820px;
-        margin-bottom: 28px;
+        max-width: 920px;
+        margin-bottom: 34px;
+        display: grid;
+        grid-template-columns: 54px minmax(0, 1fr);
+        gap: 18px;
       }
-      .section-head h2 {
-        margin: 10px 0 0;
-        font-size: clamp(28px, 3vw, 44px);
-        line-height: 1.08;
-        letter-spacing: -.05em;
+      .section-number {
+        width: 46px;
+        height: 46px;
+        display: grid;
+        place-items: center;
+        border: 1px solid rgba(145,75,43,.28);
+        border-radius: 50%;
+      }
+      .section-copy h2 {
+        margin: 0;
+        font-size: clamp(34px, 4vw, 55px);
+        line-height: 1.02;
+        letter-spacing: -.055em;
         font-weight: 500;
       }
-      .section-head p {
-        margin: 13px 0 0;
-        color: var(--body);
-        font-size: 14px;
-        line-height: 1.6;
-      }
+      .section-copy p { margin: 13px 0 0; color: var(--body); font-size: 15px; line-height: 1.62; }
 
-      .system {
-        position: relative;
+      .overview {
         padding: 24px;
         border: 1px solid var(--line-strong);
-        border-radius: 16px;
-        background:
-          radial-gradient(circle at 15% 5%, rgba(255,255,255,.55), transparent 28%),
-          rgba(237, 231, 220, .55);
-        overflow: hidden;
+        border-radius: 18px;
+        background: rgba(236,229,217,.6);
       }
-
-      .system-row {
-        position: relative;
-        min-width: 0;
-        display: grid;
+      .overview-kicker {
+        display: flex;
+        align-items: center;
         gap: 12px;
+        margin-bottom: 10px;
       }
-      .system-row + .flow-down {
-        width: 1px;
-        height: 34px;
-        margin: 0 auto;
-        background: var(--line-strong);
-        position: relative;
+      .overview-kicker::after { height: 1px; flex: 1; background: var(--line); content: ""; }
+      .source-band {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 8px;
       }
-      .flow-down::after {
+      .source-chip {
+        min-width: 0;
+        padding: 13px;
+        border: 1px solid rgba(85,97,107,.2);
+        border-radius: 8px;
+        background: var(--source-soft);
+      }
+      .source-chip strong { display: block; color: #303a42; font-size: 12px; font-weight: 600; }
+      .source-chip span { display: block; margin-top: 4px; color: #4b5861; font-size: 11px; line-height: 1.4; }
+      .down-arrow { width: 1px; height: 30px; position: relative; margin: 0 auto; background: var(--line-strong); }
+      .down-arrow::after {
+        width: 7px;
+        height: 7px;
         position: absolute;
-        bottom: -2px;
         left: -3px;
-        width: 6px;
-        height: 6px;
+        bottom: 0;
         border-right: 1px solid var(--ink);
         border-bottom: 1px solid var(--ink);
         transform: rotate(45deg);
         content: "";
       }
-      .inputs { grid-template-columns: 1fr 1fr 1fr; }
-      .evidence-inputs { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-      .input-card, .memory-card, .control-card, .destination-card {
-        min-width: 0;
+      .coverage-band {
+        padding: 16px 20px;
+        display: grid;
+        grid-template-columns: 210px minmax(0, 1fr);
+        gap: 20px;
+        align-items: center;
         border: 1px solid var(--line);
         border-radius: 10px;
-        background: rgba(245, 240, 232, .88);
-      }
-      .input-card { padding: 17px; }
-      .input-card .number, .node .number {
-        color: var(--accent);
-        font: 500 9px/1 var(--mono);
-      }
-      .input-card h3, .memory-card h3, .control-card h3, .destination-card h3 {
-        margin: 10px 0 0;
-        font-size: 15px;
-        font-weight: 500;
-        letter-spacing: -.02em;
-      }
-      .input-card p, .memory-card p, .control-card p, .destination-card p {
-        margin: 7px 0 0;
-        color: var(--body);
-        font-size: 11px;
-        line-height: 1.52;
-      }
-      .source-list {
-        margin-top: 13px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 5px;
-      }
-      .source-list span {
-        min-height: 23px;
-        display: inline-flex;
-        align-items: center;
-        padding: 0 7px;
-        border: 1px solid var(--line);
-        border-radius: 5px;
-        color: var(--muted);
-        background: rgba(255,255,255,.3);
-        font: 400 8px/1 var(--mono);
-      }
-
-      .memory {
-        grid-template-columns: 1.35fr repeat(3, 1fr);
-        padding: 15px;
-        border: 1px solid rgba(139,74,44,.25);
-        border-radius: 12px;
-        background: var(--accent-soft);
-      }
-      .memory-card {
-        min-height: 132px;
-        padding: 16px;
-        background: rgba(245, 240, 232, .65);
-      }
-      .memory-card.primary {
-        color: var(--paper);
-        background: var(--ink);
-      }
-      .memory-card.primary p { color: rgba(245,240,232,.67); }
-      .memory-card .label { font-size: 8px; }
-
-      .runtime {
-        padding: 16px;
-        border: 1px solid var(--line-strong);
-        border-radius: 12px;
-        background: rgba(245,240,232,.76);
-      }
-      .runtime-head {
-        display: flex;
-        align-items: start;
-        justify-content: space-between;
-        gap: 20px;
-        padding: 3px 3px 16px;
-      }
-      .runtime-head h3 {
-        margin: 6px 0 0;
-        font-size: 21px;
-        font-weight: 500;
-        letter-spacing: -.035em;
-      }
-      .runtime-head p {
-        max-width: 560px;
-        margin: 0;
-        color: var(--body);
-        font-size: 11px;
-        line-height: 1.5;
-        text-align: right;
-      }
-      .loop {
-        display: grid;
-        grid-template-columns: repeat(7, minmax(0, 1fr));
-        gap: 24px;
-      }
-      .node {
-        min-width: 0;
-        min-height: 154px;
-        position: relative;
-        padding: 15px;
-        border: 1px solid var(--line);
-        border-radius: 9px;
         background: var(--paper);
       }
-      .node:not(:last-child)::after {
+      .coverage-band strong { font-size: 15px; font-weight: 600; }
+      .coverage-band .label { display: block; margin-bottom: 6px; }
+      .coverage-band p { margin: 4px 0 0; color: var(--body); font-size: 12px; line-height: 1.45; }
+      .coverage-equation { color: var(--signal); font: 500 11px/1.6 var(--mono); text-align: right; }
+      .lifecycle {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 22px;
+      }
+      .life-node {
+        min-width: 0;
+        min-height: 168px;
+        position: relative;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--paper);
+        text-decoration: none;
+      }
+      .life-node:not(:last-child)::after {
+        width: 14px;
+        height: 1px;
         position: absolute;
         top: 50%;
         right: -19px;
-        width: 13px;
-        height: 1px;
-        background: var(--line-strong);
+        background: var(--ink);
         content: "";
       }
-      .node:not(:last-child)::before {
+      .life-node:not(:last-child)::before {
+        width: 6px;
+        height: 6px;
         position: absolute;
         z-index: 2;
         top: calc(50% - 3px);
         right: -19px;
-        width: 6px;
-        height: 6px;
         border-top: 1px solid var(--ink);
         border-right: 1px solid var(--ink);
         transform: rotate(45deg);
         content: "";
       }
-      .node h4 {
-        margin: 12px 0 0;
-        font-size: 13px;
-        font-weight: 500;
-      }
-      .node p {
-        margin: 7px 0 0;
-        color: var(--body);
-        font-size: 10px;
-        line-height: 1.48;
-      }
-      .node.agent {
-        color: var(--paper);
-        background: var(--ink);
-      }
-      .node.agent p { color: rgba(245,240,232,.67); }
-      .node.agent .number { color: #d18d6d; }
-      .return-loop {
+      .life-node .step { color: var(--muted); font: 500 9px/1 var(--mono); }
+      .life-node h3 { margin: 14px 0 0; font-size: 16px; line-height: 1.25; font-weight: 600; }
+      .life-node p { margin: 8px 0 0; color: var(--body); font-size: 12px; line-height: 1.48; }
+      .life-node.signal { border-color: rgba(145,75,43,.28); background: var(--signal-pale); }
+      .life-node.agent { color: var(--paper); background: var(--ink); }
+      .life-node.agent p { color: rgba(245,240,232,.72); }
+      .life-node.agent .step { color: #d89a79; }
+      .life-node.action { border-color: rgba(49,93,73,.28); background: var(--learn-soft); }
+      .feedback-line {
+        min-height: 44px;
         position: relative;
-        height: 42px;
-        margin: 10px 6.5% 0;
+        margin: 12px 6% 0;
         border-right: 1px dashed var(--line-strong);
         border-bottom: 1px dashed var(--line-strong);
         border-left: 1px dashed var(--line-strong);
         border-radius: 0 0 12px 12px;
       }
-      .return-loop::before {
+      .feedback-line::before {
+        width: 7px;
+        height: 7px;
         position: absolute;
         top: -1px;
         left: -4px;
-        width: 7px;
-        height: 7px;
         border-top: 1px solid var(--ink);
         border-left: 1px solid var(--ink);
         transform: rotate(45deg);
         content: "";
       }
-      .return-loop span {
+      .feedback-line span {
         position: absolute;
         left: 50%;
-        bottom: -8px;
+        bottom: -9px;
         transform: translateX(-50%);
-        padding: 0 8px;
+        padding: 0 10px;
         color: var(--muted);
-        background: var(--paper);
-        font: 400 8px/1.4 var(--mono);
+        background: var(--paper-2);
+        font: 500 9px/1.4 var(--mono);
         white-space: nowrap;
       }
-
-      .controls {
-        grid-template-columns: repeat(4, 1fr);
-        padding: 13px;
-        border: 1px dashed var(--line-strong);
-        border-radius: 12px;
-      }
-      .control-card {
-        min-height: 103px;
-        padding: 14px;
-      }
-      .control-card h3 { font-size: 12px; }
-      .control-card p { font-size: 10px; }
-
-      .destinations { grid-template-columns: repeat(3, 1fr); }
-      .destination-card {
-        min-height: 128px;
-        padding: 16px;
-      }
-      .destination-card.apply { border-color: rgba(45,106,79,.28); background: var(--positive-soft); }
-      .destination-card.route { border-color: rgba(139,100,48,.28); background: var(--caution-soft); }
-      .destination-card.hold { background: rgba(255,255,255,.22); }
-      .destination-card .label { color: var(--ink); }
-
-      .system-caption {
-        margin: 18px 4px 0;
-        display: flex;
-        justify-content: space-between;
-        gap: 20px;
-        color: var(--muted);
-        font: 400 9px/1.55 var(--mono);
-      }
-
-      .grounding {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        padding: 13px;
-        border: 1px solid var(--line);
-        border-radius: 12px;
-        background: rgba(255,255,255,.2);
-      }
-      .grounding .control-card { background: rgba(245,240,232,.74); }
-
-      .coordinator {
+      .foundation-rails { margin-top: 22px; display: grid; gap: 7px; }
+      .foundation-rail {
+        padding: 12px 16px;
         display: grid;
-        grid-template-columns: 1.25fr 1fr 1fr;
-        gap: 12px;
-        padding: 15px;
-        border: 1px solid rgba(139,74,44,.25);
-        border-radius: 12px;
-        background: var(--accent-soft);
-      }
-      .coordinator > article {
-        min-width: 0;
-        padding: 16px;
-        border: 1px solid var(--line);
-        border-radius: 9px;
-        background: rgba(245,240,232,.72);
-      }
-      .coordinator > article:first-child { color: var(--paper); background: var(--ink); }
-      .coordinator > article:first-child p { color: rgba(245,240,232,.67); }
-      .coordinator h3 { margin: 9px 0 0; font-size: 15px; font-weight: 500; }
-      .coordinator p { margin: 7px 0 0; color: var(--body); font-size: 10px; line-height: 1.5; }
-
-      .intelligence-zone {
-        padding: 16px;
-        border: 1px solid var(--line-strong);
-        border-radius: 12px;
-        background: rgba(245,240,232,.76);
-      }
-      .zone-head {
-        display: flex;
-        justify-content: space-between;
-        gap: 20px;
-        padding: 3px 3px 14px;
-      }
-      .zone-head h3 { margin: 6px 0 0; font-size: 21px; font-weight: 500; letter-spacing: -.035em; }
-      .zone-head p { max-width: 600px; margin: 0; color: var(--body); font-size: 11px; line-height: 1.5; text-align: right; }
-      .capabilities {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 8px;
-      }
-      .capability {
-        min-width: 0;
-        padding: 12px;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: rgba(255,255,255,.22);
-      }
-      .capability strong { display: block; font-size: 10px; font-weight: 500; }
-      .capability span { display: block; margin-top: 5px; color: var(--body); font-size: 9px; line-height: 1.45; }
-      .case-workspace {
-        margin-top: 12px;
-        padding: 15px;
-        border: 1px solid rgba(139,74,44,.3);
-        border-radius: 10px;
-        background: var(--accent-soft);
-      }
-      .case-head { display: flex; align-items: end; justify-content: space-between; gap: 18px; }
-      .case-head h4 { margin: 7px 0 0; font-size: 17px; font-weight: 500; }
-      .case-head p { max-width: 600px; margin: 0; color: var(--body); font-size: 10px; line-height: 1.45; text-align: right; }
-      .case-questions {
-        margin-top: 12px;
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 8px;
-      }
-      .case-node {
-        min-width: 0;
-        min-height: 112px;
-        padding: 13px;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: var(--paper);
-      }
-      .case-node strong { display: block; font-size: 11px; font-weight: 500; }
-      .case-node p { margin: 6px 0 0; color: var(--body); font-size: 9px; line-height: 1.48; }
-      .case-node.core { color: var(--paper); background: var(--ink); }
-      .case-node.core p { color: rgba(245,240,232,.67); }
-      .governance-label {
-        margin: 13px 2px 8px;
-        display: flex;
-        align-items: center;
-        gap: 9px;
-        color: var(--accent);
-        font: 500 8px/1.4 var(--mono);
-        text-transform: uppercase;
-        letter-spacing: .06em;
-      }
-      .governance-label::before, .governance-label::after { height: 1px; flex: 1; background: rgba(139,74,44,.22); content: ""; }
-      .governance { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 8px; }
-      .governance .control-card { min-height: 88px; padding: 12px; }
-      .actions { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-      .actions .destination-card { min-width: 0; }
-      .response-loop {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 22px;
-      }
-      .response-step {
-        position: relative;
-        min-width: 0;
-        padding: 14px;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: rgba(255,255,255,.2);
-      }
-      .response-step:not(:last-child)::after {
-        position: absolute;
-        top: 50%;
-        right: -18px;
-        width: 13px;
-        height: 1px;
-        background: var(--line-strong);
-        content: "";
-      }
-      .response-step strong { display: block; font-size: 10px; font-weight: 500; }
-      .response-step span { display: block; margin-top: 5px; color: var(--body); font-size: 9px; line-height: 1.45; }
-      .response-step:last-child { color: var(--paper); background: var(--ink); }
-      .response-step:last-child span { color: rgba(245,240,232,.67); }
-
-      .planes {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 12px;
-      }
-      .plane {
-        min-width: 0;
-        min-height: 300px;
-        padding: 20px;
-        border: 1px solid var(--line);
-        border-radius: 11px;
-        background: rgba(255,255,255,.2);
-      }
-      .plane-index {
-        width: 31px;
-        height: 31px;
-        border: 1px solid rgba(139,74,44,.28);
-        border-radius: 50%;
-        display: grid;
-        place-items: center;
-        color: var(--accent);
-        font: 500 10px/1 var(--mono);
-      }
-      .plane h3 {
-        margin: 19px 0 0;
-        font-size: 18px;
-        line-height: 1.22;
-        letter-spacing: -.03em;
-        font-weight: 500;
-      }
-      .plane > p {
-        margin: 9px 0 0;
-        color: var(--body);
-        font-size: 11px;
-        line-height: 1.55;
-      }
-      .plane ul {
-        margin: 17px 0 0;
-        padding: 0;
-        list-style: none;
-      }
-      .plane li {
-        padding: 9px 0;
-        border-top: 1px solid var(--line);
-        font-size: 10px;
-        line-height: 1.45;
-      }
-      .plane li strong { font-weight: 500; }
-
-      .objects {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        gap: 1px;
-        overflow: hidden;
-        border: 1px solid var(--line);
-        border-radius: 12px;
-        background: var(--line);
-      }
-      .object {
-        min-width: 0;
-        min-height: 210px;
-        padding: 17px;
-        background: rgba(245,240,232,.93);
-      }
-      .object code {
-        color: var(--accent);
-        font: 500 10px/1.3 var(--mono);
-      }
-      .object h3 {
-        margin: 15px 0 0;
-        font-size: 14px;
-        font-weight: 500;
-      }
-      .object p {
-        margin: 8px 0 0;
-        color: var(--body);
-        font-size: 10px;
-        line-height: 1.55;
-      }
-      .object .example {
-        margin-top: 14px;
-        padding-top: 11px;
-        border-top: 1px solid var(--line);
-        color: var(--muted);
-        font: 400 8px/1.55 var(--mono);
-      }
-
-      .agents {
-        display: grid;
-        grid-template-columns: .78fr 1.22fr;
-        gap: 14px;
-      }
-      .agent-principle, .agent-flow {
-        border: 1px solid var(--line);
-        border-radius: 12px;
-      }
-      .agent-principle {
-        padding: 24px;
-        color: var(--paper);
-        background: var(--ink);
-      }
-      .agent-principle h3 {
-        margin: 12px 0 0;
-        font-size: 25px;
-        line-height: 1.15;
-        letter-spacing: -.04em;
-        font-weight: 500;
-      }
-      .agent-principle p {
-        margin: 13px 0 0;
-        color: rgba(245,240,232,.68);
-        font-size: 12px;
-        line-height: 1.62;
-      }
-      .agent-principle .label { color: #d18d6d; }
-      .agent-flow { padding: 20px; }
-      .question-list { display: grid; gap: 8px; }
-      .question {
-        min-width: 0;
-        display: grid;
-        grid-template-columns: 34px 1fr auto;
-        gap: 12px;
-        align-items: center;
-        padding: 12px;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: rgba(255,255,255,.2);
-      }
-      .question > span:first-child {
-        width: 29px;
-        height: 29px;
-        border-radius: 50%;
-        display: grid;
-        place-items: center;
-        color: var(--accent);
-        background: var(--accent-soft);
-        font: 500 9px/1 var(--mono);
-      }
-      .question strong {
-        display: block;
-        font-size: 11px;
-        font-weight: 500;
-      }
-      .question p {
-        margin: 4px 0 0;
-        color: var(--body);
-        font-size: 9px;
-        line-height: 1.45;
-      }
-      .question > code {
-        color: var(--muted);
-        font: 400 8px/1.4 var(--mono);
-        text-align: right;
-      }
-
-      .trace {
-        border: 1px solid var(--line);
-        border-radius: 12px;
-        overflow: hidden;
-      }
-      .trace-row {
-        min-height: 92px;
-        display: grid;
-        grid-template-columns: 150px 210px minmax(0,1fr) 200px;
+        grid-template-columns: 230px minmax(0, 1fr);
         gap: 16px;
         align-items: center;
-        padding: 14px 18px;
-        background: rgba(255,255,255,.2);
-      }
-      .trace-row + .trace-row { border-top: 1px solid var(--line); }
-      .trace-step {
-        color: var(--accent);
-        font: 500 9px/1.3 var(--mono);
-        text-transform: uppercase;
-      }
-      .trace-question { font-size: 11px; font-weight: 500; line-height: 1.4; }
-      .trace-evidence { color: var(--body); font-size: 10px; line-height: 1.5; }
-      .trace-result {
-        padding: 9px 10px;
-        border-radius: 6px;
-        color: var(--body);
-        background: var(--paper-2);
-        font-size: 9px;
-        line-height: 1.45;
-      }
-
-      .boundaries {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 14px;
-      }
-      .boundary {
-        padding: 23px;
         border: 1px solid var(--line);
+        border-radius: 7px;
+        background: rgba(255,255,255,.24);
+      }
+      .foundation-rail strong { font-size: 12px; font-weight: 600; }
+      .foundation-rail span { color: var(--body); font-size: 11px; line-height: 1.45; }
+
+      .systems-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      .system-panel { min-width: 0; border: 1px solid var(--line); border-radius: 13px; overflow: hidden; }
+      .system-panel header { padding: 20px; color: var(--paper); background: var(--ink); }
+      .system-panel.carve header { background: var(--signal); }
+      .system-panel header h3 { margin: 7px 0 0; font-size: 22px; font-weight: 500; letter-spacing: -.03em; }
+      .system-panel header p { margin: 7px 0 0; color: rgba(245,240,232,.73); font-size: 12px; line-height: 1.48; }
+      .system-row { min-height: 112px; padding: 17px 19px; display: grid; grid-template-columns: 165px minmax(0,1fr); gap: 18px; background: rgba(255,255,255,.2); }
+      .system-row + .system-row { border-top: 1px solid var(--line); }
+      .system-name strong { display: block; font-size: 13px; font-weight: 600; }
+      .system-name span { display: block; margin-top: 6px; color: var(--muted); font: 400 9px/1.45 var(--mono); }
+      .system-data { color: var(--body); font-size: 12px; line-height: 1.52; }
+      .role-tags { margin-top: 9px; display: flex; flex-wrap: wrap; gap: 5px; }
+      .role-tags span { padding: 4px 7px; border-radius: 4px; background: var(--paper-2); color: var(--muted); font: 500 8px/1 var(--mono); text-transform: uppercase; }
+      .direction-panel {
+        margin-top: 16px;
+        padding: 20px;
+        display: grid;
+        grid-template-columns: 210px minmax(0,1fr);
+        gap: 24px;
+        border: 1px solid rgba(133,101,49,.25);
         border-radius: 12px;
+        background: var(--sand-soft);
       }
-      .boundary h3 {
-        margin: 0;
-        font-size: 19px;
-        font-weight: 500;
-        letter-spacing: -.03em;
+      .direction-panel h3 { margin: 7px 0 0; font-size: 17px; font-weight: 600; }
+      .direction-panel p { margin: 0; color: var(--body); font-size: 13px; line-height: 1.55; }
+      .world-model {
+        margin-top: 26px;
+        padding: 22px;
+        border: 1px solid var(--line-strong);
+        border-radius: 13px;
+        background: var(--paper-2);
       }
-      .boundary ul {
-        margin: 17px 0 0;
-        padding: 0;
-        list-style: none;
-      }
-      .boundary li {
+      .world-model-head { display: grid; grid-template-columns: 250px minmax(0,1fr); gap: 24px; }
+      .world-model h3 { margin: 7px 0 0; font-size: 21px; font-weight: 500; }
+      .world-model-head p { margin: 0; color: var(--body); font-size: 13px; line-height: 1.55; }
+      .entity-chain { margin-top: 19px; display: grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap: 18px; }
+      .entity {
+        min-width: 0;
         position: relative;
-        padding: 10px 0 10px 22px;
-        border-top: 1px solid var(--line);
-        color: var(--body);
-        font-size: 11px;
-        line-height: 1.5;
-      }
-      .boundary li::before {
-        position: absolute;
-        top: 15px;
-        left: 2px;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: var(--accent);
-        content: "";
-      }
-      .boundary.not li::before { border-radius: 2px; background: var(--muted); }
-
-      .close {
-        margin-top: 98px;
-        padding: 54px;
-        border-radius: 14px;
-        color: var(--paper);
-        background: var(--ink);
+        padding: 13px 9px;
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        background: var(--paper);
         text-align: center;
+        font-size: 11px;
+        font-weight: 600;
       }
-      .close .label { color: #d18d6d; }
-      .close h2 {
-        max-width: 980px;
-        margin: 16px auto 0;
-        font-size: clamp(32px, 4vw, 58px);
-        line-height: 1.03;
-        letter-spacing: -.055em;
-        font-weight: 500;
+      .entity:not(:last-child)::after { position: absolute; top: 50%; right: -15px; color: var(--muted); content: "↔"; }
+      .knowledge-types { margin-top: 12px; display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+      .knowledge-type { padding: 12px; border-radius: 7px; background: rgba(255,255,255,.32); }
+      .knowledge-type strong { display: block; font-size: 11px; }
+      .knowledge-type span { display: block; margin-top: 5px; color: var(--body); font-size: 10px; line-height: 1.45; }
+
+      .signal-definition {
+        margin-bottom: 16px;
+        padding: 18px 20px;
+        display: grid;
+        grid-template-columns: 210px minmax(0,1fr);
+        gap: 24px;
+        border-radius: 10px;
+        color: var(--paper);
+        background: var(--signal);
       }
-      .close p {
-        max-width: 760px;
-        margin: 18px auto 0;
-        color: rgba(245,240,232,.68);
-        font-size: 13px;
-        line-height: 1.6;
+      .signal-definition strong { font-size: 17px; font-weight: 600; }
+      .signal-definition p { margin: 0; color: rgba(245,240,232,.8); font-size: 13px; line-height: 1.55; }
+      .signal-table { border: 1px solid var(--line); border-radius: 13px; overflow: hidden; }
+      .signal-head, .signal-row { display: grid; grid-template-columns: 190px 1.12fr 1.12fr .95fr; }
+      .signal-head { color: var(--muted); background: var(--paper-2); font: 500 9px/1.3 var(--mono); text-transform: uppercase; }
+      .signal-head > div { padding: 11px 15px; }
+      .signal-row { min-height: 190px; background: rgba(255,255,255,.2); }
+      .signal-row + .signal-row { border-top: 1px solid var(--line); }
+      .signal-row > div { min-width: 0; padding: 18px 15px; }
+      .signal-row > div + div { border-left: 1px solid var(--line); }
+      .territory strong { display: block; font-size: 16px; line-height: 1.3; font-weight: 600; }
+      .territory span { display: block; margin-top: 8px; color: var(--body); font-size: 12px; line-height: 1.5; }
+      .cell-label { display: none; }
+      .signal-cell p { margin: 0; color: var(--body); font-size: 12px; line-height: 1.52; }
+      .signal-cell strong { color: var(--ink); font-weight: 600; }
+      .signal-cell .formula { color: var(--signal); font: 500 10px/1.55 var(--mono); }
+      .signal-cell .case-question { color: var(--ink); font-size: 13px; line-height: 1.5; font-weight: 500; }
+      .signal-notes { margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+      .signal-note { padding: 15px; border: 1px solid var(--line); border-radius: 8px; color: var(--body); background: var(--paper-2); font-size: 12px; line-height: 1.5; }
+      .signal-note strong { color: var(--ink); }
+
+      .power-strip { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 8px; margin-bottom: 12px; }
+      .power-card { padding: 13px; border: 1px solid var(--line); border-radius: 7px; background: var(--paper-2); }
+      .power-card strong { display: block; font-size: 11px; }
+      .power-card span { display: block; margin-top: 5px; color: var(--body); font-size: 10px; line-height: 1.45; }
+      .reasoning-shell { padding: 22px; border: 1px solid var(--line-strong); border-radius: 14px; background: rgba(236,229,217,.65); }
+      .reasoning-rule { margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+      .reasoning-rule h3 { margin: 6px 0 0; font-size: 22px; font-weight: 500; }
+      .reasoning-rule p { max-width: 620px; margin: 0; color: var(--body); font-size: 12px; line-height: 1.5; text-align: right; }
+      .reasoning-grid { display: grid; grid-template-columns: minmax(0,1fr) 1.15fr minmax(0,1fr); gap: 26px; align-items: stretch; }
+      .move-stack { display: grid; gap: 9px; }
+      .reason-move { min-width: 0; min-height: 118px; position: relative; padding: 15px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); }
+      .reason-move strong { display: block; font-size: 12px; font-weight: 600; }
+      .reason-move p { margin: 7px 0 0; color: var(--body); font-size: 11px; line-height: 1.48; }
+      .move-stack.left .reason-move::after { width: 27px; height: 1px; position: absolute; right: -27px; top: 50%; background: var(--line-strong); content: ""; }
+      .move-stack.right .reason-move::before { width: 27px; height: 1px; position: absolute; left: -27px; top: 50%; background: var(--line-strong); content: ""; }
+      .case-core { min-width: 0; padding: 25px; border-radius: 11px; color: var(--paper); background: var(--ink); }
+      .case-core .label { color: #d99a79; }
+      .case-core h3 { margin: 13px 0 0; font-size: 26px; line-height: 1.15; letter-spacing: -.035em; font-weight: 500; }
+      .case-core > p { margin: 12px 0 0; color: rgba(245,240,232,.72); font-size: 12px; line-height: 1.55; }
+      .case-fields { margin-top: 18px; display: grid; gap: 6px; }
+      .case-fields span { padding: 8px 9px; border: 1px solid rgba(245,240,232,.13); border-radius: 5px; color: rgba(245,240,232,.77); font: 400 9px/1.4 var(--mono); }
+      .jump-band { margin-top: 12px; padding: 13px 15px; display: flex; flex-wrap: wrap; align-items: center; gap: 7px; border: 1px dashed var(--line-strong); border-radius: 7px; }
+      .jump-band strong { margin-right: 4px; font-size: 11px; }
+      .jump-band span { padding: 5px 8px; border-radius: 4px; color: var(--signal); background: var(--signal-pale); font: 500 8px/1 var(--mono); text-transform: uppercase; }
+      .route-examples { margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+      .route-example { padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: rgba(255,255,255,.2); }
+      .route-example strong { display: block; font-size: 12px; }
+      .route-example p { margin: 7px 0 0; color: var(--body); font: 400 10px/1.6 var(--mono); }
+
+      .investigation-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+      .investigation-card { min-width: 0; border: 1px solid var(--line); border-radius: 13px; overflow: hidden; background: rgba(255,255,255,.2); }
+      .investigation-card header { padding: 20px; border-bottom: 1px solid var(--line); background: var(--signal-pale); }
+      .investigation-card header h3 { margin: 7px 0 0; font-size: 23px; letter-spacing: -.03em; font-weight: 500; }
+      .investigation-card header p { margin: 7px 0 0; color: var(--body); font-size: 12px; line-height: 1.5; }
+      .investigation-body { padding: 19px; }
+      .investigation-block + .investigation-block { margin-top: 17px; padding-top: 16px; border-top: 1px solid var(--line); }
+      .investigation-block h4 { margin: 0; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; }
+      .investigation-block ul { margin: 9px 0 0; padding-left: 17px; color: var(--body); }
+      .investigation-block li { margin: 5px 0; padding-left: 3px; font-size: 12px; line-height: 1.48; }
+      .investigation-block.actions { padding: 15px; border: 1px solid rgba(49,93,73,.2); border-radius: 8px; background: var(--learn-soft); }
+      .investigation-block.actions h4 { color: var(--learn); }
+      .investigation-block.actions + .investigation-block { border-top: 0; }
+      .investigation-principle { margin-top: 14px; padding: 17px 19px; border-radius: 9px; color: var(--paper); background: var(--ink); font-size: 13px; line-height: 1.55; }
+      .investigation-principle strong { color: #d99a79; }
+
+      .disposition-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 9px; }
+      .disposition { min-width: 0; min-height: 145px; padding: 17px; border: 1px solid var(--line); border-radius: 9px; background: rgba(255,255,255,.2); }
+      .disposition.apply { border-color: rgba(49,93,73,.28); background: var(--learn-soft); }
+      .disposition.route { border-color: rgba(133,101,49,.28); background: var(--sand-soft); }
+      .disposition strong { display: block; margin-top: 10px; font-size: 14px; font-weight: 600; }
+      .disposition p { margin: 7px 0 0; color: var(--body); font-size: 12px; line-height: 1.5; }
+      .intervention-contract {
+        margin-top: 12px;
+        padding: 17px 19px;
+        border: 1px solid var(--line-strong);
+        border-radius: 9px;
+        background: var(--paper-2);
+      }
+      .intervention-contract strong { font-size: 13px; }
+      .intervention-contract p { margin: 6px 0 0; color: var(--body); font-size: 12px; line-height: 1.55; }
+      .measurement { margin-top: 26px; padding: 22px; border: 1px solid rgba(49,93,73,.25); border-radius: 13px; background: rgba(221,232,223,.65); }
+      .measurement-head { display: grid; grid-template-columns: 240px minmax(0,1fr); gap: 24px; }
+      .measurement h3 { margin: 7px 0 0; font-size: 22px; font-weight: 500; }
+      .measurement-head p { margin: 0; color: var(--body); font-size: 13px; line-height: 1.55; }
+      .measure-flow { margin-top: 18px; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 20px; }
+      .measure-step { min-width: 0; position: relative; padding: 15px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); }
+      .measure-step:not(:last-child)::after { width: 15px; position: absolute; top: 50%; right: -18px; color: var(--learn); content: "→"; }
+      .measure-step strong { display: block; font-size: 12px; }
+      .measure-step span { display: block; margin-top: 6px; color: var(--body); font-size: 10px; line-height: 1.45; }
+      .performance-outcomes { margin-top: 12px; display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+      .performance-outcome { padding: 12px; border-radius: 7px; background: rgba(255,255,255,.34); }
+      .performance-outcome strong { display: block; font-size: 10px; }
+      .performance-outcome span { display: block; margin-top: 5px; color: var(--body); font-size: 9px; line-height: 1.42; }
+      .decision-band { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 7px; align-items: center; }
+      .decision-band strong { margin-right: 3px; font-size: 11px; }
+      .decision-band span { padding: 6px 9px; border-radius: 5px; color: var(--learn); background: rgba(255,255,255,.48); font: 500 8px/1 var(--mono); }
+
+      .scale-shell { padding: 22px; border: 1px solid var(--line-strong); border-radius: 14px; background: var(--paper-2); }
+      .scale-equation { display: grid; grid-template-columns: repeat(7, auto); gap: 8px; align-items: center; justify-content: center; }
+      .scale-unit { padding: 11px 13px; border: 1px solid var(--line); border-radius: 7px; background: var(--paper); font-size: 11px; font-weight: 600; text-align: center; }
+      .scale-op { color: var(--signal); font: 500 13px/1 var(--mono); }
+      .scale-note { max-width: 900px; margin: 15px auto 0; color: var(--body); font-size: 12px; line-height: 1.55; text-align: center; }
+      .scale-loop { margin-top: 22px; display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: 19px; }
+      .scale-step { min-width: 0; min-height: 138px; position: relative; padding: 15px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); }
+      .scale-step:not(:last-child)::after { position: absolute; top: 50%; right: -16px; color: var(--signal); content: "→"; }
+      .scale-step strong { display: block; font-size: 12px; }
+      .scale-step span { display: block; margin-top: 7px; color: var(--body); font-size: 10px; line-height: 1.45; }
+      .coverage-ledger { margin-top: 22px; border: 1px solid var(--line); border-radius: 9px; overflow: hidden; }
+      .ledger-row { display: grid; grid-template-columns: 1.3fr .8fr 1fr 1.15fr 1fr; }
+      .ledger-row > div { min-width: 0; padding: 12px; color: var(--body); font-size: 10px; line-height: 1.4; }
+      .ledger-row > div + div { border-left: 1px solid var(--line); }
+      .ledger-row.head { color: var(--muted); background: rgba(255,255,255,.26); font: 500 8px/1.2 var(--mono); text-transform: uppercase; }
+      .ledger-row.head > div { color: inherit; }
+      .ledger-row:not(.head) { border-top: 1px solid var(--line); background: var(--paper); }
+      .scale-capabilities { margin-top: 12px; display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+      .scale-capability { padding: 13px; border-radius: 7px; background: rgba(255,255,255,.34); }
+      .scale-capability strong { display: block; font-size: 11px; }
+      .scale-capability span { display: block; margin-top: 5px; color: var(--body); font-size: 10px; line-height: 1.45; }
+
+      .appendix { padding: 24px; border-radius: 14px; color: var(--paper); background: var(--ink); }
+      .appendix .section-head { margin-bottom: 28px; }
+      .appendix .section-copy h2 { color: var(--paper); }
+      .appendix .section-copy p { color: rgba(245,240,232,.68); }
+      .appendix .section-number { color: #d99a79; border-color: rgba(217,154,121,.4); }
+      .object-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+      .object { min-width: 0; min-height: 150px; padding: 15px; border: 1px solid rgba(245,240,232,.13); border-radius: 8px; background: rgba(245,240,232,.04); }
+      .object code { color: #d99a79; font: 500 9px/1.3 var(--mono); }
+      .object strong { display: block; margin-top: 11px; font-size: 12px; }
+      .object span { display: block; margin-top: 6px; color: rgba(245,240,232,.65); font-size: 10px; line-height: 1.48; }
+      .integrity-rail { margin-top: 13px; padding: 14px; display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; border: 1px solid rgba(245,240,232,.13); border-radius: 8px; }
+      .integrity-rail div { color: rgba(245,240,232,.68); font-size: 10px; line-height: 1.45; }
+      .integrity-rail strong { display: block; margin-bottom: 5px; color: var(--paper); font-size: 11px; }
+
+      .closing { margin-top: 112px; padding: 55px; border: 1px solid var(--line); border-radius: 15px; text-align: center; }
+      .closing h2 { max-width: 1000px; margin: 15px auto 0; font-size: clamp(38px,5vw,67px); line-height: 1; letter-spacing: -.06em; font-weight: 500; }
+      .closing p { max-width: 780px; margin: 18px auto 0; color: var(--body); font-size: 14px; line-height: 1.6; }
+
+      @media (max-width: 1100px) {
+        .scope-grid { grid-template-columns: 1fr 1fr; }
+        .scope-card:nth-child(3) { border-left: 0; border-top: 1px solid var(--line); }
+        .scope-card:nth-child(4) { border-top: 1px solid var(--line); }
+        .source-band { grid-template-columns: repeat(3,1fr); }
+        .lifecycle, .scale-loop { grid-template-columns: repeat(3,1fr); }
+        .life-node:nth-child(3)::after, .life-node:nth-child(3)::before { display: none; }
+        .scale-step:nth-child(3)::after { display: none; }
+        .feedback-line { display: none; }
+        .entity-chain { grid-template-columns: repeat(3,1fr); }
+        .entity:nth-child(3)::after { display: none; }
+        .signal-head, .signal-row { grid-template-columns: 170px 1fr 1fr; }
+        .signal-head > div:last-child { display: none; }
+        .signal-row > div:last-child { grid-column: 2 / 4; border-top: 1px solid var(--line); }
+        .object-grid { grid-template-columns: repeat(2,1fr); }
       }
 
-      @media (max-width: 1250px) {
-        .loop { grid-template-columns: repeat(4, 1fr); }
-        .node:nth-child(4)::after, .node:nth-child(4)::before { display: none; }
-        .return-loop { display: none; }
-        .planes { grid-template-columns: repeat(2, 1fr); }
-        .objects { grid-template-columns: repeat(3, 1fr); }
-        .evidence-inputs, .actions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      }
-
-      @media (max-width: 900px) {
-        main { width: min(100% - 30px, 760px); padding-top: 54px; }
+      @media (max-width: 820px) {
+        main { width: min(100% - 30px, 720px); padding-top: 58px; }
         .topbar { padding: 0 16px; }
-        .top-meta span { display: none; }
-        .thesis, .inputs, .memory, .controls, .destinations, .agents, .boundaries, .grounding, .coordinator { grid-template-columns: 1fr; }
-        .thesis > div + div { border-left: 0; border-top: 1px solid var(--line); }
-        .loop { grid-template-columns: 1fr 1fr; gap: 12px; }
-        .node:not(:last-child)::after, .node:not(:last-child)::before { display: none; }
-        .runtime-head { display: block; }
-        .runtime-head p { margin-top: 9px; text-align: left; }
-        .objects { grid-template-columns: 1fr 1fr; }
-        .trace-row { grid-template-columns: 110px 1fr; }
-        .trace-evidence, .trace-result { grid-column: 2; }
-        .system-caption { display: block; }
-        .system-caption span { display: block; margin-top: 6px; }
-        .capabilities, .governance, .case-questions, .response-loop { grid-template-columns: 1fr 1fr; }
-        .zone-head, .case-head { display: block; }
-        .zone-head p, .case-head p { margin-top: 8px; text-align: left; }
-        .response-step:not(:last-child)::after { display: none; }
+        .top-links span, .top-links a:first-of-type { display: none; }
+        .section { margin-top: 88px; }
+        .systems-layout, .investigation-grid { grid-template-columns: 1fr; }
+        .source-band { grid-template-columns: 1fr 1fr; }
+        .coverage-band, .foundation-rail, .direction-panel, .world-model-head, .signal-definition, .measurement-head { grid-template-columns: 1fr; }
+        .coverage-equation { text-align: left; }
+        .reasoning-grid { grid-template-columns: 1fr; }
+        .move-stack.left .reason-move::after, .move-stack.right .reason-move::before { display: none; }
+        .case-core { grid-row: 1; }
+        .reasoning-rule { display: block; }
+        .reasoning-rule p { margin-top: 8px; text-align: left; }
+        .power-strip, .performance-outcomes, .scale-capabilities, .integrity-rail { grid-template-columns: 1fr 1fr; }
+        .route-examples { grid-template-columns: 1fr; }
+        .disposition-grid { grid-template-columns: 1fr 1fr; }
+        .measure-flow { grid-template-columns: 1fr 1fr; }
+        .measure-step:not(:last-child)::after { display: none; }
+        .scale-equation { grid-template-columns: 1fr 30px 1fr; }
+        .ledger-row { grid-template-columns: 1.2fr .8fr 1fr; }
+        .ledger-row > div:nth-child(4), .ledger-row > div:nth-child(5) { display: none; }
       }
 
       @media (max-width: 560px) {
-        .top-meta { display: none; }
-        main { width: calc(100% - 24px); padding-top: 42px; }
-        .hero h1 { font-size: 46px; }
-        .hero > p { font-size: 15px; }
-        .section { margin-top: 68px; }
-        .system { padding: 12px; }
-        .loop, .planes, .objects, .evidence-inputs, .actions, .capabilities, .governance, .case-questions, .response-loop { grid-template-columns: 1fr; }
-        .trace-row { grid-template-columns: 1fr; }
-        .trace-evidence, .trace-result { grid-column: auto; }
-        .question { grid-template-columns: 30px 1fr; }
-        .question > code { grid-column: 2; text-align: left; }
-        .close { padding: 38px 22px; }
-        .hero h1, .hero > p, .section-head, .input-card, .memory-card,
-        .node, .control-card, .destination-card, .plane, .object,
-        .agent-principle, .agent-flow, .trace-row, .boundary, .close {
-          min-width: 0;
-          overflow-wrap: anywhere;
-        }
+        main { width: calc(100% - 24px); padding-top: 46px; }
+        .top-links { display: none; }
+        .hero h1 { font-size: 62px; }
+        .hero > p { font-size: 16px; }
+        .scope-grid { grid-template-columns: 1fr; }
+        .scope-card + .scope-card { border-left: 0; border-top: 1px solid var(--line); }
+        .dimension-rail { display: block; text-align: left; line-height: 1.55; }
+        .section-head { grid-template-columns: 1fr; gap: 12px; }
+        .section-number { width: 39px; height: 39px; }
+        .overview, .reasoning-shell, .scale-shell { padding: 13px; }
+        .source-band, .lifecycle, .scale-loop, .power-strip, .knowledge-types, .disposition-grid, .measure-flow, .performance-outcomes, .scale-capabilities, .object-grid, .integrity-rail { grid-template-columns: 1fr; }
+        .life-node, .scale-step { min-height: 0; }
+        .life-node:not(:last-child)::after, .life-node:not(:last-child)::before, .scale-step:not(:last-child)::after { display: none; }
+        .foundation-rail { gap: 5px; }
+        .system-row { grid-template-columns: 1fr; gap: 7px; }
+        .direction-panel, .world-model-head { gap: 8px; }
+        .entity-chain { grid-template-columns: 1fr 1fr; }
+        .entity::after { display: none; }
+        .signal-head { display: none; }
+        .signal-row { display: block; }
+        .signal-row > div { padding: 16px; }
+        .signal-row > div + div { border-left: 0; border-top: 1px solid var(--line); }
+        .signal-row > div:last-child { grid-column: auto; }
+        .cell-label { display: block; margin-bottom: 7px; color: var(--signal); font: 500 8px/1.3 var(--mono); text-transform: uppercase; }
+        .signal-notes { grid-template-columns: 1fr; }
+        .case-core { padding: 20px; }
+        .jump-band { align-items: flex-start; }
+        .measure-step { min-height: 0; }
+        .scale-equation { grid-template-columns: 1fr; }
+        .scale-op { text-align: center; }
+        .coverage-ledger { display: none; }
+        .closing { padding: 38px 20px; }
       }
     </style>
   </head>
   <body>
     <header class="topbar">
       <a class="brand" href="./"><img src="./orb.svg" alt=""><span>CARVE</span></a>
-      <div class="top-meta">
-        <span>Commerce intelligence system model</span>
-        <a href="#whole-system">How it works</a>
+      <div class="top-links">
+        <span>Commerce intelligence system map</span>
+        <a href="#overview">Overview</a>
         <a href="https://wstortebecker.github.io/carve-catalog-playbook/" target="_blank" rel="noreferrer">Domain worktree ↗</a>
       </div>
     </header>
 
     <main>
       <section class="hero">
-        <span class="eyebrow">How Carve works</span>
-        <h1>A continuously working commerce intelligence system.</h1>
-        <p>Carve maintains a living understanding of the catalog, addressable demand, search visibility, result selection and PDP performance. Agents explore every product, page, query and market; investigate opportunities; make permitted changes; and learn from what happens.</p>
-        <div class="thesis">
-          <div><strong>Capture qualified demand</strong><span>Find valuable searches no existing page adequately serves.</span></div>
-          <div><strong>Improve rank and impressions</strong><span>Strengthen a suitable existing page where visibility is weaker than it should be.</span></div>
-          <div><strong>Improve search-result CTR</strong><span>Earn more selection from organic results and free Shopping surfaces.</span></div>
-          <div><strong>Improve PDP decision and ATC</strong><span>Help qualified shoppers understand, choose and successfully add the product.</span></div>
+        <span class="eyebrow">First-principles system map</span>
+        <h1>How Carve works.</h1>
+        <p>Carve connects retailer truth and shopper behaviour with outside-market evidence, finds unrealized performance, investigates each case adaptively, makes permitted changes and learns from measured outcomes.</p>
+
+        <div class="scope-grid" aria-label="What Carve improves">
+          <article class="scope-card"><strong>Uncaptured demand</strong><span>Qualified demand the retailer can credibly serve, but no existing page adequately serves.</span></article>
+          <article class="scope-card"><strong>Weak rank or impressions</strong><span>A suitable page exists, but earns less organic visibility than its realistic opportunity.</span></article>
+          <article class="scope-card"><strong>Weak organic or free-Shopping CTR</strong><span>The result is shown, but selected less often than expected for its context.</span></article>
+          <article class="scope-card"><strong>Weak PDP decision or ATC</strong><span>Qualified shoppers reach the product but do not sufficiently understand, choose or successfully add it.</span></article>
         </div>
+        <div class="dimension-rail"><strong>Across every question:</strong> market · language · device · organic / free Shopping / other observed surface · traffic cohort · time</div>
       </section>
 
-      <section class="section" id="whole-system">
+      <section class="section" id="overview">
         <header class="section-head">
-          <span class="label">The whole system</span>
-          <h2>Evidence enters. Understanding persists. Agents reason and act. Outcomes become new evidence.</h2>
-          <p>The outer lifecycle is durable. Inside each case, the work is adaptive: Carve can revisit any question, use different tools, keep competing explanations alive or ask the retailer for missing truth.</p>
+          <span class="section-number">00</span>
+          <div class="section-copy"><h2>The complete system at a glance.</h2><p>The outer operating loop is stable. What happens inside an investigation is not: agents can branch, jump, delegate, split or reopen the case as the evidence changes.</p></div>
         </header>
 
-        <div class="system">
-          <div class="system-row evidence-inputs">
-            <article class="input-card">
-              <span class="number">RETAILER-ASSERTED FACTS</span>
-              <h3>Catalog and experience</h3>
-              <p>What products, variants, offers, pages and approved claims currently exist. Authority stays attached to the source.</p>
-              <div class="source-list"><span>Shopify</span><span>PIM</span><span>DAM</span><span>CMS</span><span>Catalog feed</span><span>Market config</span></div>
-            </article>
-            <article class="input-card">
-              <span class="number">FIRST-PARTY OBSERVATIONS</span>
-              <h3>Performance and behaviour</h3>
-              <p>What shoppers and systems appear to do, measured with each tool’s scope, definition and limitations intact.</p>
-              <div class="source-list"><span>GSC</span><span>GMC</span><span>GA4</span><span>Shopify</span><span>Onsite search</span><span>Hotjar</span><span>Reviews</span><span>Support</span></div>
-            </article>
-            <article class="input-card">
-              <span class="number">EXTERNAL OBSERVATIONS</span>
-              <h3>Demand and market</h3>
-              <p>What Google, Shopping surfaces, competitors, demand and local markets show at a specific place and time.</p>
-              <div class="source-list"><span>Live SERPs</span><span>Shopping</span><span>DataForSEO</span><span>Competitors</span><span>Trends</span><span>CrUX</span><span>Research</span></div>
-            </article>
-            <article class="input-card">
-              <span class="number">RETAILER DIRECTION</span>
-              <h3>Intent and authority</h3>
-              <p>Which outcomes matter, what may be claimed, what Carve may change and who decides when judgment is commercial.</p>
-              <div class="source-list"><span>Goals</span><span>Brand rules</span><span>Markets</span><span>Claims</span><span>Permissions</span><span>Approvals</span><span>Risk limits</span></div>
-            </article>
+        <div class="overview">
+          <div class="overview-kicker"><span class="label">Source families</span></div>
+          <div class="source-band">
+            <div class="source-chip"><strong>Catalog and product truth</strong><span>Commerce platform, PIM, DAM, CMS and feed</span></div>
+            <div class="source-chip"><strong>Search and performance</strong><span>GSC, GMC, analytics and confirmed commerce events</span></div>
+            <div class="source-chip"><strong>Behaviour and customer voice</strong><span>Onsite search, replays, reviews, support and tests</span></div>
+            <div class="source-chip"><strong>Demand and competition</strong><span>Localized SERPs, Shopping, keywords, Trends and competitors</span></div>
+            <div class="source-chip"><strong>Retailer direction</strong><span>Goals, product authority, brand rules and permissions</span></div>
           </div>
 
-          <div class="flow-down"></div>
-
-          <div class="system-row grounding">
-            <article class="control-card"><span class="label">Identity</span><h3>Resolve what each record refers to.</h3><p>Link product, variant, URL, collection, offer ID, analytics item, query cluster, market, language, device and search surface.</p></article>
-            <article class="control-card"><span class="label">Provenance</span><h3>Keep the evidence inspectable.</h3><p>Store the raw snapshot, source, timestamp, scope, metric definition, transformation, freshness and known blind spots.</p></article>
-            <article class="control-card"><span class="label">Conflict</span><h3>Resolve disagreement by authority—not convenience.</h3><p>Prefer the valid source for the claim; otherwise retain the conflict and ask the retailer rather than silently merging it.</p></article>
+          <div class="down-arrow"></div>
+          <div class="coverage-band">
+            <div><span class="label">Catalog coverage</span><strong>Nothing known is forgotten.</strong><p>Carve maintains coverage across every valid, addressable combination.</p></div>
+            <div class="coverage-equation">product / variant ↔ page / collection ↔ query job × market / language × device / surface × time</div>
           </div>
+          <div class="down-arrow"></div>
 
-          <div class="flow-down"></div>
-
-          <div class="system-row memory">
-            <article class="memory-card primary">
-              <span class="label">Living commerce world model</span>
-              <h3>One connected understanding of the retailer and its addressable demand.</h3>
-              <p>Products, variants, pages, offers, query clusters, markets, customer evidence, observations, changes and outcomes are linked across time.</p>
-            </article>
-            <article class="memory-card">
-              <span class="label">Facts and claims</span>
-              <h3>What may be treated as true</h3>
-              <p>Retailer-authorized product facts, current catalog state, page content, offer state and market configuration.</p>
-            </article>
-            <article class="memory-card">
-              <span class="label">Observations</span>
-              <h3>What was measured or seen</h3>
-              <p>First-party metrics, external snapshots, live experiences, customer evidence and their limitations.</p>
-            </article>
-            <article class="memory-card">
-              <span class="label">Beliefs and learning</span>
-              <h3>What Carve currently thinks</h3>
-              <p>Hypotheses, uncertainty, past interventions, measured outcomes, retailer corrections and learned patterns.</p>
-            </article>
+          <div class="lifecycle">
+            <a class="life-node" href="#systems"><span class="step">01 · OBSERVE</span><h3>Connect reality</h3><p>Ingest source records, resolve identity and preserve source, scope, freshness and metric meaning.</p></a>
+            <a class="life-node signal" href="#signals"><span class="step">02 · DETECT</span><h3>Derive opportunities</h3><p>Compare observed performance with a relevant expectation and create a scoped signal—not a cause.</p></a>
+            <a class="life-node" href="#scale"><span class="step">03 · COORDINATE</span><h3>Open or merge cases</h3><p>Deduplicate related signals, split different mechanisms and prevent parallel work from colliding.</p></a>
+            <a class="life-node agent" href="#reasoning"><span class="step">04 · UNDERSTAND</span><h3>Investigate adaptively</h3><p>Maintain competing explanations and choose tools by what would change the belief or action.</p></a>
+            <a class="life-node action" href="#outcomes"><span class="step">05 · CHANGE</span><h3>Act under authority</h3><p>Ask, prepare, test, apply, route, monitor or reverse an exact intervention.</p></a>
+            <a class="life-node action" href="#outcomes"><span class="step">06 · LEARN</span><h3>Measure the response</h3><p>Verify live state, measure outcome and mechanism, then update the case and future judgment.</p></a>
           </div>
+          <div class="feedback-line"><span>measured response returns as new evidence</span></div>
 
-          <div class="flow-down"></div>
-
-          <div class="coordinator">
-            <article><span class="label">Catalog-wide explorer</span><h3>Carve looks for unrealized performance everywhere—not only alerts.</h3><p>It repeatedly maps products, pages, query demand, markets and search surfaces; compares them with relevant alternatives and their own history; and opens cases where deeper work may create value.</p></article>
-            <article><span class="label">Case coordination</span><h3>One registry of active questions</h3><p>Deduplicate overlapping signals, merge shared evidence, split genuinely different markets or mechanisms and reopen cases when the world changes.</p></article>
-            <article><span class="label">Collision control</span><h3>Parallel work remains coherent</h3><p>Share evidence across cases, detect when interventions touch the same page or field and prevent one agent from invalidating another agent’s work.</p></article>
-          </div>
-
-          <div class="flow-down"></div>
-
-          <div class="intelligence-zone">
-            <div class="zone-head">
-              <div><span class="label">Agentic intelligence</span><h3>Each case is an adaptive workspace.</h3></div>
-              <p>The agent does not execute a universal checklist. It chooses the next question, specialist and tool by what would most change the current belief or the justified action.</p>
-            </div>
-
-            <div class="capabilities">
-              <div class="capability"><strong>Foundation-model reasoning</strong><span>Frame ambiguous problems, compare explanations, synthesize evidence and create exact work.</span></div>
-              <div class="capability"><strong>Ecommerce domain expertise</strong><span>Search, Shopping, content, merchandising, CRO and market worktrees supply expert questions and mechanisms.</span></div>
-              <div class="capability"><strong>Specialist agents and skills</strong><span>Bounded research, analysis, content, visual, implementation and measurement work can run in parallel.</span></div>
-              <div class="capability"><strong>Tool and capability registry</strong><span>Carve knows which connected and Carve-provided tools can answer or execute each kind of question.</span></div>
-            </div>
-
-            <div class="case-workspace">
-              <div class="case-head">
-                <div><span class="label">The active case</span><h4>Question, evidence, beliefs, decisions and history stay together.</h4></div>
-                <p>These are reasoning moves, not stages. The agent can use any of them repeatedly, in any order, and retain several live explanations.</p>
-              </div>
-              <div class="case-questions">
-                <article class="case-node"><strong>Frame the performance question</strong><p>Define the product or page, demand, market, device, surface, cohort, comparator and outcome precisely enough to reason about.</p></article>
-                <article class="case-node core"><strong>Form competing mechanisms</strong><p>Ask what could produce the pattern, what each explanation predicts and what evidence would weaken it.</p></article>
-                <article class="case-node"><strong>Seek decision-changing evidence</strong><p>Join first-party history, external observations, live experience, customer evidence and expert research only where it separates actions.</p></article>
-                <article class="case-node"><strong>Inspect the real experience</strong><p>See the actual SERP, Shopping result, landing page or PDP in the relevant market and device—not only an aggregate metric.</p></article>
-                <article class="case-node core"><strong>Maintain the current performance read</strong><p>State the best-supported limit, viable alternatives, uncertainty, missing truth and why a particular move is or is not justified.</p></article>
-                <article class="case-node"><strong>Design an intervention and its test</strong><p>Make the smallest coherent change that improves or tests the likely mechanism; predefine expected response, comparator and guardrails.</p></article>
-              </div>
-            </div>
-
-            <div class="governance-label">These constraints govern ingestion, reasoning and action continuously</div>
-            <div class="governance">
-              <article class="control-card"><span class="label">Truth</span><h3>Claims require authority.</h3><p>Research and inference can suggest a claim; only a valid retailer source can authorize it.</p></article>
-              <article class="control-card"><span class="label">Evidence</span><h3>Confidence stays calibrated.</h3><p>Correlation, recordings, SERP samples, competitors and experiments support different conclusions.</p></article>
-              <article class="control-card"><span class="label">Permission</span><h3>Every capability is scoped.</h3><p>Read, ask, draft, preview, test, stage, publish, route and reverse are separate authorities.</p></article>
-              <article class="control-card"><span class="label">Safety</span><h3>Every material change is controlled.</h3><p>Dependencies, approvals, versions, live verification, collision checks and rollback are recorded.</p></article>
-            </div>
-          </div>
-
-          <div class="flow-down"></div>
-
-          <div class="system-row actions">
-            <article class="destination-card"><span class="label">Ask</span><h3>Resolve missing intent or truth.</h3><p>Ask a precise retailer question when a product claim, commercial choice or approval cannot be inferred safely.</p></article>
-            <article class="destination-card"><span class="label">Prepare</span><h3>Create the exact intervention.</h3><p>Draft before/after values, page or feed changes, assets, scope, rationale, preview and measurement plan.</p></article>
-            <article class="destination-card apply"><span class="label">Test / apply</span><h3>Use an authorized write surface.</h3><p>Stage, publish or experiment only where the connector and permission allow it; then verify the rendered live state.</p></article>
-            <article class="destination-card route"><span class="label">Route</span><h3>Hand over a decision-ready change.</h3><p>Give the right owner the evidence, exact recommendation, dependencies and approval needed for work Carve cannot execute.</p></article>
-            <article class="destination-card hold"><span class="label">Hold / monitor</span><h3>No justified move yet.</h3><p>Retain the case and reopen automatically when evidence, demand, catalog state or authority changes.</p></article>
-          </div>
-
-          <div class="flow-down"></div>
-
-          <div class="response-loop">
-            <div class="response-step"><strong>The intervention changes retailer reality</strong><span>A page, offer, feed, presentation or decision experience becomes different.</span></div>
-            <div class="response-step"><strong>Search systems and shoppers respond</strong><span>Eligibility, ranking, presentation, selection, comprehension and behaviour may change.</span></div>
-            <div class="response-step"><strong>The outcome becomes evidence</strong><span>Carve measures the target, mechanism, comparator, time window and guardrails.</span></div>
-            <div class="response-step"><strong>The system learns</strong><span>Keep, revise, expand, reverse or reopen; update the case, world model and retailer-specific judgment.</span></div>
-          </div>
-
-          <div class="system-caption">
-            <span>Persistent: ingestion, identity, provenance, catalog exploration, case coordination, monitoring and measurement.</span>
-            <span>Adaptive: live SERPs, browser inspection, deeper research, specialist agents, retailer questions, experiments and execution.</span>
+          <div class="foundation-rails">
+            <div class="foundation-rail"><strong>Persistent world model and history</strong><span>Entities · asserted facts · observations · signals · cases · interventions · results · retailer-specific learning</span></div>
+            <div class="foundation-rail"><strong>Continuous operating control</strong><span>Source health · truth authority · uncertainty · permissions · approvals · privacy · versions · collisions · live verification · rollback</span></div>
           </div>
         </div>
       </section>
 
-      <section class="section">
+      <section class="section" id="systems">
         <header class="section-head">
-          <span class="label">Four operating layers</span>
-          <h2>Persistent knowledge, exhaustive coverage, adaptive intelligence and governed action.</h2>
-          <p>These layers explain what the software must continuously do. They are not screens or a fixed order of work.</p>
+          <span class="section-number">01</span>
+          <div class="section-copy"><h2>Systems and data have different jobs.</h2><p>Some systems tell Carve what exists. Some reveal a performance pattern. Some help explain it. Others let Carve change and verify the experience. The same source may play more than one role.</p></div>
         </header>
-        <div class="planes">
-          <article class="plane"><span class="plane-index">01</span><h3>Grounding and memory</h3><p>Turns disconnected source records into an inspectable living world model.</p><ul><li><strong>Identity:</strong> products, pages, queries, offers, markets and observations resolve to connected entities.</li><li><strong>Authority:</strong> retailer facts remain distinct from observations, derived metrics and model beliefs.</li><li><strong>History:</strong> raw evidence, transformations, decisions, changes and outcomes remain attributable.</li><li><strong>Missing systems:</strong> available evidence and confidence change; reasoning adapts.</li></ul></article>
-          <article class="plane"><span class="plane-index">02</span><h3>Exploration and coordination</h3><p>Provides continuous coverage without inheriting human attention limits.</p><ul><li><strong>Coverage:</strong> repeatedly inspect every relevant product, page, query cluster, surface and market.</li><li><strong>Opportunity:</strong> look for upside even when nothing is broken or declining.</li><li><strong>Case registry:</strong> merge duplicates, split different mechanisms and share evidence.</li><li><strong>Collision control:</strong> coordinate simultaneous work that touches the same commercial object.</li></ul></article>
-          <article class="plane"><span class="plane-index">03</span><h3>Adaptive intelligence</h3><p>Combines general reasoning with deep ecommerce expertise and real tools.</p><ul><li><strong>Reasoning:</strong> frame ambiguity, generate alternatives and update beliefs from evidence.</li><li><strong>Expertise:</strong> SEO, Shopping, content, merchandising, CRO and market mechanisms guide inquiry.</li><li><strong>Specialists:</strong> delegate bounded research, analysis, creative and implementation work in parallel.</li><li><strong>Tool choice:</strong> use the source most likely to change the decision—not every available integration.</li></ul></article>
-          <article class="plane"><span class="plane-index">04</span><h3>Governed action and learning</h3><p>Makes intelligence useful without detaching it from truth, authority or outcomes.</p><ul><li><strong>Collaboration:</strong> ask for missing facts, intent and approvals when judgment belongs to the retailer.</li><li><strong>Execution:</strong> draft, preview, stage, test, publish, verify and reverse within permission.</li><li><strong>Measurement:</strong> observe the commercial result, expected mechanism, comparator and guardrails.</li><li><strong>Learning:</strong> update the case, retailer memory and future judgment from corrections and results.</li></ul></article>
-        </div>
-      </section>
 
-      <section class="section">
-        <header class="section-head">
-          <span class="label">What the software actually stores</span>
-          <h2>Seven durable objects make the intelligence operational.</h2>
-          <p>The system stays coherent because it does not collapse facts, observations, beliefs, permissions, changes and outcomes into one blob of context.</p>
-        </header>
-        <div class="objects">
-          <article class="object"><code>ENTITY</code><h3>What exists</h3><p>Product, variant, page, collection, offer, query cluster, market, language, device and surface—with their relationships.</p><div class="example">Aster Shell ↔ AS-310-BLK-M ↔ /se/aster ↔ GMC offer ↔ GA4 item</div></article>
-          <article class="object"><code>ASSERTED FACT</code><h3>What may be claimed as true</h3><p>A retailer-authorized fact with source, owner, scope, effective date and any unresolved conflict.</p><div class="example">Waterproof rating · PIM · approved for SE product copy</div></article>
-          <article class="object"><code>OBSERVATION</code><h3>What was measured or seen</h3><p>A raw or derived record with source, scope, timestamp, definition, provenance, freshness and limitations.</p><div class="example">Confirmed ATC · Shopify · SE mobile · buyable sessions · 28 days</div></article>
-          <article class="object"><code>CASE</code><h3>What Carve is trying to understand</h3><p>Commercial question, exact scope, competing mechanisms, evidence, current beliefs, uncertainty and decisions.</p><div class="example">Why does this PDP underperform matched products in Sweden?</div></article>
-          <article class="object"><code>POLICY</code><h3>What Carve may decide or do</h3><p>Truth authority, permissions, approval rules, risk limits and budgets scoped by system, field, market and action.</p><div class="example">Draft Swedish copy; Brand approves claim; Carve may publish</div></article>
-          <article class="object"><code>INTERVENTION</code><h3>What will change</h3><p>Exact before/after values, mechanism, dependencies, owner, version, preview, measurement plan and rollback.</p><div class="example">Positioning + description + fit guidance · Shopify version 8.4</div></article>
-          <article class="object"><code>RESULT</code><h3>What happened and was learned</h3><p>Outcome, mechanism evidence, comparator, window, uncertainty, guardrails and keep/revise/expand/reverse decision.</p><div class="example">ATC improved; comprehension moved; returns unchanged → expand</div></article>
-        </div>
-      </section>
-
-      <section class="section">
-        <header class="section-head">
-          <span class="label">How agent intelligence behaves</span>
-          <h2>The playbook guides questions. It does not dictate a route.</h2>
-        </header>
-        <div class="agents">
-          <article class="agent-principle">
-            <span class="label">One orchestrated intelligence</span>
-            <h3>Carve asks: what would most change what I believe or what I do next?</h3>
-            <p>A case does not automatically call every integration. The agent uses the world model, opens the most diagnostic source, inspects the real experience, revises its explanations and delegates bounded work to specialists when useful.</p>
-            <p>The public worktree is seeded ecommerce expertise—not a deterministic route. Retailer facts, live evidence, corrections and measured outcomes continually change how that expertise is applied.</p>
+        <div class="systems-layout">
+          <article class="system-panel">
+            <header><span class="label">Retailer-connected</span><h3>The retailer’s operating reality</h3><p>Carve connects what the retailer already uses. Availability varies; missing systems change confidence and available actions, not the underlying reasoning.</p></header>
+            <div class="system-row"><div class="system-name"><strong>Commerce, PIM, DAM and CMS</strong><span>Shopify or equivalent · product systems</span></div><div class="system-data">Products, variants, collections, page content, titles, descriptions, specs, approved claims, imagery, price, stock, offers, localization and market configuration.<div class="role-tags"><span>truth</span><span>investigate</span><span>change</span><span>verify</span></div></div></div>
+            <div class="system-row"><div class="system-name"><strong>Search Console and Merchant Center</strong><span>organic search · free product listings</span></div><div class="system-data">Query/page/country/device/search-appearance clicks, impressions, CTR and average position; free-listing performance, offer status and diagnostics. Native reporting is aggregated—not reliable exact organic carousel-slot history.<div class="role-tags"><span>signal</span><span>investigate</span><span>monitor</span></div></div></div>
+            <div class="system-row"><div class="system-name"><strong>Analytics and commerce outcomes</strong><span>GA4 · platform events · BI / warehouse</span></div><div class="system-data">Landing cohorts, product views, navigation and device/source behaviour. The commerce platform or server-side record confirms successful same-product adds and orders where available.<div class="role-tags"><span>signal</span><span>investigate</span><span>measure</span></div></div></div>
+            <div class="system-row"><div class="system-name"><strong>Behaviour and customer evidence</strong><span>Hotjar / Contentsquare · onsite search · reviews · support</span></div><div class="system-data">Replays, heatmaps, interaction friction, internal demand language, questions, objections, product misunderstandings and reasons shoppers cannot decide.<div class="role-tags"><span>investigate</span><span>design</span><span>guardrail</span></div></div></div>
+            <div class="system-row"><div class="system-name"><strong>Experiment, release and work systems</strong><span>testing · deploy history · ticketing</span></div><div class="system-data">Test allocation and results, launch annotations, template releases, owners, dependencies, approvals and routed work.<div class="role-tags"><span>context</span><span>execute</span><span>measure</span></div></div></div>
           </article>
-          <article class="agent-flow">
-            <div class="question-list">
-              <div class="question"><span>Q</span><div><strong>What exactly is the commercial performance question?</strong><p>Qualified uncaptured demand, weak rank or impressions, poor organic/Shopping selection, or weak PDP decision and ATC—in an exact market and cohort.</p></div><code>scope</code></div>
-              <div class="question"><span>H</span><div><strong>Which distinct mechanisms could produce what we see?</strong><p>Retain alternatives whose predictions and required actions differ instead of forcing one label.</p></div><code>hypotheses</code></div>
-              <div class="question"><span>E</span><div><strong>Which evidence would most change the decision?</strong><p>Choose first-party history, external observation, customer evidence, live inspection or retailer input according to the disagreement.</p></div><code>investigation</code></div>
-              <div class="question"><span>A</span><div><strong>What useful, truthful and authorized move follows?</strong><p>Intersect the likely mechanism with product truth, source capability, dependencies, commercial intent and risk.</p></div><code>intervention</code></div>
-              <div class="question"><span>M</span><div><strong>What response would support or weaken the belief?</strong><p>Predeclare the outcome, mechanism, comparator, time window and guardrails—then update rather than defend the original answer.</p></div><code>learning</code></div>
-            </div>
+
+          <article class="system-panel carve">
+            <header><span class="label" style="color:#f4c9b2">Carve-provided</span><h3>Outside-market and live-experience evidence</h3><p>Carve brings observation that is normally missing or scattered, scoped to the actual market, device and surface being investigated.</p></header>
+            <div class="system-row"><div class="system-name"><strong>Localized SERP and Shopping observation</strong><span>raw SERP provider · browser capture</span></div><div class="system-data">Actual result composition, observed organic and free-product presentation, page shown, title, snippet, image, variant, price, badges and sampled position by market/device/time.<div class="role-tags"><span>signal</span><span>investigate</span><span>competitor</span></div></div></div>
+            <div class="system-row"><div class="system-name"><strong>Demand and query research</strong><span>SEO suite / DataForSEO · Trends</span></div><div class="system-data">Query clusters, local vocabulary, estimated demand, seasonality, related jobs, SERP type and changes in what people appear to want.<div class="role-tags"><span>discover</span><span>signal</span><span>investigate</span></div></div></div>
+            <div class="system-row"><div class="system-name"><strong>Competitor and page research</strong><span>crawl · browser · change history</span></div><div class="system-data">Winning page types, page roles, product expression, content, assortment, imagery, offer and decision support. Competitor patterns suggest mechanisms; they do not authorize retailer claims.<div class="role-tags"><span>investigate</span><span>benchmark</span><span>design</span></div></div></div>
+            <div class="system-row"><div class="system-name"><strong>Rendered experience and performance</strong><span>browser · CrUX · PageSpeed</span></div><div class="system-data">The actual indexable/search result/PDP experience, visible hierarchy, broken interactions, responsive behaviour and field performance evidence where relevant.<div class="role-tags"><span>investigate</span><span>verify</span><span>guardrail</span></div></div></div>
+            <div class="system-row"><div class="system-name"><strong>Extensible discovery surfaces</strong><span>AI referrals · sampled AI visibility · new channels</span></div><div class="system-data">Referral and conversion data plus sampled external visibility where available. Partial observability stays explicit; it plugs into the same demand, selection and landing-performance model rather than becoming fake precision.<div class="role-tags"><span>observe</span><span>research</span><span>measure</span></div></div></div>
           </article>
         </div>
-      </section>
 
-      <section class="section">
-        <header class="section-head">
-          <span class="label">One case moving through the system</span>
-          <h2>An example trace—not a universal recipe.</h2>
-          <p>The same system may take a completely different path for another product, market or signal.</p>
-        </header>
-        <div class="trace">
-          <div class="trace-row"><span class="trace-step">Observe</span><strong class="trace-question">A product’s confirmed Swedish mobile PDP-to-ATC is materially weak.</strong><span class="trace-evidence">Shopify confirms the add. GA4 is supporting because its event fires earlier. Availability and device remain visible.</span><span class="trace-result">Case opened with exact cohort and comparator.</span></div>
-          <div class="trace-row"><span class="trace-step">Investigate</span><strong class="trace-question">Wrong traffic, weak offer, failed configuration or missing decision information?</strong><span class="trace-evidence">Carve checks relevant landing demand, Merchant promise, live alternatives, PIM truth, rendered PDP, product questions and valid-add behaviour.</span><span class="trace-result">Several hypotheses weaken; one converges.</span></div>
-          <div class="trace-row"><span class="trace-step">Performance read</span><strong class="trace-question">The product fits, but shoppers must infer construction, protection and layering fit.</strong><span class="trace-evidence">Approved facts exist but are absent at the decision point. Competitors and customer evidence reveal the same criteria.</span><span class="trace-result">Useful uncertainty stated; technical audit deprioritized.</span></div>
-          <div class="trace-row"><span class="trace-step">Act</span><strong class="trace-question">Expose existing truth where shoppers identify and configure the product.</strong><span class="trace-evidence">Carve drafts exact positioning, description and fit guidance, renders the market/device preview and routes claim/expression approval.</span><span class="trace-result">Approved change set written and storefront verified.</span></div>
-          <div class="trace-row"><span class="trace-step">Learn</span><strong class="trace-question">Did comprehension and confirmed same-product ATC improve?</strong><span class="trace-evidence">Experiment or controlled comparison, with returns, support, speed and unaffected cohorts as guardrails.</span><span class="trace-result">Keep, revise, expand, reverse or hold; memory updated.</span></div>
+        <div class="direction-panel">
+          <div><span class="label">Retailer direction</span><h3>Human authority is data too.</h3></div>
+          <p>Goals, priority markets, product-truth owners, approved claims, brand expression, commercial constraints, read/write permissions, approval thresholds and risk limits determine what Carve may conclude and do. When truth or intent is missing, Carve asks instead of guessing.</p>
+        </div>
+
+        <div class="world-model">
+          <div class="world-model-head"><div><span class="label">Living commerce world model</span><h3>Disconnected dashboards become one inspectable reality.</h3></div><p>Identity resolution lets Carve join a Search Console query to the right page, Merchant Center offer, Shopify variant, rendered market experience and confirmed shopper outcome—while keeping time, source and limitations attached.</p></div>
+          <div class="entity-chain"><div class="entity">Product / variant</div><div class="entity">Page / collection</div><div class="entity">Query / intent</div><div class="entity">Offer / listing</div><div class="entity">Market / surface</div><div class="entity">Behaviour / result</div></div>
+          <div class="knowledge-types"><div class="knowledge-type"><strong>Asserted facts</strong><span>What an authorized retailer source permits Carve to treat or publish as true.</span></div><div class="knowledge-type"><strong>Observations</strong><span>What a system measured or Carve saw, with definition, scope, provenance and freshness.</span></div><div class="knowledge-type"><strong>Beliefs</strong><span>What the agent currently infers, with alternatives, confidence and evidence that could change it.</span></div></div>
         </div>
       </section>
 
-      <section class="section">
+      <section class="section" id="signals">
         <header class="section-head">
-          <span class="label">System boundary</span>
-          <h2>What Carve is—and what it deliberately is not.</h2>
+          <span class="section-number">02</span>
+          <div class="section-copy"><h2>Raw data becomes a scoped signal—not a diagnosis.</h2><p>Carve resolves the entity and cohort, computes the relevant metric or pattern, compares it with a meaningful expectation, and stores the gap with its evidence and limitations. It then opens or updates a case.</p></div>
         </header>
-        <div class="boundaries">
-          <article class="boundary"><h3>Carve is</h3><ul><li>A persistent model of the retailer’s catalog, addressable demand, markets, evidence and change history.</li><li>Continuous catalog-wide exploration plus adaptive case intelligence—not attention-limited triage.</li><li>General reasoning combined with ecommerce worktrees, specialist agents and real research and execution tools.</li><li>Adaptive to missing systems: it uses the available evidence and makes the resulting uncertainty explicit.</li><li>Permissioned: autonomous in one action class, approval-bound in another and collaborative when truth or intent is missing.</li></ul></article>
-          <article class="boundary not"><h3>Carve is not</h3><ul><li>A deterministic checklist or one universal route through every performance issue.</li><li>A system that equates connector data with truth or treats rankings, recordings and competitor patterns as causal proof.</li><li>A model allowed to invent product facts, silently decide commercial policy or act beyond its connected capability.</li><li>A system that only detects breakage; its purpose is to find and create unrealized performance.</li><li>Currently a post-purchase, inventory-planning, paid-media or unit-economics system; those remain context or routed work.</li></ul></article>
+
+        <div class="signal-definition"><strong>Every signal contains</strong><p>Entity or demand cluster · market · language · device · surface · traffic cohort · metric and denominator · baseline or comparator · magnitude · commercial upside · source records · freshness · confidence · limitations · detection time · related case.</p></div>
+
+        <div class="signal-table">
+          <div class="signal-head"><div>Performance territory</div><div>Signal inputs — where it is seen</div><div>Derived signal — what the pattern means</div><div>Question opened</div></div>
+
+          <article class="signal-row">
+            <div class="territory"><strong>Uncaptured demand</strong><span>No existing page adequately serves qualified demand the retailer could credibly fulfil.</span></div>
+            <div class="signal-cell"><span class="cell-label">Signal inputs</span><p>Localized keyword/SERP demand, Trends and seasonality + catalog/product fit + page inventory and GSC coverage + onsite search/customer language where available.</p></div>
+            <div class="signal-cell"><span class="cell-label">Derived signal</span><p class="formula">valuable query job + credible retailer fit + no adequate landing page</p><p>“Adequate” considers intent, page type, market availability and whether an existing page already owns the demand.</p></div>
+            <div class="signal-cell"><span class="cell-label">Question opened</span><p class="case-question">Should Carve create, retarget or strengthen a page—or is the demand intentionally or commercially unsuitable?</p></div>
+          </article>
+
+          <article class="signal-row">
+            <div class="territory"><strong>Weak rank or impressions</strong><span>A suitable page exists and is shown or eligible, but visibility is weaker than its realistic opportunity.</span></div>
+            <div class="signal-cell"><span class="cell-label">Signal inputs</span><p>GSC query × page × country × device impressions and average position + localized SERP/rank observation + demand/history + comparable pages and competitors.</p></div>
+            <div class="signal-cell"><span class="cell-label">Derived signal</span><p class="formula">suitable page + relevant demand + visibility gap versus meaningful expectation</p><p>The expectation may come from history, matched winners, demand coverage, local SERP state or a planned target—not a universal rank threshold.</p></div>
+            <div class="signal-cell"><span class="cell-label">Question opened</span><p class="case-question">What limits the page’s relevance, usefulness, differentiation, internal prominence or eligibility for this demand?</p></div>
+          </article>
+
+          <article class="signal-row">
+            <div class="territory"><strong>Weak organic or free-Shopping CTR</strong><span>Valuable visibility exists, but the result is selected less often than expected in comparable context.</span></div>
+            <div class="signal-cell"><span class="cell-label">Signal inputs</span><p>GSC organic and search-appearance metrics or GMC free-listing performance + query and position mix + market/device/surface + actual SERP or Shopping presentation.</p></div>
+            <div class="signal-cell"><span class="cell-label">Derived signal</span><p class="formula">impressions + comparable context + observed selection gap</p><p>Organic web, free Shopping and paid Shopping remain separate. Exact free-carousel placement requires sampled external observation, not assumed native precision.</p></div>
+            <div class="signal-cell"><span class="cell-label">Question opened</span><p class="case-question">Is selection limited by intent mix, position, result clarity, page choice, image, product data, offer or competing presentation?</p></div>
+          </article>
+
+          <article class="signal-row">
+            <div class="territory"><strong>Weak PDP decision or ATC</strong><span>Qualified, buyable product visits do not sufficiently become confirmed same-product adds.</span></div>
+            <div class="signal-cell"><span class="cell-label">Signal inputs</span><p>Commerce-platform confirmed adds + GA4 cohort segmentation + product/variant availability + source/landing context + rendered PDP + behaviour/customer evidence.</p></div>
+            <div class="signal-cell"><span class="cell-label">Derived signal</span><p class="formula">qualified PDP cohort + buyable state + weak confirmed add or interaction divergence</p><p>It may be a low level, decline, product/market/device divergence, or button interaction that fails to become a valid add.</p></div>
+            <div class="signal-cell"><span class="cell-label">Question opened</span><p class="case-question">What prevents comprehension, confidence, product/variant choice or technically successful addition?</p></div>
+          </article>
+        </div>
+
+        <div class="signal-notes">
+          <div class="signal-note"><strong>Carve does not only detect drops or errors.</strong> Stable performance can still contain upside when relevant demand, matched products, customer criteria or competitors show that the experience can be materially better.</div>
+          <div class="signal-note"><strong>Market is a dimension, not a fifth problem.</strong> The same product can have different demand, language, SERP, assortment, offer, competitors and behaviour by country; Carve retains those differences from detection through measurement.</div>
         </div>
       </section>
 
-      <section class="close">
-        <span class="label">The system in one sentence</span>
-        <h2>Carve gives the whole catalog and every addressable demand opportunity a continuously working ecommerce expert.</h2>
-        <p>General intelligence supplies the reasoning. Ecommerce expertise, connected evidence, persistent memory, tools, permissions and measured outcomes make it dependable and useful.</p>
+      <section class="section" id="reasoning">
+        <header class="section-head">
+          <span class="section-number">03</span>
+          <div class="section-copy"><h2>The case is the hub. Reasoning can move in any direction.</h2><p>Carve combines general model intelligence with ecommerce expertise, persistent memory, connected tools and specialist agents. It selects the next move by expected decision impact—not by a compulsory checklist.</p></div>
+        </header>
+
+        <div class="power-strip">
+          <div class="power-card"><strong>Foundation-model reasoning</strong><span>Frame ambiguity, compare explanations, synthesize evidence and create exact work.</span></div>
+          <div class="power-card"><strong>Ecommerce expertise</strong><span>SEO, Shopping, content, merchandising, CRO and market worktrees supply mechanisms and questions.</span></div>
+          <div class="power-card"><strong>Specialist agents and skills</strong><span>Research, analysis, browser inspection, content, visual and implementation work can run in parallel.</span></div>
+          <div class="power-card"><strong>Tool and capability registry</strong><span>Carve knows what each source can answer and what each connected system can safely change.</span></div>
+        </div>
+
+        <div class="reasoning-shell">
+          <div class="reasoning-rule"><div><span class="label">Adaptive case intelligence</span><h3>What would most change the belief or the action?</h3></div><p>The agent keeps distinct explanations alive, states what each predicts, seeks evidence that separates them, and stops only when an attractive move is justified—or more evidence is unlikely to change the decision.</p></div>
+
+          <div class="reasoning-grid">
+            <div class="move-stack left">
+              <article class="reason-move"><strong>Reframe, split or merge scope</strong><p>Change product, page, query, market, device, surface or cohort when the aggregate hides different mechanisms.</p></article>
+              <article class="reason-move"><strong>Generate and challenge mechanisms</strong><p>Ask what could produce the pattern, what each explanation predicts, and what evidence would weaken it.</p></article>
+              <article class="reason-move"><strong>Select decision-changing evidence</strong><p>Choose the source, live observation or retailer question most likely to separate actions—not every available tool.</p></article>
+            </div>
+
+            <article class="case-core">
+              <span class="label">Active case</span>
+              <h3>The current performance read</h3>
+              <p>A maintained view of what likely limits performance, which alternatives remain plausible, what is still unknown and which intervention is currently justified.</p>
+              <div class="case-fields"><span>commercial question + exact scope</span><span>signal records + linked raw evidence</span><span>competing mechanisms + predictions</span><span>current belief + uncertainty</span><span>tool calls + specialist work + retailer answers</span><span>candidate interventions + decisions + history</span></div>
+            </article>
+
+            <div class="move-stack right">
+              <article class="reason-move"><strong>Inspect, research, delegate or ask</strong><p>Open the real SERP, Shopping result or PDP; consult customer evidence; run specialists; or ask for missing truth and intent.</p></article>
+              <article class="reason-move"><strong>Design the intervention and test</strong><p>Manipulate the likely mechanism with an exact, coherent change and predeclare expected response and guardrails.</p></article>
+              <article class="reason-move"><strong>Update, abandon or reopen</strong><p>Reconcile new evidence, drop weak explanations, retain uncertainty, reverse course or reopen the case when reality changes.</p></article>
+            </div>
+          </div>
+
+          <div class="jump-band"><strong>Valid moves at any point:</strong><span>jump back</span><span>branch</span><span>parallelize</span><span>ask retailer</span><span>reframe</span><span>split by market</span><span>merge cases</span><span>hold</span><span>reopen</span></div>
+        </div>
+
+        <div class="route-examples">
+          <article class="route-example"><strong>Example path: weak ranking</strong><p>GSC query/page pattern → localized live SERP → query intent and winning page types → existing page title/H1/body/product facts → competing pages and internal prominence → return to GSC by page/query/market → revise mechanism → exact content or page-role change</p></article>
+          <article class="route-example"><strong>Example path: weak ATC</strong><p>platform-confirmed add gap → GA4 source/device cohort → buyability and variant state → rendered PDP → replay/heatmap → reviews and support questions → competitor decision experience → product/offer truth → revise mechanism → exact PDP or routed commercial change</p></article>
+        </div>
+      </section>
+
+      <section class="section" id="investigations">
+        <header class="section-head">
+          <span class="section-number">04</span>
+          <div class="section-copy"><h2>The investigation library is deep. The route stays adaptive.</h2><p>These are the ecommerce mechanisms and evidence families Carve can draw from. They are not mandatory checks, and technical plumbing is only one possible explanation—not the centre of the work.</p></div>
+        </header>
+
+        <div class="investigation-grid">
+          <article class="investigation-card">
+            <header><span class="label">Demand coverage</span><h3>Uncaptured demand</h3><p>Does valuable local demand match something the retailer can credibly serve, and is the right page missing or merely expressed badly?</p></header>
+            <div class="investigation-body">
+              <div class="investigation-block"><h4>Carve investigates</h4><ul><li>Query jobs, intent, local vocabulary, demand level, trend, seasonality and the page types Google rewards.</li><li>Catalog and product truth, market availability, assortment depth and whether the retailer can genuinely fulfil the job.</li><li>Existing product, collection, category and guide pages; what each currently targets; overlap and cannibalization.</li><li>Competitor landing pages, content, merchandising, product mix and offer needed to satisfy the demand.</li></ul></div>
+              <div class="investigation-block"><h4>Candidate mechanisms</h4><ul><li>The demand is not targeted; an existing page never states the job; the wrong page type owns it; page roles overlap; the market assortment or offer is not credible.</li></ul></div>
+              <div class="investigation-block actions"><h4>A justified change can look like</h4><ul><li>Create a collection, landing page or guide with the right page role and product set.</li><li>Retarget an existing page; write its title, H1, collection/body copy and merchandising around the job.</li><li>Expose existing assortment through navigation and internal links; separate or consolidate overlapping pages.</li><li>Hold when the retailer cannot credibly satisfy the demand—rather than manufacture relevance.</li></ul></div>
+            </div>
+          </article>
+
+          <article class="investigation-card">
+            <header><span class="label">Organic visibility</span><h3>Weak rank or impressions</h3><p>A suitable page exists. What prevents it from becoming the strongest relevant answer for the intended query job?</p></header>
+            <div class="investigation-body">
+              <div class="investigation-block"><h4>Carve investigates</h4><ul><li>Query-to-page ownership and actual ranking by market/device; live SERP intent, result type and competing pages.</li><li>Title, H1, body and collection text, product description, specs, use cases, imagery, product data and how completely the page answers the job.</li><li>Page role, differentiation from sibling pages, cannibalization, internal linking and merchandising prominence.</li><li>Competitor usefulness, assortment and offer; eligibility, rendering, indexing or feed issues only when evidence points there.</li></ul></div>
+              <div class="investigation-block"><h4>Candidate mechanisms</h4><ul><li>Intent mismatch; weak or generic product expression; unclear page role; shallow content/assortment; cannibalization; low internal prominence; stronger competitive answer; limited eligibility.</li></ul></div>
+              <div class="investigation-block actions"><h4>A justified change can look like</h4><ul><li>Rewrite positioning, title, H1, description, collection copy, specs or supporting decision content.</li><li>Differentiate sibling pages, consolidate overlap when warranted or create a supporting page for a distinct intent.</li><li>Add relevant internal references and expose the page in the right collection/navigation context.</li><li>Correct product/feed/structured information or technical eligibility only where it explains the visibility gap.</li></ul></div>
+            </div>
+          </article>
+
+          <article class="investigation-card">
+            <header><span class="label">Result selection</span><h3>Weak organic or free-Shopping CTR</h3><p>Given the query, position, market, device and surface, why does the shopper choose another result?</p></header>
+            <div class="investigation-body">
+              <div class="investigation-block"><h4>Carve investigates</h4><ul><li>CTR conditioned on query and position mix—not a blended average—and the exact page/offer shown.</li><li>The rendered organic snippet or product listing: title, product name, description/snippet, image, variant, price, stock, shipping, reviews and badges.</li><li>Search intent and landing-page promise; feed/page consistency; richer-result eligibility; competitor presentation and real offer differences.</li><li>Market/device differences and sampled carousel placement where native reporting cannot show the slot.</li></ul></div>
+              <div class="investigation-block"><h4>Candidate mechanisms</h4><ul><li>Lower-intent query mix; weaker position; unclear or generic title; wrong page or variant; poor imagery; missing product data; lost enhanced presentation; genuinely weaker offer.</li></ul></div>
+              <div class="investigation-block actions"><h4>A justified change can look like</h4><ul><li>Rewrite the title/meta or product title to express the right product, use and differentiator in the visible result.</li><li>Select or brief a stronger primary image; correct variant, price, availability, shipping or review data across page and feed.</li><li>Clarify which page should appear and align its on-page promise with the query.</li><li>Route real price, stock or shipping weakness instead of disguising it with copy.</li></ul></div>
+            </div>
+          </article>
+
+          <article class="investigation-card">
+            <header><span class="label">Product decision</span><h3>Weak PDP decision or ATC</h3><p>What prevents a qualified shopper from understanding, trusting, choosing or successfully adding this product?</p></header>
+            <div class="investigation-body">
+              <div class="investigation-block"><h4>Carve investigates</h4><ul><li>Traffic intent and promise continuity from search/listing to PDP; buyability, stock and variant availability for the exact cohort.</li><li>First-screen positioning, product description, facts, specs, use cases, comparison, sizing, variants, imagery/video, reviews and proof.</li><li>Price, promotion, delivery, returns and local offer; customer questions from search, reviews, support and surveys.</li><li>Replays, heatmaps and funnels; selection/CTA/valid-add behaviour; mobile hierarchy, errors, speed, template releases and competitor PDPs.</li></ul></div>
+              <div class="investigation-block"><h4>Candidate mechanisms</h4><ul><li>Wrong traffic; unclear value; missing decision information; weak proof/imagery; unavailable choice; unattractive offer; interaction failure; mobile regression; product-market mismatch.</li></ul></div>
+              <div class="investigation-block actions"><h4>A justified change can look like</h4><ul><li>Sharpen positioning and rewrite the product description around the customer job and approved differentiators.</li><li>Add or reorder decision facts, comparison, fit/size/use-case guidance, proof and imagery.</li><li>Clarify delivery/returns and selection state; repair variant or valid-add behaviour; recommend a better alternative.</li><li>Route price, stock, product, imagery or engineering work with an exact evidence-backed brief.</li></ul></div>
+            </div>
+          </article>
+        </div>
+
+        <div class="investigation-principle"><strong>The important principle:</strong> Carve is trying to improve performance, not merely prove that data is clean. Validation is proportionate to the decision. Once the evidence is trustworthy enough, attention moves to product expression, page usefulness, result presentation, shopper decision support and the real competitive experience.</div>
+      </section>
+
+      <section class="section" id="outcomes">
+        <header class="section-head">
+          <span class="section-number">05</span>
+          <div class="section-copy"><h2>Agent dispositions, performance outcomes and learning are separate.</h2><p>“Apply” is an operational action. “CTR improved” is a performance outcome. “Expand” is a learning decision. Keeping them separate prevents the system from confusing activity with impact.</p></div>
+        </header>
+
+        <div class="disposition-grid">
+          <article class="disposition"><span class="label">Ask</span><strong>Resolve missing truth or intent</strong><p>A precise retailer question with the disputed fact, why it matters and which decision the answer unlocks.</p></article>
+          <article class="disposition"><span class="label">Prepare</span><strong>Create a decision-ready change</strong><p>Exact before/after content, data, asset brief or implementation with rationale, preview, dependencies and measurement.</p></article>
+          <article class="disposition apply"><span class="label">Test / apply</span><strong>Use an authorized write surface</strong><p>Stage, experiment or publish within permission; record the version and verify the rendered live state.</p></article>
+          <article class="disposition route"><span class="label">Route</span><strong>Hand the right owner exact work</strong><p>Evidence, mechanism, recommended change, commercial choice, dependencies and approval—not a vague ticket.</p></article>
+          <article class="disposition"><span class="label">Hold / monitor</span><strong>No justified move yet</strong><p>Retain the case and reopen when evidence, demand, catalog state, authority or the expected value changes.</p></article>
+          <article class="disposition"><span class="label">Reverse</span><strong>Restore the controlled prior state</strong><p>Rollback because verification failed, a pre-set harm trigger fired or measured evidence no longer supports the intervention.</p></article>
+        </div>
+
+        <div class="intervention-contract"><strong>Every intervention carries the same contract:</strong><p>Diagnosed mechanism · exact before/after · affected products/pages/markets · why behaviour should change · dependencies · authority and approval · preview · target performance outcome · expected mechanism response · comparator · maturation window · guardrails · live verification · rollback.</p></div>
+
+        <div class="measurement">
+          <div class="measurement-head"><div><span class="label" style="color:var(--learn)">Measurement and learning</span><h3>Did reality respond as predicted?</h3></div><p>Carve uses the strongest feasible comparison: controlled experiment where appropriate, otherwise matched cohorts, annotated before/after and converging mechanism evidence. It accounts for maturation time, overlapping changes and market/device heterogeneity.</p></div>
+          <div class="measure-flow">
+            <div class="measure-step"><strong>1. Verify live state</strong><span>Confirm the intended version rendered correctly in every affected market/device and no dependency failed.</span></div>
+            <div class="measure-step"><strong>2. Observe mechanism</strong><span>Did relevance, presentation, comprehension, selection or valid-add behaviour move in the predicted direction?</span></div>
+            <div class="measure-step"><strong>3. Measure outcome</strong><span>Use the exact cohort, baseline/counterfactual, evidence window, minimum evidence and harm guardrails.</span></div>
+            <div class="measure-step"><strong>4. Update judgment</strong><span>Store result and uncertainty; update case, signal calibration, retailer memory and related cohort hypotheses.</span></div>
+          </div>
+          <div class="performance-outcomes">
+            <div class="performance-outcome"><strong>Demand outcome</strong><span>Qualified query coverage, impressions and relevant landing visibility.</span></div>
+            <div class="performance-outcome"><strong>Rank outcome</strong><span>Relevant impressions and position/distribution for the intended query-page-market.</span></div>
+            <div class="performance-outcome"><strong>Selection outcome</strong><span>Organic or free-listing clicks and CTR in comparable query/position/surface context.</span></div>
+            <div class="performance-outcome"><strong>PDP outcome</strong><span>Confirmed same-product ATC for qualified, buyable cohorts—with experience guardrails.</span></div>
+          </div>
+          <div class="decision-band"><strong>Learning decision:</strong><span>KEEP</span><span>REVISE</span><span>EXPAND</span><span>REVERSE</span><span>INCONCLUSIVE</span><span>REOPEN</span></div>
+        </div>
+      </section>
+
+      <section class="section" id="scale">
+        <header class="section-head">
+          <span class="section-number">06</span>
+          <div class="section-copy"><h2>Catalog scale is a coverage and coordination problem.</h2><p>Carve does not inherit a human manager’s attention limit. Every known, valid coverage unit remains accountable; deeper work expands where unresolved questions and information value warrant it.</p></div>
+        </header>
+
+        <div class="scale-shell">
+          <div class="scale-equation"><div class="scale-unit">Product / variant</div><span class="scale-op">↔</span><div class="scale-unit">Page / collection</div><span class="scale-op">↔</span><div class="scale-unit">Discovered query job</div><span class="scale-op">×</span><div class="scale-unit">Market · device · surface · time</div></div>
+          <p class="scale-note"><strong>Not a naive Cartesian product.</strong> Entity relationships define which combinations are valid and addressable. The query universe is unbounded, so “complete coverage” means no known opportunity or blind spot is silently forgotten—not pretending every possible query is enumerable.</p>
+
+          <div class="scale-loop">
+            <div class="scale-step"><strong>Map valid coverage units</strong><span>Link catalog, page portfolio, known demand, markets and surfaces into an accountable coverage ledger.</span></div>
+            <div class="scale-step"><strong>Scan continuously and on events</strong><span>Scheduled observation plus catalog, release, market, demand and measurement-window triggers.</span></div>
+            <div class="scale-step"><strong>Derive and merge signals</strong><span>Share source evidence, combine duplicates and split market/product exceptions where mechanisms differ.</span></div>
+            <div class="scale-step"><strong>Run cases in parallel</strong><span>Delegate bounded specialist work, reconcile disagreement and reuse research across related entities.</span></div>
+            <div class="scale-step"><strong>Coordinate interventions</strong><span>Detect shared fields, templates, dependencies and overlapping tests before agents change the same experience.</span></div>
+            <div class="scale-step"><strong>Propagate learning carefully</strong><span>Validate local results, stage cohort rollout and retain per-product exceptions instead of assuming universality.</span></div>
+          </div>
+
+          <div class="coverage-ledger" aria-label="Example catalog coverage ledger">
+            <div class="ledger-row head"><div>Coverage unit</div><div>Last evaluated</div><div>Evidence state</div><div>Case / blind spot</div><div>Next trigger</div></div>
+            <div class="ledger-row"><div>Product × page × query job × SE mobile organic</div><div>Today</div><div>Current</div><div>Rank case open</div><div>SERP refresh</div></div>
+            <div class="ledger-row"><div>Collection × demand cluster × DE free Shopping</div><div>3 days</div><div>GMC current; slot sampled</div><div>No active case</div><div>Weekly + feed change</div></div>
+            <div class="ledger-row"><div>Variant family × UK mobile PDP cohort</div><div>Yesterday</div><div>Behaviour gap</div><div>Template hypothesis shared</div><div>Test matures</div></div>
+          </div>
+
+          <div class="scale-capabilities">
+            <div class="scale-capability"><strong>Priority changes depth—not coverage</strong><span>Value, uncertainty and risk govern investigation effort and action order; they do not remove the long tail from observation.</span></div>
+            <div class="scale-capability"><strong>Patterns and exceptions coexist</strong><span>Category, template and market learning can fan out, while product-specific evidence prevents unsafe blanket changes.</span></div>
+            <div class="scale-capability"><strong>Cases form a graph</strong><span>One template issue may explain many signals; one product may have distinct demand, CTR and PDP cases in different markets.</span></div>
+            <div class="scale-capability"><strong>Coverage is measurable</strong><span>Last review, freshness, blind spots, unresolved cases and next trigger make “every product, all the time” accountable.</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section appendix" id="under-the-hood">
+        <header class="section-head">
+          <span class="section-number">07</span>
+          <div class="section-copy"><h2>The small set of durable system objects.</h2><p>This is supporting architecture, not the main performance story. Separating these objects keeps the agent’s context inspectable and prevents facts, signals, beliefs and outcomes from collapsing into one model-generated answer.</p></div>
+        </header>
+        <div class="object-grid">
+          <div class="object"><code>ENTITY</code><strong>What exists</strong><span>Product, variant, page, collection, offer, query job, market, device and surface.</span></div>
+          <div class="object"><code>ASSERTED FACT</code><strong>What may be claimed</strong><span>Retailer-authorized truth with owner, scope, effective date and source.</span></div>
+          <div class="object"><code>OBSERVATION</code><strong>What was measured or seen</strong><span>Raw or derived evidence with metric meaning, source, time, freshness and limits.</span></div>
+          <div class="object"><code>SIGNAL</code><strong>What may deserve investigation</strong><span>Scoped gap, comparator, upside, confidence and links to supporting observations.</span></div>
+          <div class="object"><code>CASE</code><strong>What Carve is trying to understand</strong><span>Question, mechanisms, evidence, beliefs, uncertainty, tool work and decisions.</span></div>
+          <div class="object"><code>POLICY</code><strong>What Carve may do</strong><span>Truth authority, permissions, approvals, privacy, risk, budgets and named owners.</span></div>
+          <div class="object"><code>INTERVENTION</code><strong>What will change</strong><span>Exact versioned before/after, mechanism, scope, preview, test, verification and rollback.</span></div>
+          <div class="object"><code>RESULT</code><strong>What happened and was learned</strong><span>Outcome, mechanism response, comparator, guardrails, uncertainty and decision.</span></div>
+        </div>
+        <div class="integrity-rail">
+          <div><strong>Connector health</strong>Freshness, schema drift, sync failures, scope gaps and degraded-source warnings.</div>
+          <div><strong>Audit and override</strong>Trace every read, belief, tool call, approval and write; support stop, override and kill controls.</div>
+          <div><strong>Privacy and tenancy</strong>Tenant isolation, secrets, retention, least-privilege access and retailer-specific memory boundaries.</div>
+          <div><strong>Learning boundaries</strong>Retailer results update that retailer’s judgment; cross-retailer learning requires explicit, privacy-safe design.</div>
+        </div>
+      </section>
+
+      <section class="closing">
+        <span class="label">In one sentence</span>
+        <h2>Carve gives the whole catalog continuous ecommerce intelligence.</h2>
+        <p>It sees connected reality, derives scoped opportunities, investigates with adaptive domain expertise, coordinates action across catalog scale and becomes better through measured outcomes—without confusing data, inference, authority or impact.</p>
       </section>
     </main>
   </body>
