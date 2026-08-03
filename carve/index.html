@@ -1,0 +1,1753 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#1A1410">
+    <title>Carve — Product intelligence mockup</title>
+    <meta name="description" content="An interactive mockup of Carve investigating and improving ecommerce product performance.">
+    <link rel="icon" href="./orb.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg: #f5f0e8;
+        --bg-2: #ede7dc;
+        --bg-3: #e0d9ce;
+        --bg-4: #d8d0c4;
+        --ink: #1a1410;
+        --ink-2: #5c4f45;
+        --ink-3: #8c7969;
+        --inverse: #f5f0e8;
+        --accent: #8b4a2c;
+        --accent-hover: #7a3d22;
+        --accent-soft: rgba(139, 74, 44, 0.1);
+        --positive: #2d6a4f;
+        --positive-soft: rgba(45, 106, 79, 0.1);
+        --negative: #8b3030;
+        --negative-soft: rgba(139, 48, 48, 0.1);
+        --caution: #8b6430;
+        --caution-soft: rgba(139, 100, 48, 0.1);
+        --line: rgba(26, 20, 16, 0.1);
+        --line-strong: rgba(26, 20, 16, 0.18);
+        --shadow: 0 18px 48px rgba(40, 29, 22, 0.1);
+        --sidebar: 224px;
+        --topbar: 58px;
+        --sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
+
+      * { box-sizing: border-box; }
+
+      html, body {
+        width: 100%;
+        min-height: 100%;
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: var(--sans);
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      body::before {
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        pointer-events: none;
+        opacity: 0.028;
+        content: "";
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+
+      button, input { font: inherit; }
+      button, a { -webkit-tap-highlight-color: transparent; }
+      button:focus-visible, a:focus-visible {
+        outline: 3px solid rgba(139, 74, 44, 0.35);
+        outline-offset: 2px;
+      }
+      a { color: inherit; }
+
+      .app {
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: var(--sidebar) minmax(0, 1fr);
+      }
+
+      .sidebar {
+        position: fixed;
+        inset: 0 auto 0 0;
+        z-index: 40;
+        width: var(--sidebar);
+        display: flex;
+        flex-direction: column;
+        padding: 22px 16px 18px;
+        background: var(--ink);
+        color: rgba(245, 240, 232, 0.68);
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0 8px;
+        color: var(--inverse);
+        text-decoration: none;
+      }
+
+      .brand img { width: 26px; height: 26px; }
+      .brand span {
+        font-family: Georgia, serif;
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+      }
+
+      .store {
+        margin-top: 28px;
+        padding: 13px 14px;
+        border: 1px solid rgba(245, 240, 232, 0.12);
+        border-radius: 8px;
+        background: rgba(245, 240, 232, 0.045);
+      }
+      .store small, .sidebar-label {
+        display: block;
+        color: rgba(245, 240, 232, 0.38);
+        font: 500 10px/1.25 var(--mono);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .store strong {
+        display: block;
+        margin-top: 7px;
+        color: var(--inverse);
+        font-size: 13px;
+        font-weight: 500;
+      }
+      .store span {
+        display: block;
+        margin-top: 3px;
+        font-size: 11px;
+      }
+
+      .sidebar-label { margin: 27px 10px 9px; }
+
+      .nav {
+        display: grid;
+        gap: 4px;
+      }
+      .nav-button {
+        width: 100%;
+        min-height: 40px;
+        border: 0;
+        border-radius: 7px;
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding: 0 11px;
+        color: rgba(245, 240, 232, 0.58);
+        background: transparent;
+        font-size: 13px;
+        text-align: left;
+        cursor: pointer;
+        transition: background 120ms ease, color 120ms ease;
+      }
+      .nav-button:hover { color: var(--inverse); background: rgba(245, 240, 232, 0.06); }
+      .nav-button.active { color: var(--inverse); background: rgba(245, 240, 232, 0.105); }
+      .nav-icon {
+        width: 17px;
+        height: 17px;
+        flex: 0 0 auto;
+        border: 1px solid rgba(245, 240, 232, 0.34);
+        border-radius: 5px;
+        position: relative;
+      }
+      .active .nav-icon { border-color: #c57150; }
+      .active .nav-icon::after {
+        position: absolute;
+        inset: 4px;
+        border-radius: 2px;
+        background: #c57150;
+        content: "";
+      }
+      .nav-button .count {
+        margin-left: auto;
+        min-width: 22px;
+        padding: 2px 6px;
+        border-radius: 99px;
+        color: rgba(245, 240, 232, 0.75);
+        background: rgba(245, 240, 232, 0.08);
+        font: 500 10px/1.4 var(--mono);
+        text-align: center;
+      }
+
+      .sidebar-bottom {
+        margin-top: auto;
+        padding: 16px 10px 0;
+        border-top: 1px solid rgba(245, 240, 232, 0.1);
+      }
+      .agent-live {
+        display: grid;
+        grid-template-columns: 10px 1fr;
+        gap: 10px;
+        align-items: start;
+      }
+      .agent-live i {
+        width: 8px;
+        height: 8px;
+        margin-top: 4px;
+        border-radius: 50%;
+        background: #c57150;
+        box-shadow: 0 0 0 5px rgba(197, 113, 80, 0.12);
+      }
+      .agent-live strong {
+        display: block;
+        color: var(--inverse);
+        font-size: 12px;
+        font-weight: 500;
+      }
+      .agent-live span {
+        display: block;
+        margin-top: 3px;
+        font-size: 11px;
+        line-height: 1.45;
+      }
+      .playbook-link {
+        display: inline-flex;
+        margin-top: 17px;
+        color: rgba(245, 240, 232, 0.62);
+        font-size: 11px;
+        text-decoration: none;
+      }
+      .playbook-link:hover { color: var(--inverse); }
+
+      .main {
+        grid-column: 2;
+        min-width: 0;
+        min-height: 100vh;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        min-height: var(--topbar);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 0 26px;
+        border-bottom: 1px solid var(--line);
+        background: rgba(245, 240, 232, 0.94);
+        backdrop-filter: blur(14px);
+      }
+      .breadcrumb {
+        min-width: 0;
+        color: var(--ink-2);
+        font-size: 13px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .breadcrumb strong { color: var(--ink); font-weight: 500; }
+      .top-actions { display: flex; align-items: center; gap: 9px; }
+      .top-chip {
+        min-height: 30px;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 0 10px;
+        border: 1px solid var(--line);
+        border-radius: 99px;
+        color: var(--ink-2);
+        background: rgba(255, 255, 255, 0.24);
+        font: 500 10px/1 var(--mono);
+      }
+      .top-chip i {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--positive);
+      }
+      .avatar {
+        width: 31px;
+        height: 31px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        color: var(--inverse);
+        background: var(--ink);
+        font: 500 10px/1 var(--mono);
+      }
+
+      .view { display: none; }
+      .view.active {
+        display: block;
+        animation: enter 320ms cubic-bezier(.16, 1, .3, 1);
+      }
+      @keyframes enter {
+        from { opacity: 0; transform: translateY(5px); }
+        to { opacity: 1; transform: none; }
+      }
+
+      .page {
+        width: min(1500px, 100%);
+        margin: 0 auto;
+        padding: 26px 28px 44px;
+      }
+      .page-head {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 24px;
+      }
+      .eyebrow {
+        color: var(--accent);
+        font: 500 10px/1.3 var(--mono);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .page-head h1, .case-title h1 {
+        margin: 7px 0 0;
+        font-size: clamp(26px, 2.5vw, 38px);
+        line-height: 1.08;
+        letter-spacing: -0.045em;
+        font-weight: 500;
+      }
+      .page-head p {
+        max-width: 720px;
+        margin: 10px 0 0;
+        color: var(--ink-2);
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .button {
+        min-height: 38px;
+        border: 1px solid var(--line-strong);
+        border-radius: 7px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 0 14px;
+        color: var(--ink);
+        background: transparent;
+        font-size: 12px;
+        font-weight: 500;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background 120ms ease, color 120ms ease, border 120ms ease;
+      }
+      .button:hover { background: var(--bg-2); }
+      .button.primary {
+        border-color: var(--ink);
+        color: var(--inverse);
+        background: var(--ink);
+      }
+      .button.primary:hover { background: #332820; }
+      .button.accent {
+        border-color: var(--accent);
+        color: var(--inverse);
+        background: var(--accent);
+      }
+      .button.accent:hover { background: var(--accent-hover); }
+      .button.small { min-height: 32px; padding: 0 11px; font-size: 11px; }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.3);
+      }
+
+      .overview-metrics {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .metric-card { padding: 17px 18px; }
+      .metric-card span { color: var(--ink-2); font-size: 12px; }
+      .metric-card strong {
+        display: block;
+        margin-top: 13px;
+        font-size: 27px;
+        font-weight: 500;
+        letter-spacing: -0.04em;
+        font-variant-numeric: tabular-nums;
+      }
+      .metric-card small {
+        display: block;
+        margin-top: 6px;
+        color: var(--ink-3);
+        font-size: 11px;
+      }
+
+      .attention-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.55fr) minmax(310px, 0.75fr);
+        gap: 16px;
+        margin-top: 16px;
+      }
+      .section-card { padding: 20px; }
+      .section-title {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+      .section-title h2 {
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.25;
+        font-weight: 500;
+        letter-spacing: -0.025em;
+      }
+      .section-title p {
+        margin: 5px 0 0;
+        color: var(--ink-2);
+        font-size: 12px;
+        line-height: 1.5;
+      }
+      .case-list { display: grid; gap: 8px; }
+      .case-row {
+        width: 100%;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        display: grid;
+        grid-template-columns: 42px minmax(0, 1fr) 130px 110px;
+        gap: 13px;
+        align-items: center;
+        padding: 12px;
+        color: inherit;
+        background: var(--bg);
+        text-align: left;
+        cursor: pointer;
+      }
+      .case-row:hover { border-color: var(--line-strong); background: #faf7f1; }
+      .product-thumb {
+        width: 42px;
+        height: 42px;
+        border-radius: 7px;
+        display: grid;
+        place-items: center;
+        background: var(--bg-3);
+        overflow: hidden;
+      }
+      .product-thumb svg { width: 34px; height: 34px; }
+      .case-copy { min-width: 0; }
+      .case-copy strong {
+        display: block;
+        font-size: 13px;
+        font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .case-copy span {
+        display: block;
+        margin-top: 4px;
+        color: var(--ink-3);
+        font: 400 10px/1.4 var(--mono);
+      }
+      .route-tag, .status-pill {
+        width: fit-content;
+        max-width: 100%;
+        border-radius: 99px;
+        padding: 5px 8px;
+        color: var(--accent);
+        background: var(--accent-soft);
+        font: 500 10px/1.3 var(--mono);
+        white-space: nowrap;
+      }
+      .route-tag.green { color: var(--positive); background: var(--positive-soft); }
+      .route-tag.amber { color: var(--caution); background: var(--caution-soft); }
+      .case-value { text-align: right; }
+      .case-value strong {
+        display: block;
+        font: 500 13px/1.2 var(--mono);
+        font-variant-numeric: tabular-nums;
+      }
+      .case-value span { display: block; margin-top: 4px; color: var(--ink-3); font-size: 10px; }
+
+      .coverage-list { display: grid; gap: 14px; }
+      .coverage-item {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 9px;
+        align-items: center;
+      }
+      .coverage-item strong { font-size: 12px; font-weight: 500; }
+      .coverage-item span { color: var(--ink-3); font: 500 10px/1 var(--mono); }
+      .coverage-bar {
+        grid-column: 1 / -1;
+        height: 5px;
+        border-radius: 99px;
+        background: var(--bg-3);
+        overflow: hidden;
+      }
+      .coverage-bar i { display: block; height: 100%; border-radius: inherit; background: var(--accent); }
+
+      .plain-note {
+        margin-top: 18px;
+        padding: 14px;
+        border-radius: 8px;
+        color: var(--ink-2);
+        background: var(--bg-2);
+        font-size: 11px;
+        line-height: 1.55;
+      }
+      .plain-note strong { color: var(--ink); font-weight: 500; }
+
+      .case-page { padding-top: 20px; }
+      .case-hero {
+        position: relative;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 86px minmax(0, 1fr) minmax(360px, 0.85fr);
+        gap: 20px;
+        align-items: center;
+        padding: 20px 22px;
+      }
+      .case-art {
+        width: 80px;
+        height: 92px;
+        border-radius: 9px;
+        display: grid;
+        place-items: center;
+        background: var(--bg-2);
+      }
+      .case-art svg { width: 66px; height: 76px; }
+      .case-title { min-width: 0; }
+      .case-title h1 { font-size: 27px; }
+      .case-meta {
+        margin-top: 8px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px 13px;
+        color: var(--ink-3);
+        font: 400 10px/1.4 var(--mono);
+      }
+      .case-question {
+        padding-left: 20px;
+        border-left: 1px solid var(--line-strong);
+      }
+      .case-question span {
+        color: var(--accent);
+        font: 500 10px/1.3 var(--mono);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .case-question strong {
+        display: block;
+        margin-top: 8px;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 1.45;
+      }
+
+      .signal-strip {
+        margin-top: 12px;
+        display: grid;
+        grid-template-columns: minmax(0, 1.45fr) repeat(3, minmax(150px, .55fr));
+        gap: 1px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--line);
+      }
+      .signal-cell {
+        min-height: 90px;
+        padding: 15px 17px;
+        background: rgba(255, 255, 255, 0.3);
+      }
+      .signal-cell span { color: var(--ink-3); font-size: 11px; }
+      .signal-cell strong {
+        display: block;
+        margin-top: 8px;
+        font-size: 19px;
+        line-height: 1.25;
+        font-weight: 500;
+        letter-spacing: -0.025em;
+        font-variant-numeric: tabular-nums;
+      }
+      .signal-cell.primary strong { font-size: 15px; line-height: 1.45; letter-spacing: -0.01em; }
+      .signal-cell small {
+        display: block;
+        margin-top: 4px;
+        color: var(--ink-3);
+        font-size: 10px;
+      }
+      .down { color: var(--negative) !important; }
+
+      .case-nav {
+        position: sticky;
+        top: var(--topbar);
+        z-index: 20;
+        margin-top: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        border-bottom: 1px solid var(--line-strong);
+        background: rgba(245, 240, 232, 0.96);
+        backdrop-filter: blur(14px);
+      }
+      .case-tabs { display: flex; min-width: 0; }
+      .case-tab {
+        min-height: 48px;
+        border: 0;
+        border-bottom: 2px solid transparent;
+        padding: 0 16px;
+        color: var(--ink-3);
+        background: transparent;
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+      }
+      .case-tab:hover { color: var(--ink); }
+      .case-tab.active { color: var(--ink); border-bottom-color: var(--accent); }
+      .case-tools { display: flex; gap: 8px; padding-right: 2px; }
+
+      .case-panel { display: none; }
+      .case-panel.active {
+        display: block;
+        animation: enter 280ms cubic-bezier(.16, 1, .3, 1);
+      }
+
+      .investigation-layout {
+        display: grid;
+        grid-template-columns: 270px minmax(430px, 1fr) 286px;
+        gap: 12px;
+        margin-top: 14px;
+        align-items: start;
+      }
+      .trail, .evidence, .hypotheses { min-width: 0; }
+      .panel-head {
+        padding: 17px 18px 14px;
+        border-bottom: 1px solid var(--line);
+      }
+      .panel-head h2 {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 500;
+        letter-spacing: -0.02em;
+      }
+      .panel-head p { margin: 5px 0 0; color: var(--ink-3); font-size: 11px; line-height: 1.45; }
+
+      .trail-list { padding: 7px; }
+      .trail-step {
+        width: 100%;
+        position: relative;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        display: grid;
+        grid-template-columns: 24px minmax(0, 1fr);
+        gap: 9px;
+        padding: 10px;
+        color: inherit;
+        background: transparent;
+        text-align: left;
+        cursor: pointer;
+      }
+      .trail-step:hover { background: var(--bg); }
+      .trail-step.active { border-color: var(--line-strong); background: var(--bg); }
+      .trail-step.is-running { background: var(--accent-soft); }
+      .trail-number {
+        width: 22px;
+        height: 22px;
+        border: 1px solid var(--line-strong);
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        color: var(--ink-3);
+        font: 500 9px/1 var(--mono);
+      }
+      .trail-step.complete .trail-number {
+        border-color: rgba(45, 106, 79, 0.28);
+        color: var(--positive);
+        background: var(--positive-soft);
+      }
+      .trail-step.active .trail-number { border-color: var(--accent); color: var(--accent); }
+      .trail-copy span {
+        display: block;
+        color: var(--ink-3);
+        font: 500 9px/1.25 var(--mono);
+        text-transform: uppercase;
+      }
+      .trail-copy strong {
+        display: block;
+        margin-top: 4px;
+        font-size: 12px;
+        line-height: 1.35;
+        font-weight: 500;
+      }
+      .trail-copy small {
+        display: block;
+        margin-top: 4px;
+        color: var(--ink-3);
+        font-size: 10px;
+        line-height: 1.35;
+      }
+
+      .evidence {
+        min-height: 610px;
+        overflow: hidden;
+      }
+      .evidence-stage { padding: 22px; }
+      .evidence-source-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .source-lockup { display: flex; flex-wrap: wrap; gap: 6px; }
+      .source-badge {
+        min-height: 24px;
+        display: inline-flex;
+        align-items: center;
+        padding: 0 8px;
+        border: 1px solid var(--line-strong);
+        border-radius: 5px;
+        color: var(--ink-2);
+        background: var(--bg);
+        font: 500 9px/1 var(--mono);
+      }
+      .observed { color: var(--ink-3); font: 400 9px/1.3 var(--mono); }
+      .evidence-stage h2 {
+        max-width: 680px;
+        margin: 22px 0 0;
+        font-size: clamp(21px, 2vw, 29px);
+        line-height: 1.15;
+        letter-spacing: -0.04em;
+        font-weight: 500;
+      }
+      .evidence-lead {
+        max-width: 720px;
+        margin: 11px 0 0;
+        color: var(--ink-2);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      .evidence-block {
+        margin-top: 22px;
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        overflow: hidden;
+        background: var(--bg);
+      }
+      .evidence-block-head {
+        min-height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 0 14px;
+        border-bottom: 1px solid var(--line);
+        color: var(--ink-2);
+        font-size: 11px;
+      }
+      .evidence-block-head span:last-child { font: 400 9px/1 var(--mono); color: var(--ink-3); }
+      .metric-comparison {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1px;
+        background: var(--line);
+      }
+      .comparison-cell { padding: 16px; background: #f9f6ef; }
+      .comparison-cell span { color: var(--ink-3); font-size: 10px; }
+      .comparison-cell strong {
+        display: block;
+        margin-top: 9px;
+        font: 500 22px/1.1 var(--mono);
+        letter-spacing: -0.04em;
+      }
+      .comparison-cell small { display: block; margin-top: 5px; color: var(--ink-3); font-size: 10px; }
+
+      .chart-wrap { padding: 16px 16px 8px; background: #f9f6ef; }
+      .chart-wrap svg { width: 100%; height: 190px; overflow: visible; }
+      .chart-grid line { stroke: rgba(26, 20, 16, 0.1); stroke-width: 1; }
+      .chart-line { fill: none; stroke: var(--accent); stroke-width: 2.4; }
+      .chart-line-muted { fill: none; stroke: var(--ink-3); stroke-width: 1.5; stroke-dasharray: 5 5; }
+      .chart-area { fill: rgba(139, 74, 44, 0.08); }
+
+      .finding-box {
+        margin-top: 14px;
+        padding: 14px 15px;
+        border-left: 3px solid var(--accent);
+        border-radius: 0 7px 7px 0;
+        background: var(--accent-soft);
+      }
+      .finding-box span { color: var(--accent); font: 500 9px/1.25 var(--mono); text-transform: uppercase; }
+      .finding-box strong {
+        display: block;
+        margin-top: 6px;
+        font-size: 12px;
+        line-height: 1.5;
+        font-weight: 500;
+      }
+
+      .query-table, .truth-table { width: 100%; border-collapse: collapse; background: #f9f6ef; }
+      .query-table th, .query-table td, .truth-table th, .truth-table td {
+        padding: 11px 13px;
+        border-bottom: 1px solid var(--line);
+        font-size: 11px;
+        text-align: left;
+      }
+      .query-table th, .truth-table th { color: var(--ink-3); font: 500 9px/1.3 var(--mono); text-transform: uppercase; }
+      .query-table td:not(:first-child), .truth-table td:last-child { font-family: var(--mono); font-size: 10px; }
+      .query-table tr:last-child td, .truth-table tr:last-child td { border-bottom: 0; }
+      .verified { color: var(--positive); }
+      .missing { color: var(--negative); }
+
+      .serp {
+        padding: 17px;
+        background: #fffefa;
+      }
+      .serp-query {
+        padding: 9px 12px;
+        border: 1px solid var(--line);
+        border-radius: 99px;
+        color: var(--ink-2);
+        font-size: 11px;
+      }
+      .serp-result { margin-top: 17px; }
+      .serp-result small { color: var(--ink-2); font-size: 10px; }
+      .serp-result h3 { margin: 5px 0; color: #3e5d78; font-size: 15px; font-weight: 500; }
+      .serp-result p { margin: 0; color: var(--ink-2); font-size: 11px; line-height: 1.5; }
+      .serp-result.competitor { margin-top: 19px; padding-top: 15px; border-top: 1px solid var(--line); }
+      .serp-callout {
+        margin-top: 12px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .serp-callout div { padding: 10px; border-radius: 6px; background: var(--bg-2); }
+      .serp-callout span { display: block; color: var(--ink-3); font-size: 9px; }
+      .serp-callout strong { display: block; margin-top: 4px; font-size: 11px; font-weight: 500; }
+
+      .phone-review {
+        padding: 18px;
+        display: grid;
+        grid-template-columns: 180px minmax(0, 1fr);
+        gap: 22px;
+        background: #f9f6ef;
+      }
+      .phone {
+        width: 170px;
+        height: 330px;
+        border: 7px solid var(--ink);
+        border-radius: 28px;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 16px 30px rgba(26, 20, 16, 0.14);
+      }
+      .phone-top { height: 18px; background: var(--ink); }
+      .phone-image {
+        height: 116px;
+        display: grid;
+        place-items: center;
+        background: var(--bg-3);
+      }
+      .phone-image svg { width: 76px; height: 92px; }
+      .phone-copy { padding: 12px; }
+      .phone-copy small { color: var(--ink-3); font: 500 7px/1 var(--mono); }
+      .phone-copy h4 { margin: 5px 0 3px; font-size: 14px; font-weight: 500; }
+      .phone-copy p { margin: 0; color: var(--ink-2); font-size: 8px; line-height: 1.4; }
+      .phone-choice { margin-top: 10px; height: 25px; border: 1px solid var(--line-strong); border-radius: 3px; }
+      .phone-cta { margin-top: 7px; height: 28px; border-radius: 3px; display: grid; place-items: center; color: #fff; background: var(--ink); font-size: 7px; }
+      .review-notes { display: grid; align-content: start; gap: 9px; }
+      .review-note {
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        background: white;
+      }
+      .review-note span { color: var(--ink-3); font: 500 9px/1 var(--mono); }
+      .review-note strong { display: block; margin-top: 6px; font-size: 11px; line-height: 1.45; font-weight: 500; }
+
+      .hypothesis-list { padding: 9px; display: grid; gap: 7px; }
+      .hypothesis {
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--bg);
+      }
+      .hypothesis.primary { border-color: rgba(139, 74, 44, 0.28); background: var(--accent-soft); }
+      .hypothesis-head { display: flex; justify-content: space-between; gap: 9px; align-items: start; }
+      .hypothesis-head strong { font-size: 11px; line-height: 1.35; font-weight: 500; }
+      .confidence { flex: 0 0 auto; font: 500 8px/1 var(--mono); color: var(--ink-3); }
+      .hypothesis.primary .confidence { color: var(--accent); }
+      .hypothesis p { margin: 7px 0 0; color: var(--ink-2); font-size: 10px; line-height: 1.45; }
+      .evidence-count { margin-top: 8px; display: flex; gap: 6px; flex-wrap: wrap; }
+      .evidence-count span {
+        border-radius: 99px;
+        padding: 3px 6px;
+        color: var(--positive);
+        background: var(--positive-soft);
+        font: 500 8px/1.3 var(--mono);
+      }
+      .evidence-count span.against { color: var(--negative); background: var(--negative-soft); }
+      .performance-read {
+        margin: 0 9px 9px;
+        padding: 14px;
+        border-radius: 8px;
+        color: var(--inverse);
+        background: var(--ink);
+      }
+      .performance-read span { color: #d29679; font: 500 9px/1.2 var(--mono); text-transform: uppercase; }
+      .performance-read strong { display: block; margin-top: 8px; font-size: 12px; line-height: 1.5; font-weight: 500; }
+      .performance-read a { display: inline-flex; margin-top: 12px; color: rgba(245,240,232,.62); font-size: 10px; }
+
+      .change-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) 330px;
+        gap: 14px;
+        margin-top: 14px;
+        align-items: start;
+      }
+      .change-main, .approval-card, .measurement-main, .measurement-side { padding: 20px; }
+      .change-set-head { display: flex; align-items: start; justify-content: space-between; gap: 16px; }
+      .change-set-head h2 { margin: 0; font-size: 20px; font-weight: 500; letter-spacing: -.03em; }
+      .change-set-head p { max-width: 650px; margin: 7px 0 0; color: var(--ink-2); font-size: 12px; line-height: 1.5; }
+      .change-items { margin-top: 18px; display: grid; gap: 9px; }
+      .change-item {
+        position: relative;
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        padding: 15px 15px 15px 46px;
+        background: var(--bg);
+      }
+      .change-check {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        width: 18px;
+        height: 18px;
+        accent-color: var(--accent);
+      }
+      .change-label { color: var(--accent); font: 500 9px/1.2 var(--mono); text-transform: uppercase; }
+      .diff {
+        margin-top: 9px;
+        display: grid;
+        grid-template-columns: 1fr 28px 1fr;
+        gap: 9px;
+        align-items: stretch;
+      }
+      .diff-side {
+        min-height: 72px;
+        padding: 11px;
+        border-radius: 6px;
+        color: var(--ink-2);
+        background: rgba(139, 48, 48, 0.055);
+        font-size: 11px;
+        line-height: 1.45;
+      }
+      .diff-side.after { color: var(--ink); background: rgba(45, 106, 79, 0.07); }
+      .diff-side small { display: block; margin-bottom: 6px; color: var(--ink-3); font: 500 8px/1 var(--mono); text-transform: uppercase; }
+      .diff-arrow { display: grid; place-items: center; color: var(--ink-3); font-size: 16px; }
+      .change-why { margin: 10px 0 0; color: var(--ink-2); font-size: 10px; line-height: 1.5; }
+      .change-why strong { color: var(--ink); font-weight: 500; }
+
+      .approval-card { position: sticky; top: calc(var(--topbar) + 64px); }
+      .approval-card h2 { margin: 0; font-size: 16px; font-weight: 500; }
+      .approval-card > p { margin: 7px 0 0; color: var(--ink-2); font-size: 11px; line-height: 1.5; }
+      .approval-steps { margin-top: 17px; display: grid; gap: 10px; }
+      .approval-step {
+        display: grid;
+        grid-template-columns: 24px 1fr;
+        gap: 9px;
+        align-items: start;
+      }
+      .approval-step i {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        color: var(--positive);
+        background: var(--positive-soft);
+        font: 500 9px/1 var(--mono);
+        font-style: normal;
+      }
+      .approval-step.pending i { color: var(--caution); background: var(--caution-soft); }
+      .approval-step strong { display: block; font-size: 11px; font-weight: 500; }
+      .approval-step span { display: block; margin-top: 3px; color: var(--ink-3); font-size: 9px; line-height: 1.4; }
+      .authority {
+        margin-top: 17px;
+        padding: 12px;
+        border-radius: 7px;
+        background: var(--bg-2);
+      }
+      .authority span { color: var(--ink-3); font: 500 9px/1.2 var(--mono); text-transform: uppercase; }
+      .authority strong { display: block; margin-top: 7px; font-size: 11px; line-height: 1.45; font-weight: 500; }
+      .approval-actions { margin-top: 14px; display: grid; gap: 7px; }
+      .approval-actions .button { width: 100%; }
+      .rollback { margin-top: 12px; color: var(--ink-3); font-size: 9px; line-height: 1.45; }
+
+      .measurement-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) 340px;
+        gap: 14px;
+        margin-top: 14px;
+      }
+      .measurement-head h2 { margin: 0; font-size: 20px; font-weight: 500; letter-spacing: -.03em; }
+      .measurement-head p { margin: 7px 0 0; color: var(--ink-2); font-size: 12px; line-height: 1.55; }
+      .measure-grid { margin-top: 18px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+      .measure-card { padding: 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+      .measure-card span { color: var(--ink-3); font: 500 9px/1.2 var(--mono); text-transform: uppercase; }
+      .measure-card strong { display: block; margin-top: 8px; font-size: 12px; line-height: 1.45; font-weight: 500; }
+      .measure-card small { display: block; margin-top: 6px; color: var(--ink-3); font-size: 9px; line-height: 1.4; }
+      .decision-row {
+        margin-top: 16px;
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .decision-row span {
+        min-height: 34px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        display: grid;
+        place-items: center;
+        color: var(--ink-3);
+        font: 500 9px/1 var(--mono);
+        background: var(--bg);
+      }
+      .measurement-side h3 { margin: 0; font-size: 14px; font-weight: 500; }
+      .timeline { margin-top: 16px; display: grid; gap: 0; }
+      .timeline-item {
+        position: relative;
+        min-height: 66px;
+        padding: 0 0 17px 27px;
+      }
+      .timeline-item::before {
+        position: absolute;
+        top: 9px;
+        bottom: -8px;
+        left: 7px;
+        width: 1px;
+        background: var(--line-strong);
+        content: "";
+      }
+      .timeline-item:last-child::before { display: none; }
+      .timeline-item::after {
+        position: absolute;
+        top: 4px;
+        left: 2px;
+        width: 10px;
+        height: 10px;
+        border: 2px solid var(--bg);
+        border-radius: 50%;
+        background: var(--ink-3);
+        box-shadow: 0 0 0 1px var(--line-strong);
+        content: "";
+      }
+      .timeline-item.done::after { background: var(--positive); }
+      .timeline-item.current::after { background: var(--accent); box-shadow: 0 0 0 5px var(--accent-soft); }
+      .timeline-item strong { display: block; font-size: 11px; font-weight: 500; }
+      .timeline-item span { display: block; margin-top: 4px; color: var(--ink-3); font-size: 9px; line-height: 1.45; }
+
+      .queue-list, .learning-grid, .connections-grid { display: grid; gap: 12px; }
+      .queue-card { padding: 18px; display: grid; grid-template-columns: minmax(0, 1fr) 180px 140px; gap: 18px; align-items: center; }
+      .queue-card h2 { margin: 0; font-size: 15px; font-weight: 500; }
+      .queue-card p { margin: 5px 0 0; color: var(--ink-2); font-size: 11px; line-height: 1.45; }
+      .queue-owner span, .queue-state span { display: block; color: var(--ink-3); font: 500 9px/1.2 var(--mono); text-transform: uppercase; }
+      .queue-owner strong, .queue-state strong { display: block; margin-top: 6px; font-size: 11px; font-weight: 500; }
+
+      .learning-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .learning-card { padding: 18px; }
+      .learning-card h2 { margin: 12px 0 0; font-size: 15px; font-weight: 500; }
+      .learning-card p { margin: 7px 0 0; color: var(--ink-2); font-size: 11px; line-height: 1.55; }
+      .learning-source { margin-top: 14px; color: var(--ink-3); font: 400 9px/1.4 var(--mono); }
+
+      .system-map {
+        padding: 20px;
+        display: grid;
+        grid-template-columns: minmax(220px, .8fr) 42px minmax(260px, 1fr) 42px minmax(220px, .8fr);
+        gap: 10px;
+        align-items: center;
+      }
+      .system-column { display: grid; gap: 8px; }
+      .system-column > h2 { margin: 0 0 5px; font-size: 13px; font-weight: 500; }
+      .system-node {
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--bg);
+      }
+      .system-node strong { display: block; font-size: 11px; font-weight: 500; }
+      .system-node span { display: block; margin-top: 4px; color: var(--ink-3); font-size: 9px; line-height: 1.45; }
+      .system-node.core { border-color: rgba(139, 74, 44, 0.3); background: var(--accent-soft); }
+      .system-arrow { color: var(--ink-3); font-size: 22px; text-align: center; }
+      .permissions {
+        margin-top: 14px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .permission-card { padding: 16px; }
+      .permission-card span { color: var(--accent); font: 500 9px/1.2 var(--mono); text-transform: uppercase; }
+      .permission-card h3 { margin: 8px 0 0; font-size: 13px; font-weight: 500; }
+      .permission-card p { margin: 6px 0 0; color: var(--ink-2); font-size: 10px; line-height: 1.5; }
+
+      .mockup-note {
+        margin-top: 26px;
+        color: var(--ink-3);
+        font-size: 10px;
+        line-height: 1.5;
+        text-align: center;
+      }
+
+      .toast {
+        position: fixed;
+        right: 22px;
+        bottom: 22px;
+        z-index: 100;
+        max-width: 360px;
+        border-radius: 9px;
+        padding: 14px 16px;
+        color: var(--inverse);
+        background: var(--ink);
+        box-shadow: var(--shadow);
+        opacity: 0;
+        transform: translateY(12px);
+        pointer-events: none;
+        transition: opacity 220ms ease, transform 220ms cubic-bezier(.16,1,.3,1);
+      }
+      .toast.show { opacity: 1; transform: none; }
+      .toast strong { display: block; font-size: 12px; font-weight: 500; }
+      .toast span { display: block; margin-top: 4px; color: rgba(245,240,232,.65); font-size: 10px; line-height: 1.4; }
+
+      @media (max-width: 1200px) {
+        .investigation-layout { grid-template-columns: 250px minmax(420px, 1fr); }
+        .hypotheses { grid-column: 1 / -1; }
+        .hypothesis-list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        .performance-read { grid-column: 1 / -1; }
+        .case-hero { grid-template-columns: 76px minmax(0, 1fr); }
+        .case-question { grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--line); padding: 14px 0 0; }
+      }
+
+      @media (max-width: 900px) {
+        :root { --sidebar: 0px; --topbar: 54px; }
+        html, body { max-width: 100%; overflow-x: hidden; }
+        .app { display: block; }
+        .sidebar {
+          position: fixed;
+          top: 0;
+          right: 0;
+          left: 0;
+          width: 100%;
+          height: 58px;
+          padding: 0 14px;
+          flex-direction: row;
+          align-items: center;
+          overflow: hidden;
+        }
+        .brand { flex: 0 0 auto; padding: 0; }
+        .brand img { width: 24px; height: 24px; }
+        .brand span { font-size: 16px; }
+        .store, .sidebar-label, .sidebar-bottom { display: none; }
+        .nav { min-width: 0; margin-left: auto; display: flex; gap: 2px; overflow: hidden; }
+        .nav-button { width: auto; min-height: 34px; padding: 0 8px; font-size: 11px; white-space: nowrap; }
+        .nav-icon, .nav-button .count { display: none; }
+        .nav-button[data-view="learning"], .nav-button[data-view="connections"] { display: none; }
+        .main, .view, .page { width: 100%; max-width: 100%; min-width: 0; }
+        .main { min-height: 100vh; padding-top: 58px; overflow-x: hidden; }
+        .topbar { top: 58px; padding: 0 16px; }
+        .top-chip:first-child { display: none; }
+        .page { padding: 20px 16px 36px; }
+        .overview-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .attention-grid, .change-layout, .measurement-layout { grid-template-columns: 1fr; }
+        .case-row { grid-template-columns: 42px minmax(0, 1fr); }
+        .case-row .route-tag, .case-row .case-value { display: none; }
+        .case-hero { width: 100%; max-width: 100%; grid-template-columns: 64px minmax(0,1fr); }
+        .case-art { width: 60px; height: 72px; }
+        .case-art svg { width: 50px; height: 58px; }
+        .case-title, .case-question, .signal-cell { min-width: 0; overflow-wrap: anywhere; }
+        .signal-strip { width: 100%; max-width: 100%; grid-template-columns: 1fr 1fr; }
+        .signal-cell.primary { grid-column: 1 / -1; }
+        .case-nav { width: 100%; max-width: 100%; top: 112px; overflow-x: auto; }
+        .case-tabs { flex: 0 0 max-content; }
+        .case-tab { white-space: nowrap; }
+        .case-tools { display: none; }
+        .case-tab { padding: 0 11px; }
+        .investigation-layout { grid-template-columns: 1fr; }
+        .trail-list { display: flex; overflow-x: auto; }
+        .trail-step { min-width: 220px; }
+        .evidence { min-height: 0; }
+        .hypotheses { grid-column: auto; }
+        .hypothesis-list { grid-template-columns: 1fr 1fr; }
+        .approval-card { position: relative; top: auto; }
+        .learning-grid, .permissions { grid-template-columns: 1fr; }
+        .system-map { grid-template-columns: 1fr; }
+        .system-arrow { transform: rotate(90deg); }
+        .queue-card { grid-template-columns: 1fr; }
+      }
+
+      @media (max-width: 620px) {
+        .nav-button { padding: 0 7px; }
+        .nav-button[data-view="attention"], .nav-button[data-view="case"] { font-size: 0; }
+        .nav-button[data-view="attention"]::after { content: "Feed"; font-size: 11px; }
+        .nav-button[data-view="case"]::after { content: "Work"; font-size: 11px; }
+        .nav-button[data-view="changes"] { display: none; }
+        .top-actions .top-chip { display: none; }
+        .page-head { align-items: start; flex-direction: column; }
+        .overview-metrics { grid-template-columns: 1fr 1fr; }
+        .metric-card { padding: 14px; }
+        .metric-card strong { font-size: 22px; }
+        .case-hero { padding: 16px; }
+        .case-question strong { font-size: 13px; }
+        .signal-strip { grid-template-columns: 1fr; }
+        .signal-cell.primary { grid-column: auto; }
+        .signal-cell { min-height: 76px; }
+        .case-nav { margin-right: -16px; margin-left: -16px; padding-left: 7px; }
+        .investigation-layout { margin-right: -8px; margin-left: -8px; }
+        .evidence-stage { padding: 17px; }
+        .evidence-source-row { align-items: flex-start; flex-direction: column; }
+        .metric-comparison { grid-template-columns: 1fr; }
+        .phone-review { grid-template-columns: 1fr; }
+        .phone { margin: 0 auto; }
+        .hypothesis-list { grid-template-columns: 1fr; }
+        .diff { grid-template-columns: 1fr; }
+        .diff-arrow { transform: rotate(90deg); }
+        .measure-grid, .decision-row { grid-template-columns: 1fr; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <a class="brand" href="./" aria-label="Carve product intelligence">
+          <img src="./orb.svg" alt="">
+          <span>CARVE</span>
+        </a>
+
+        <div class="store">
+          <small>Workspace</small>
+          <strong>Northline Outdoor</strong>
+          <span>7 markets · 1,842 products</span>
+        </div>
+
+        <span class="sidebar-label">Intelligence</span>
+        <nav class="nav" aria-label="Primary navigation">
+          <button class="nav-button" data-view="attention"><span class="nav-icon"></span>Attention<span class="count">18</span></button>
+          <button class="nav-button active" data-view="case"><span class="nav-icon"></span>Investigations<span class="count">6</span></button>
+          <button class="nav-button" data-view="changes"><span class="nav-icon"></span>Changes<span class="count">7</span></button>
+          <button class="nav-button" data-view="learning"><span class="nav-icon"></span>Learnings</button>
+          <button class="nav-button" data-view="connections"><span class="nav-icon"></span>Connections</button>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <div class="agent-live">
+            <i></i>
+            <div>
+              <strong>Carve is working</strong>
+              <span>1,842 products observed. Six investigations are active across four worktrees.</span>
+            </div>
+          </div>
+          <a class="playbook-link" href="https://wstortebecker.github.io/carve-catalog-playbook/" target="_blank" rel="noreferrer">Open public reasoning map ↗</a>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div class="breadcrumb" id="breadcrumb">Investigations / <strong>Aster Shell · Sweden</strong></div>
+          <div class="top-actions">
+            <span class="top-chip">SE · SV · Mobile</span>
+            <span class="top-chip"><i></i>8 sources connected</span>
+            <span class="avatar">WS</span>
+          </div>
+        </header>
+
+        <section class="view" id="view-attention">
+          <div class="page">
+            <header class="page-head">
+              <div>
+                <span class="eyebrow">All products, continuously</span>
+                <h1>Where performance can improve.</h1>
+                <p>Carve is not working through a human-sized queue. It observes the whole catalog, opens every credible opportunity, and brings people in where judgment or authority is required.</p>
+              </div>
+              <button class="button" data-open-case>Open current investigation →</button>
+            </header>
+
+            <div class="overview-metrics">
+              <article class="card metric-card"><span>Products observed today</span><strong>1,842</strong><small>Across 7 active markets</small></article>
+              <article class="card metric-card"><span>Credible opportunities</span><strong>18</strong><small>Not generic warnings</small></article>
+              <article class="card metric-card"><span>Changes ready</span><strong>7</strong><small>Four need approval</small></article>
+              <article class="card metric-card"><span>Changes measuring</span><strong>12</strong><small>Three decisions due this week</small></article>
+            </div>
+
+            <div class="attention-grid">
+              <article class="card section-card">
+                <div class="section-title">
+                  <div><h2>Work in motion</h2><p>Each case is a specific performance question, not an automated score.</p></div>
+                  <span class="route-tag green">6 active now</span>
+                </div>
+                <div class="case-list">
+                  <button class="case-row" data-open-case>
+                    <span class="product-thumb"><svg viewBox="0 0 80 92" aria-hidden="true"><path fill="#52463c" d="M26 13 36 7h8l10 6 16 10-9 18-8-5v45H27V36l-8 5-9-18z"/><path fill="#76685d" d="m36 7 4 13 4-13z"/><path fill="none" stroke="#c9b9aa" stroke-width="2" d="M30 47h20M30 54h20"/></svg></span>
+                    <span class="case-copy"><strong>Aster Shell · Swedish mobile landing sessions</strong><span>Shopify confirmed PDP→ATC 3.1% · matched shells 6.8%</span></span>
+                    <span class="route-tag">Weak PDP-to-ATC</span>
+                    <span class="case-value"><strong>−3.7 pp</strong><span>28-day gap</span></span>
+                  </button>
+                  <button class="case-row" data-demo-message="This secondary case is represented at overview depth in this mockup.">
+                    <span class="product-thumb"><svg viewBox="0 0 80 92" aria-hidden="true"><rect x="18" y="14" width="44" height="66" rx="8" fill="#76685d"/><rect x="28" y="7" width="24" height="12" rx="6" fill="none" stroke="#52463c" stroke-width="5"/><path d="M25 38h30M25 47h30" stroke="#c9b9aa" stroke-width="2"/></svg></span>
+                    <span class="case-copy"><strong>Transit Pack 35L · Germany free listings</strong><span>Healthy impressions · item CTR trails comparable offers</span></span>
+                    <span class="route-tag amber">Organic CTR</span>
+                    <span class="case-value"><strong>−28%</strong><span>qualified clicks</span></span>
+                  </button>
+                  <button class="case-row" data-demo-message="This secondary case is represented at overview depth in this mockup.">
+                    <span class="product-thumb"><svg viewBox="0 0 80 92" aria-hidden="true"><path fill="#665c4d" d="M8 49 21 17h38l13 32-14 7-6-16v41H28V40l-6 16z"/></svg></span>
+                    <span class="case-copy"><strong>Women’s waterproof hiking jackets · UK</strong><span>Suitable collection exists · mobile position 6.2 → 12.4</span></span>
+                    <span class="route-tag">Poor ranking</span>
+                    <span class="case-value"><strong>−38%</strong><span>organic clicks</span></span>
+                  </button>
+                  <button class="case-row" data-demo-message="This secondary case is represented at overview depth in this mockup.">
+                    <span class="product-thumb"><svg viewBox="0 0 80 92" aria-hidden="true"><path fill="#88786b" d="M15 24 33 11h14l18 13-9 16-8-5v46H32V35l-8 5z"/></svg></span>
+                    <span class="case-copy"><strong>Packable rainwear · Sweden</strong><span>Demand exists · no current page adequately answers the job</span></span>
+                    <span class="route-tag green">Uncaptured demand</span>
+                    <span class="case-value"><strong>14.2k</strong><span>monthly demand</span></span>
+                  </button>
+                </div>
+              </article>
+
+              <aside class="card section-card">
+                <div class="section-title"><div><h2>Catalog coverage</h2><p>Every worktree remains open in parallel.</p></div></div>
+                <div class="coverage-list">
+                  <div class="coverage-item"><strong>Uncaptured demand</strong><span>4 cases</span><div class="coverage-bar"><i style="width:62%"></i></div></div>
+                  <div class="coverage-item"><strong>Poor ranking</strong><span>5 cases</span><div class="coverage-bar"><i style="width:78%"></i></div></div>
+                  <div class="coverage-item"><strong>Organic CTR</strong><span>3 cases</span><div class="coverage-bar"><i style="width:48%"></i></div></div>
+                  <div class="coverage-item"><strong>PDP-to-ATC</strong><span>6 cases</span><div class="coverage-bar"><i style="width:92%"></i></div></div>
+                </div>
+                <div class="plain-note"><strong>Market is not a fifth score.</strong> Carve compares countries inside every investigation, then asks whether the difference comes from demand, vocabulary, result presentation, offer, product truth or the local experience.</div>
+              </aside>
+            </div>
+            <p class="mockup-note">Illustrative retailer and metrics. The reasoning model is grounded in the public Carve product-performance worktree.</p>
+          </div>
+        </section>
+
+        <section class="view active" id="view-case">
+          <div class="page case-page">
+            <article class="card case-hero">
+              <div class="case-art">
+                <svg viewBox="0 0 80 92" aria-label="Aster waterproof shell illustration"><path fill="#52463c" d="M26 13 36 7h8l10 6 16 10-9 18-8-5v45H27V36l-8 5-9-18z"/><path fill="#76685d" d="m36 7 4 13 4-13z"/><path fill="none" stroke="#c9b9aa" stroke-width="2" d="M30 47h20M30 54h20"/><path fill="none" stroke="#2f2822" stroke-width="2" d="M40 20v61"/></svg>
+              </div>
+              <div class="case-title">
+                <span class="status-pill" id="case-status">Awaiting content approval</span>
+                <h1>Aster Shell</h1>
+                <div class="case-meta"><span>AS-310</span><span>Sweden · Swedish</span><span>Mobile landing sessions</span><span>28 days</span><span>Owner: Ecommerce</span></div>
+              </div>
+              <div class="case-question">
+                <span>The question Carve opened</span>
+                <strong>The product fits the arriving job and is buyable. Why do Swedish mobile shoppers add it at less than half the rate of matched shell products?</strong>
+              </div>
+            </article>
+
+            <div class="signal-strip">
+              <div class="signal-cell primary"><span>Exact signal · Shopify / warehouse</span><strong>Confirmed same-product PDP→ATC is materially weak in buyable Swedish mobile landing sessions.</strong><small>GA4 reports 4.0%, but its event fires before cart confirmation. Shopify is primary.</small></div>
+              <div class="signal-cell"><span>Aster PDP→ATC</span><strong class="down">3.1%</strong><small>18,420 sessions</small></div>
+              <div class="signal-cell"><span>Matched shells</span><strong>6.8%</strong><small>Same market and device</small></div>
+              <div class="signal-cell"><span>Technical add success</span><strong>99.2%</strong><small>Variant/cart reconciliation</small></div>
+            </div>
+
+            <nav class="case-nav" aria-label="Investigation sections">
+              <div class="case-tabs">
+                <button class="case-tab active" data-case-tab="investigation">Investigation</button>
+                <button class="case-tab" data-case-tab="change">Proposed change <span aria-hidden="true">·</span> 4</button>
+                <button class="case-tab" data-case-tab="measurement">Measurement</button>
+              </div>
+              <div class="case-tools">
+                <button class="button small" id="replay">Replay agent work</button>
+                <a class="button small" href="https://wstortebecker.github.io/carve-catalog-playbook/?case=atc" target="_blank" rel="noreferrer">Open reasoning map ↗</a>
+              </div>
+            </nav>
+
+            <div class="case-panel active" id="panel-investigation">
+              <div class="investigation-layout">
+                <aside class="card trail">
+                  <header class="panel-head"><h2>Evidence trail</h2><p>Carve chose the next tool from what the previous evidence left uncertain.</p></header>
+                  <div class="trail-list" id="trail-list">
+                    <button class="trail-step complete" data-evidence="performance"><span class="trail-number">01</span><span class="trail-copy"><span>Shopify + GA4</span><strong>Locate the loss</strong><small>Scope, cohorts and measurement</small></span></button>
+                    <button class="trail-step complete" data-evidence="search"><span class="trail-number">02</span><span class="trail-copy"><span>Search Console</span><strong>Check arriving intent</strong><small>Query, page, market, device</small></span></button>
+                    <button class="trail-step complete" data-evidence="shopping"><span class="trail-number">03</span><span class="trail-copy"><span>Merchant Center</span><strong>Inspect the listing promise</strong><small>Organic item performance</small></span></button>
+                    <button class="trail-step complete" data-evidence="serp"><span class="trail-number">04</span><span class="trail-copy"><span>DataForSEO + browser</span><strong>Read the live alternatives</strong><small>Swedish mobile result set</small></span></button>
+                    <button class="trail-step complete active" data-evidence="truth"><span class="trail-number">05</span><span class="trail-copy"><span>Shopify + PIM</span><strong>Verify product truth</strong><small>What Carve may actually say</small></span></button>
+                    <button class="trail-step complete" data-evidence="behaviour"><span class="trail-number">06</span><span class="trail-copy"><span>Browser + Hotjar + voice</span><strong>Inspect the decision</strong><small>What shoppers must infer</small></span></button>
+                    <button class="trail-step complete" data-evidence="read"><span class="trail-number">07</span><span class="trail-copy"><span>Carve synthesis</span><strong>Choose the next move</strong><small>Evidence for and against</small></span></button>
+                  </div>
+                </aside>
+
+                <section class="card evidence" id="evidence-stage" aria-live="polite"></section>
+
+                <aside class="card hypotheses">
+                  <header class="panel-head"><h2>Competing explanations</h2><p>Several can remain active. Carve acts on the strongest useful explanation, not false certainty.</p></header>
+                  <div class="hypothesis-list">
+                    <article class="hypothesis primary">
+                      <div class="hypothesis-head"><strong>Product meaning and decision information are missing where mobile shoppers decide.</strong><span class="confidence">HIGH</span></div>
+                      <p>Approved answers are absent or buried. Page inspection, customer questions and observed behaviour converge.</p>
+                      <div class="evidence-count"><span>5 support</span><span class="against">0 weaken</span></div>
+                    </article>
+                    <article class="hypothesis">
+                      <div class="hypothesis-head"><strong>Variant selection or add behaviour is failing.</strong><span class="confidence">LOW</span></div>
+                      <p>Real-device adds succeed and Shopify/cart reconciliation is healthy.</p>
+                      <div class="evidence-count"><span>1 support</span><span class="against">4 weaken</span></div>
+                    </article>
+                    <article class="hypothesis">
+                      <div class="hypothesis-head"><strong>The real offer is too weak.</strong><span class="confidence">MED–LOW</span></div>
+                      <p>Price and delivery are comparable. Value expression may contribute, but the terms are not clearly worse.</p>
+                      <div class="evidence-count"><span>2 support</span><span class="against">3 weaken</span></div>
+                    </article>
+                    <article class="hypothesis">
+                      <div class="hypothesis-head"><strong>The wrong traffic is reaching the product.</strong><span class="confidence">LOW–MED</span></div>
+                      <p>No session-level query join exists, but the gap persists within defensible source cohorts and the search promise fits.</p>
+                      <div class="evidence-count"><span>1 support</span><span class="against">3 weaken</span></div>
+                    </article>
+                  </div>
+                  <div class="performance-read">
+                    <span>Current performance read</span>
+                    <strong>The product fits the arriving job, but the PDP makes shoppers infer what Aster is, whether it layers correctly and what its protection means.</strong>
+                    <a href="https://wstortebecker.github.io/carve-catalog-playbook/?case=atc" target="_blank" rel="noreferrer">Why Carve followed this route ↗</a>
+                  </div>
+                </aside>
+              </div>
+            </div>
+
+            <div class="case-panel" id="panel-change">
+              <div class="change-layout">
+                <section class="card change-main">
+                  <div class="change-set-head">
+                    <div><span class="eyebrow">Treatment follows the cause</span><h2>Make Aster understandable and choosable on mobile.</h2><p>One coordinated content treatment exposes existing verified truth. Price, stock, product capability and traffic acquisition remain unchanged.</p></div>
+                    <span class="route-tag green">Draft ready</span>
+                  </div>
+                  <div class="change-items">
+                    <article class="change-item">
+                      <input class="change-check" type="checkbox" checked aria-label="Include subtitle change">
+                      <span class="change-label">Positioning · Shopify product subtitle</span>
+                      <div class="diff"><div class="diff-side"><small>Current</small>Built for every adventure.</div><div class="diff-arrow">→</div><div class="diff-side after"><small>Proposed</small>A lightweight 3-layer waterproof shell for wet, high-output hikes.</div></div>
+                      <p class="change-why"><strong>Why:</strong> names the product type, construction and job already supported by the product record and the arriving search promise.</p>
+                    </article>
+                    <article class="change-item">
+                      <input class="change-check" type="checkbox" checked aria-label="Include first screen summary change">
+                      <span class="change-label">Decision information · first screen</span>
+                      <div class="diff"><div class="diff-side"><small>Current</small>Waterproof · Breathable · Lightweight</div><div class="diff-arrow">→</div><div class="diff-side after"><small>Proposed</small>310 g · uninsulated regular cut · designed over a light fleece</div></div>
+                      <p class="change-why"><strong>Why:</strong> answers the recurring layering and weight questions before size selection.</p>
+                    </article>
+                    <article class="change-item">
+                      <input class="change-check" type="checkbox" checked aria-label="Include protection explanation">
+                      <span class="change-label">Description · protection and limitations</span>
+                      <div class="diff"><div class="diff-side"><small>Current</small>20,000 mm appears in an unlabelled specification table.</div><div class="diff-arrow">→</div><div class="diff-side after"><small>Proposed</small>Explain the approved test basis, 3-layer construction, taped seams, intended use and honest limitations in plain Swedish.</div></div>
+                      <p class="change-why"><strong>Why:</strong> turns an isolated number into decision evidence without inventing a stronger claim.</p>
+                    </article>
+                    <article class="change-item">
+                      <input class="change-check" type="checkbox" checked aria-label="Include fit guidance">
+                      <span class="change-label">Fit · product-specific measurement module</span>
+                      <div class="diff"><div class="diff-side"><small>Current</small>Generic body-size chart only.</div><div class="diff-arrow">→</div><div class="diff-side after"><small>Proposed</small>Show garment chest, hem, back length and sleeve measurements beside the size selector.</div></div>
+                      <p class="change-why"><strong>Why:</strong> lets shoppers choose the actual garment and layering fit instead of translating a generic chart.</p>
+                    </article>
+                  </div>
+                </section>
+
+                <aside class="card approval-card">
+                  <span class="eyebrow">Authority and control</span>
+                  <h2>Carve can prepare this. People approve the claim and expression.</h2>
+                  <p>The system keeps product truth, brand judgment and ecommerce publishing as distinct permissions.</p>
+                  <div class="approval-steps">
+                    <div class="approval-step"><i>✓</i><div><strong>Drafted by Carve</strong><span>Four linked changes · version CS-184</span></div></div>
+                    <div class="approval-step"><i>✓</i><div><strong>Facts verified</strong><span>Product owner · Karin Lund</span></div></div>
+                    <div class="approval-step pending" id="brand-approval"><i>3</i><div><strong>Brand expression</strong><span>Awaiting Sofia Nilsson</span></div></div>
+                    <div class="approval-step pending" id="commerce-approval"><i>4</i><div><strong>Publish authority</strong><span>Awaiting Ecommerce</span></div></div>
+                  </div>
+                  <div class="authority"><span>Carve’s current permission</span><strong>Draft, render a Swedish mobile preview, and stage the Shopify change. Do not publish new claims without approval.</strong></div>
+                  <div class="approval-actions">
+                    <button class="button accent" id="approve-change">Approve and stage 4 changes</button>
+                    <button class="button" data-tab-target="investigation">Review all evidence</button>
+                  </div>
+                  <p class="rollback">Before writing, Carve snapshots the Shopify product version. The staged content can be reversed without restoring any known-wrong product fact.</p>
+                </aside>
+              </div>
+            </div>
+
+            <div class="case-panel" id="panel-measurement">
+              <div class="measurement-layout">
+                <section class="card measurement-main">
+                  <div class="measurement-head"><span class="eyebrow">Predeclared before publishing</span><h2>Did the treatment resolve the decision problem?</h2><p>Carve measures the commercial outcome and the predicted mechanism. It does not call extra accordion clicks a win.</p></div>
+                  <div class="measure-grid">
+                    <article class="measure-card"><span>Primary outcome</span><strong>Shopify-confirmed same-product PDP→ATC</strong><small>Buyable Swedish mobile landing sessions · Aster only</small></article>
+                    <article class="measure-card"><span>Comparison</span><strong>Server-side split where feasible</strong><small>Otherwise narrow pre/post with matched shell control and version annotation</small></article>
+                    <article class="measure-card"><span>Mechanism evidence</span><strong>Fit and protection task success</strong><small>Can intended shoppers explain construction, use and choose a layering size?</small></article>
+                    <article class="measure-card"><span>Guardrails</span><strong>Returns, support themes, speed and accessibility</strong><small>Desktop and navigated cohorts remain visible</small></article>
+                  </div>
+                  <div class="finding-box"><span>Decision rule</span><strong>Keep or expand only when confirmed ATC and the predicted comprehension mechanism improve without worsening returns, accessibility or another predefined cohort.</strong></div>
+                  <div class="decision-row"><span>KEEP</span><span>REVISE</span><span>EXPAND</span><span>REVERSE</span><span>HOLD</span></div>
+                </section>
+                <aside class="card measurement-side">
+                  <h3>Change lifecycle</h3>
+                  <div class="timeline" id="lifecycle">
+                    <div class="timeline-item done"><strong>Signal scoped</strong><span>28 Jul · source and cohort fixed</span></div>
+                    <div class="timeline-item done"><strong>Cause investigated</strong><span>29 Jul · seven evidence calls</span></div>
+                    <div class="timeline-item current"><strong id="timeline-current">Awaiting approval</strong><span id="timeline-detail">Content and publishing authority</span></div>
+                    <div class="timeline-item"><strong>Storefront verification</strong><span>Swedish mobile render and cart test</span></div>
+                    <div class="timeline-item"><strong>Measurement window</strong><span>Begins only after the intended version is live</span></div>
+                    <div class="timeline-item"><strong>Carve decision</strong><span>Keep, revise, expand, reverse or hold</span></div>
+                  </div>
+                </aside>
+              </div>
+            </div>
+            <p class="mockup-note">Illustrative case. Search queries are never presented as a deterministic GA4 session join; Hotjar recordings are clues, not causal proof.</p>
+          </div>
+        </section>
+
+        <section class="view" id="view-changes">
+          <div class="page">
+            <header class="page-head"><div><span class="eyebrow">Permissioned execution</span><h1>Changes ready for judgment.</h1><p>Carve arrives with the evidence, exact fields, expected mechanism, owners, measurement and rollback—not a vague recommendation.</p></div></header>
+            <div class="queue-list">
+              <article class="card queue-card"><div><span class="route-tag">Content treatment</span><h2>Aster Shell · Swedish mobile PDP</h2><p>Positioning, first-screen decision information, protection explanation and fit measurements.</p></div><div class="queue-owner"><span>Needs</span><strong>Brand + Ecommerce approval</strong></div><div class="queue-state"><span>State</span><strong id="queue-aster-state">Facts verified</strong></div></article>
+              <article class="card queue-card"><div><span class="route-tag amber">Free listing</span><h2>Transit Pack 35L · German product title</h2><p>Clarify capacity and cabin use in the feed title using verified catalog facts.</p></div><div class="queue-owner"><span>Needs</span><strong>Merchandising approval</strong></div><div class="queue-state"><span>State</span><strong>Preview ready</strong></div></article>
+              <article class="card queue-card"><div><span class="route-tag green">Collection</span><h2>Packable rainwear · new Swedish collection</h2><p>Customer job, qualifying product set, collection copy, navigation placement and measurement plan.</p></div><div class="queue-owner"><span>Needs</span><strong>Range owner decision</strong></div><div class="queue-state"><span>State</span><strong>Scope proposed</strong></div></article>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" id="view-learning">
+          <div class="page">
+            <header class="page-head"><div><span class="eyebrow">Retailer memory</span><h1>Carve learns how Northline performs.</h1><p>The public worktree supplies domain judgment. Retailer-specific evidence, constraints and outcomes make that judgment increasingly local.</p></div><a class="button" href="https://wstortebecker.github.io/carve-catalog-playbook/" target="_blank" rel="noreferrer">Open public worktree ↗</a></header>
+            <div class="learning-grid">
+              <article class="card learning-card"><span class="eyebrow">Product truth</span><h2>Technical claims come from approved PIM fields.</h2><p>Marketing copy and competitor language may suggest questions, but they cannot create a waterproof, fit or material claim.</p><div class="learning-source">PIM policy · 14 verified changes</div></article>
+              <article class="card learning-card"><span class="eyebrow">Market language</span><h2>Swedish shell shoppers respond to explicit layering guidance.</h2><p>Three retained tests improved comprehension when the uninsulated fit was made specific near size selection.</p><div class="learning-source">Experiments CS-121, CS-143, CS-166</div></article>
+              <article class="card learning-card"><span class="eyebrow">Measurement</span><h2>Shopify confirmation is primary for product adds.</h2><p>GA4 add_to_cart fires on drawer initiation in the current implementation and is used as supporting telemetry.</p><div class="learning-source">Analytics reconciliation · reviewed 22 Jul</div></article>
+              <article class="card learning-card"><span class="eyebrow">Brand constraint</span><h2>No superlatives without a documented comparison basis.</h2><p>Carve can describe specific construction and use, but routes “best”, “ultimate” and comparative protection claims.</p><div class="learning-source">Northline voice policy · v4.2</div></article>
+              <article class="card learning-card"><span class="eyebrow">Search learning</span><h2>“Skaljacka” and “regnjacka” represent overlapping but different jobs.</h2><p>Carve preserves page ownership rather than forcing both terms into every shell product and collection.</p><div class="learning-source">GSC + Swedish SERPs · 11-month history</div></article>
+              <article class="card learning-card"><span class="eyebrow">Rollback</span><h2>Keep factual corrections even when persuasion is reversed.</h2><p>An inconclusive treatment does not justify restoring a known-wrong size, availability or product specification.</p><div class="learning-source">Execution policy · global</div></article>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" id="view-connections">
+          <div class="page">
+            <header class="page-head"><div><span class="eyebrow">The operating system</span><h1>Retailer truth, external reality and agent judgment.</h1><p>Carve connects private retailer systems, brings its own search and market observation, and retains an evidence-backed memory of products, cases and changes.</p></div></header>
+            <article class="card system-map">
+              <div class="system-column">
+                <h2>Retailer connects</h2>
+                <div class="system-node"><strong>Shopify / commerce platform</strong><span>Products, variants, collections, markets, availability, confirmed carts and orders</span></div>
+                <div class="system-node"><strong>Google first-party</strong><span>Search Console, Merchant Center, GA4 and Ads when available</span></div>
+                <div class="system-node"><strong>Experience and voice</strong><span>Hotjar or Contentsquare, reviews, support, onsite search, PIM and DAM</span></div>
+              </div>
+              <div class="system-arrow">→</div>
+              <div class="system-column">
+                <h2>Carve understands</h2>
+                <div class="system-node core"><strong>Catalog identity graph</strong><span>Product ↔ variant ↔ page ↔ Merchant offer ↔ market ↔ analytics item</span></div>
+                <div class="system-node core"><strong>Agent and evidence memory</strong><span>Signals, questions, tool calls, hypotheses, decisions, versions and outcomes</span></div>
+                <div class="system-node core"><strong>Public ecommerce worktree</strong><span>Uncaptured demand, poor ranking, CTR and PDP-to-ATC reasoning</span></div>
+              </div>
+              <div class="system-arrow">→</div>
+              <div class="system-column">
+                <h2>Carve brings and does</h2>
+                <div class="system-node"><strong>External search intelligence</strong><span>DataForSEO keyword demand, live organic/Shopping results, competitors and trends</span></div>
+                <div class="system-node"><strong>Adaptive investigation</strong><span>Chooses the next useful source, keeps competing explanations and states uncertainty</span></div>
+                <div class="system-node"><strong>Permissioned action</strong><span>Drafts, previews, stages, publishes, verifies, measures and reverses within authority</span></div>
+              </div>
+            </article>
+            <div class="permissions">
+              <article class="card permission-card"><span>Read</span><h3>Observe continuously</h3><p>Carve reads connected data and its own external observations without asking a human to pull reports.</p></article>
+              <article class="card permission-card"><span>Prepare</span><h3>Draft and preview</h3><p>It may create an exact proposed treatment and render the outcome while preserving source-system versions.</p></article>
+              <article class="card permission-card"><span>Apply</span><h3>Act only within authority</h3><p>Low-risk factual corrections may be delegated. Claims, commercial decisions and major page changes can require named approval.</p></article>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="toast" id="toast" role="status"><strong id="toast-title"></strong><span id="toast-copy"></span></div>
+
+    <script>
+      (function () {
+        var evidence = {
+          performance: {
+            sources: ["SHOPIFY", "WAREHOUSE", "GA4"],
+            observed: "28 days · refreshed 08:12",
+            title: "The weakness survives the useful cohort cuts.",
+            lead: "Carve compares the same product by market, device, landing versus navigated, buyability, source group and promotion. The gap is concentrated in Swedish mobile landing sessions; it is not created by unavailable variants.",
+            body:
+              '<div class="evidence-block"><div class="evidence-block-head"><span>Confirmed same-product PDP→ATC</span><span>Shopify is primary</span></div>' +
+              '<div class="metric-comparison"><div class="comparison-cell"><span>Aster · landing</span><strong class="down">3.1%</strong><small>18,420 buyable sessions</small></div><div class="comparison-cell"><span>Aster · navigated</span><strong>5.9%</strong><small>8,104 buyable sessions</small></div><div class="comparison-cell"><span>Matched shells</span><strong>6.8%</strong><small>Market/device matched</small></div></div>' +
+              '<div class="chart-wrap"><svg viewBox="0 0 700 190" preserveAspectRatio="none" aria-hidden="true"><g class="chart-grid"><line x1="0" y1="30" x2="700" y2="30"/><line x1="0" y1="80" x2="700" y2="80"/><line x1="0" y1="130" x2="700" y2="130"/><line x1="0" y1="180" x2="700" y2="180"/></g><path class="chart-area" d="M0 93 C80 88,125 102,190 97 C265 90,315 119,375 126 C450 134,500 147,560 146 C615 144,655 149,700 151 L700 190 L0 190Z"/><path class="chart-line" d="M0 93 C80 88,125 102,190 97 C265 90,315 119,375 126 C450 134,500 147,560 146 C615 144,655 149,700 151"/><path class="chart-line-muted" d="M0 74 C90 72,150 78,220 70 C300 77,390 74,470 80 C540 75,620 78,700 72"/></svg></div></div>' +
+              '<div class="finding-box"><span>What this changes</span><strong>Carve keeps the product decision and arriving context in scope. It deprioritizes stock, promotion and a general cart failure.</strong></div>'
+          },
+          search: {
+            sources: ["SEARCH CONSOLE", "GA4"],
+            observed: "Query × page × country × device",
+            title: "Search intent is relevant—but it cannot be joined to an individual session.",
+            lead: "The Aster PDP receives Swedish impressions for rain-shell, hiking-shell, lightweight and layering jobs. Carve uses page-level organic cohorts as guardrails and does not fabricate a GSC-query-to-GA4-user join.",
+            body:
+              '<div class="evidence-block"><div class="evidence-block-head"><span>Relevant query clusters reaching the Aster PDP</span><span>Sweden · mobile</span></div><table class="query-table"><thead><tr><th>Query cluster</th><th>Impressions</th><th>Avg position</th><th>CTR</th></tr></thead><tbody><tr><td>vattentät skaljacka dam</td><td>18,240</td><td>6.8</td><td>4.6%</td></tr><tr><td>lätt regnjacka vandring</td><td>11,804</td><td>8.2</td><td>3.9%</td></tr><tr><td>3-lagers skaljacka</td><td>7,911</td><td>5.4</td><td>5.3%</td></tr><tr><td>skaljacka över fleece</td><td>3,284</td><td>7.7</td><td>4.1%</td></tr></tbody></table></div>' +
+              '<div class="finding-box"><span>What this changes</span><strong>Obviously wrong intent is not the strongest explanation. The page must still complete the product promise made by Search and Shopping.</strong></div>'
+          },
+          shopping: {
+            sources: ["MERCHANT CENTER", "SEARCH CONSOLE"],
+            observed: "Organic item performance · Sweden",
+            title: "The free listing is healthy enough to keep the PDP under examination.",
+            lead: "The processed title, image, price and availability are normal for the shell cohort, with no disapproval. This does not prove the listing is optimal; it weakens the claim that listing failure alone explains the PDP conversion gap.",
+            body:
+              '<div class="evidence-block"><div class="evidence-block-head"><span>Aster · free Merchant listings</span><span>Item AS-310</span></div><div class="metric-comparison"><div class="comparison-cell"><span>Impressions</span><strong>42.8k</strong><small>+11% vs prior period</small></div><div class="comparison-cell"><span>Organic CTR</span><strong>2.9%</strong><small>Cohort: 3.0%</small></div><div class="comparison-cell"><span>Eligibility</span><strong class="verified">Active</strong><small>No limiting issue</small></div></div></div>' +
+              '<div class="serp-callout"><div><span>Listing promise</span><strong>“Aster 3L waterproof shell jacket”</strong></div><div><span>Landing requirement</span><strong>The PDP must explain 3-layer protection and intended use.</strong></div></div>' +
+              '<div class="finding-box"><span>What this changes</span><strong>Carve does not spend this case on feed plumbing. It treats the listing as the promise the PDP must complete.</strong></div>'
+          },
+          serp: {
+            sources: ["DATAFORSEO", "SWEDISH MOBILE BROWSER"],
+            observed: "Stockholm · sv-SE · mobile",
+            title: "Alternatives answer the criteria Aster leaves implicit.",
+            lead: "Carve captures the real Swedish mobile result set and opens representative product pages. It compares answer type and decision information—not just keyword counts.",
+            body:
+              '<div class="evidence-block"><div class="evidence-block-head"><span>Live result and comparable answers</span><span>Observed 09:04</span></div><div class="serp"><div class="serp-query">vattentät skaljacka dam</div><div class="serp-result"><small>northline.se › aster-shell</small><h3>Aster 3L Waterproof Shell Jacket</h3><p>A lightweight shell for changing conditions. Free delivery and returns.</p></div><div class="serp-result competitor"><small>bergco.se › dam › skaljackor</small><h3>Waterproof 3-layer hiking shells for women</h3><p>Compare protection, garment weight, fit and ventilation for wet, high-output hiking.</p></div><div class="serp-callout"><div><span>Northline exposes</span><strong>Name, generic weight claim, offer</strong></div><div><span>Winning answers expose</span><strong>Construction, use, weight, fit and trade-offs</strong></div></div></div></div>' +
+              '<div class="finding-box"><span>What this changes</span><strong>Competitors do not prove causality. They reveal the decision criteria a credible treatment should answer with Northline’s own verified facts.</strong></div>'
+          },
+          truth: {
+            sources: ["SHOPIFY", "PIM", "RENDERED PDP"],
+            observed: "Product version 8.4 · Swedish",
+            title: "The answers already exist. The shopper cannot see them.",
+            lead: "Carve separates source truth from published presentation. It finds approved, product-specific facts in the PIM, then checks whether each one is understandable and visible on the actual mobile PDP.",
+            body:
+              '<div class="evidence-block"><div class="evidence-block-head"><span>Verified product record versus live PDP</span><span>AS-310</span></div><table class="truth-table"><thead><tr><th>Decision fact</th><th>Approved source</th><th>Live Swedish mobile PDP</th></tr></thead><tbody><tr><td>3-layer construction + taped seams</td><td class="verified">Verified</td><td class="missing">Not explained</td></tr><tr><td>20,000 mm approved test basis</td><td class="verified">Verified</td><td class="missing">Number buried in table</td></tr><tr><td>310 g garment weight</td><td class="verified">Verified</td><td class="missing">Generic “lightweight” only</td></tr><tr><td>Uninsulated regular cut over light fleece</td><td class="verified">Verified</td><td class="missing">Not stated</td></tr><tr><td>Product-specific garment measurements</td><td class="verified">Verified</td><td class="missing">Generic body chart only</td></tr></tbody></table></div>' +
+              '<div class="finding-box"><span>What this changes</span><strong>Carve can propose a concrete treatment without inventing claims or asking the retailer to create missing product data first.</strong></div>'
+          },
+          behaviour: {
+            sources: ["LIVE BROWSER", "HOTJAR", "GORGIAS", "YOTPO"],
+            observed: "Sampled evidence · not causal proof",
+            title: "Different evidence points to the same unresolved questions.",
+            lead: "The rendered page shows where answers sit. Sampled recordings show repeated journeys. Support and review language reveals questions at scale. None is treated as causal proof alone.",
+            body:
+              '<div class="evidence-block"><div class="evidence-block-head"><span>Swedish mobile decision review</span><span>iOS + Android verified</span></div><div class="phone-review"><div class="phone"><div class="phone-top"></div><div class="phone-image"><svg viewBox="0 0 80 92" aria-hidden="true"><path fill="#52463c" d="M26 13 36 7h8l10 6 16 10-9 18-8-5v45H27V36l-8 5-9-18z"/><path fill="#76685d" d="m36 7 4 13 4-13z"/><path fill="none" stroke="#c9b9aa" stroke-width="2" d="M30 47h20M30 54h20"/></svg></div><div class="phone-copy"><small>NORTHLINE</small><h4>Aster</h4><p>Built for every adventure. Waterproof · Breathable · Lightweight.</p><div class="phone-choice"></div><div class="phone-cta">ADD TO BAG</div></div></div><div class="review-notes"><div class="review-note"><span>HOTJAR COHORT</span><strong>Repeated return from generic size chart to variant selection; several sessions scroll to specifications and back.</strong></div><div class="review-note"><span>GORGIAS</span><strong>“Can I wear a fleece under this, or should I size up?” repeats across Swedish tickets.</strong></div><div class="review-note"><span>YOTPO + Q&amp;A</span><strong>Shoppers ask what 20,000 mm means and whether it is intended for long rain exposure.</strong></div><div class="review-note"><span>FUNCTION CHECK</span><strong>Valid variants add successfully on current iOS and Android devices.</strong></div></div></div></div>' +
+              '<div class="finding-box"><span>What this changes</span><strong>The evidence supports a product-story and decision-information treatment. It weakens an isolated CTA or technical repair.</strong></div>'
+          },
+          read: {
+            sources: ["CARVE SYNTHESIS", "PUBLIC WORKTREE"],
+            observed: "Evidence state · 7 calls",
+            title: "The next best move is one coordinated product treatment.",
+            lead: "Carve does not claim perfect causal certainty. It chooses the treatment most capable of testing the strongest useful explanation while keeping the product, offer and traffic fixed.",
+            body:
+              '<div class="evidence-block"><div class="evidence-block-head"><span>Signal → evidence → performance move</span><span>Case ATC-SE-184</span></div><div style="padding:18px;background:#f9f6ef"><div class="finding-box" style="margin-top:0"><span>Performance read</span><strong>The product fits the arriving job, but the PDP makes Swedish mobile shoppers infer what Aster is, whether it layers correctly and what its protection means.</strong></div><div class="serp-callout"><div><span>Change</span><strong>Positioning + protection explanation + product-specific fit guidance</strong></div><div><span>Keep fixed</span><strong>Price, stock, capability, traffic source and cart behaviour</strong></div><div><span>Authority</span><strong>Carve drafts; Product verifies; Brand and Ecommerce approve</strong></div><div><span>Test</span><strong>Confirmed same-product ATC plus comprehension and risk guardrails</strong></div></div></div></div>' +
+              '<div class="finding-box"><span>Decision</span><strong>Apply after approval. If the predicted comprehension mechanism does not move, revise or reverse the persuasive treatment while retaining factual corrections.</strong></div>'
+          }
+        };
+
+        var viewNames = {
+          attention: "Attention / <strong>All catalog work</strong>",
+          case: "Investigations / <strong>Aster Shell · Sweden</strong>",
+          changes: "Changes / <strong>Approval queue</strong>",
+          learning: "Learnings / <strong>Northline memory</strong>",
+          connections: "Connections / <strong>Data and authority</strong>"
+        };
+
+        var toastTimer;
+
+        function showToast(title, copy) {
+          var toast = document.getElementById("toast");
+          document.getElementById("toast-title").textContent = title;
+          document.getElementById("toast-copy").textContent = copy;
+          toast.classList.add("show");
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(function () { toast.classList.remove("show"); }, 3400);
+        }
+
+        function navigate(view) {
+          document.querySelectorAll(".view").forEach(function (node) { node.classList.toggle("active", node.id === "view-" + view); });
+          document.querySelectorAll(".nav-button").forEach(function (node) { node.classList.toggle("active", node.dataset.view === view); });
+          document.getElementById("breadcrumb").innerHTML = viewNames[view] || viewNames.case;
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          history.replaceState(null, "", "#" + view);
+        }
+
+        function setCaseTab(tab) {
+          document.querySelectorAll(".case-tab").forEach(function (node) { node.classList.toggle("active", node.dataset.caseTab === tab); });
+          document.querySelectorAll(".case-panel").forEach(function (node) { node.classList.toggle("active", node.id === "panel-" + tab); });
+          document.querySelector("#view-case").scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        function renderEvidence(key) {
+          var item = evidence[key] || evidence.truth;
+          document.querySelectorAll(".trail-step").forEach(function (node) { node.classList.toggle("active", node.dataset.evidence === key); });
+          document.getElementById("evidence-stage").innerHTML =
+            '<div class="evidence-stage">' +
+              '<div class="evidence-source-row"><div class="source-lockup">' +
+                item.sources.map(function (source) { return '<span class="source-badge">' + source + '</span>'; }).join("") +
+              '</div><span class="observed">' + item.observed + '</span></div>' +
+              '<h2>' + item.title + '</h2>' +
+              '<p class="evidence-lead">' + item.lead + '</p>' +
+              item.body +
+            '</div>';
+        }
+
+        document.querySelectorAll(".nav-button").forEach(function (button) {
+          button.addEventListener("click", function () { navigate(button.dataset.view); });
+        });
+        document.querySelectorAll("[data-open-case]").forEach(function (button) {
+          button.addEventListener("click", function () { navigate("case"); setCaseTab("investigation"); });
+        });
+        document.querySelectorAll("[data-demo-message]").forEach(function (button) {
+          button.addEventListener("click", function () { showToast("Overview-only example", button.dataset.demoMessage); });
+        });
+        document.querySelectorAll(".case-tab").forEach(function (button) {
+          button.addEventListener("click", function () { setCaseTab(button.dataset.caseTab); });
+        });
+        document.querySelectorAll("[data-tab-target]").forEach(function (button) {
+          button.addEventListener("click", function () { setCaseTab(button.dataset.tabTarget); });
+        });
+        document.querySelectorAll(".trail-step").forEach(function (button) {
+          button.addEventListener("click", function () { renderEvidence(button.dataset.evidence); });
+        });
+
+        document.getElementById("approve-change").addEventListener("click", function () {
+          var selected = document.querySelectorAll(".change-check:checked").length;
+          document.getElementById("case-status").textContent = "Approved · staged for storefront QA";
+          document.getElementById("queue-aster-state").textContent = "Approved · staged";
+          document.getElementById("brand-approval").classList.remove("pending");
+          document.getElementById("brand-approval").querySelector("i").textContent = "✓";
+          document.getElementById("brand-approval").querySelector("span").textContent = "Approved in mockup";
+          document.getElementById("commerce-approval").classList.remove("pending");
+          document.getElementById("commerce-approval").querySelector("i").textContent = "✓";
+          document.getElementById("commerce-approval").querySelector("span").textContent = "Approved in mockup";
+          document.getElementById("timeline-current").textContent = "Approved and staged";
+          document.getElementById("timeline-detail").textContent = selected + " changes · awaiting storefront verification";
+          this.textContent = "Approved · preview staged";
+          this.disabled = true;
+          showToast("Change set staged", selected + " approved changes are ready for Swedish mobile storefront verification. No real system was changed.");
+          setTimeout(function () { setCaseTab("measurement"); }, 700);
+        });
+
+        document.getElementById("replay").addEventListener("click", function () {
+          var steps = Array.from(document.querySelectorAll(".trail-step"));
+          var index = 0;
+          steps.forEach(function (step) { step.classList.remove("complete", "active", "is-running"); });
+          showToast("Carve is replaying the investigation", "Watch how each unanswered question determines the next source.");
+          function next() {
+            if (index > 0) {
+              steps[index - 1].classList.remove("is-running");
+              steps[index - 1].classList.add("complete");
+            }
+            if (index >= steps.length) {
+              steps[steps.length - 1].classList.add("active");
+              renderEvidence("read");
+              return;
+            }
+            steps[index].classList.add("is-running", "active");
+            renderEvidence(steps[index].dataset.evidence);
+            index += 1;
+            setTimeout(next, 850);
+          }
+          next();
+        });
+
+        var initialView = location.hash.replace("#", "");
+        if (viewNames[initialView]) navigate(initialView);
+        renderEvidence("truth");
+      })();
+    </script>
+  </body>
+</html>
