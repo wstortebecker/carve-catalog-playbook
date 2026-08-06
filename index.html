@@ -1175,6 +1175,30 @@
           kind: "Platform guidance",
           url: "https://developers.google.com/search/docs/specialty/ecommerce/help-google-understand-your-ecommerce-site-structure"
         },
+        googleUrlInspectionApi: {
+          name: "URL Inspection API: indexed status only, not a live URL test",
+          publisher: "Google Search Console",
+          kind: "Programmatic inspection documentation",
+          url: "https://developers.google.com/webmaster-tools/v1/urlInspection.index/inspect"
+        },
+        googleCanonical: {
+          name: "Canonical signals, duplicate URLs and Google-selected canonicals",
+          publisher: "Google Search Central",
+          kind: "Crawling and indexing guidance",
+          url: "https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls"
+        },
+        googleJavascriptSeo: {
+          name: "How Google crawls, renders and indexes JavaScript pages",
+          publisher: "Google Search Central",
+          kind: "Rendering guidance",
+          url: "https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics"
+        },
+        googleInternational: {
+          name: "Multi-regional URLs, crawling, canonicals and hreflang",
+          publisher: "Google Search Central",
+          kind: "International site guidance",
+          url: "https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites"
+        },
         googleRankingSystems: {
           name: "Ranking systems: page-level signals, site-wide signals and link analysis",
           publisher: "Google Search Central",
@@ -3844,6 +3868,49 @@
         }
       });
 
+      const TECHNICAL_PARTICIPATION = Object.freeze({
+        summary: "Carve runs this quietly alongside the main investigation. A clean pass is not a ranking diagnosis, and a warning is ignored unless it can explain the exact affected cohort.",
+        cases: Object.freeze({
+          "poor-ranking": Object.freeze({
+            purpose: "Confirm the intended page can participate normally before blaming its content, positioning or competitors. Because it already appears, a generic indexing warning is not enough."
+          }),
+          "uncaptured-demand": Object.freeze({
+            purpose: "Before creating anything, confirm that a plausible existing answer is not merely unpublished, excluded, miscanonicalized, unlinked or missing its important rendered content."
+          })
+        }),
+        automated: Object.freeze([
+          "Fetch the intended market-specific storefront URLs and record final status, redirect chain, robots.txt access, page robots/noindex directives, declared canonical and locale signals.",
+          "Compare important product or collection content and crawlable links in the raw response and rendered page; flag missing main content, broken destinations and template-level differences.",
+          "Crawl the real internal paths and sitemap for the scoped URLs. Ordinary internal prominence remains a performance cause in the main ranking branch.",
+          "Sample affected and healthy-control URLs through the Search Console URL Inspection API for Google's indexed state, selected canonical, crawl result and last crawl. The API does not run a live URL test.",
+          "Join anomalies to release, theme, app, routing and market-history changes, then rerun the same acceptance checks after any fix."
+        ]),
+        opensWhen: Object.freeze([
+          "The page is intended to participate for this market and customer demand.",
+          "A specific access, canonical, rendering, routing, publication or localization fault is concentrated in the affected cohort—or begins when performance is lost.",
+          "The fault can plausibly stop Google reaching, selecting or understanding the intended main answer.",
+          "Healthy controls do not share it—or direct before/after or platform evidence establishes a broad fault when no healthy control remains."
+        ]),
+        doesNotProve: Object.freeze([
+          "A 200 response, self-canonical, sitemap entry or valid schema does not establish that Google can index and select the intended content—or that the page is competitive enough to rank.",
+          "A Lighthouse warning, isolated crawl warning or stale inspection result does not prove the cause of a performance gap.",
+          "Not every URL should be indexable; intentional exclusions are not faults."
+        ]),
+        routing: Object.freeze([
+          "Weak internal prominence stays in the ranking branch; page-role or canonical competition stays in page ownership unless the platform is actually malfunctioning.",
+          "Product eligibility and feed/source problems stay in Google product visibility; AI crawler, catalogue and source-resolution problems stay in AI discovery.",
+          "Only a specific platform, template, redirect, noindex, rendering or localization malfunction becomes a technical handoff."
+        ]),
+        handoff: Object.freeze([
+          "Name the exact affected URLs, products and markets, with actual → expected behaviour.",
+          "Attach dated evidence, healthy controls, first-seen timing and any release correlation.",
+          "Name the source system and owner; request the exact change rather than saying 'fix SEO'.",
+          "Define the acceptance test, safe rollback and the condition for reopening the original demand case.",
+          "After the repair is verified, resume the ranking or demand investigation; the technical fix is not the performance conclusion."
+        ]),
+        sources: Object.freeze(["googleUrlInspectionApi", "googleCanonical", "googleJavascriptSeo", "googleInternational", "googleStructure"])
+      });
+
       function marketInvestigationFor(item) {
         const specific = MARKET_INVESTIGATION[item.id] || {};
         return {
@@ -4008,6 +4075,19 @@
           (lens.measure ? '<p><b>Measure:</b> ' + escapeHtml(lens.measure) + '</p>' : '') +
           (lens.caveat ? '<p><b>Caveat:</b> ' + escapeHtml(lens.caveat) + '</p>' : '') +
           (lens.guardrails ? '<p><b>Guardrail:</b> ' + escapeHtml(lens.guardrails) + '</p>' : '');
+      }
+
+      function technicalParticipationHtml(item) {
+        const specific = TECHNICAL_PARTICIPATION.cases[item.id];
+        if (!specific) return "";
+        return paragraph(TECHNICAL_PARTICIPATION.summary) +
+          '<div class="detail-cell"><strong>Why it runs here</strong><span>' + escapeHtml(specific.purpose) + '</span></div>' +
+          '<p><b>What Carve can check programmatically</b></p>' + listHtml(TECHNICAL_PARTICIPATION.automated, false) +
+          '<p><b>Interrupt the main investigation only when</b></p>' + listHtml(TECHNICAL_PARTICIPATION.opensWhen, false) +
+          '<p><b>What a technical warning does not prove</b></p>' + listHtml(TECHNICAL_PARTICIPATION.doesNotProve, false) +
+          '<p><b>Keep causes in the right branch</b></p>' + listHtml(TECHNICAL_PARTICIPATION.routing, false) +
+          '<p><b>If another owner must fix it, hand them this</b></p>' + listHtml(TECHNICAL_PARTICIPATION.handoff, false) +
+          '<p><b>Primary guidance</b></p>' + sourceHtml(TECHNICAL_PARTICIPATION.sources);
       }
 
       function examplesHtml(hypothesis) {
@@ -4306,7 +4386,7 @@
           kicker: "Carve · every product / page / market",
           title: "Capture more relevant product demand",
           copy: "Find web, Google product-surface and AI-discovery headroom, investigate why demand is missed, make the strongest concrete treatment and learn across the catalogue.",
-          meta: "Relevant visibility is the objective. Accuracy is non-negotiable."
+          meta: "Performance first. Participation blockers are checked quietly."
         });
 
         CASES.forEach(function (item, index) {
@@ -4349,7 +4429,8 @@
           kicker: "Carve problem",
           title: activeCase.caseTitle,
           copy: activeCase.caseCopy,
-          meta: activeCase.scope
+          meta: activeCase.scope,
+          tags: TECHNICAL_PARTICIPATION.cases[activeCase.id] ? ["Quiet participation check"] : []
         });
         addEdge("signal-" + activeCase.id, "case-" + activeCase.id, activeCase.id);
 
@@ -4643,7 +4724,7 @@
               "Measure the original cohort, protect adjacent performance, and update retailer-specific memory. A surprising result reopens the reasoning rather than ending it."
             ], false)) +
             section("Market performance is a first-class entry point", paragraph("Carve continuously scans for country and language divergence, first locates whether the gap is poor web ranking, missing search coverage, weak Google product visibility or weak AI discovery, then compares the local demand, page, products, offer/catalogue evidence and competitive set. Geography points to a concrete mechanism; it never becomes a vague diagnosis.")) +
-            section("Guardrails stay quiet", paragraph("Carve checks whether the product can support the demand and whether each measurement really describes the named surface. Technical access and commercial constraints are corrected or routed when they block discovery, but they do not dominate a map whose purpose is better relevant visibility.")) +
+            section("Guardrails stay quiet", paragraph("Carve quietly checks whether the intended answer can participate. Most of this is automated. It only opens a technical handoff when a specific access, canonical, rendering, routing, market or publication fault can explain the affected cohort; otherwise it returns immediately to performance work.")) +
             section("When several causes are true", crossCauseRulesHtml()) +
             section("Research basis", sourceHtml(["memo", "gscPerformance", "ahrefsEcommerce", "aleydaEcommerce", "merchantPerformance", "merchantStatus", "gscShoppingReports", "gscAiPerformance", "bingAiPerformance", "merchantAiInsights", "shopifyAgentic", "openAiShopping", "openAiShoppingResearch", "shopifyLocalization"]))
         };
@@ -4683,6 +4764,7 @@
             section("How a live instance is bounded", listHtml(item.frame, false)) +
             section("Market split · route the difference to its real mechanism", marketLensHtml(item)) +
             section("How Carve chooses the next move", paragraph("It does not complete branches in order. It opens the observation with the highest ability to distinguish the explanations that remain plausible, can research several sources in parallel, and can combine routes or create a new explanation when the evidence demands it.")) +
+            section("Quiet technical participation check · mostly automated", technicalParticipationHtml(item)) +
             section("When several causes are supported", crossCauseRulesHtml()) +
             section("What a live investigation must produce", paragraph("A falsifiable performance read naming the query or shopping job, page, product or merchant cohort; the likely discovery mechanism; evidence for and against it; the exact SEO, page, product-data, catalogue, link or evidence treatment; a concrete before/after; owner and permission; and the result that would keep, revise or reverse it.")) +
             section("Research basis", sourceHtml(item.caseSources))
@@ -5325,6 +5407,22 @@
         const allowedOpportunities = new Set(["Rank higher", "More impressions", "More product impressions", "More AI traffic"]);
         const allowedActionTypes = new Set(["apply", "route", "no-action"]);
         const sourceIds = new Set(Object.keys(SOURCES));
+        const technicalCaseIds = Object.keys(TECHNICAL_PARTICIPATION.cases);
+        if (technicalCaseIds.length !== 2 || !technicalCaseIds.includes("poor-ranking") || !technicalCaseIds.includes("uncaptured-demand")) {
+          errors.push("Quiet technical participation checks must stay limited to the two web-search cases.");
+        }
+        if (!TECHNICAL_PARTICIPATION.summary) errors.push("Technical participation check lacks a summary.");
+        ["automated", "opensWhen", "doesNotProve", "routing", "handoff", "sources"].forEach(function (field) {
+          if (!TECHNICAL_PARTICIPATION[field] || !TECHNICAL_PARTICIPATION[field].length) {
+            errors.push("Technical participation check lacks " + field);
+          }
+        });
+        technicalCaseIds.forEach(function (caseId) {
+          if (!TECHNICAL_PARTICIPATION.cases[caseId].purpose) errors.push("Technical participation check lacks purpose for " + caseId);
+        });
+        TECHNICAL_PARTICIPATION.sources.forEach(function (sourceId) {
+          if (!sourceIds.has(sourceId)) errors.push("Technical participation check has unknown source " + sourceId);
+        });
         CASES.forEach(function (item) {
           if (!item.id || ids.has(item.id)) errors.push("Invalid or duplicate case ID: " + item.id);
           ids.add(item.id);
@@ -5395,7 +5493,7 @@
         state.activeCaseId = CASES[0].id;
       }
 
-      window.CARVE_WORKTREE_DATA = { cases: CASES, sources: SOURCES };
+      window.CARVE_WORKTREE_DATA = { cases: CASES, sources: SOURCES, technicalParticipation: TECHNICAL_PARTICIPATION };
       window.CARVE_WORKTREE_VALIDATE = validateData;
       renderTree();
       requestAnimationFrame(function () {
