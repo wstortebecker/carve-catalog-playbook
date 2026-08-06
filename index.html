@@ -1061,7 +1061,7 @@
           <div class="brand">Carve</div>
           <div class="titleblock">
             <h1>The Carve worktree</h1>
-            <p>How Carve captures more relevant product demand across organic search and AI shopping—product by product, page by page, market by market.</p>
+            <p>How Carve captures more relevant product demand across web search, Google product surfaces and AI shopping—product by product, page by page, market by market.</p>
           </div>
         </div>
         <div class="top-status">
@@ -1074,7 +1074,7 @@
         id="viewport"
         class="viewport"
         tabindex="0"
-        aria-label="Interactive search and AI demand worktree. Drag or use a trackpad to move. Pinch or Control or Command plus scroll to zoom. Select any card for the full reasoning."
+        aria-label="Interactive web search, Google product-surface and AI demand worktree. Drag or use a trackpad to move. Pinch or Control or Command plus scroll to zoom. Select any card for the full reasoning."
       >
         <div id="world" class="world">
           <svg id="connectors" class="connector-layer" aria-hidden="true"></svg>
@@ -1175,6 +1175,18 @@
           kind: "Platform guidance",
           url: "https://developers.google.com/search/docs/specialty/ecommerce/help-google-understand-your-ecommerce-site-structure"
         },
+        googleRankingSystems: {
+          name: "Ranking systems: page-level signals, site-wide signals and link analysis",
+          publisher: "Google Search Central",
+          kind: "Ranking-system documentation",
+          url: "https://developers.google.com/search/docs/appearance/ranking-systems-guide"
+        },
+        googleHelpfulContent: {
+          name: "Create helpful, reliable, people-first content",
+          publisher: "Google Search Central",
+          kind: "Content and evidence guidance",
+          url: "https://developers.google.com/search/docs/fundamentals/creating-helpful-content"
+        },
         googleTitleLinks: {
           name: "How Google creates and changes title links",
           publisher: "Google Search Central",
@@ -1229,6 +1241,12 @@
           kind: "Tool-data limitation",
           url: "https://help.ahrefs.com/en/articles/907670-how-long-does-it-take-for-ahrefs-to-find-my-new-backlink"
         },
+        ahrefsAuthorityMetric: {
+          name: "Domain Rating is a third-party backlink metric, not a search-engine ranking score",
+          publisher: "Ahrefs",
+          kind: "Tool-metric limitation",
+          url: "https://help.ahrefs.com/en/articles/907673-do-search-engines-use-domain-authority-domain-rating-as-a-ranking-factor"
+        },
         aleydaEcommerce: {
           name: "Common ecommerce SEO problems and page differentiation",
           publisher: "Aleyda Solis",
@@ -1240,6 +1258,30 @@
           publisher: "Google Merchant Center",
           kind: "Platform documentation",
           url: "https://support.google.com/merchants/answer/12159540"
+        },
+        merchantTracking: {
+          name: "Track free-listing product performance and distinguish organic Shopping traffic",
+          publisher: "Google Merchant Center",
+          kind: "Measurement and attribution documentation",
+          url: "https://support.google.com/merchants/answer/15114528"
+        },
+        merchantStatus: {
+          name: "Product visibility, status, marketing-method and country limitations",
+          publisher: "Google Merchant Center",
+          kind: "Platform workflow",
+          url: "https://support.google.com/merchants/answer/12488713"
+        },
+        merchantSpecification: {
+          name: "Merchant Center product data specification",
+          publisher: "Google Merchant Center",
+          kind: "Product-data specification",
+          url: "https://support.google.com/merchants/answer/7052112"
+        },
+        merchantVariants: {
+          name: "Group true product variants with item group ID",
+          publisher: "Google Merchant Center",
+          kind: "Product-data specification",
+          url: "https://support.google.com/merchants/answer/6324507"
         },
         merchantAiInsights: {
           name: "AI performance insights: limited-US organic AI share of voice, journey phases, terms, and attributes",
@@ -1295,6 +1337,18 @@
           kind: "Platform workflow",
           url: "https://support.google.com/merchants/answer/14990942"
         },
+        googleShareProductData: {
+          name: "How feeds, pages and structured data support Google product experiences",
+          publisher: "Google Search Central",
+          kind: "Platform guidance",
+          url: "https://developers.google.com/search/docs/specialty/ecommerce/share-your-product-data-with-google"
+        },
+        gscShoppingReports: {
+          name: "Shopping reports, Merchant listings and product snippets in Search Console",
+          publisher: "Google Search Console",
+          kind: "Platform documentation",
+          url: "https://support.google.com/webmasters/answer/12660034"
+        },
         merchantIdentifiers: {
           name: "Use the exact GTIN, brand, and MPN assigned to a product",
           publisher: "Google Merchant Center",
@@ -1312,6 +1366,12 @@
           publisher: "Google Ads",
           kind: "Measurement documentation",
           url: "https://support.google.com/google-ads/answer/2472708"
+        },
+        adsSearchInsights: {
+          name: "Search terms insights across Search, Shopping and Performance Max",
+          publisher: "Google Ads",
+          kind: "Demand and intent evidence",
+          url: "https://support.google.com/google-ads/answer/11386930"
         },
         keywordPlanner: {
           name: "Keyword Planner search forecasts and historical metrics",
@@ -1354,6 +1414,12 @@
           publisher: "Google Analytics",
           kind: "Referral measurement documentation",
           url: "https://support.google.com/analytics/answer/12923437"
+        },
+        ga4ChannelGroups: {
+          name: "GA4 channel definitions, including Shopping Free Listings and Organic Shopping",
+          publisher: "Google Analytics",
+          kind: "Attribution definition",
+          url: "https://support.google.com/analytics/answer/9756891"
         },
         shopifySearch: {
           name: "Onsite-search queries, no-result and no-click reports",
@@ -1501,7 +1567,7 @@
         }
       };
 
-      // V1 is intentionally limited to three demand-capture worktrees.
+      // V1 is intentionally limited to four demand-capture worktrees.
 
       function focusedRoute(spec) {
         return {
@@ -1551,16 +1617,16 @@
           id: "uncaptured-demand",
           shortLabel: "Uncaptured organic demand",
           signalType: "Organic search · Coverage",
-          signal: "Valuable search demand has no strong ecommerce answer",
-          signalCopy: "Customers search for a product, attribute, use case, audience or decision that the retailer could serve, but no current PDP, collection or guide captures the opportunity well.",
+          signal: "Valuable search demand has no adequate ecommerce answer",
+          signalCopy: "Customers search for a product, attribute, use case, audience or decision that is relevant to the retailer, but the store does not yet provide a truthful, useful answer—or the current range cannot support one.",
           seenIn: "keyword and competitor gaps · fringe Search Console queries · paid search terms · customer language · catalogue-to-demand coverage",
           opportunities: ["More impressions"],
-          signalDetail: "This is an opportunity-coverage problem, not merely a keyword with low rank. Carve connects external demand, customer language, the live results, the catalogue and every plausible current page. If a suitable page already appears but performs weakly, the case belongs under Poor ranking. Otherwise Carve decides whether performance will improve most by exposing hidden product relevance, expanding an existing page, building a useful collection, adding decision content or clarifying page ownership. Product fit is a guardrail; improving the customer answer is the objective.",
+          signalDetail: "This is an opportunity-coverage problem, not merely a keyword with low rank. Carve connects external demand, customer language, the live results, the catalogue and every plausible current page. If a suitable page already appears but performs weakly, the case belongs under Poor ranking. Otherwise Carve first identifies what is absent: recognisable product fit, a complete existing answer, a distinct shopping task, help with the decision, clear page ownership or a range capable of serving the need. Only then does it choose a PDP, product-listing page, category landing page, governed facet, guide, decision tool, assortment brief or no action. Product truth and customer usefulness are the guardrails.",
           signalViews: [
             "Ahrefs → Competitive Analysis → Content Gap → Keywords. Compare the retailer with several genuinely comparable ecommerce competitors in the correct market; inspect the ranking URL behind every candidate rather than accepting the export as a backlog.",
             "Ahrefs → Keywords Explorer → Matching terms, Related terms and Questions; review Parent Topic, Traffic Potential and the current SERP overview. Automated clusters and volumes are estimates, not final page architecture.",
             "Search Console → Performance → Search results → Queries. Export the longest useful window, segment by country/device and inspect fringe queries reaching generic or unsuitable URLs. Search Console cannot reveal demand for which the property never appeared, and visible query rows are incomplete.",
-            "Google Ads → Search terms for relevant campaigns, plus Keyword Planner → Discover new keywords / historical metrics and Google Trends for market and seasonality. Paid terms are shaped by campaign targeting; Planner and Trends do not measure the retailer's organic opportunity directly.",
+            "Google Ads → Search terms and Search terms insights for relevant Search, Shopping or Performance Max activity. Compare queries, impressions and configured conversion evidence with campaign targeting; use Keyword Planner and Trends for additional local demand and seasonality. Paid evidence can corroborate a shopping job, but it does not forecast organic performance.",
             "Customer- and catalogue-first coverage: use onsite searches, support, reviews and approved product attributes to generate real product-type, material, feature, use, audience and compatibility jobs, then test those jobs against external demand. Customer language corroborates a need; it is not an organic-volume measure."
           ],
           signalContext: [
@@ -1575,19 +1641,19 @@
             "The need is relevant to the retailer's category and customer. Carve investigates every credible gap; demand magnitude changes the proportionate response, not whether the gap is noticed.",
             "No current page combines the right product fit, page role, choice or information, customer language and clear ownership strongly enough to serve the job.",
             "At least one demand source exists and its limitation is recorded. Independent corroboration raises confidence, but a low-cost product-data correction need not wait for an arbitrary volume threshold.",
-            "The catalogue can serve a useful version of the need. If it cannot, record that quietly as a boundary and keep it out of the performance worktree rather than manufacturing product fit."
+            "The current catalogue can serve a useful version of the need, or the gap is close enough to the retailer's strategy that it deserves a specific assortment decision. If neither is true, Carve records why and takes no action rather than manufacturing product fit."
           ],
           signalDoesNotProve: "A competitor keyword, no-result search, rising trend or isolated Search Console query does not prove that the retailer needs a new page. It may represent another market, another meaning, an exact competitor brand, a synonym gap, an informational question, a temporarily unavailable range or a capability the products do not have.",
-          signalSources: ["gscPerformance", "gscData", "ahrefsEcommerce", "keywordPlanner", "googleTrends", "adsSearchTerms", "shopifySearch", "gorgiasInsights", "yotpoInsights"],
+          signalSources: ["gscPerformance", "gscData", "ahrefsEcommerce", "keywordPlanner", "googleTrends", "adsSearchTerms", "adsSearchInsights", "shopifySearch", "gorgiasInsights", "yotpoInsights"],
           caseTitle: "What ecommerce answer is missing from this demand?",
-          caseCopy: "Understand the search job, range and current coverage, then build the strongest useful answer without duplicating an existing page.",
-          caseDetail: "Carve does not begin with a URL template. It moves between keyword demand, local results, customer language, product records and the actual store until it understands what would help the shopper choose. Several causes can combine: a new collection may also need richer product attributes, collection copy, cards and a connected guide. Carve forms a concrete performance hypothesis, makes the smallest coherent treatment and learns from the resulting relevant impressions. Organic clicks remain an outcome guardrail, not a separate optimization track.",
+          caseCopy: "Understand the search job, range and current coverage, then choose the strongest useful answer—or conclude that the range cannot support one.",
+          caseDetail: "Carve does not begin with a URL template. It moves between keyword demand, local results, customer language, product records and the actual store until it understands the shopper's task. The answer format is a conclusion: one exact product may need a PDP; a coherent range may need a product-listing page, collection or governed facet; a broad category may need a category landing page; a learning task may need guidance; a matching or calculation task may need a tool. On Shopify, one collection template may perform both category-landing and product-listing roles. Several treatments can combine, but Carve makes the smallest coherent intervention and learns from relevant impressions. Organic clicks remain an outcome guardrail, not a separate optimization track.",
           scope: "One coherent organic demand cluster × one market and language × every plausible existing page × every potentially qualifying SKU or variant",
           frame: [
             "Demand: representative queries, market, season, source limitations and the customer job behind the wording.",
             "Current coverage: every own URL receiving impressions or plausibly intended to answer the need, and the actual job each page performs.",
             "Catalogue and expression: qualifying products, decisive attributes, descriptions, imagery, cards, collection membership and what customers can actually understand.",
-            "Page choice: expose product relevance, expand a PDP or collection, create a distinct collection or guide, or clarify overlapping roles.",
+            "Answer choice: exact-product evaluation → PDP; range comparison → product-listing page or collection; category orientation → category landing page; durable attribute slice → governed facet; explanation → on-page guidance or guide; repeated matching/calculation → decision tool; no credible product fit → assortment brief or no action. The arrows are evidence prompts, not fixed rules.",
             "Performance hypothesis: state which missing answer suppresses visibility, exactly what coordinated page treatment will provide it, and which market/query cohort should respond."
           ],
           marketLens: [
@@ -1740,59 +1806,59 @@
               id: "missing-commercial-collection",
               actionTypes: ["apply", "route"],
               surface: {
-                cause: "A distinct shoppable collection is missing",
-                investigate: "Test commercial intent, qualifying range, meaningful choice, page distinctness and sustainable collection ownership together.",
-                identify: "Customers need to compare a coherent range, but no existing page provides that useful scope.",
-                action: "Launch a demand-led collection with the right products, copy, cards, filters and internal paths."
+                cause: "A distinct shopping task has no adequate experience",
+                investigate: "Identify the shopper's task, qualifying range and useful decisions before choosing any page or interface.",
+                identify: "Customers need a distinct way to orient, narrow or compare, and no current experience can serve it cleanly.",
+                action: "Choose the lightest durable answer: PDP, listing page, category landing page, governed facet—or no new page."
               },
-              title: "The assortment supports a distinct comparison need, but no collection owns it",
-              fit: "Use when the shopper wants a choice of products and a new collection would perform a stable, useful job that no current page can absorb.",
-              detail: "A collection is justified by customer usefulness and catalogue truth, not by volume or a keyword modifier alone. Three products can be meaningful in a specialist range; twenty products can still form a useless duplicate.",
-              question: "Would a dedicated collection help a real shopper orient, narrow and compare a coherent qualifying range in a way no current page does?",
-              evidenceTitle: "Prove demand, range coherence, comparison value and page distinctness",
-              evidenceDetail: "Read the demand and live results alongside an SKU qualification table and every potentially overlapping page. A collection must have a defensible inclusion rule, real choice, useful differences and an owner who can keep it truthful.",
+              title: "The assortment supports a distinct shopping task, but the store has no adequate way to serve it",
+              fit: "Use when the shopper needs to find, orient within or compare a product set and no current page or controlled filter state performs that stable job.",
+              detail: "The diagnosis is a missing shopping experience—not automatically a missing collection. Three products can justify a specialist listing; a broad category may need orientation before its grid; a stable attribute slice may be best served by a governed facet; one exact product may need only its PDP. Format follows the job, catalogue and retailer's platform.",
+              question: "What must the shopper accomplish, which products truthfully support it, and what is the smallest durable experience that completes that task?",
+              evidenceTitle: "Prove the shopping task, range coherence, useful decisions and need for a distinct experience",
+              evidenceDetail: "Read the demand and live results beside an SKU qualification table, current taxonomy, filtered states and every overlapping page. First prove the missing experience. Then compare delivery options by customer usefulness, distinctness, maintainability, internal prominence and the retailer's platform rules.",
               open: [
                 "Live SERPs and Ahrefs SERP overview for representative commercial queries; classify PDPs, collections, marketplaces and guides.",
                 "Ahrefs Content Gap and Keywords Explorer for the complete cluster, related modifiers, seasonality and stronger ranking collection URLs.",
                 "PIM or Shopify product/variant records for all possible members, including the exact facts used for inclusion and comparison.",
-                "Every current parent collection, subcollection, filtered state, landing page, guide and PDP that could overlap.",
+                "Every current PDP, product-listing page, collection, category landing page, filtered state, guide and tool that could already serve or overlap the task.",
                 "Current parent-collection and customer-language evidence showing whether shoppers repeatedly seek or refine to the proposed subset."
               ],
               compare: [
-                "Proposed collection job and inclusion rule versus every existing page job.",
-                "Qualifying range breadth and decision differences versus a single-product PDP or strengthened parent collection.",
-                "What top-performing collections help shoppers compare versus what the proposed page can truthfully maintain."
+                "The shopping task and inclusion rule versus every existing page or filter job.",
+                "One exact product versus a coherent product set; simple comparison versus category orientation; stable indexed demand versus temporary filtering.",
+                "PDP, product-listing page, category landing page, governed facet and strengthened existing page by usefulness, distinctness, maintainability and risk of overlap."
               ],
               supports: [
-                "Commercial collection pages consistently serve the query cluster in the live results.",
+                "Commercial pages or controlled product-list experiences consistently serve the query cluster in the live results.",
                 "A coherent, maintainable set of qualifying products exists with meaningful differences to compare.",
-                "No current page has the same scope, and the parent cannot absorb it without becoming vague or unwieldy.",
-                "The proposed page has a natural relationship to a parent collection, qualifying PDPs or relevant guidance."
+                "No current experience has the same task and scope, and the parent cannot absorb it without becoming vague or unwieldy.",
+                "A proposed answer has a natural place in the store and can be kept accurate as products and markets change."
               ],
               weakens: [
                 "Only one exact product truly qualifies, making its PDP the better answer.",
-                "An existing collection can serve the same job through clearer positioning and membership.",
-                "The proposed collection differs only by wording while repeating the same products and decisions.",
-                "The range is temporary, materially unsupported or cannot be maintained truthfully."
+                "An existing PDP, listing, category page or controlled filter can serve the same job through clearer positioning and membership.",
+                "A proposed page differs only by wording while repeating the same products and decisions.",
+                "The range is temporary, materially unsupported or cannot be maintained truthfully; the right outcome may be an assortment decision or no action."
               ],
-              diagnosisTitle: "A durable shoppable job maps to a real, currently scattered product range",
-              diagnosis: "Name the collection job, qualifying SKUs, meaningful comparison criteria, relationship to existing pages and evidence that a new experience is distinct—not merely another keyword URL.",
-              actionMode: "APPLY draft · ROUTE page creation and placement",
-              actionTitle: "Create a useful collection, not a keyword shell",
-              actionDetail: "Build the collection from approved inclusion criteria and customer decisions: clear scope, qualifying products, useful cards and filters, concise orientation, product-grounded guidance and natural links into the store.",
+              diagnosisTitle: "A durable shopping task maps to a real range, but no current experience completes it",
+              diagnosis: "Name the shopper's task, qualifying SKUs, useful decisions and overlap set. Keep the diagnosis neutral about format; explain separately why the chosen PDP, listing, category landing page, facet or existing-page treatment is the smallest adequate answer.",
+              actionMode: "APPLY answer specification · ROUTE creation, governance and placement",
+              actionTitle: "Choose and build the smallest useful shopping experience",
+              actionDetail: "Use a PDP for one exact product; a product-listing page or collection for a coherent range to compare; a category landing page when shoppers need orientation or subcategory choice; a governed facet when one durable attribute slice can be maintained and made discoverable safely. Strengthen an existing page when it can perform the job. Do not create a URL when filtering, PDP improvement or no action is better.",
               before: "Nine packable waterproof shells are scattered across “Jackets” and “Travel,” with no stable way to see or compare packed size, weight and construction.",
               after: "“Women's Packable Rain Jackets” contains only approved qualifying products. Orientation states the use and boundaries; cards and filters expose packed size, weight, construction and fit; guidance explains the real protection-versus-weight trade-off.",
-              why: "The new page completes a distinct comparison task that neither the generic parent nor scattered PDPs can perform.",
+              why: "The chosen experience completes a distinct shopping task that neither the current parent, scattered PDPs nor transient filters perform. The evidence chooses the format; the keyword does not.",
               implementation: [
-                "Define the customer job, market, inclusion and exclusion criteria and relationship to every existing collection or guide.",
+                "Define the customer job, market, inclusion and exclusion criteria and relationship to every existing page, filter or tool.",
                 "Audit all candidate SKUs and variants; resolve unknown facts before membership is approved.",
-                "Draft the stable URL/handle, title tag, H1, concise above-grid orientation, curated default set, useful filters and differentiating card facts.",
-                "Write assortment-specific buying guidance and connect the collection from the parent, qualifying PDPs and relevant guides where customers benefit.",
-                "Obtain page-creation and placement approval, QA products/claims/mobile rendering and launch with the demand cluster and overlap set annotated."
+                "Score the realistic answer formats: PDP, existing-page expansion, product-listing page, category landing page, governed facet, guide or tool. Record why each is selected or rejected.",
+                "Specify the chosen experience exactly: URL or governed state where needed, title/H1, orientation, product rules, default order, cards, filters, guidance and internal paths.",
+                "Obtain creation, indexability, governance and placement approval where relevant; QA products, claims and mobile rendering, then launch with the demand cluster and overlap set annotated."
               ],
               keepsFixed: "Do not invent qualifications, include products to pad the range, create several slight modifier variants or change index/navigation behavior without approval.",
               owner: "Category merchandising and ecommerce content, with product-data and SEO approval",
-              permission: "Carve may prepare the qualification table, page specification, copy, product set and links. New URL creation, publishing, navigation placement and ongoing collection rules require configured ecommerce approval.",
+              permission: "Carve may prepare the qualification table, answer-format decision, page or facet specification, copy, product set and links. New URLs, indexable facets, publishing, navigation placement and ongoing rules require configured ecommerce approval.",
               measure: "Primary: cluster impressions, rank distribution and intended-page ownership. Guardrails: organic clicks, accurate query coverage and displacement across every overlapping page.",
               guardrails: "No thin duplicate, misleading membership, unsupported claim, orphaned page, severe overlap with a current collection or decline in the combined cluster's relevant visibility.",
               substitute: "Without paid keyword tools, combine Search Console fringe queries, live SERPs, Google Ads terms, onsite/customer language and manual competitor page review. Without PIM, use an approved SKU qualification sheet.",
@@ -1809,61 +1875,63 @@
               id: "missing-decision-content",
               actionTypes: ["apply", "route"],
               surface: {
-                cause: "The missing answer is guidance, not another product grid",
-                investigate: "Read the query questions, result types and customer decisions to see whether shoppers must learn before choosing.",
-                identify: "A complete answer requires explanation or comparison that a commercial page cannot provide cleanly.",
-                action: "Create the comparison or decision guide shoppers need, then connect it to the relevant products."
+                cause: "The shopper cannot resolve the decision from products alone",
+                investigate: "Find the unanswered comparison, compatibility, sizing or selection task and how much interaction it requires.",
+                identify: "Products exist, but shoppers need explanation, structured comparison or personalised matching before they can choose.",
+                action: "Put the answer in the right place: PDP/PLP guidance, a guide, comparison module or decision tool."
               },
-              title: "Demand is real, but customers need decision content before they can shop",
-              fit: "Use for research, comparison, compatibility or suitability needs where a guide or decision aid is the genuinely useful search answer.",
-              detail: "Carve does not create generic awareness articles. The content must solve a product decision the retailer understands, use original or approved facts and lead naturally to the relevant shopping experience.",
-              question: "What must the customer understand before choosing, and can that answer live concisely on a collection or does it warrant a distinct guide?",
+              title: "Demand is real, but the unresolved decision prevents the catalogue from becoming useful",
+              fit: "Use for research, comparison, compatibility, sizing or suitability needs where products alone do not complete the customer's task.",
+              detail: "The cause is an unresolved decision—not automatically missing editorial content. A short answer may belong on a PDP or listing page; a reusable explanation may deserve a guide; side-by-side facts may need a comparison module; repeated input-dependent choices may justify a finder or calculator. Every answer must use original or approved facts and lead naturally to relevant products.",
+              question: "What must the customer understand or input before choosing, and which answer format solves that task with the least friction?",
               evidenceTitle: "Distinguish learning intent from shoppable comparison and exact-product evaluation",
               evidenceDetail: "Inspect the actual questions, dominant result types, strong answers and customer confusion. Then identify the retailer's verified expertise, product data and trade-offs that can produce an original, complete answer.",
               open: [
                 "Ahrefs Keywords Explorer → Questions, Matching terms and SERP overview for representative question and comparison queries.",
                 "Live SERPs in the target market: guides, videos, collections, PDPs, snippets and the depth of decision being answered.",
-                "Existing guides, collection descriptions, PDP copy, FAQs, size or compatibility tools and help content for duplication or contradictions.",
+                "Existing guides, collection descriptions, PDP copy, FAQs, comparison modules, size or compatibility tools and help content for duplication or contradictions.",
                 "Approved product specifications, product-owner expertise and qualifying products needed to explain real trade-offs.",
                 "Support questions, reviews and onsite queries showing where customers misunderstand the category or fail to choose."
               ],
               compare: [
                 "Question intent versus commercial collection or exact-product intent.",
-                "A concise answer within an existing shopping page versus a distinct guide with a separate job.",
+                "A concise answer within a PDP or listing versus a distinct guide, side-by-side comparison or interactive tool with a separate job.",
+                "A stable explanation that can be read once versus a repeated choice that depends on the shopper's inputs, products or variants.",
                 "The retailer's original product-grounded answer versus generic summaries already present in the results."
               ],
               supports: [
                 "Guides, comparisons or mixed informational results consistently dominate the relevant queries.",
                 "Customers cannot choose without understanding a concept, trade-off, compatibility rule or sizing method.",
                 "The retailer has verified facts or expertise capable of answering completely and specifically.",
-                "A separate guide can link customers to one clear collection or qualifying products at the decision point."
+                "The answer can lead customers to one clear collection or qualifying products at the decision point."
               ],
               weakens: [
                 "The query is plainly commercial and product grids dominate the results.",
-                "The answer is short enough to fit naturally in collection guidance or PDP copy.",
+                "The answer is already clear in the appropriate PDP, listing, comparison or tool.",
                 "The retailer lacks trustworthy expertise or product facts and would merely rewrite competitors.",
                 "The topic has no useful relationship to products the retailer can serve."
               ],
-              diagnosisTitle: "Customers need a product decision explained before the catalogue becomes useful",
-              diagnosis: "Name the unresolved decision, the evidence that people seek explanation, the retailer-specific facts required and why the answer should be a guide rather than another collection.",
-              actionMode: "APPLY content draft · ROUTE expert and publication approval",
-              actionTitle: "Create the decision answer and earn the transition into shopping",
-              actionDetail: "Answer the exact question, explain trade-offs and limits using approved facts, and link to the right collection or PDP when the reader is ready. Do not disguise a keyword article as expertise.",
+              diagnosisTitle: "Customers need a specific decision resolved before the catalogue becomes useful",
+              diagnosis: "Name the unresolved decision, the evidence that customers face it, the retailer-specific facts required and whether it is best solved by inline guidance, a guide, structured comparison or an interactive tool.",
+              actionMode: "APPLY content or specification · ROUTE expert, tool and publication approval",
+              actionTitle: "Deliver the decision answer in the experience that fits the task",
+              actionDetail: "Use PDP or listing guidance for a concise local question; a guide for a durable explanation; a comparison module when customers must inspect products against the same criteria; a finder or calculator when the recommendation changes with inputs. Connect the answer to qualifying products only when the customer is ready. Do not disguise a keyword article as expertise.",
               before: "A collection paragraph repeats “10K vs 20K waterproof rating” but never explains the conditions, limits or relevant products.",
               after: "A guide explains 10K and 20K ratings, construction limits and use conditions using approved range data, then routes readers to the appropriate shell collections and qualifying PDPs.",
-              why: "The missing search answer is understanding. A complete guide serves that job while preserving the collection as a product-comparison surface.",
+              why: "The missing answer is decision support. The chosen format should remove the actual uncertainty while preserving PDPs and listings as clear shopping surfaces.",
               implementation: [
                 "Define the exact question, audience, decision outcome and boundary with commercial pages.",
                 "Collect approved facts, expert input, recurring customer questions and actual products that illustrate each trade-off.",
-                "Write the direct answer first, followed by useful explanation, comparison criteria, limits and examples from the retailer's range.",
+                "Choose inline guidance, guide, comparison module or interactive tool from the task: reading, comparing fixed criteria or calculating/matching from inputs. Record why lighter options are insufficient.",
+                "Write or specify the direct answer first, followed by useful explanation, comparison criteria, inputs, limits and examples from the retailer's range.",
                 "Add contextual links only where the reader has enough information to choose; ensure linked collections/PDPs deliver the promised answer.",
                 "Review for factual accuracy, originality, voice, accessibility and duplication, then annotate publication and target cluster."
               ],
               keepsFixed: "Do not turn commercial pages into essays, invent tests or authority, call products 'best' without a defensible basis or create a guide that merely rewrites ranking competitors.",
-              owner: "Ecommerce content or editorial, with product/category expert and brand approval",
-              permission: "Carve may research, structure and draft from approved sources. Expert claims, regulated guidance, new content publication and template changes require the configured owners.",
-              measure: "Primary: question-cluster impressions, rankings, intended-guide ownership and combined visibility of the guide and commercial pages. Guardrail: organic clicks to the intended connected pages.",
-              guardrails: "No factual error, generic filler, competing commercial promise, misleading recommendation, dead-end traffic or deterioration in the collection's own commercial query coverage.",
+              owner: "Ecommerce content or editorial, with product/category expert; product and UX/engineering owners when a module or tool is required",
+              permission: "Carve may research, choose the answer format and draft content or a tool/module specification from approved sources. Expert claims, regulated guidance, new publication, calculations and experience changes require the configured owners.",
+              measure: "Primary: question-cluster impressions, rankings, intended-answer ownership and combined visibility of the answer and connected commercial pages. Guardrail: organic clicks to the intended connected pages.",
+              guardrails: "No factual error, generic filler, competing commercial promise, misleading recommendation, dead-end traffic or deterioration in the connected PDP or listing's commercial query coverage.",
               substitute: "Without integrated customer-research tools, use Search Console, support questions, customer interviews and structured product-choice review. Without internal expertise, do not publish authoritative guidance until a product owner or qualified expert validates it.",
               sources: ["ahrefsEcommerce", "gscPerformance", "googleStructure", "baymardCategory", "baymardDescriptions", "gorgiasInsights", "yotpoInsights", "memo"],
               examples: [
@@ -1871,6 +1939,76 @@
                   context: "Searchers ask whether ceramic or stainless-steel cookware is better for induction cooking.",
                   before: "Two collection pages state materials but never explain heat response, care or compatibility trade-offs.",
                   after: "A product-grounded comparison explains the trade-offs and links to verified induction-compatible collections at the relevant decision points."
+                }
+              ]
+            }),
+            focusedRoute({
+              id: "assortment-boundary",
+              actionTypes: ["route", "no-action"],
+              surface: {
+                cause: "The current range cannot credibly serve the demand",
+                investigate: "Test every plausible SKU and variant against the shopper's must-have criteria, then compare the real competitive range.",
+                identify: "The demand is relevant, but products, variants or market availability—not page wording—leave the customer job unserved.",
+                action: "Route an exact assortment decision, serve a narrower truthful need, or record no action with a condition to revisit."
+              },
+              title: "The opportunity fits the retailer, but the current assortment does not yet earn the answer",
+              fit: "Use when the customer job is strategically relevant but no current product, variant or coherent range can satisfy its non-negotiable requirements in the target market.",
+              detail: "Carve must distinguish a hidden product fact from a missing product capability. Copy cannot turn water resistance into waterproofing, add an unavailable size or create meaningful choice from unrelated products. The valuable output may be an evidence-backed buying or range brief—not another page.",
+              question: "Which must-have requirement is absent, how material is the demand, what do stronger retailers actually supply, and is closing the gap a sensible range decision?",
+              evidenceTitle: "Prove the product gap before recommending assortment work or stopping",
+              evidenceDetail: "Build a query-to-need-to-SKU table for the target market. Separate must-haves from preferences, verified absence from unknown data, and true product disadvantage from weak presentation. Compare competitors at product and variant level rather than inferring range quality from their ranking.",
+              open: [
+                "The full demand cluster in Ahrefs or Semrush, Google Ads search terms, Keyword Planner and Trends, split by market, season and customer job.",
+                "PIM, Shopify and supplier or product-owner records for every plausible SKU and variant: capability, material, dimensions, compatibility, size, colour, certification, availability and market publication.",
+                "Winning retailer pages and their actual qualifying products, variants, price bands and decision differences; record facts from primary product evidence where possible.",
+                "Onsite searches, no-result refinements, support questions and reviews showing whether existing customers ask for the missing capability or choice.",
+                "Current category plans, incoming products and known range constraints from merchandising or buying owners."
+              ],
+              compare: [
+                "Customer must-have criteria versus verified facts for every own SKU and variant in the target market.",
+                "Own range versus stronger retailers on the product capability or meaningful choice that resolves the job—not page length, keyword count or DR.",
+                "Demand size, persistence, adjacency to the retailer's customer and likely range role versus the cost and lead time of closing the gap.",
+                "A narrower demand job the current range can serve truthfully versus a new-product, new-variant or no-action decision."
+              ],
+              supports: [
+                "No own SKU meets one or more non-negotiable requirements, or only unavailable/wrong-market variants do.",
+                "Winning retailers repeatedly offer the missing capability, size, compatibility or meaningful breadth and make it central to the customer answer.",
+                "Customer, paid-search or onsite evidence independently confirms that the missing need matters to the retailer's audience.",
+                "Rewriting a page would require implied, unsupported or materially broadened product claims."
+              ],
+              weakens: [
+                "Approved product records prove suitable products exist and the issue is merely hidden or inconsistent expression.",
+                "One current page already contains a useful qualifying range but positions or presents it poorly.",
+                "The apparent requirement is optional, based on another market or generated by a misleading keyword cluster.",
+                "Competitors win mainly through a better page experience around products of comparable suitability."
+              ],
+              diagnosisTitle: "The missing answer is a product or range capability—not a missing SEO page",
+              diagnosis: "Name the exact unmet criteria, affected market, excluded own SKUs, competitor products that demonstrate the gap, demand evidence and whether the responsible decision is new product, new variant, local availability, a narrower target or no action.",
+              actionMode: "ROUTE assortment decision · NO ACTION when the opportunity is not addressable",
+              actionTitle: "Prepare the range decision instead of manufacturing relevance",
+              actionDetail: "Give the buying or product owner an exact opportunity brief: customer job, market demand, required product criteria, competitor examples, own-range gap, affected queries and realistic options. If the retailer can serve a narrower job, scope that answer truthfully. If the gap is off-strategy, too temporary or unattractive, record no action and the specific condition that would reopen it.",
+              before: "Search demand exists for wide-fit waterproof walking shoes, but the retailer has standard-width waterproof shoes and wide-fit non-waterproof shoes. A proposed collection would imply that some products satisfy both requirements.",
+              after: "Carve rejects the misleading page, lists the missing combined width-and-waterproof requirement by market and routes a range brief with competitor products and demand evidence. Until a verified product exists, it targets only the separate needs the range can serve and records when to revisit the combined opportunity.",
+              why: "The customer is asking for a product reality the current range does not provide. Better copy or another URL would create impressions for an answer the retailer cannot fulfil.",
+              implementation: [
+                "Translate the demand into must-have, optional and disqualifying product criteria; have the relevant product owner validate ambiguous requirements.",
+                "Audit all plausible own SKUs and variants by market, recording qualifies, excludes, unavailable and unknown with source evidence.",
+                "Inspect the actual products behind stronger competitor answers and isolate the material range difference from presentation or authority differences.",
+                "Write the owner-ready decision: customer and market, demand evidence, missing capability or choice, competitor evidence, current-range boundary and options such as buy, develop, localise, replenish, target narrowly or decline.",
+                "If routed, attach an owner and review date. If no action, store the reason and reopening condition; do not create or optimise a page that implies unsupported fit."
+              ],
+              keepsFixed: "Do not change claims, product classification or page scope to hide the range gap. Do not prescribe buying volume, price or commercial terms from search demand alone.",
+              owner: "Category merchandising, buying or product, with ecommerce and market owners",
+              permission: "Carve may investigate, prepare the evidence-backed range brief and draft a narrower truthful demand treatment. Product creation, buying, replenishment, market publication and assortment commitments require the configured business owner.",
+              measure: "For a routed decision: owner disposition and whether qualifying products become available; reopen the search case only when the range can serve it. For no action: monitor the recorded demand, strategy or catalogue condition—not rankings for a page that should not exist.",
+              guardrails: "No unsupported product promise, false collection membership, demand-only buying recommendation, competitor imitation without customer fit or permanent dismissal without a clear reason and reopening condition.",
+              substitute: "Without PIM, create an owner-approved SKU and variant qualification sheet from Shopify, supplier records and product interviews. Without paid keyword data, use live results, Search Console fringe queries, onsite searches, support and a clearly caveated external demand estimate.",
+              sources: ["ahrefsEcommerce", "gscPerformance", "keywordPlanner", "googleTrends", "shopifyFields", "shopifyLocalization", "shopifySearch", "gorgiasInsights", "yotpoInsights", "memo"],
+              examples: [
+                {
+                  context: "Local demand grows for refillable fragrance travel sprays, but the retailer sells only sealed miniature bottles and standard full-size fragrances.",
+                  before: "A proposed 'refillable travel perfume' collection would contain products that are small but not refillable.",
+                  after: "Carve identifies refillability as the missing must-have, routes a range brief with local demand and competitor products, and keeps the current travel-size page positioned only around verified portable formats."
                 }
               ]
             }),
@@ -1945,15 +2083,15 @@
             }),
           ],
           learn: {
-            title: "Did the new ecommerce answer capture valuable demand?",
-            copy: "Measure the whole query cluster and page family; then keep, improve, expand, consolidate or reverse the treatment.",
+            title: "Did the chosen answer capture demand—or did the evidence confirm a range boundary?",
+            copy: "Measure the whole query cluster and page family; then keep, improve, expand, consolidate, reverse or close the opportunity with a recorded reason.",
             meta: "Relevant query coverage · intended page ownership · organic visits",
-            detail: "A new page has no page-level baseline and organic response is noisy. Carve freezes the query cluster, market, competing own pages, product cohort and expected mechanism; confirms the complete treatment is live; then reads whether the retailer gained relevant search coverage, visibility and organic visits rather than merely moving existing impressions between its own URLs.",
+            detail: "A new answer may have no page-level baseline and organic response is noisy. Carve freezes the query cluster, market, competing own pages, product cohort and expected mechanism; confirms any approved treatment is live; then reads whether the retailer gained relevant search coverage, visibility and organic visits rather than merely moving existing impressions between its own URLs. For an assortment route or no-action decision, Carve measures the decision state and waits for the recorded reopening condition instead of pretending a search result should change.",
             verify: [
-              "The approved product facts, title/H1, description, product membership, guidance and links are live on the intended page, products, variants, market and devices.",
+              "For a live answer, the approved product facts, title/H1, description, product membership, guidance, tool behaviour and links are correct on the intended page, products, variants, market and devices.",
               "The live range, wording and product claims still match the products the page is meant to help customers choose.",
               "The release annotation records the demand cluster, all potentially overlapping URLs, changed fields, owner approval and expected mechanism.",
-              "The intended page is discoverable and measurable; basic publication or indexing exceptions are routed without creating a duplicate page."
+              "The intended answer is discoverable and measurable; basic publication or indexing exceptions are routed without creating a duplicate page. For assortment or no action, the owner, decision and reopening condition are recorded."
             ],
             measure: [
               "Primary search coverage: cluster impressions, rank distribution, new relevant queries and the share of cluster visibility owned by the intended URL.",
@@ -1980,7 +2118,7 @@
           signalCopy: "A suitable existing ecommerce page—a PDP, collection or product-grounded guide where appropriate—already appears for relevant demand, but ranks too weakly to capture the impressions it reasonably could.",
           seenIn: "GSC query × page × country × device · local rank history · live local SERP",
           opportunities: ["Rank higher"],
-          signalDetail: "This worktree starts with an existing page that Google already tests for the demand. Carve does not treat average position as a verdict or respond with an SEO checklist. It reads the query as a shopping job, inspects the exact page and local result set, then asks which change would make the retailer a materially stronger answer: assign the job to the right page, express the product more clearly, improve the shoppable range, add decision evidence, resolve divided ownership, strengthen internal prominence, or earn relevant page-level authority. Several mechanisms may be active together. Carve ranks them as performance hypotheses and can coordinate more than one change when that is the stronger intervention.",
+          signalDetail: "This worktree starts with an existing page that Google already tests for the demand. Carve does not treat average position as a verdict or respond with an SEO checklist. It reads the query as a shopping job, inspects the exact page and local result set, then asks which change would make the retailer a materially stronger answer: assign the job to the right page, express the product more clearly, improve the shoppable range, add decision evidence, resolve divided ownership, strengthen internal prominence, build credible category evidence—or recognise a real product, range or offer disadvantage that copy cannot solve. Several mechanisms may be active together. Carve ranks them as performance hypotheses and can coordinate more than one change when that is the stronger intervention.",
           signalViews: [
             "Search Console → Performance → Search results. Filter the target country, device and date; select the exact query and open Pages, or filter the intended page and open Queries. Read impressions and average position as the visibility signal; keep clicks as an outcome guardrail. Search Console position is an average of the property's topmost result, not an exact rank for every impression.",
             "Ahrefs, Semrush, Sistrix or another local rank tracker → exact query, country, language, device and intended URL. Use daily or weekly URL-level history to see whether the page is persistently weak, declining, recovering or alternating with another own URL.",
@@ -2018,32 +2156,33 @@
             read: [
               "Different local wording or meaning strengthens the product-expression hypothesis.",
               "A different dominant local page type strengthens the page-job hypothesis.",
-              "A materially different local product set strengthens the merchandising hypothesis or moves the case outside Carve's current range.",
+              "A materially different local product set strengthens merchandising when suitable own products are hidden, or the real-competitive-gap branch when the local range genuinely cannot match the job.",
               "The wrong own-market URL strengthens page-ownership and may create a precise technical handoff.",
-              "A relevant local publisher/reference deficit strengthens the page-level authority hypothesis."
+              "A repeated local deficit in relevant page/category references and independent evidence strengthens the authority hypothesis; a DA/DR difference alone does not."
             ],
             caveat: "A healthy market is useful as a comparator only when the underlying customer job, product range, season and result environment are genuinely comparable. Localization means adapting the answer, not substituting words in a translation.",
             sources: ["gscDimensions", "gscPerformance", "ahrefsEcommerce", "aleydaEcommerce", "shopifyFields", "shopifyLocalization"]
           },
           caseTitle: "What is holding this suitable page below stronger results?",
           caseCopy: "Read the shopping job and page as a whole, rank the performance hypotheses, then make the strongest product-grounded improvement.",
-          caseDetail: "Carve moves between the scoped search signal, the live local result set, the rendered page, product data, customer language, internal paths and page-level references. It is not required to prove one deterministic ranking factor before acting—Google does not provide that observability. Instead, it distinguishes materially different mechanisms, looks for converging evidence and counter-evidence, and chooses the intervention with the strongest expected effect on relevant visibility. A page may simultaneously need clearer targeting, stronger product expression, more useful decision content and better internal links. Carve records those as a coordinated hypothesis rather than pretending one card explains the whole case.",
+          caseDetail: "Carve moves between the scoped search signal, the live local result set, the rendered page, product and variant truth, customer language, internal paths, credible external evidence and the competitors' actual local answer. It is not required to prove one deterministic ranking factor before acting—Google does not provide that observability. Instead, it distinguishes materially different mechanisms, looks for converging evidence and counter-evidence, and chooses the intervention with the strongest expected effect on relevant visibility. A page may simultaneously need clearer targeting, stronger product expression, more useful decision content and better internal links; or it may meet a real product, availability or credibility ceiling. Carve records those as a coordinated hypothesis and routes what copy cannot solve rather than pretending one card explains the whole case.",
           scope: "One relevant query or coherent shopping job × one intended existing ecommerce page (PDP, collection or product-grounded guide) × one market/language × device where material × the competitor and own-page set needed to explain performance",
           frame: [
             "Outcome: how far the intended page is from the useful local result set, and how much relevant visibility is plausibly available.",
             "Shopper job: whether the query expects one product, a range to compare, or guidance before shopping.",
             "Retailer answer: page role, product meaning, descriptions, range, cards, filters, comparison or guidance, specifications, proof and imagery.",
             "Page portfolio: which own URL should own the job, which pages are complementary, and whether ownership is divided.",
-            "Prominence: how relevant internal paths and genuine page-level external references support the intended page.",
+            "Prominence and credibility: how useful internal paths plus genuine page-, category- and market-level external evidence support the intended answer.",
+            "Competitive reality: whether the own products, sellable variants, availability and offer can genuinely satisfy the job—or whether the correct response is a routed commercial decision, narrower positioning or no action.",
             "Action: the highest-leverage coherent change or change set, with a measurement plan and downstream quality guardrails."
           ],
-          caseSources: ["gscPerformance", "gscData", "gscPosition", "gscDimensions", "gscLinks", "googleStructure", "ahrefsEcommerce", "ahrefsProduct", "ahrefsCategory", "ahrefsCannibal", "ahrefsLinks", "aleydaEcommerce", "shopifyFields", "shopifyLocalization", "baymardCategory", "baymardDescriptions", "memo"],
+          caseSources: ["gscPerformance", "gscData", "gscPosition", "gscDimensions", "gscLinks", "googleStructure", "googleRankingSystems", "googleHelpfulContent", "ahrefsEcommerce", "ahrefsProduct", "ahrefsCategory", "ahrefsCannibal", "ahrefsLinks", "ahrefsAuthorityMetric", "aleydaEcommerce", "shopifyFields", "shopifyLocalization", "baymardCategory", "baymardDescriptions", "searchPilotRetail", "memo"],
           hypotheses: [
             focusedRoute({
               id: "ranking-page-job",
               actionTypes: ["apply", "route"],
               surface: {
-                cause: "Google is testing the wrong kind of page",
+                cause: "The shown page is not the best existing owner for this job",
                 investigate: "Read the local SERP, query modifiers and every plausible PDP, collection and guide.",
                 identify: "The products fit, but the shown page cannot perform the shopper's job as well as another page.",
                 action: "Give the job to the right page and make adjacent pages' roles distinct."
@@ -2491,66 +2630,70 @@
             }),
             focusedRoute({
               id: "ranking-external-authority",
-              actionTypes: ["apply", "route"],
+              actionTypes: ["apply", "route", "no-action"],
               surface: {
-                cause: "The page lacks relevant external authority",
-                investigate: "Compare exact-URL references, lost links, mentions and the real ranking pages' link context.",
-                identify: "The page experience is competitive, but stronger URLs earn materially better relevant references.",
-                action: "Reclaim real references and earn new ones through products, evidence or useful resources."
+                cause: "Competitors have stronger credible authority in this product space",
+                investigate: "Compare the exact pages, category ecosystem and independent evidence behind the real winners—not DA or DR alone.",
+                identify: "The retailer's answer is competitive, but winners have repeated relevant endorsement, original evidence and recognised category presence.",
+                action: "Recover valid references and create category evidence worth citing—or stop when no legitimate earning mechanism exists."
               },
-              title: "Stronger ranking pages have page-level references the retailer has not earned or retained",
-              fit: "Use after page job, product expression, merchandising and decision usefulness are credible. This is a page-level evidence and opportunity investigation—not domain authority optimization or a backlink-count target.",
-              detail: "Links and editorial product references can separate otherwise competitive ecommerce pages, but transactional PDPs and collections are difficult to earn links to directly. Carve examines the exact ranking URLs and context of their references, reclaims legitimate links pointing to wrong or retired destinations, and identifies product-, expertise- or evidence-led reasons a publisher would genuinely reference the retailer. Sometimes the better path is a useful guide, test or dataset that earns attention and links internally to the commercial owner.",
-              question: "Do relevant external pages materially prefer the URLs outranking this page, and what legitimate retailer asset or relationship could close that exact gap?",
-              evidenceTitle: "Audit exact-URL link context and realistic earning opportunities",
-              evidenceDetail: "Use Ahrefs/Semrush at exact URL level, not domain DR, and inspect the actual referring pages. Classify editorial reviews, product roundups, supplier/dealer listings, partner pages, press, communities, directories, scraper/spam and lost/broken references. Compare the local ranking URLs and preserve the discovery-date limitation of third-party crawlers. Search for unlinked brand/product mentions and retailer-owned properties pointing to old URLs.",
+              title: "Stronger competitors have credible category evidence—not merely a higher authority score",
+              fit: "Use only after page job, product expression, merchandising and decision usefulness are credible. Google uses page-level and site-wide signals plus link analysis, but does not expose their weight. DA and DR are third-party backlink estimates, so Carve treats an authority ceiling as a comparative hypothesis that needs several observable forms of evidence.",
+              detail: "A strong PDP or collection can remain disadvantaged when competing retailers are repeatedly recognised in the category: their relevant pages and supporting resources earn editorial references, manufacturers list them, independent reviewers evaluate their products, specialists contribute original work, and the whole category is connected by useful content and links. Carve separates this real category presence from a large-domain halo or a raw backlink count. It compares the exact ranking pages, the supporting category ecosystem and the independent sources behind them, then asks whether the retailer has an honest way to close the gap.",
+              question: "Across this coherent query set, what exact external confidence do the repeat winners possess, how is it connected to their ranking pages, and can the retailer legitimately earn an equivalent advantage?",
+              evidenceTitle: "Triangulate page references, category-wide credibility and a repeat ranking pattern",
+              evidenceDetail: "Start with the exact target and ranking URLs, then widen only to their relevant category folders, guides, experts and brand evidence. Inspect the actual sources rather than relying on DR, link counts or an automated topical-authority label. Look for a repeated pattern across matched queries and pages: relevant editorial links, independent evaluations, official manufacturer or association listings, original tests/data, identifiable expertise and useful supporting resources that connect to commercial pages. Record that this evidence supports an authority hypothesis; it cannot reveal Google's private weighting.",
               open: [
                 "Ahrefs Site Explorer → Exact URL → Referring domains/backlinks, Best by links and Lost links for the target and actual ranking competitor URLs.",
-                "Ahrefs Link Intersect or equivalent using page-level competitors with the same customer job; manually inspect relevance and placement.",
+                "Ahrefs/Semrush organic pages and Link Intersect for the relevant category path and several matched ranking pages; inspect whether the advantage repeats beyond one lucky URL.",
                 "GSC Links report as sampled first-party corroboration, plus direct server/referral evidence where available.",
-                "Supplier/dealer directories, authorised retailer lists, product reviews/roundups, press coverage, partner pages and unlinked brand/product mentions.",
-                "Existing retailer research, testing, experts, imagery, launches, tools or guides that could create a genuine reference-worthy reason."
+                "The actual supplier/dealer listings, independent reviews and tests, editorial roundups, trade or association references, partner pages and relevant press behind the winners.",
+                "The retailer's category hub, guides, authors/experts, test methods, tools, original imagery/data and commercial pages to see whether credible evidence exists and is connected.",
+                "Search and referral patterns for unlinked brand/product mentions and relevant lost or wrong-destination references in the target market."
               ],
               compare: [
-                "Exact target URL versus exact ranking URLs, not whole-domain totals.",
-                "Relevant editorial/product references versus spam, boilerplate or unrelated links.",
-                "Current versus lost/wrong-destination references and whether the original relationship still exists.",
-                "Target market's publishers and references versus other countries; local authority does not automatically transfer."
+                "Exact target URL versus exact ranking URLs first; relevant category sections second; whole-domain metrics only as weak context.",
+                "Several matched own and competitor pages across the same product space—not one keyword or one unusually successful URL.",
+                "Relevant independent editorial/product evidence versus paid, boilerplate, spam or unrelated references.",
+                "Current versus lost or wrong-destination references and whether the underlying relationship still exists.",
+                "Target-market publishers, experts and official sources versus other countries; credibility and recognition do not transfer automatically."
               ],
               supports: [
-                "The target page is competitive on job, products and usefulness, while several stronger exact URLs have relevant editorial/product references it lacks.",
-                "Valuable existing references point to a retired, redirected, wrong-locale or inferior retailer URL.",
-                "The retailer is omitted from relevant roundups or official directories despite having a genuinely competitive product and eligible relationship.",
-                "The retailer owns original testing, expertise, imagery or data that publishers and customers would reasonably use."
+                "Several otherwise comparable own pages are weak while repeat-winning competitors have relevant page or category references that the retailer lacks.",
+                "The winners' commercial pages are supported by original tests, specialist guides, identifiable expertise or official relationships that independent sources actually use.",
+                "Valuable existing references point to a retired, wrong-locale or inferior retailer destination, leaving the intended page or category disconnected.",
+                "The retailer has a genuinely competitive product plus original evidence, expertise, imagery, data or an eligible official relationship that credible sources would reasonably use."
               ],
               weakens: [
-                "The apparent gap exists only in DR or raw link count, while actual referring pages are irrelevant or low quality.",
-                "The target page still has a clear page-job, product, merchandising or content disadvantage.",
-                "Competitor references point mostly to their homepage or unrelated assets and do not support the ranking URL.",
-                "No legitimate relationship, product advantage or useful asset exists; generic outreach would create noise rather than authority."
+                "The apparent gap exists only in DA, DR or raw counts; the actual referring pages are irrelevant, paid, boilerplate or low quality.",
+                "The target page still has a clear page-job, product, merchandising, content or internal-prominence disadvantage.",
+                "The pattern disappears across matched queries and pages, or competitor references point only to unrelated assets with no useful connection to the category.",
+                "A real product, range, availability or offer advantage better explains why competitors are stronger answers.",
+                "No legitimate evidence, relationship or useful asset exists; generic outreach would create noise rather than authority."
               ],
-              diagnosisTitle: "A relevant page-level authority gap remains after the customer answer is competitive",
-              diagnosis: "Name the exact target and competitor URLs, the relevant referring-page types, lost or misdirected own references, realistic earning mechanism and why those references matter to this product/customer space. Do not diagnose from DR alone.",
-              actionMode: "APPLY owned destinations · ROUTE outreach, PR, partnerships or research",
-              actionTitle: "Recover legitimate references and create a real reason to be cited",
-              actionDetail: "Correct retailer-controlled and partner destinations, request factual updates to legitimate supplier/dealer pages, reclaim broken or outdated references, and prepare specific opportunities for product review, category expertise, original testing/data or a useful guide/tool. Where direct collection/PDP links are unrealistic, earn links to the most relevant reference-worthy asset and connect it internally to the commercial owner.",
-              before: "The waterproof-jacket collection is strong on-page, but an official supplier directory links to a retired rainwear URL. Competing ranking collections are cited in field-test roundups; the retailer has unpublished verified testing and original imagery.",
-              after: "The supplier corrects the destination. The retailer publishes a useful testing methodology and results with product-level evidence, routes it to appropriate editorial/product-review owners, and links clearly to the waterproof collection. No DA quota or paid-link list is created.",
-              why: "The action closes a specific external-evidence gap through useful products, relationships and original proof rather than treating backlinks as an abstract score.",
+              diagnosisTitle: "Competitors have a specific, observable credibility advantage across this category",
+              diagnosis: "Name the exact query cohort, target and matched competitor pages; the repeated independent-source pattern; how each source connects to the category or ranking page; the retailer's lost, missing or underused evidence; and one legitimate earning mechanism. State what remains unknown: this evidence supports an authority ceiling but does not prove how much Google weights it. Never write only 'competitors have higher authority.'",
+              actionMode: "APPLY owned evidence/destinations · ROUTE research, PR or partnerships · NO ACTION when no legitimate mechanism exists",
+              actionTitle: "Build the missing category credibility through real evidence and relationships",
+              actionDetail: "First correct wrong owned, supplier and partner destinations. Then publish and connect only the evidence the retailer actually possesses: a transparent test, expert guide, original dataset, useful tool, verified product comparison or official relationship. Prepare named, source-specific opportunities for independent evaluation, manufacturer/association inclusion, digital PR or product feedback with no promised coverage. If the retailer has neither credible evidence nor a legitimate relationship, record no authority action instead of starting generic link outreach.",
+              before: "Across twenty local waterproof-shell queries, the retailer's otherwise strong collection and PDPs rank below two specialists. Those specialists are repeatedly referenced in independent field tests and official brand directories, while the retailer's verified fabric and packability tests are unpublished and three supplier links point to retired URLs.",
+              after: "The exact supplier destinations are corrected. The retailer publishes its method, measurements and limitations on one useful shell-testing resource, connects each result to qualifying products and gives the relevant independent reviewers access to evidence or samples without a coverage requirement. The change packet names each source, owner and destination; it contains no DA target.",
+              why: "The action addresses the observed advantage—credible, category-relevant evidence connected to commercial pages—rather than trying to improve a third-party score or manufacture backlinks.",
               implementation: [
-                "Finish the page-job, product-expression, merchandising and decision-evidence review before making authority the lead hypothesis.",
-                "Export and manually classify exact-URL own and competitor references by relevance, context, destination and relationship.",
-                "Reclaim retailer-controlled, supplier, partner and genuinely lost references first.",
-                "Define one credible earning mechanism—product feedback, official listing, original testing/data, expert guide, tool or launch—with the appropriate owner and audience.",
-                "Route personalized outreach/PR with disclosure and editorial-independence requirements; monitor references and the scoped ranking cohort without claiming one link caused movement."
+                "Show that the intended page is already competitive on customer job, product answer, content, merchandising and internal prominence; preserve the matched comparison set.",
+                "Map exact-page and relevant category-level evidence for the retailer and repeat winners. Classify every material source by relevance, independence, market, destination and relationship.",
+                "Recover retailer-controlled, supplier, partner and genuinely lost references first; specify the exact current and proposed URL for each correction.",
+                "Choose one evidence mechanism that already has truthful substance—test/data, expert resource, tool, official listing, product feedback or launch—and write the method, asset, audience, owner and claim boundaries.",
+                "Prepare individualized PR, review or partnership records naming the source, why its audience benefits, what evidence is offered, disclosure terms and the destination that should be used; require approval before contact.",
+                "Measure the matched ranking cohort and relevant reference outcomes over a realistic period. Take no action when there is no honest earning mechanism, and never claim that one new link caused a rank change."
               ],
-              keepsFixed: "Maintain editorial independence, disclosure, accurate product claims and local relevance. Do not buy links, exchange product for guaranteed coverage, automate generic outreach, copy competitor campaigns or optimize to DA/DR targets.",
+              keepsFixed: "Maintain editorial independence, disclosure, negative findings, accurate claims and market relevance. Do not buy links, exchange products for guaranteed coverage, automate generic outreach, imitate competitor evidence, present staff as experts without basis or optimize to DA/DR targets.",
               owner: "SEO/content with PR, partnerships, product/category and brand owners",
-              permission: "Carve may audit references, correct owned destinations, draft briefs and prepare individualized opportunity records. External outreach, product seeding, public claims, partnerships and publishing original tests require configured owner approval.",
-              measure: "Primary: target query-page position and impressions. Supporting: recovered destinations, new relevant referring pages or mentions, referral visits and organic clicks. Links are evidence, not single-event causal proof.",
+              permission: "Carve may audit the evidence network, correct governed owned destinations, draft evidence assets and prepare individualized opportunity records. External contact, product seeding, public test claims, partnerships and publication require configured owner approval.",
+              measure: "Primary: matched query × intended page × market position and impressions across the category cohort. Supporting: corrected destinations, new relevant independent references, referral visits and organic clicks. DA/DR movement is not success, and timing alone does not establish link causality.",
               guardrails: "No paid/manipulative links, misleading outreach, undisclosed incentives, irrelevant placements, unsafe claims, wrong-market references or reputational harm.",
-              substitute: "Without a commercial backlink platform, use GSC Links, referral analytics, manual search for product/brand mentions and competitor roundup review. Mark coverage incomplete and avoid false precision.",
-              sources: ["gscLinks", "ahrefsLinks", "ahrefsLinkDiscovery", "ahrefsProduct", "ahrefsCategory", "googleStructure", "memo"],
+              substitute: "Without a commercial backlink platform, use GSC Links, referral analytics, supplier/partner records, manual brand/product searches and a sampled review of the actual sources behind repeat winners. Mark coverage incomplete and avoid false precision.",
+              sources: ["googleRankingSystems", "googleHelpfulContent", "gscLinks", "ahrefsLinks", "ahrefsLinkDiscovery", "ahrefsAuthorityMetric", "ahrefsProduct", "ahrefsCategory", "memo"],
               examples: [
                 {
                   context: "Reference recovery",
@@ -2561,6 +2704,95 @@
                   context: "Earned authority",
                   before: "Competitor products appear in credible “best packable shell” tests; the retailer pitches a collection page with no evidence.",
                   after: "The retailer makes its verified weight/packed-size testing and product samples available for independent evaluation, with no coverage or link requirement."
+                },
+                {
+                  context: "No legitimate authority action",
+                  before: "A tool reports that every winner has a higher DR, but the relevant referring pages do not support their shell collections and the retailer has no original evidence or eligible relationship.",
+                  after: "Carve rejects the authority diagnosis, records the evidence gap and returns to the remaining product, page and merchandising hypotheses instead of launching generic outreach."
+                }
+              ]
+            }),
+            focusedRoute({
+              id: "ranking-real-competitive-gap",
+              actionTypes: ["apply", "route", "no-action"],
+              surface: {
+                cause: "The retailer is genuinely a weaker answer for this demand",
+                investigate: "Compare the query's real constraints with qualifying products, variants, availability, offer and evidence in the local market.",
+                identify: "The page is accurate and useful, but competitors satisfy an important customer requirement materially better.",
+                action: "Expose a better own option, narrow the promise, route the exact commercial decision—or accept that another result deserves to win."
+              },
+              title: "A real product, assortment or offer disadvantage limits what SEO can achieve",
+              fit: "Use only after checking whether the retailer's value is hidden by weak page ownership, product expression, merchandising or decision content. A competitor ranking above the retailer does not itself prove a better offer. This branch requires a like-for-like, market-specific comparison showing that the retailer cannot currently answer an important part of the shopping job as well.",
+              detail: "Sometimes the page is not the main weakness. The competing product has a required capability the retailer's product lacks; the competitor offers meaningful choice where the retailer has one frequently unavailable option; the needed size or compatibility is absent; or the local price, stock or delivery reality makes another merchant a clearly stronger answer. Carve names that exact difference and separates it from presentation. For ordinary web ranking, this remains a performance and addressability diagnosis—not a claim that Google uses one observed commercial fact as a direct ranking factor.",
+              question: "What must the customer get from this query, which own and competitor products genuinely satisfy it in this market, and is the remaining disadvantage something the retailer can responsibly change?",
+              evidenceTitle: "Recreate the actual product choice from verified facts—not competitor appearance",
+              evidenceDetail: "Translate the query cluster and customer language into must-have constraints and meaningful preferences. Build a dated comparison at product and sellable-variant level using approved own data and the live local competitor experience. Count qualifying, meaningfully distinct choices rather than total SKUs; compare equivalent variants, pack sizes, tax and current availability; distinguish a persistent range gap from one temporary stock event. Use search demand, support, reviews and onsite language to show whether the observed difference actually matters to this shopping job.",
+              open: [
+                "Search Console query cluster and live local SERP: modifiers, repeated winners and the exact pages/products they present.",
+                "Shopify, PIM or approved catalogue export at product and variant level: attributes, sizes, compatibility, market publication, stock state and collection membership.",
+                "The live local competitor collections and PDPs for the same products or customer job, including product range, verified specifications, variants, price, availability and delivery promise.",
+                "Onsite search, support, reviews/Q&A and sales/category knowledge for recurring must-have constraints, substitutions and range complaints.",
+                "Own availability history and matched-market snapshots where the diagnosis depends on persistent stock or offer differences rather than today's page."
+              ],
+              compare: [
+                "Required customer constraints first; optional preferences second; irrelevant visual or copy differences last.",
+                "Equivalent products, variants, bundles, taxes and market availability—not the cheapest visible card or a global assortment.",
+                "Meaningfully distinct qualifying choices and useful coverage—not raw SKU count, colour duplicates or irrelevant breadth.",
+                "Persistent range and offer state versus a temporary promotion, stockout, delivery incident or stale competitor page.",
+                "The retailer's best truthful answer versus the repeat-winning competitors, including a narrower query where the own range may be genuinely strong."
+              ],
+              supports: [
+                "A must-have query constraint is verified in repeat-winning products but absent from every own product or sellable variant.",
+                "The retailer has only one qualifying option and it is repeatedly unavailable, while competitors sustain several materially distinct qualifying choices.",
+                "Customer searches, support, reviews or category evidence independently show that the missing size, compatibility, capability or range choice affects the decision.",
+                "The disadvantage persists in the target market after equivalent variants, price basis, tax, availability and date are aligned.",
+                "The retailer performs more credibly for a narrower job that its actual products fully serve, showing where an honest repositioning could work."
+              ],
+              weakens: [
+                "A qualifying own product exists but is omitted from the collection, buried, badly described or missing the decisive source attribute; use the merchandising or product-expression branch.",
+                "Competitors merely have more SKUs, longer copy, a higher DR or a lower headline price that is not equivalent to the own offer.",
+                "The supposed advantage is temporary, outside the target market or unrelated to the actual query constraints.",
+                "Own products meet the same needs and the meaningful difference is page role, evidence, internal prominence or external authority.",
+                "There is no reliable product or offer evidence behind the comparison."
+              ],
+              diagnosisTitle: "Competitors win on a named customer requirement the retailer cannot currently match",
+              diagnosis: "State the query/customer job, target market and date; each must-have constraint; the exact qualifying and excluded own SKUs/variants; the matched competitor products; the persistent product, range, availability or offer difference; and the evidence that customers care about it. Then state whether the realistic response is an existing alternative, narrower positioning, an owner decision or no action. Never stop at 'their products are better.'",
+              actionMode: "APPLY truthful alternative or narrower positioning · ROUTE product/range/stock/offer decision · NO ACTION when the competitor deserves to win",
+              actionTitle: "Respond to the real disadvantage instead of hiding it with SEO copy",
+              actionDetail: "If a better-fitting own product exists, connect it to the demand and correct the missing product data, collection membership and page expression through the relevant branches. If the current range can credibly serve a narrower job, remove the unsupported broad promise and reposition the page around that strength. Otherwise prepare an owner-ready decision naming the required capability or variants, qualifying/excluded SKU set, market demand, competitor evidence, proposed assortment/restock/product/price/delivery change and expected visibility opportunity. Record no SEO action when the retailer cannot or should not close the gap.",
+              before: "The UK collection targets “wide-fit waterproof hiking boots,” but only one wide-fit model qualifies and its common sizes were available on 18% of observed days. Three repeat-winning specialist collections each offer six to ten genuinely wide, waterproof models with current size choice. The page team proposes adding more mentions of “wide fit.”",
+              after: "Carve removes the unsupported broad-range positioning, keeps the qualifying model focused on model and fit-specific demand, and sends Buying an exact gap record: required wide-fit definition, missing sizes and product types, own and competitor qualifying SKU table, local demand cluster, availability history and the condition for reopening the broader collection. No invented range copy is published.",
+              why: "The response follows the evidence: presentation cannot create a product capability, available variant or meaningful range. It preserves truthful demand the retailer can serve while turning the remaining opportunity into a concrete commercial decision.",
+              implementation: [
+                "Define the customer job and split must-have constraints from preferences using the query cluster plus customer/category evidence.",
+                "Build the own product-and-variant qualification table from approved source data; record exclusions and unknowns rather than treating missing data as false.",
+                "Capture a dated local competitor set and normalize variants, packs, tax, availability and delivery before comparing products or offers.",
+                "Test presentation explanations first: find any strong own alternative hidden by data, collection membership, page ownership or copy and route it to the relevant actionable branch.",
+                "For the remaining real gap, choose one response: reposition to a supportable narrower job; create a precise product/range/stock/offer decision packet; or record no action with the condition that would reopen the case.",
+                "Apply only governed truthful page changes. Require the commercial owner for assortment, product, stock, price, delivery or policy changes; re-run the ranking case only after the underlying reality changes."
+              ],
+              keepsFixed: "Preserve verified product facts, customer-important limitations, current availability and distinct demand the retailer already serves. Do not manufacture attributes, pad collections, hide price or delivery, imply unavailable choice, copy a competitor range or use SEO wording to disguise a commercial constraint.",
+              owner: "Ecommerce SEO/content with category merchandising; Buying, product, inventory, pricing or operations for the real constraint",
+              permission: "Carve may build the comparison, expose an approved better own alternative, narrow unsupported positioning and draft the complete decision packet. New products, range commitments, purchasing, stock allocation, price, delivery and product changes require their configured owners. Carve may record no action when no responsible change exists.",
+              measure: "For an applied narrower treatment: position and impressions for the supportable query cohort, intended-URL ownership and preservation of accurate adjacent demand. For a routed change: qualifying product/variant coverage and availability first; reopen ranking measurement only after release. A routed recommendation is not counted as an SEO win.",
+              guardrails: "No false product capability, misleading range breadth, hidden availability or offer terms, unapproved buying/pricing decision, sacrifice of strong narrower demand or claim that correlation proves a direct ranking factor.",
+              substitute: "Without competitor feeds or historical offers, capture dated live pages repeatedly and mark freshness limits. Without a PIM, build an owner-approved SKU/variant fact ledger. Without customer-voice systems, sample support, reviews, onsite search and category-owner evidence.",
+              sources: ["gscPerformance", "gscDimensions", "ahrefsCategory", "ahrefsProduct", "googleHelpfulContent", "shopifyFields", "shopifyLocalization", "baymardCategory", "searchPilotRetail", "memo"],
+              examples: [
+                {
+                  context: "A truthful narrower opportunity",
+                  before: "A generic “travel backpacks” collection has five bags but none fits airline personal-item limits; competitors consistently do.",
+                  after: "Carve rejects the broad personal-item angle, positions the genuinely strong 40-litre range for carry-on trekking demand and routes the missing personal-item assortment opportunity to Buying."
+                },
+                {
+                  context: "Hidden strength is not a real range gap",
+                  before: "Competitors appear to own “induction copper pans,” while two qualifying own models are absent from the collection and their induction bases are missing from cards and descriptions.",
+                  after: "Carve rejects the commercial-gap hypothesis and moves the case to merchandising and product expression with the exact qualifying models and fields."
+                },
+                {
+                  context: "No responsible SEO action",
+                  before: "The query requires certified child-safety compatibility; no own product has the certification and every repeat winner does.",
+                  after: "Carve records no SEO/content action, routes the product decision with the demand evidence and reopens the case only if a certified product becomes sellable."
                 }
               ]
             })
@@ -2590,6 +2822,504 @@
             ],
             memory: "Store the customer job, query cluster, intended URL, market/device, signal sources and limits, local SERP/page-type capture, product/range snapshot, hypothesis ranking, exact field and page versions, internal/external reference state, approvals, release date, expected response, competing events, results and what remains uncertain.",
             sources: ["gscData", "gscPosition", "gscPerformance", "gscDimensions", "optimizelyResults", "searchPilotRetail", "memo"]
+          }
+        },
+        {
+          id: "weak-google-product-visibility",
+          shortLabel: "Google product surfaces · weak visibility",
+          signalType: "Google product surfaces · Organic",
+          signal: "Relevant products receive too little visibility in Google product surfaces",
+          signalCopy: "Products the retailer can genuinely sell for the shopping job are absent, limited or weakly exposed in Google's free product listings, merchant-listing features, Images, Lens or Shopping experiences.",
+          seenIn: "Merchant Center Organic product impressions · GSC Merchant listings · local product-result captures · GA4 Organic Shopping",
+          opportunities: ["More product impressions"],
+          signalDetail: "This is a product-surface visibility case, not ordinary blue-link ranking and not paid-media optimization. Carve keeps each observable surface and metric separate: Merchant Center Organic product impressions, Search Console Merchant-listing appearances on Web or Images, sampled live product results and downstream Organic Shopping visits. It then joins the affected offer back to the retailer's product, variant, page, source feed and market. Google does not expose one dependable organic carousel rank, so Carve never invents it. The goal is to make every relevant sellable product accurately eligible, retrievable and competitive for the right product demand—not merely to clear diagnostics or stuff a feed with search terms.",
+          signalViews: [
+            "Merchant Center → Analytics → Products. Filter traffic to Organic, then split by item, brand, category, country and date. Use impressions as the primary product-surface signal and clicks only as a downstream guardrail. Do not mix Ads and Organic totals.",
+            "Search Console → Performance → Search results. Filter Search appearance to Merchant listings, then inspect Query, Page, Country and Device for Web; repeat with Search type Image where relevant. This covers merchant-listing appearances in general Search and Google Images, not every free-listing surface.",
+            "Merchant Center → Products → All products / Needs attention. For affected item IDs, inspect visibility, status, country and marketing-method eligibility, final processed attributes, data sources and issue history. Approval is a participation fact, not proof of competitive exposure.",
+            "Live target-market product results: capture the Search product unit, Shopping tab and Images on the relevant device, with date, location, query, visible products, merchants and presentation. Use this to understand the result set—not as complete rank history.",
+            "GA4 → Reports → Acquisition → Traffic acquisition and Landing page. Filter Source platform to Shopping Free Listings or Default channel group to Organic Shopping, then inspect landing pages and product-item events. GA4 begins after a click and cannot reveal unclicked impressions or the exact Google surface.",
+            "Google Ads Shopping/PMax product and search-term data may corroborate query-product matching and demand, but paid eligibility, bids, budgets and campaign targeting change exposure. Keep paid evidence separate from the organic product-surface outcome."
+          ],
+          signalContext: [
+            "The exact shopping job and target market. Group queries only when the shopper wants materially the same product answer; preserve category, brand, product, attribute, size, color, compatibility, use and local modifiers.",
+            "The affected retail object graph: product, sellable variant, Merchant offer ID, item group, landing URL, canonical URL, country, language, currency and marketing method. Never compare a parent product in Shopify with an unexplained offer row in Merchant Center.",
+            "The three data layers for every affected item: approved source facts, submitted data-source values and Google's final processed values, plus what the customer actually sees on the landing page and selected variant.",
+            "The live local product set: which exact products and merchants are exposed, what their titles and main images communicate, which variants are represented, and whether price, availability, shipping, returns, ratings or promotions create a materially stronger answer.",
+            "The complete own product expression: PDP title and description, structured data, Merchant title and description, product type/category, brand/GTIN/MPN, variant attributes, images, price, availability and market-specific offer.",
+            "Lifecycle and range state: new, in stock, temporarily unavailable, preorder, superseded or discontinued; whether a new equivalent should inherit demand or whether intentional exclusion is correct."
+          ],
+          signalQualifies: [
+            "The product cohort truthfully fits a defined shopping job and is sellable in the named market. Demand comes from Merchant/GSC queries, paid search terms, external keyword evidence, customer language or repeated live product results—not from a completeness score alone.",
+            "The missing outcome is named precisely: product not submitted, ineligible or limited; eligible with zero/weak Organic impressions; missing relevant query coverage; wrong variant or offer exposed; absent from an observed product unit; or materially weaker relative visibility.",
+            "The affected Merchant offer IDs are reconciled to retailer product and variant IDs, landing pages and markets before product-level conclusions are made.",
+            "At least one comparison exists: the same cohort over time, a matched product family, another genuinely comparable market, relevant competing products, or live demand for which the retailer has a truthful answer.",
+            "Source limitations are recorded. Merchant Center, Search Console, live captures and GA4 describe overlapping but non-identical parts of the journey."
+          ],
+          signalDoesNotProve: "An approved item is not guaranteed to appear. Zero reported impressions can reflect thresholds, low demand, wrong market or an uncompetitive match; a live absence is only one sampled result. Search Console average position is not the item's exact left-to-right carousel slot, and Merchant Center competitor visibility is relative—not a universal product rank. A feed warning, missing optional field, low click count or competitor title difference does not by itself identify the visibility cause.",
+          signalSources: ["merchantPerformance", "merchantTracking", "merchantStatus", "merchantSurfaces", "gscDimensions", "gscPosition", "gscShoppingReports", "ga4ChannelGroups", "googleShareProductData", "adsSearchTerms"],
+          marketLens: {
+            title: "Treat each country as a distinct product offer without losing the global product identity",
+            summary: "The same physical product can have different submitted offers, language, currency, availability, eligibility and competition by country. Market is part of the offer key, not a vague localization label.",
+            split: [
+              "Merchant Organic impressions/clicks by item and customer country, with the marketing method and target country retained.",
+              "Search Console Merchant listings by query, page, country, device and Web/Image search type.",
+              "Merchant offer ID, item group, language, feed label/data source, country, price/currency, availability and shipping/returns configuration.",
+              "Live local Search, Shopping and Images product sets on the relevant device, plus the local landing page and selected variant.",
+              "GA4 Shopping Free Listings sessions by country and landing page as a post-click guardrail."
+            ],
+            read: [
+              "Missing or limited market eligibility selects the participation hypothesis.",
+              "Local query language absent from truthful product fields selects the product-expression hypothesis.",
+              "Wrong currency, variant, landing state or local availability selects the variant/offer hypothesis.",
+              "Feed, page, schema and processed-value differences select the source-consistency hypothesis.",
+              "A persistent local competitor advantage after accurate participation selects the real competitive-gap hypothesis."
+            ],
+            caveat: "Do not force market parity. Demand, product regulation, assortment, season and competition can legitimately differ. Compare markets only after the product job and offer state are aligned.",
+            sources: ["merchantPerformance", "merchantStatus", "merchantSpecification", "gscDimensions", "merchantProductDetails", "shopifyLocalization"]
+          },
+          caseTitle: "Why are relevant products not earning their available Google product visibility?",
+          caseCopy: "Separate participation from retrieval and competition, trace the exact offers through Google's data path, then improve the strongest supported mechanism.",
+          caseDetail: "Carve begins with the product-surface outcome, not a generic feed audit. It identifies the exact products, variants, queries, markets and Google surfaces affected; reconciles retailer IDs with Merchant offers; and holds several explanations live. A product may be missing from the submitted range, limited in one country, poorly described for the job, split into incorrect variants, weakened by stale conflicting sources, visually unsuitable for a product surface or simply worse than the products winning. Carve opens the evidence that best separates those possibilities, then produces an exact source-level change packet or an honest routed commercial decision.",
+          scope: "Shopping job/query cluster × Google product surface and metric × Merchant offer/product/variant cohort × target country/language/device × comparable period and competitive set",
+          frame: [
+            "Outcome: which Organic product impressions, Merchant-listing query/page visibility or observed product-unit presence is missing, and in which market/surface.",
+            "Identity: the retailer product, sellable variant, Merchant offer ID, item group, landing URL and target market behind every row.",
+            "Participation: whether the complete relevant cohort is submitted, visible, approved and eligible for the intended marketing method and country.",
+            "Product answer: what title, description, type, category, attributes, identifiers, variant facts and imagery tell Google and shoppers about the product.",
+            "Offer truth: whether landing page, structured data, source feed and processed Merchant values agree on variant, price, availability, currency and destination.",
+            "Competition: after accurate participation and representation, which observable product, assortment, offer or merchant advantages make other results stronger.",
+            "Treatment: exact source fields/assets/offers changed, products deliberately excluded, owner, processing check, expected impression cohort and click-quality guardrail."
+          ],
+          caseSources: ["merchantPerformance", "merchantTracking", "merchantStatus", "merchantSpecification", "merchantProductDetails", "merchantDataSources", "merchantSurfaces", "merchantTitle", "merchantImages", "merchantIdentifiers", "merchantVariants", "merchantCompetitors", "merchantPricing", "gscDimensions", "gscPosition", "gscShoppingReports", "googleShareProductData", "googleProductAppearance", "ga4ChannelGroups", "savvyFeed", "storegrowersTitle", "feedTest", "memo"],
+          hypotheses: [
+            focusedRoute({
+              id: "shopping-participation",
+              actionTypes: ["apply", "route", "no-action"],
+              surface: {
+                cause: "Exception: relevant sellable offers cannot fully participate",
+                investigate: "Reconcile the intended product/variant cohort with submitted offers, status, country and marketing-method eligibility.",
+                identify: "Products are absent, hidden, limited, stale or disapproved in the exact market/surface where visibility is expected.",
+                action: "Restore the intended offers at their source—or document an intentional exclusion."
+              },
+              title: "Products that should answer the demand are missing or limited before competition begins",
+              fit: "Use when the retailer has genuinely relevant, sellable variants but Merchant Center does not contain or approve the complete intended offer cohort for free listings in the target country.",
+              detail: "This is the exception lane, not the centre of Shopping improvement. Carve first proves which products should participate, then compares that approved retailer cohort with Merchant Center. It distinguishes intentional exclusion, processing delay, a product-level issue, a market or marketing-method limitation and an account-level problem. Clearing an irrelevant warning is not performance work.",
+              question: "Which exact sellable variants should be eligible for this job and market, and where do they disappear between the retailer source and Google's final status?",
+              evidenceTitle: "Join retailer variants to Merchant offers and trace the loss",
+              evidenceDetail: "Create a cohort ledger with retailer product/variant ID, Merchant offer ID, item group, market, language, data source, landing URL, intended marketing method, visibility, status and issues. Compare expected, submitted and final processed counts, then open only the issue attached to the missing visibility.",
+              open: [
+                "Shopify/PIM/ERP export of active products and sellable variants in the target market, including publish state, availability, lifecycle and approved destination rules.",
+                "Merchant Center → Products → All products, filtered by item ID, country, marketing method, visibility and status; inspect Limited and Not approved separately.",
+                "Merchant Center → Needs attention → affected issue → View products and status history; distinguish account-, data-source- and item-level scope.",
+                "Merchant Center → Settings → Data sources and the affected product's details to identify the source, last update, processed attributes and excluded destinations.",
+                "Merchant Organic product impressions before/after the status change, with Search Console Merchant-listing evidence for the affected pages where available."
+              ],
+              compare: [
+                "Expected sellable variant cohort versus submitted, visible and approved Merchant offers.",
+                "Target country and Free listings marketing method versus other countries/methods; approval elsewhere does not establish local eligibility.",
+                "Issue start/status history versus the first loss of Organic product impressions.",
+                "Intentional product/lifecycle exclusion versus accidental connector, mapping, policy or data-quality loss."
+              ],
+              supports: [
+                "Relevant active variants have no corresponding Merchant offer in the target market.",
+                "Affected offers are hidden, expired, Not approved or Limited for Free listings in the exact country.",
+                "An item/account issue begins with the cohort's impression loss and names a concrete required correction.",
+                "A connector or source rule excludes a durable product family that the storefront actually sells locally."
+              ],
+              weakens: [
+                "The complete cohort is current, visible and approved for Free listings in the target country.",
+                "The missing variants are unavailable, intentionally private, prohibited or irrelevant to the demand.",
+                "Organic impressions were weak long before the warning or remain weak for matched approved items.",
+                "The issue is only a recommendation with no demonstrated participation effect."
+              ],
+              diagnosisTitle: "A defined set of relevant offers is lost before organic product matching can occur",
+              diagnosis: "Name the exact retailer variants and Merchant offer IDs, target country/marketing method, loss point, issue or rule, start date and products that should remain excluded. Do not report a generic feed-health percentage.",
+              actionMode: "APPLY approved source corrections · ROUTE policy/account/connector change · NO ACTION for intentional exclusion",
+              actionTitle: "Restore only the product offers that should truthfully participate",
+              actionDetail: "Fix the owning source or mapping, not a temporary downstream symptom: include the intended variants/data source/market, provide the exact required approved values, update stale products or correct the landing-page mismatch. Route policy reviews, account settings and connector code. Preserve valid exclusions and annotate why.",
+              before: "The UK store sells 84 active walking-shoe variants, but only 51 Merchant offers target the UK. A connector rule excludes every wide-fit variant because its internal fit code is unmapped.",
+              after: "The approved fit-code mapping submits the 24 sellable wide-fit variants with stable IDs and correct UK offers; nine unavailable variants remain excluded. Carve verifies their final processed status and Free listings eligibility before measuring impressions.",
+              why: "A product cannot earn product-surface visibility when its sellable offer never reaches the relevant market and marketing method.",
+              implementation: [
+                "Define the expected cohort from local storefront truth and record deliberate exclusions with an owner.",
+                "Join each retailer variant to its Merchant offer and classify missing, hidden, limited, disapproved, stale or approved.",
+                "Trace each affected offer to its owning data source/rule and prepare the exact field or mapping correction.",
+                "Apply governed product-data changes; route account, policy, connector or legal decisions with the affected IDs and issue evidence.",
+                "Resubmit or wait for the documented processing path, then verify final processed values, status, country and Free listings eligibility before closing delivery."
+              ],
+              keepsFixed: "Keep unavailable, unsupported, regulated, wrong-market and intentionally private products excluded. Preserve stable offer IDs and accurate lifecycle state.",
+              owner: "Ecommerce product-data/feed owner; operations or engineering for connector rules; policy/legal/account owner where required",
+              permission: "Carve may reconcile cohorts, correct approved source values and resubmit through governed integrations. Account settings, policy review requests, legal claims, connector code and destination changes require configured approval.",
+              measure: "Primary: count/share of intended offers visible and approved for Free listings, followed by Organic product impressions for the restored cohort. Guardrails: no wrong-market exposure, inaccurate offer, irrelevant query coverage or deterioration in Organic Shopping clicks.",
+              guardrails: "No mass inclusion, unstable ID recreation, unsupported attribute, false availability, policy circumvention or claim that approval guarantees impressions.",
+              substitute: "Without direct Merchant API access, export All products/Needs attention and join manually to a Shopify/PIM variant export. Preserve unresolved mappings rather than guessing.",
+              sources: ["merchantStatus", "merchantDataSources", "merchantProductDetails", "merchantSpecification", "merchantPerformance", "googleShareProductData", "memo"],
+              examples: [
+                { context: "Country-specific loss", before: "A product is approved in Sweden but Limited for Germany; the global dashboard hides the difference.", after: "The German offers receive the required approved local values, while genuinely unavailable German variants remain excluded." },
+                { context: "Intentional boundary", before: "A clearance range with unstable stock is treated as a missing-feed defect.", after: "The owner confirms deliberate exclusion; Carve records no action and focuses on the durable range." }
+              ]
+            }),
+            focusedRoute({
+              id: "shopping-product-expression",
+              actionTypes: ["apply", "route"],
+              surface: {
+                cause: "Product fit exists, but the listing data does not express it",
+                investigate: "Map real Shopping demand to approved product facts, submitted fields, processed values and the PDP.",
+                identify: "Relevant attributes, product type or customer language are absent, vague or buried across the affected cohort.",
+                action: "Correct source product data and write truthful, query-useful listing identities at catalog scale."
+              },
+              title: "Google receives an incomplete or generic explanation of what the product actually is",
+              fit: "Use when approved eligible products truthfully satisfy the shopping job, but their title, description, type, category, identifiers or attributes do not make that fit legible.",
+              detail: "Carve does not append a keyword formula to every title. It learns which product facts distinguish this demand, verifies those facts against approved sources and writes for the way customers identify and compare the category. The exact field mix changes by vertical: size/material/gender for apparel; model/capacity/compatibility for electronics; dimensions/material/use for homeware. PDP and feed may have different presentation needs, but they must describe the same product truth.",
+              question: "Which approved facts determine retrieval for this shopping job, and where are they missing or expressed through retailer-only language?",
+              evidenceTitle: "Compare demand language, winning product records and the retailer's full product expression",
+              evidenceDetail: "Use Merchant/GSC query evidence, paid terms as corroboration and live product results to define the shopping vocabulary. Build an attribute ledger from PIM/supplier/product-owner evidence, then inspect the source, submitted and processed title, description, product type, category, brand, GTIN/MPN and vertical-specific attributes for every SKU—not just one example.",
+              open: [
+                "Search Console Merchant listings → Queries/Pages by country and device, plus Merchant Organic performance by item/category and Google Ads search terms where relevant.",
+                "Live local product results for representative category, brand, product, attribute, use and compatibility queries; record exact winning product titles and visible facts without copying them.",
+                "PIM, supplier records and product-owner evidence for product type, brand/model, material, audience, size, color, pattern, dimensions, capacity, compatibility, use and other category facts.",
+                "Merchant product details: source and final processed title, description, Google product category, product type, identifiers and category-specific attributes.",
+                "Rendered PDP and structured data to see whether source product truth is absent, inconsistent or only hidden from the feed."
+              ],
+              compare: [
+                "Customer shopping vocabulary versus approved retailer product facts and internal naming.",
+                "Affected low-coverage products versus matched high-coverage siblings with comparable demand, availability, price and brand strength.",
+                "Source values versus submitted and final processed values; do not draft into a field Google is replacing from another source without understanding ownership.",
+                "Exact variant facts versus family-level claims and market-specific language."
+              ],
+              supports: [
+                "Relevant query modifiers map to approved facts that are absent from titles, descriptions or structured product attributes.",
+                "Generic internal model names hide the product type or decisive compatibility/use facts.",
+                "Matched siblings with accurate distinguishing attributes earn broader relevant Merchant-listing query coverage.",
+                "Google's processed product record lacks or rewrites the relevant source value."
+              ],
+              weakens: [
+                "The product does not possess the demanded capability or the fact applies only to another variant.",
+                "Product data already explains the job accurately and consistently at the expected level of detail.",
+                "The cohort is not eligible, has a broken offer or faces a demonstrably stronger real product/merchant gap.",
+                "The proposed term broadens expectations, repeats attributes mechanically or targets demand unrelated to the product."
+              ],
+              diagnosisTitle: "The retailer has the product answer, but its Merchant representation conceals the decisive facts",
+              diagnosis: "Name the query/job, qualifying offer IDs, exact verified facts, current source/submitted/processed fields, missing expression and excluded products. ‘Feed needs optimization’ is not a diagnosis.",
+              actionMode: "APPLY approved product-data changes · ROUTE new claims or taxonomy decisions",
+              actionTitle: "Rewrite the listing around verified product identity and decisive shopping attributes",
+              actionDetail: "Correct reusable source attributes first, then produce exact per-category title and description changes that front-load useful differentiators without losing brand/model identity. Populate truthful product type/category, identifiers and vertical-specific attributes. Keep non-qualifying variants out and validate final processed values after release.",
+              before: "Merchant title: “Aster.” Description: “Built for every adventure.” The approved PIM contains women's fit, waterproof construction, 3-layer build, jacket product type and hiking use.",
+              after: "Merchant title: “Aster Women's 3-Layer Waterproof Hiking Jacket.” The description explains approved construction, fit, use and limits; product type and relevant attributes are populated from the PIM. Water-resistant siblings do not inherit “waterproof.”",
+              why: "The change gives Google and shoppers the approved facts needed to match the product to the correct demand while protecting relevance.",
+              implementation: [
+                "Cluster the demand by shopping job and list must-have versus optional product facts for the category.",
+                "Audit every candidate SKU/variant against approved sources; label qualify, exclude or needs confirmation.",
+                "Map each verified fact to its owning source and Merchant field, including variant and market scope.",
+                "Draft exact field-level before/after values by product pattern, then review exceptions rather than forcing one formula across the catalog.",
+                "Release a governed cohort, verify final processed values and compare relevant impression/query coverage with matched untouched products where possible."
+              ],
+              keepsFixed: "Preserve stable IDs, genuine brand/model identity, product claims, variant boundaries and existing high-quality query coverage. Never turn search wording into an unsupported capability.",
+              owner: "Ecommerce product content and feed/PIM owner, with category/product and brand approval",
+              permission: "Carve may apply approved facts to governed product-data fields and draft cohort rules. New claims, regulated facts, product taxonomy changes and large title-pattern rollouts require configured approval.",
+              measure: "Primary: Merchant Organic impressions and relevant Merchant-listing query coverage for the changed offer cohort. Supporting: observed product inclusion and Organic Shopping clicks. Compare quality, not raw impression growth alone.",
+              guardrails: "No keyword stuffing, title truncation that removes identity, wrong variant facts, unsupported superlative, irrelevant impressions, duplicate-looking offers or loss of strong exact-product coverage.",
+              substitute: "Without Merchant query detail, use GSC Merchant-listing queries, paid search terms, live results and matched product cohorts. Without PIM, use an owner-approved fact ledger tied to stable retailer and Merchant IDs.",
+              sources: ["merchantTitle", "merchantSpecification", "merchantIdentifiers", "merchantProductDetails", "merchantPerformance", "gscDimensions", "adsSearchTerms", "storegrowersTitle", "savvyFeed", "memo"],
+              examples: [
+                { context: "Compatibility demand", before: "“Dock Pro 8” omits connector type, laptop compatibility and power output.", after: "The approved connector, compatible device class and wattage are explicit in title/attributes; unsupported devices stay excluded." },
+                { context: "Catalog-scale exception", before: "One formula adds color to every title, pushing model/capacity out of view for electronics.", after: "Category-specific patterns prioritize the attributes customers actually use, with product-level exceptions reviewed." }
+              ]
+            }),
+            focusedRoute({
+              id: "shopping-variant-offer",
+              actionTypes: ["apply", "route"],
+              surface: {
+                cause: "Google cannot reliably resolve the right variant or local offer",
+                investigate: "Join item groups, offer IDs, variant attributes and landing-page selection across markets.",
+                identify: "Variants are incorrectly grouped, duplicated, omitted or landed on the wrong price, color, size or availability state.",
+                action: "Repair product-family identity and send each sellable variant to its exact truthful offer."
+              },
+              title: "The product family and its sellable variants do not form a coherent Google offer set",
+              fit: "Use when visibility fragments or becomes inaccurate because true variants are not grouped, distinct products are grouped together, attributes are inconsistent, or the link does not resolve to the submitted variant/offer.",
+              detail: "Retailer platforms often expose a parent product while Merchant Center evaluates offers. Carve preserves both levels. It uses stable unique IDs per offer, groups only true variants with one item group, supplies distinguishing attributes and verifies that each link selects the matching variant at the submitted local price and availability.",
+              question: "Does every Merchant offer identify one sellable variant, belong to the correct product family and land on the same variant and market state it describes?",
+              evidenceTitle: "Reconstruct the product-family → variant → offer → landing-state chain",
+              evidenceDetail: "Build the family graph from Shopify/PIM variant options, Merchant offer IDs/item_group_id and final URLs. Check color, size, material, pattern, capacity or other distinguishing attributes, then load each link in the target market and compare the preselected variant, image, price, currency, availability and structured data.",
+              open: [
+                "Shopify/PIM product and variant records: stable IDs, option names/values, publication, inventory, market availability and product-family relationships.",
+                "Merchant Center product details for every sibling offer: ID, item_group_id, title, variant attributes, link, image, price, availability, country and final processed values.",
+                "Target-market landing URLs on mobile and desktop, including variant preselection, canonical URL, structured Product/Offer data, image and checkout availability.",
+                "Merchant Organic performance at item level and GSC Merchant-listing pages/queries to identify one dominant, missing or wrongly credited sibling.",
+                "Live product results for variant-sensitive queries such as color, size, capacity or compatibility."
+              ],
+              compare: [
+                "Parent product identity versus each unique sellable variant and Merchant offer.",
+                "True siblings that differ only by variant attributes versus separate products incorrectly sharing an item group.",
+                "Submitted variant/offer versus loaded landing state and structured data.",
+                "High-visibility versus missing sibling offers after availability and demand are matched."
+              ],
+              supports: [
+                "True variants use different or missing item groups, while unrelated products share one group.",
+                "Several offers reuse one ID or one generic landing state, preventing stable variant identity.",
+                "A submitted color/size/capacity opens another variant or shows a different price/availability/image.",
+                "Relevant variant attributes are absent or inconsistent across siblings."
+              ],
+              weakens: [
+                "Every offer has a stable unique ID, correct item group, complete variant attributes and matching landing state.",
+                "The apparent variant is actually a separate product with a different function or customer job.",
+                "Low visibility follows real local unavailability or negligible demand for the variant.",
+                "The gap exists equally at the whole family level, strengthening product expression or competition instead."
+              ],
+              diagnosisTitle: "Offer-level identity breaks the connection between demand, the product family and the variant customers can buy",
+              diagnosis: "Name the parent product, affected retailer variant and Merchant offer IDs, item-group error, mismatched attributes or landing state, market and the correct relationship. Do not fix this by generating new IDs indiscriminately.",
+              actionMode: "APPLY governed variant mappings · ROUTE connector, URL or template behavior",
+              actionTitle: "Make every offer stable, correctly grouped and directly purchasable as described",
+              actionDetail: "Preserve stable IDs, group only true variants, populate the distinguishing variant attributes and align each title/image/link with that offer. Fix URL parameters or platform selection so the landing page opens the submitted local variant with matching price and availability. Route connector or template changes with an exact mapping table.",
+              before: "All 18 colors of a trainer share one Merchant ID and generic URL. A search for the green version opens black, while separate men's and women's lasts share one item group.",
+              after: "Each sellable color/size offer has a stable ID; true variants share the correct family group; gendered lasts remain separate products; each link preselects the submitted color with matching image, price and availability.",
+              why: "Google can maintain a stable, truthful offer identity and customers reach the exact variant whose product listing answered their demand.",
+              implementation: [
+                "Define the retailer's product-family rules and which option differences constitute true variants by category.",
+                "Join every active retailer variant to Merchant ID/item group and flag collisions, orphan offers, missing siblings and cross-product groups.",
+                "Verify distinguishing attributes and load every affected final URL in the target market to record actual landing state.",
+                "Apply approved mappings/attributes and route URL-selection or connector behavior with a complete before/after table.",
+                "Verify processed grouping and spot-check live landing variants before measuring the repaired cohort."
+              ],
+              keepsFixed: "Keep stable offer IDs whenever possible, preserve analytics continuity, never group functionally different products and never advertise unavailable variant combinations.",
+              owner: "Product-data/feed owner with ecommerce platform or integration engineering",
+              permission: "Carve may audit and correct governed mappings/attributes. ID replacement, connector rules, URL behavior, canonical logic and template changes require explicit approval and migration planning.",
+              measure: "Primary: intended sibling offers approved and receiving relevant Organic impressions, with reduced missing/duplicated variant coverage. Guardrails: correct landing variant, stable attribution and Organic Shopping clicks.",
+              guardrails: "No ID churn, cross-product grouping, duplicate offers, wrong variant landing, price/availability mismatch or destroyed performance history.",
+              substitute: "Without an item-level API join, export Merchant products and Shopify/PIM variants, then validate a high-risk sample manually. Keep unmatched IDs unresolved rather than using title similarity as truth.",
+              sources: ["merchantVariants", "merchantSpecification", "merchantProductDetails", "merchantStatus", "merchantPerformance", "googleProductAppearance", "memo"],
+              examples: [
+                { context: "Capacity variants", before: "128 GB and 512 GB devices share a generic title/link and land on whichever option was last selected.", after: "Each offer carries its exact capacity and lands with that capacity, price and availability selected; the device family remains grouped." }
+              ]
+            }),
+            focusedRoute({
+              id: "shopping-source-consistency",
+              actionTypes: ["apply", "route"],
+              surface: {
+                cause: "Google receives conflicting or stale product truth",
+                investigate: "Compare source, submitted, processed, structured and rendered values with timestamps and ownership.",
+                identify: "Another source overwrites the intended value, or page/feed timing creates inaccurate price, availability, identity or offer data.",
+                action: "Fix ownership and synchronization so one current product truth reaches every surface."
+              },
+              title: "The feed, page, structured data and Google's processed record disagree",
+              fit: "Use when a correct edit does not survive processing, the listing becomes inaccurate or exposure is limited because multiple sources or update schedules conflict.",
+              detail: "Merchant Center can combine uploaded feeds, platform integrations, supplemental sources, automatic extraction and landing-page data. Carve does not repeatedly patch the final field. It identifies which system owns the fact, which transformation or source wins, and whether timing creates temporary conflict. Product content can legitimately be channel-specific, but identity, variant, price, availability and claims must remain truthful and reconcilable.",
+              question: "For each decisive field, what is the approved value, which system owns it, what was submitted, what did Google process, and what appears on the local page now?",
+              evidenceTitle: "Build a field-level lineage and freshness comparison",
+              evidenceDetail: "For affected offers, retain timestamps and compare PIM/Shopify, integration transforms, every Merchant data source, final processed values, rendered PDP, structured data and checkout. Trace whether a manual edit, automatic update, supplemental source or connector rewrite explains the difference.",
+              open: [
+                "Merchant product details → final attributes and data sources for the affected title, description, image, price, availability, link, identifiers and market fields.",
+                "Merchant Settings → Data sources: source priority/coverage, latest fetch or sync, feed labels, target countries and automatic data behavior.",
+                "PIM/Shopify source records and integration logs or mapping rules for the same offer IDs and timestamps.",
+                "Rendered local PDP, variant state, structured Product/Offer data and checkout price/availability.",
+                "Needs attention/status history and Organic impression timeline around the first mismatch or processed-value change."
+              ],
+              compare: [
+                "Approved source of truth versus each submitted source and Google's final processed value.",
+                "Page, schema, feed and checkout price/availability at the same observation time.",
+                "One-off latency versus repeatable source-priority or transformation conflict.",
+                "Affected market/variant versus healthy siblings flowing through the same integration."
+              ],
+              supports: [
+                "Google's final value differs from the intended source because another named data source or automatic extraction overwrites it.",
+                "Price, availability, currency or variant differs between feed, landing page, structured data or checkout.",
+                "The product-data source is stale or fails to refresh at the cadence required by the retailer's offer changes.",
+                "A connector transform strips or rewrites decisive fields for one product family or market."
+              ],
+              weakens: [
+                "Source, submitted, processed, rendered and checkout values agree within the expected update window.",
+                "The product is accurately represented but simply earns weak exposure.",
+                "The observed difference is an intentional approved channel presentation that does not alter product truth.",
+                "The problem is missing eligibility or incorrect product-family identity rather than conflicting sources."
+              ],
+              diagnosisTitle: "A named source, transformation or update delay prevents approved product truth from reaching Google consistently",
+              diagnosis: "State the offer IDs, fields, correct owner/value, conflicting source or transform, timestamps, final processed value, affected market and resulting status/visibility risk.",
+              actionMode: "APPLY source-of-truth correction · ROUTE integration and update-cadence change",
+              actionTitle: "Repair the lineage once, then verify the final processed and rendered offer",
+              actionDetail: "Correct the owning source, mapping priority or sync cadence; remove only genuinely obsolete overrides; align page and structured data for core offer facts; and resubmit through the governed path. Verify Google processed the intended value before measuring. Do not rely on repeated manual Merchant edits that the connector will overwrite.",
+              before: "Shopify says 129 EUR and in stock; a nightly legacy feed says 119 EUR and out of stock; structured data follows Shopify. Google processes the legacy offer and limits the product.",
+              after: "The legacy override is retired for the affected market, Shopify owns price/availability through the approved connector, the feed and structured data agree, and Carve verifies the final 129 EUR in-stock record after sync.",
+              why: "A stable product representation requires one explicit owner and a delivery path fast enough for the retailer's real offer changes.",
+              implementation: [
+                "Create a field-lineage table for the affected offers with source, transform, timestamp, submitted value, processed value and rendered value.",
+                "Assign the approved owner and expected update cadence for each conflicting field.",
+                "Fix the owning source or transformation; remove stale overrides only after confirming no other cohort depends on them.",
+                "Resync/resubmit and verify landing page, structured data, checkout and final processed Merchant values in the target market.",
+                "Monitor the next normal price/availability change to prove the repair persists."
+              ],
+              keepsFixed: "Preserve intentional market/channel differences, source audit history, stable IDs and the retailer's ability to update urgent stock/price truth quickly.",
+              owner: "Product-data platform/feed owner with ecommerce platform and integration engineering",
+              permission: "Carve may correct governed source values and disable a documented obsolete override with approval. Source priority, connector transforms, automatic updates and sync schedules require configured owner approval.",
+              measure: "Primary: processed-value agreement and restored/healthy Organic impressions for the affected offers after processing. Guardrails: zero price/availability/variant mismatches, correct landing experience and no sibling-source regression.",
+              guardrails: "No temporary patch presented as a fix, stale overwrite, wrong market/currency, lost emergency update path or mass source removal without dependency review.",
+              substitute: "Without source lineage APIs, export each source and capture the PDP/schema/checkout at the same timestamp. Mark unknown precedence and run a reversible single-offer test before catalog-scale change.",
+              sources: ["merchantDataSources", "merchantProductDetails", "merchantSpecification", "merchantStatus", "googleShareProductData", "googleProductAppearance", "memo"],
+              examples: [
+                { context: "Processed-title overwrite", before: "A manually improved Merchant title reverts every night because the Shopify connector remains authoritative.", after: "The approved title logic moves to the connector's owning field; the processed title remains correct after the next sync." }
+              ]
+            }),
+            focusedRoute({
+              id: "shopping-visual-answer",
+              actionTypes: ["apply", "route"],
+              surface: {
+                cause: "The product's visual record cannot represent the right item or use",
+                investigate: "Compare submitted/processed images, variant fidelity, image requirements and the visual pattern of relevant product results.",
+                identify: "Missing, wrong, low-utility or policy-limited imagery weakens eligibility or visual matching for this surface.",
+                action: "Select or create an accurate main image and supporting set for the product and variant."
+              },
+              title: "The image source does not give Google a clear, accurate view of the product",
+              fit: "Use when the main image is missing, limited, mismatched to the offer or unable to show the visible product facts that distinguish relevant image-led demand. If impressions are healthy and only clicks are weak, that belongs to later CTR work.",
+              detail: "Google product surfaces are visual, but Carve does not assume prettier imagery causes more impressions. It looks for participation problems and strong visual mismatches: wrong color/variant, placeholders, overlays, tiny product framing, poor crop, unavailable image fetch or no visual evidence of the defining form/use. It separates an existing asset-selection error from a genuine creative gap.",
+              question: "Does the final image accurately and legibly show this exact offer, and is the missing demand inherently visual enough that a different approved asset could change matching or participation?",
+              evidenceTitle: "Inspect the complete image path and the live visual result set",
+              evidenceDetail: "Compare source asset, submitted image_link/additional images, Google's processed image, live listing thumbnail and PDP variant. Inspect Merchant image issues and fetch state. Then compare relevant local product results for framing and which physical product traits are visually decisive; do not infer causality from aesthetics alone.",
+              open: [
+                "Merchant product details and Needs attention for image URL, processed image, crawl/policy issues and affected item scope.",
+                "DAM/Shopify/PIM image assignments by product and variant, including main/alternate order, resolution, crop, accessibility text and rights.",
+                "Rendered PDP variant gallery and the exact image shown after selecting the submitted offer.",
+                "Live target-market Search product units, Shopping tab and Images for representative image-led demand, captured by device/date.",
+                "Merchant Organic and GSC Image/Merchant-listing impressions for the affected cohort before and after a controlled asset change."
+              ],
+              compare: [
+                "Submitted and processed main image versus the exact product/variant being sold.",
+                "Affected products versus matched siblings with the same demand/offer context but clearer accurate imagery.",
+                "Existing approved asset that solves the issue versus the need for a new shoot/diagram.",
+                "Image-led shopping jobs versus text-led demand where imagery is unlikely to explain exposure."
+              ],
+              supports: [
+                "The processed image is missing, limited, inaccessible, a placeholder or materially different from the submitted variant.",
+                "The main asset makes the product tiny/obscured or fails to show the physical distinction central to the query, while an approved accurate asset exists.",
+                "The wrong color/material/form is shown for variant-sensitive demand.",
+                "Matched siblings with accurate variant-specific assets participate normally while the broken image cohort does not."
+              ],
+              weakens: [
+                "The final image is compliant, clear, variant-correct and representative of the visual job.",
+                "The only evidence is a competitor's more attractive creative while the retailer already receives healthy impressions.",
+                "Demand depends on invisible specifications that must be represented in product data/content instead.",
+                "The real constraint is price, availability, product suitability or eligibility."
+              ],
+              diagnosisTitle: "A specific image-path or visual-evidence gap prevents the offer from being represented accurately",
+              diagnosis: "Name the offer IDs, surface/job, source and processed image, exact mismatch or limitation, existing replacement or required asset, and why this is expected to affect participation/visual relevance rather than only CTR.",
+              actionMode: "APPLY approved asset selection · ROUTE new image production",
+              actionTitle: "Give each offer one accurate, legible main image and the supporting evidence the product needs",
+              actionDetail: "Fix the image URL/fetch or assign the strongest existing compliant variant-correct asset. Where the necessary evidence does not exist, prepare a production brief specifying product/variant, framing, scale, feature/use, market, rights and crops. Keep feed, PDP and variant selection consistent.",
+              before: "A foldable travel stroller listing uses a distant lifestyle photo where the product occupies 15% of the frame; the compact folded form central to the demand exists only in an unassigned studio asset.",
+              after: "The approved clear product image becomes the main offer image and the folded-at-scale asset is added as supporting evidence; each color offer uses its matching asset. Carve verifies Google's processed image before measuring.",
+              why: "The change repairs the exact visual representation without claiming that generic creative polish is an organic ranking factor.",
+              implementation: [
+                "Classify whether the issue is fetch/policy, wrong assignment, weak existing selection or missing creative evidence.",
+                "Audit main and supporting assets by offer/variant and identify the smallest approved correction.",
+                "Apply asset URLs/order for governed existing media, or route a detailed production brief with rights and variant coverage.",
+                "Verify PDP variant, submitted image and final processed Merchant image agree on the exact offer.",
+                "Measure the affected image-led cohort; move healthy-impression/weak-click problems out of this V1 track."
+              ],
+              keepsFixed: "Preserve product truth, correct color/variant, image rights, accessibility and existing effective assets. Do not add promotional overlays or misleading composite products.",
+              owner: "Ecommerce merchandising/content and DAM/creative owner; feed owner for delivery",
+              permission: "Carve may select and assign approved existing assets. New photography, retouching, generated imagery, rights-sensitive assets and brand-template changes require owner approval.",
+              measure: "Primary: issue resolution where applicable, then Merchant Organic and GSC Image/Merchant-listing impressions for the image-led cohort. Guardrails: correct variant, image consistency and Organic Shopping clicks; do not attribute exact causality without a controlled cohort.",
+              guardrails: "No wrong variant, deceptive scale/color, disallowed overlays, broken URL, inaccessible image, rights violation or optimization based only on aesthetic preference.",
+              substitute: "Without image APIs, export Merchant image URLs and DAM/Shopify assignments, then visually inspect the affected cohort and live processed listings manually.",
+              sources: ["merchantImages", "merchantProductDetails", "merchantStatus", "merchantSurfaces", "gscDimensions", "feedTest", "memo"],
+              examples: [
+                { context: "Wrong variant image", before: "The blue sofa offer shows the beige parent image in Google and lands on blue.", after: "The blue offer, processed listing and preselected PDP variant all use the approved blue asset." }
+              ]
+            }),
+            focusedRoute({
+              id: "shopping-real-competitive-gap",
+              actionTypes: ["apply", "route", "no-action"],
+              surface: {
+                cause: "Competing products or merchants provide a materially stronger answer",
+                investigate: "Compare exact products, ranges, local offers and merchant evidence after participation and representation are sound.",
+                identify: "A real product, assortment, availability, price, delivery or merchant advantage explains the persistent visibility gap.",
+                action: "Expose a stronger truthful own alternative, route the real business decision or accept the competitive limit."
+              },
+              title: "The retailer is accurately represented, but the products winning are genuinely better for the shopping job",
+              fit: "Use only after affected offers can participate and their product/variant data is accurate. This prevents Carve from disguising assortment, availability or offer weakness as a feed-copy problem.",
+              detail: "‘Competitors are stronger’ is not a diagnosis. Carve identifies the exact observable advantage: a product meets a must-have criterion the retailer's does not; the winning merchant stocks the relevant sizes; the range provides meaningful choice; the local offer has materially better price, delivery or returns; or the merchant has stronger credible review/reputation evidence. Merchant competitor metrics can show overlap and higher-position patterns, but not why or an exact carousel slot. The cause comes from product- and offer-level comparison.",
+              question: "Once representation is accurate, what customer-relevant advantage do repeatedly visible products or merchants actually have—and can the retailer close it honestly?",
+              evidenceTitle: "Compare matched products and complete local offers, not domain scores",
+              evidenceDetail: "Use live product results and Merchant competitor/price insights to choose a real comparison set. Verify exact variant, pack, market and observation time. Build a must-have/preference matrix across approved specifications, product range, in-stock sizes/variants, price, shipping, returns, ratings/reviews and merchant reputation. Keep Google's opaque selection logic separate from the observable customer advantage.",
+              open: [
+                "Live local Search product unit/Shopping results for a stable query cohort, recording exact products, variants, merchants, visible offer facts and date/device.",
+                "Merchant Center competitor visibility and pricing insights where available: relative visibility, overlap, higher position and comparable price—not exact carousel rank or causal explanation.",
+                "Own and competitor PDPs/offers for approved specifications, variants, price, availability, shipping, returns, reviews and product evidence.",
+                "PIM/inventory/storefront data for genuinely better-fitting own alternatives and the depth of the qualifying local range.",
+                "Merchant Organic impression trends by item/category/country after participation, product data and source consistency are verified."
+              ],
+              compare: [
+                "Exact customer must-haves versus preferences; one missing must-have can outweigh many generic benefits.",
+                "Equivalent variant/pack and market offer at the same observation time.",
+                "Product-selection advantage versus merchant-selection advantage for the same product.",
+                "Persistent competitive pattern versus a temporary promotion, stock event or sampled result."
+              ],
+              supports: [
+                "Repeatedly visible products meet a required specification, compatibility, size or use that the retailer's candidate does not.",
+                "The retailer's qualifying range is materially thinner or key variants remain unavailable in the target market.",
+                "For the same product, another merchant has a verifiably stronger current price, delivery, return or reputation proposition.",
+                "Accurate product-data treatments fail to close the gap while the same concrete competitive advantage persists."
+              ],
+              weakens: [
+                "The comparison uses another variant, pack, country, outdated price or unavailable offer.",
+                "A genuine approved own advantage is still missing from product data or imagery.",
+                "The Merchant record is ineligible, inaccurate or conflicted, so competition has not been isolated.",
+                "The conclusion rests only on domain authority, raw review count, a competitor's longer title or one live result."
+              ],
+              diagnosisTitle: "A named product, range or merchant advantage remains after accurate Google participation",
+              diagnosis: "State the shopping job, exact own and competing products/offers, must-have or complete-offer difference, repeated visibility evidence, stronger own alternative if any, and the accountable decision owner. Preserve uncertainty about Google's exact ranking mechanism.",
+              actionMode: "APPLY truthful alternative exposure · ROUTE product/assortment/offer decision · NO ACTION",
+              actionTitle: "Respond to the real competitive advantage instead of rewriting around it",
+              actionDetail: "If another own product fits better, connect and describe that offer accurately. If approved value is genuinely hidden, return to the product-expression or image route. Otherwise prepare the exact assortment, variant availability, price, shipping, returns, reputation or product decision with demand and competitor evidence—or target a narrower job the retailer can win. Record no action when the competing result deserves its position and no responsible change is available.",
+              before: "For “wide-fit waterproof walking shoes,” competitors repeatedly expose four verified wide-fit waterproof models in common sizes. The retailer has one qualifying model, with wide sizes mostly unavailable; marketing proposes adding ‘wide comfort’ to standard-fit titles.",
+              after: "Standard-fit products remain unchanged. Carve exposes the one verified in-stock wide-fit model, routes the size/range gap with demand and competitor evidence, and recommends a narrower waterproof-trail job the current range can serve meanwhile.",
+              why: "The action protects product truth while turning the real disadvantage into the decision most likely to improve future visibility.",
+              implementation: [
+                "Verify participation, product expression, variant identity and source consistency for the own comparison cohort.",
+                "Define the customer must-haves and compare exact current products/offers in the target market across repeated observations.",
+                "Search the own catalog for a genuinely stronger alternative and expose it only if its approved facts support the job.",
+                "Prepare a decision packet for the real gap: affected demand/products/markets, exact competitor advantage, estimated opportunity, options and accountable owner.",
+                "Record the chosen route—business change, narrower demand, watch or no action—and reopen when stock, range or offer conditions change."
+              ],
+              keepsFixed: "Never change product capability through wording, hide price/delivery limits, make commercial decisions for the retailer or imply Google revealed a causal ranking factor.",
+              owner: "Category/product, merchandising, inventory, commercial, operations or customer-trust owner; Carve owns diagnosis and prepared decision",
+              permission: "Carve may improve discovery of a verified stronger own offer and draft the decision. Assortment, stock, price, shipping, returns, review programs and product changes require their owners.",
+              measure: "Primary: relevant Merchant Organic impressions for the affected own cohort, plus observed or relative visibility where those separate measures are available after the business condition changes. Guardrails: truthful product match, Organic Shopping clicks and no irrelevant exposure.",
+              guardrails: "No false parity, wrong comparable, hidden commercial disadvantage, manipulated review activity, margin decision by Carve, irrelevant query targeting or claim that relative visibility is exact carousel rank.",
+              substitute: "Without Merchant competitor/pricing insights, capture dated local product results and competitor PDP/offers manually. Use multiple observations and preserve freshness uncertainty.",
+              sources: ["merchantCompetitors", "merchantPricing", "merchantPerformance", "merchantSurfaces", "merchantTracking", "baymardDescriptions", "memo"],
+              examples: [
+                { context: "Merchant advantage", before: "Another merchant wins the same appliance product with local stock and two-day delivery; the retailer needs nine days.", after: "Carve routes the delivery constraint and exposes a truly equivalent in-stock alternative if one exists; it does not add ‘fast delivery’ copy." },
+                { context: "Product advantage", before: "Winning tents are certified for four-season use; the retailer's three-season tent is relabelled for ‘winter camping’ demand.", after: "The unsupported relabelling is rejected; Carve targets the honest three-season job and routes the missing four-season assortment." }
+              ]
+            })
+          ],
+          learn: {
+            title: "Learn whether the treatment increased relevant Google product visibility",
+            copy: "Verify source delivery and Google's processed offer, then measure each organic product surface with its own definition.",
+            meta: "Merchant Organic impressions · Merchant-listing query coverage · observed inclusion · Organic Shopping visits",
+            detail: "Google product visibility is distributed across surfaces whose reports do not share one denominator. Carve freezes the offer cohort, query/job, market, source versions and expected mechanism; verifies the change in the final processed record; and then reads Merchant Center, Search Console, live captures and GA4 separately. It never converts Search Console average position into a left-to-right carousel rank or combines paid and organic exposure into one success score.",
+            verify: [
+              "Confirm exact source-field, mapping, variant, link, image, availability and market changes are live for the approved retailer and Merchant offer IDs.",
+              "Open Merchant product details after processing and verify final attributes, status, country and Free listings marketing-method eligibility—not merely the submitted payload.",
+              "Load the target-market landing URL and verify selected variant, price, currency, availability, image, structured data and checkout agree.",
+              "Annotate release/processing date, Google or connector delays, demand/season, promotions, stock, price, competitor changes and paid-campaign changes affecting the same products."
+            ],
+            measure: [
+              "Merchant Center primary: Organic impressions by affected item/brand/category/country and date. Keep Ads separate. Use clicks and key events only as downstream quality guardrails.",
+              "Search Console: Merchant listings Search appearance by query, page, country, device and Web/Image type where data exists. Respect anonymized rows, page aggregation and surface coverage.",
+              "Live observations: repeated local product-unit inclusion and visible product/merchant set for the frozen query/device sample. This can reveal presentation and competitors, but it is not a census or exact historical rank.",
+              "GA4: Shopping Free Listings source platform / Organic Shopping channel, landing pages and product events after clicks. GA4 cannot explain unclicked impressions or identify every originating Google surface.",
+              "Paid Shopping/PMax metrics remain a separate corroboration or media-owner handoff; organic improvements are not credited from paid impressions."
+            ],
+            decide: [
+              "Keep factual participation, identity and source-consistency corrections when they remain accurate, even if demand is too small for a quick impression read.",
+              "Keep or expand a treatment when relevant Organic impressions/query coverage improve for matched offers without wrong-market, wrong-variant or click-quality harm.",
+              "Revise when products are approved but the expected query/job does not respond, Google processes another value, or only irrelevant exposure grows; reopen the next-best hypothesis.",
+              "Reverse reversible wording, grouping or image treatments that distort product identity or harm adjacent coverage; preserve corrected facts and valid stable IDs.",
+              "Route or record no action when the remaining explanation is real product, range, availability, price, delivery, reputation or intentionally excluded demand."
+            ],
+            memory: "Store the shopping job/query cohort; market/surface and metric definitions; retailer product/variant ↔ Merchant offer/item-group mapping; source/submitted/processed/page snapshots; eligibility/status history; local result captures; hypotheses and counter-evidence; exact change packet and approvals; processing/release dates; Merchant/GSC/GA4 outcomes; harms; and the condition that reopens a routed competitive or lifecycle gap.",
+            sources: ["merchantPerformance", "merchantTracking", "merchantStatus", "merchantProductDetails", "gscDimensions", "gscPosition", "gscShoppingReports", "ga4ChannelGroups", "googleShareProductData", "feedTest", "memo"]
           }
         },
         {
@@ -3081,13 +3811,13 @@
         },
       ];
 
-      const CASES = ["poor-ranking", "uncaptured-demand", "weak-ai-discovery"].map(function (id) {
+      const CASES = ["poor-ranking", "uncaptured-demand", "weak-google-product-visibility", "weak-ai-discovery"].map(function (id) {
         return FOCUSED_CASES.find(function (item) { return item.id === id; });
       });
 
       const STAGES = [
         { key: "signal", x: 320, number: "SIGNAL", title: "Search or AI demand opportunity", copy: "The exact observable outcome, source, market and coverage limits." },
-        { key: "case", x: 610, number: "CARVE PROBLEM", title: "Where relevant demand is being lost", copy: "Poor ranking, uncaptured demand or weak AI discovery." },
+        { key: "case", x: 610, number: "CARVE PROBLEM", title: "Where relevant demand is being lost", copy: "Web ranking, uncaptured demand, Google product surfaces or AI discovery." },
         { key: "hypothesis", x: 900, number: "POSSIBLE CAUSES", title: "What could be limiting discovery", copy: "Live ecommerce hypotheses. Several can be true together." },
         { key: "evidence", x: 1190, number: "INVESTIGATE", title: "Reports, pages and cohorts to compare", copy: "The next evidence chosen for its diagnostic value." },
         { key: "finding", x: 1480, number: "PERFORMANCE READ", title: "What the evidence now makes most likely", copy: "A specific, falsifiable explanation—not false certainty." },
@@ -3103,6 +3833,10 @@
         "poor-ranking": {
           investigate: "Compare the same query, intended page, local answer and competitors by country",
           identify: "A local intent, page, merchandising, prominence or authority difference explains rank"
+        },
+        "weak-google-product-visibility": {
+          investigate: "Compare the same shopping job, offer cohort, Merchant representation and local product results by country",
+          identify: "A local participation, product-data, offer, source, image or competitive difference explains product visibility"
         },
         "weak-ai-discovery": {
           investigate: "Compare the same shopping job, products, source evidence and observed AI outcome by market",
@@ -3286,6 +4020,17 @@
             '<p><b>After</b>' + escapeHtml(example.after || "") + '</p>' +
           '</article>';
         }).join("") + '</div>';
+      }
+
+      function changePacketHtml(hypothesis) {
+        return '<div class="detail-grid">' +
+          '<div class="detail-cell"><strong>1 · Exact scope</strong><span>Query or customer job; current URL and every affected URL; product and variant IDs; collection, market, language and device; observation window.</span></div>' +
+          '<div class="detail-cell"><strong>2 · Evidence record</strong><span>Dated signal, page, product, competitor and customer evidence; what supports and weakens the diagnosis; source limitations and unresolved uncertainty.</span></div>' +
+          '<div class="detail-cell"><strong>3 · Field-level diff</strong><span>For every source field, title, H1, description, module, product membership, ordering rule, filter, link or destination: current value → proposed value. Name additions, removals, exclusions and dependencies; never submit a prose-only recommendation.</span></div>' +
+          '<div class="detail-cell"><strong>4 · Why this treatment</strong><span>' + escapeHtml(hypothesis.why) + '</span></div>' +
+          '<div class="detail-cell"><strong>5 · Authority and release</strong><span>' + escapeHtml(hypothesis.owner) + ' · ' + escapeHtml(hypothesis.permission) + ' Include required approval, preview/QA checks, publish time, reversibility and exact rollback or reopen condition.</span></div>' +
+          '<div class="detail-cell"><strong>6 · Measurement contract</strong><span>' + escapeHtml(hypothesis.measure) + ' Preserve this boundary: ' + escapeHtml(hypothesis.keepsFixed) + '</span></div>' +
+        '</div>';
       }
 
       function getCase(id) {
@@ -3560,7 +4305,7 @@
           y: Math.max(240, (signalPositions[0] + marketSignalY) / 2 - 20),
           kicker: "Carve · every product / page / market",
           title: "Capture more relevant product demand",
-          copy: "Find search and AI-discovery headroom, investigate why demand is missed, make the strongest concrete treatment and learn across the catalogue.",
+          copy: "Find web, Google product-surface and AI-discovery headroom, investigate why demand is missed, make the strongest concrete treatment and learn across the catalogue.",
           meta: "Relevant visibility is the objective. Accuracy is non-negotiable."
         });
 
@@ -3588,8 +4333,8 @@
           y: marketSignalY,
           kicker: "Cross-market scan · entry point",
           title: "Demand capture differs by market",
-          copy: "Locate whether the gap is ranking, missing search coverage or weak AI discovery, then enter the relevant worktree.",
-          meta: "Routes into the three V1 outcomes · not a fourth problem",
+          copy: "Locate whether the gap is web ranking, missing search coverage, Google product visibility or AI discovery, then enter the relevant worktree.",
+          meta: "Routes into the four V1 outcomes · not another problem",
           tags: ["Market performance"]
         });
         addEdge("root", "market-signal", "market-scan");
@@ -3830,10 +4575,11 @@
           kicker: "Cross-market demand scan",
           title: "Demand capture differs by market",
           body:
-            '<p class="lead">This is a first-class way into the work—not a fourth problem. Carve continuously compares countries and languages, locates where relevant demand is being missed, then opens Poor ranking, Uncaptured demand or Weak AI discovery.</p>' +
+            '<p class="lead">This is a first-class way into the work—not another problem. Carve continuously compares countries and languages, locates where relevant demand is being missed, then opens Poor ranking, Uncaptured demand, Weak Google product visibility or Weak AI discovery.</p>' +
             section("First locate the lost outcome", marketOutcomeLinksHtml()) +
             section("Signal data · where the market gap appears", listHtml([
               "Organic search: Search Console query × page × country × device, country-specific rank history, live local results and target-market keyword demand.",
+              "Google product surfaces: Merchant Center Organic item performance, offer status and country eligibility; Search Console Merchant-listing visibility; repeated live product-result captures; and GA4 Organic Shopping after the click.",
               "AI search: Google generative-AI impressions and Bing citations where available, plus repeated market-specific citation observations.",
               "AI shopping: Merchant AI visibility where available, Shopify Agentic channel sessions and directional Catalog retrieval, plus repeated product and merchant observations.",
               "Demand coverage: compare local customer language, catalogue fit and every plausible localized page before deciding the market needs another page.",
@@ -3845,8 +4591,8 @@
               "Use a healthy market to generate hypotheses, not as an automatic benchmark. Demand, competition, assortment and buying expectations may legitimately differ.",
               "Name the concrete mechanism. ‘Germany is weak’ and ‘localization issue’ are observations, not diagnoses."
             ], false)) +
-            section("Then enter the relevant worktree", paragraph("A suitable page ranking weakly becomes Poor ranking; a relevant search job with no adequate page becomes Uncaptured demand; weak citations, product inclusion, merchant selection or AI visibility become Weak AI discovery. More than one can be open for the same market.")) +
-            section("Research basis", sourceHtml(["gscDimensions", "gscPosition", "gscAiPerformance", "merchantAiInsights", "bingAiPerformance", "shopifyAgentic", "shopifyLocalization"]))
+            section("Then enter the relevant worktree", paragraph("A suitable page ranking weakly becomes Poor ranking; a relevant search job with no adequate page becomes Uncaptured demand; weak organic product-surface exposure becomes Weak Google product visibility; weak citations, AI product inclusion, merchant selection or AI visibility become Weak AI discovery. More than one can be open for the same market.")) +
+            section("Research basis", sourceHtml(["gscDimensions", "gscPosition", "merchantPerformance", "merchantStatus", "gscShoppingReports", "gscAiPerformance", "merchantAiInsights", "bingAiPerformance", "shopifyAgentic", "shopifyLocalization"]))
         };
       }
 
@@ -3882,23 +4628,24 @@
           kicker: "Carve’s demand-capture intelligence",
           title: "Capture more relevant product demand",
           body:
-            '<p class="lead">Carve gives every product and page the attention of a world-class ecommerce search team. It continuously finds relevant demand the retailer is missing, researches why, forms the strongest performance hypothesis, makes or prepares the concrete treatment, and learns from the result across markets. The V1 objective is more qualified discovery through organic search and AI shopping.</p>' +
-            section("The three V1 problem boundaries", listHtml([
+            '<p class="lead">Carve gives every product and page the attention of a world-class ecommerce search team. It continuously finds relevant demand the retailer is missing, researches why, forms the strongest performance hypothesis, makes or prepares the concrete treatment, and learns from the result across markets. The V1 objective is more qualified discovery through web search, Google product surfaces and AI shopping.</p>' +
+            section("The four V1 problem boundaries", listHtml([
               "Poor ranking: a suitable existing ecommerce page—PDP, collection or product-grounded guide where appropriate—already appears for the demand, but ranks too weakly to capture its fair share of relevant impressions.",
-              "Uncaptured demand: the retailer can serve a search job, but no current PDP, collection or guide adequately owns and answers it.",
+              "Uncaptured demand: the retailer can serve a search job, but no current product, browse or decision experience adequately owns and answers it.",
+              "Weak Google product visibility: relevant sellable offers are absent, limited or weakly exposed in Google's organic product surfaces.",
               "Weak AI discovery: relevant pages, products or merchants are absent, weak or inaccurate in AI search and shopping journeys."
             ], false)) +
             section("How Carve thinks", listHtml([
-              "Observe the exact opportunity in its real source: query/page search data, native AI reports, product-catalog retrieval, citations, repeated AI outputs or attributable AI referrals—not a blended visibility score.",
+              "Observe the exact opportunity in its real source: query/page search data, Merchant Organic product performance, Merchant-listing appearances, native AI reports, product-catalog retrieval, citations, repeated AI outputs or attributable referrals—not a blended visibility score.",
               "Open whatever helps explain it: local SERPs and AI answers, competing stores, PIM/catalog/feed fields, the live PDP or collection, customer language, reviews, support, paid search terms and market context.",
               "Keep several explanations live. Choose the next observation for information value, not because a workflow says it comes next.",
               "Turn the best-supported mechanism into a specific product-data, page, content, internal-link, catalogue or evidence treatment with a before, after, implementation path, owner and expected metric.",
               "Measure the original cohort, protect adjacent performance, and update retailer-specific memory. A surprising result reopens the reasoning rather than ending it."
             ], false)) +
-            section("Market performance is a first-class entry point", paragraph("Carve continuously scans for country and language divergence, first locates whether the gap is poor ranking, missing search coverage or weak AI discovery, then compares the local demand, page, products, catalogue evidence and competitive set. Geography points to a concrete mechanism; it never becomes a vague diagnosis.")) +
+            section("Market performance is a first-class entry point", paragraph("Carve continuously scans for country and language divergence, first locates whether the gap is poor web ranking, missing search coverage, weak Google product visibility or weak AI discovery, then compares the local demand, page, products, offer/catalogue evidence and competitive set. Geography points to a concrete mechanism; it never becomes a vague diagnosis.")) +
             section("Guardrails stay quiet", paragraph("Carve checks whether the product can support the demand and whether each measurement really describes the named surface. Technical access and commercial constraints are corrected or routed when they block discovery, but they do not dominate a map whose purpose is better relevant visibility.")) +
             section("When several causes are true", crossCauseRulesHtml()) +
-            section("Research basis", sourceHtml(["memo", "gscPerformance", "ahrefsEcommerce", "aleydaEcommerce", "gscAiPerformance", "bingAiPerformance", "merchantAiInsights", "shopifyAgentic", "openAiShopping", "openAiShoppingResearch", "shopifyLocalization"]))
+            section("Research basis", sourceHtml(["memo", "gscPerformance", "ahrefsEcommerce", "aleydaEcommerce", "merchantPerformance", "merchantStatus", "gscShoppingReports", "gscAiPerformance", "bingAiPerformance", "merchantAiInsights", "shopifyAgentic", "openAiShopping", "openAiShoppingResearch", "shopifyLocalization"]))
         };
       }
 
@@ -3972,6 +4719,7 @@
           "</div>") +
           section("Why this action follows", paragraph(hypothesis.why));
         const execution =
+          section("The exact change packet Carve must produce", changePacketHtml(hypothesis)) +
           section("How to make the change", listHtml(hypothesis.implementation, true)) +
           section("What stays fixed", paragraph(hypothesis.keepsFixed)) +
           section("Ownership and permission", '<div class="detail-grid">' +
@@ -4071,7 +4819,7 @@
         function joinSteps(steps) {
           return '<span class="drawer-path-nav">' + steps.join('<span class="path-arrow">→</span>') + "</span>";
         }
-        if (node.kind === "root") return "<b>All signals</b> → choose one of Carve’s three V1 outcomes, then inspect any plausible cause";
+        if (node.kind === "root") return "<b>All signals</b> → choose one of Carve’s four V1 outcomes, then inspect any plausible cause";
         if (node.kind === "market-signal") return "<b>Market scan</b> → locate the lost outcome → enter the relevant worktree → compare markets → identify the local mechanism";
         const item = getCase(node.caseId || state.activeCaseId);
         if (node.isMarketRoute) {
@@ -4567,13 +5315,14 @@
       function validateData() {
         const errors = [];
         const ids = new Set();
-        const expectedCaseIds = ["poor-ranking", "uncaptured-demand", "weak-ai-discovery"];
+        const expectedCaseIds = ["poor-ranking", "uncaptured-demand", "weak-google-product-visibility", "weak-ai-discovery"];
         const expectedOutcomeTag = {
           "poor-ranking": "Rank higher",
           "uncaptured-demand": "More impressions",
+          "weak-google-product-visibility": "More product impressions",
           "weak-ai-discovery": "More AI traffic"
         };
-        const allowedOpportunities = new Set(["Rank higher", "More impressions", "More AI traffic"]);
+        const allowedOpportunities = new Set(["Rank higher", "More impressions", "More product impressions", "More AI traffic"]);
         const allowedActionTypes = new Set(["apply", "route", "no-action"]);
         const sourceIds = new Set(Object.keys(SOURCES));
         CASES.forEach(function (item) {
@@ -4633,7 +5382,7 @@
           }
         });
         if (CASES.length !== expectedCaseIds.length || expectedCaseIds.some(function (id, index) { return !ids.has(id) || !CASES[index] || CASES[index].id !== id; })) {
-          errors.push("Visible worktree must contain exactly the three V1 demand-capture problems in the intended order.");
+          errors.push("Visible worktree must contain exactly the four V1 demand-capture problems in the intended order.");
         }
         return errors;
       }
